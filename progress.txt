@@ -3,10 +3,9 @@ Date : 22/05/2022
 
 
 What is accomplished today: 
-
+-UI
 
 What is remaining to be done:
--UI
 -DataBase Schema
 -DataBase ADO.NET Connection string & logic
 -Error Logging to a file
