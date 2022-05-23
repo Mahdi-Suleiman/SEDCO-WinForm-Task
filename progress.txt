@@ -13,3 +13,17 @@ What is remaining to be done:
 -App.config
 
 
+********************************************************
+Date : 23/05/2022
+
+
+What is accomplished today: 
+-DataBase Schema
+-DataBase ADO.NET Connection string & logic
+-App.config
+
+What is remaining to be done:
+-UI Enhancement
+-Error Logging to a file
+-Documentation
+
