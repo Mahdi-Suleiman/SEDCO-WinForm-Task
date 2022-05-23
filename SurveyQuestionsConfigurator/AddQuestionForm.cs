@@ -14,7 +14,9 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class AddQuestionForm : Form
     {
-
+        public int QuestionIdForEditing { get; set; }
+        //private ConnectionStringSettings = ConfigurationManager.
+        ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings["cn"];
         public AddQuestionForm()
         {
             InitializeComponent();
@@ -22,6 +24,9 @@ namespace SurveyQuestionsConfigurator
         public AddQuestionForm(int activeTab, int questionId, string questionType/*, string questionText, int numberOfSmileyFaces*/)
         {
             InitializeComponent();
+
+            QuestionIdForEditing = questionId;
+
             foreach (TabPage tab in tabControl1.TabPages)
             {
                 if (tab.TabIndex == activeTab)
@@ -33,8 +38,22 @@ namespace SurveyQuestionsConfigurator
                 {
                     tab.Enabled = false;
                 }
-
             }
+
+            if (questionType == Form1.QuestionType.SMILEY.ToString())
+            {
+                InitializeEditingSmileyQuestion(questionId);
+            }
+            else if (questionType == Form1.QuestionType.SLIDER.ToString())
+            {
+                InitializeEditingSlideQuestion(questionId);
+            }
+            else if (questionType == Form1.QuestionType.STAR.ToString())
+            {
+                InitializeEditingStarQuestion(questionId);
+            }
+
+
 
             //var cn = ConfigurationManager.ConnectionStrings["cn"];
             //SqlDataReader reader = null;
@@ -287,6 +306,325 @@ values
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void smileyQuestion_EditQuestionButton_Click(object sender, EventArgs e)
+        {
+            int questionOrder, NumberOfSmilyFaces;
+            string QuestionText;
+
+            questionOrder = Convert.ToInt32(smileyQuestion_OrderNumericUpDown.Value);
+            QuestionText = smileyQuestion_TextRichTextBox.Text;
+            NumberOfSmilyFaces = Convert.ToInt32(smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value);
+            if (CheckSmileyQuestionInputFields())
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
+                    {
+                        SqlCommand cmd = new SqlCommand($@"
+USE SurveyQuestionsConfigurator
+ UPDATE Smiley_Questions
+ SET QuestionOrder = {questionOrder}, QuestionText = '{QuestionText}', NumberOfSmileyFaces ={NumberOfSmilyFaces}
+ WHERE QuestionID = {QuestionIdForEditing};
+", conn);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Question edited successfully");
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("SQL Error:\n" + ex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void InitializeEditingSmileyQuestion(int questionId)
+        {
+
+            SqlConnection conn = null;
+            var cn = ConfigurationManager.ConnectionStrings["cn"];
+            SqlDataReader reader = null;
+
+            try
+            {
+                conn = new SqlConnection(cn.ConnectionString);
+                SqlCommand cmd = new SqlCommand($"select * from Smiley_Questions where QuestionID = {questionId}", conn);
+                conn.Open();
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    smileyQuestion_OrderNumericUpDown.Value = Convert.ToDecimal(reader[1]);
+                    smileyQuestion_TextRichTextBox.Text = (string)reader[2];
+                    smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value = Convert.ToDecimal(reader[3]);
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                //2627 -> primary key violation
+                //2601 -> unique key violation
+                // ex.Number
+                if (ex.Number == 2601)
+                {
+                    MessageBox.Show("This Question order is already in use\nTry using another one");
+                }
+                else
+                {
+                    MessageBox.Show("SQL Error:\n" + ex);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong:\n" + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            smileyQuestion_AddQuestionButton.Enabled = false;
+            smileyQuestion_AddQuestionButton.Visible = false;
+
+            smileyQuestion_EditQuestionButton.Enabled = true;
+            smileyQuestion_EditQuestionButton.Visible = true;
+        } //end function
+
+        private void InitializeEditingSlideQuestion(int questionId)
+        {
+
+            SqlConnection conn = null;
+            var cn = ConfigurationManager.ConnectionStrings["cn"];
+            SqlDataReader reader = null;
+
+            try
+            {
+                conn = new SqlConnection(cn.ConnectionString);
+                SqlCommand cmd = new SqlCommand($"select * from Slider_Questions where QuestionID = {questionId}", conn);
+                conn.Open();
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    sliderQuestion_QuestionOrderNumericUpDown.Value = Convert.ToDecimal(reader[1]);
+                    sliderQuestion_QuestionTextRichTextBox.Text = (string)reader[2];
+                    sliderQuestion_StartValueNumericUpDown.Value = Convert.ToDecimal(reader[3]);
+                    sliderQuestion_EndValueNumericUpDown.Value = Convert.ToDecimal(reader[4]);
+
+                    sliderQuestion_StartValueCaptionTextBox.Text = (string)reader[5];
+                    sliderQuestion_EndValueCaptionTextBox.Text = (string)reader[6];
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("SQL Error:\n" + ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong:\n" + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            sliderQuestion_AddQuestionButton.Enabled = false;
+            sliderQuestion_AddQuestionButton.Visible = false;
+
+            sliderQuestion_EditQuestionButton.Enabled = true;
+            sliderQuestion_EditQuestionButton.Visible = true;
+        } //end function
+
+        private void InitializeEditingStarQuestion(int questionId)
+        {
+
+            SqlConnection conn = null;
+            var cn = ConfigurationManager.ConnectionStrings["cn"];
+            SqlDataReader reader = null;
+
+            try
+            {
+                conn = new SqlConnection(cn.ConnectionString);
+                SqlCommand cmd = new SqlCommand($@"select * from Star_Questions where QuestionID = {questionId}", conn);
+                conn.Open();
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    starQuestion_QuestionOrderNumericUpDown.Value = Convert.ToDecimal(reader[1]);
+                    starQuestion_TextRichTextBox.Text = (string)reader[2];
+                    starQuestion_NumberOfStarsNumericUpDown.Value = Convert.ToDecimal(reader[3]);
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("SQL Error:\n" + ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong:\n" + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            starQuestion_AddQuestionButton.Enabled = false;
+            starQuestion_AddQuestionButton.Visible = false;
+
+            starQuestion_EditQuestionButton.Enabled = true;
+            starQuestion_EditQuestionButton.Visible = true;
+        }//end function
+
+        private void starQuestion_EditQuestionButton_Click(object sender, EventArgs e)
+        {
+            int questionOrder, NumberOfStars;
+            string questionText;
+            if (CheckStarQuestionInputFields())
+            {
+                questionOrder = Convert.ToInt32(starQuestion_QuestionOrderNumericUpDown.Value);
+                questionText = starQuestion_TextRichTextBox.Text;
+                NumberOfStars = Convert.ToInt32(starQuestion_NumberOfStarsNumericUpDown.Value);
+
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
+                    {
+                        SqlCommand cmd = new SqlCommand($@"
+USE SurveyQuestionsConfigurator
+ UPDATE Star_Questions
+ SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}', NumberOfStars = {NumberOfStars}
+ WHERE QuestionID = {QuestionIdForEditing};
+", conn);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Question edited successfully");
+                    }
+                }
+                catch (SqlException ex)
+                {
+
+                    //2627 -> primary key violation
+                    //2601 -> unique key violation
+                    // ex.Number
+                    if (ex.Number == 2627)
+                    {
+                        MessageBox.Show("This Question order is already in use\nTry using another one");
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Error:\n" + ex);
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+
+
+
+        private void sliderQuestion_EditQuestionButton_Click(object sender, EventArgs e)
+        {
+            int questionOrder, questionStartValue, questionEndValue;
+            string questionText, questionStartValueCaption, questionEndValueCaption;
+
+            if (CheckSliderQuestionInputFields())
+            {
+                //assign variables
+
+                questionOrder = Convert.ToInt32(sliderQuestion_QuestionOrderNumericUpDown.Value);
+                questionText = (string)sliderQuestion_QuestionTextRichTextBox.Text;
+                questionStartValueCaption = (string)sliderQuestion_StartValueCaptionTextBox.Text;
+                questionEndValueCaption = (string)sliderQuestion_EndValueCaptionTextBox.Text;
+                questionStartValue = Convert.ToInt32(sliderQuestion_StartValueNumericUpDown.Value);
+                questionEndValue = Convert.ToInt32(sliderQuestion_EndValueNumericUpDown.Value);
+
+
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
+                    {
+                        SqlCommand cmd = new SqlCommand($@"
+USE SurveyQuestionsConfigurator
+ UPDATE Slider_Questions
+ SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}', QuestionStartValue = {questionStartValue}, QuestionEndValue = {questionEndValue}, QuestionStartValueCaption = '{questionStartValueCaption}', QuestionEndValueCaption = '{questionEndValueCaption}'
+ WHERE QuestionID = {QuestionIdForEditing};
+", conn);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Question edited successfully");
+                    }
+                }
+                catch (SqlException ex)
+                {
+
+                    //2627 -> primary key violation
+                    if (ex.Number == 2627)
+                    {
+                        MessageBox.Show("This Question order is already in use\nTry using another one");
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Error:\n" + ex);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                }
+
+
+            }
+
+            else
+            {
+                MessageBox.Show("Question text, Start value Caption and End value caption can NOT be empty", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool CheckSmileyQuestionInputFields()
+        {
+            if (!String.IsNullOrWhiteSpace(smileyQuestion_TextRichTextBox.Text)) //if Question text is not null or empty 
+                return true;
+
+            return false;
+        }
+
+        private bool CheckSliderQuestionInputFields()
+        {
+            if (!String.IsNullOrWhiteSpace(sliderQuestion_QuestionTextRichTextBox.Text)) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(sliderQuestion_StartValueCaptionTextBox.Text))
+                    if (!String.IsNullOrWhiteSpace(sliderQuestion_EndValueCaptionTextBox.Text))
+                        return true;
+            return false;
+        }
+
+        private bool CheckStarQuestionInputFields()
+        {
+            if (!String.IsNullOrWhiteSpace(starQuestion_TextRichTextBox.Text)) //if Question text is not null or empty 
+                return true;
+
+            return false;
         }
     }
 }

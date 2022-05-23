@@ -14,7 +14,7 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class Form1 : Form
     {
-        enum QuestionType
+        public enum QuestionType
         {
             SMILEY,
             SLIDER,
@@ -353,6 +353,7 @@ namespace SurveyQuestionsConfigurator
                     //string questionText = createdQuestions_ListView.SelectedItems[0].SubItems[2].Text;
                     //int numberOfSmileyFaces = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[3].Text);
                     //form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, questionText, numberOfSmileyFaces);
+                    //MessageBox.Show("" + questionId);
                     form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, QuestionType.SMILEY.ToString());
 
                 }
@@ -378,10 +379,13 @@ namespace SurveyQuestionsConfigurator
                 //    form2 = new AddQuestionForm((int)QuestionType.SLIDER);
                 //if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString())
                 //    form2 = new AddQuestionForm((int)QuestionType.STAR);
+                form2.ShowDialog();
             }
+            else
+            {
+                MessageBox.Show("Please select an item first", "No selected item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            form2.ShowDialog();
-
+            }
         }
     }
 }

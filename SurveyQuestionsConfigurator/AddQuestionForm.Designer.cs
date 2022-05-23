@@ -30,7 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.smileyQuestionTabPage = new System.Windows.Forms.TabPage();
-            this.smileyQuestionAddQuestionButton = new System.Windows.Forms.Button();
+            this.smileyQuestion_AddQuestionButton = new System.Windows.Forms.Button();
             this.smileyQuestion_OrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.smileyQuestion_TextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.smileyQuestion_NumberOfSmileyFacesNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -38,7 +38,7 @@
             this.questionTextLabel = new System.Windows.Forms.Label();
             this.questionOrderLabel = new System.Windows.Forms.Label();
             this.sliderQuestionTabPage = new System.Windows.Forms.TabPage();
-            this.sliderQuestionAddQuestionButton = new System.Windows.Forms.Button();
+            this.sliderQuestion_AddQuestionButton = new System.Windows.Forms.Button();
             this.sliderQuestion_EndValueCaptionTextBox = new System.Windows.Forms.TextBox();
             this.sliderQuestion_StartValueCaptionTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -52,7 +52,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.starQuestionTabPage = new System.Windows.Forms.TabPage();
-            this.starQuestionAddQuestionButton = new System.Windows.Forms.Button();
+            this.starQuestion_AddQuestionButton = new System.Windows.Forms.Button();
             this.starQuestion_QuestionOrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.starQuestion_TextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.starQuestion_NumberOfStarsNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -64,6 +64,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smileyQuestion_EditQuestionButton = new System.Windows.Forms.Button();
+            this.sliderQuestion_EditQuestionButton = new System.Windows.Forms.Button();
+            this.starQuestion_EditQuestionButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.smileyQuestionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_OrderNumericUpDown)).BeginInit();
@@ -94,7 +97,8 @@
             // 
             // smileyQuestionTabPage
             // 
-            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestionAddQuestionButton);
+            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_AddQuestionButton);
+            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_EditQuestionButton);
             this.smileyQuestionTabPage.Controls.Add(this.pictureBox1);
             this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_OrderNumericUpDown);
             this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_TextRichTextBox);
@@ -110,16 +114,16 @@
             this.smileyQuestionTabPage.Text = "Smiley Question";
             this.smileyQuestionTabPage.UseVisualStyleBackColor = true;
             // 
-            // smileyQuestionAddQuestionButton
+            // smileyQuestion_AddQuestionButton
             // 
-            this.smileyQuestionAddQuestionButton.BackColor = System.Drawing.Color.LightGreen;
-            this.smileyQuestionAddQuestionButton.Location = new System.Drawing.Point(125, 417);
-            this.smileyQuestionAddQuestionButton.Name = "smileyQuestionAddQuestionButton";
-            this.smileyQuestionAddQuestionButton.Size = new System.Drawing.Size(109, 39);
-            this.smileyQuestionAddQuestionButton.TabIndex = 5;
-            this.smileyQuestionAddQuestionButton.Text = "Add Question";
-            this.smileyQuestionAddQuestionButton.UseVisualStyleBackColor = false;
-            this.smileyQuestionAddQuestionButton.Click += new System.EventHandler(this.smileyQuestionAddQuestionButton_Click);
+            this.smileyQuestion_AddQuestionButton.BackColor = System.Drawing.Color.LightGreen;
+            this.smileyQuestion_AddQuestionButton.Location = new System.Drawing.Point(136, 417);
+            this.smileyQuestion_AddQuestionButton.Name = "smileyQuestion_AddQuestionButton";
+            this.smileyQuestion_AddQuestionButton.Size = new System.Drawing.Size(109, 39);
+            this.smileyQuestion_AddQuestionButton.TabIndex = 5;
+            this.smileyQuestion_AddQuestionButton.Text = "Add Question";
+            this.smileyQuestion_AddQuestionButton.UseVisualStyleBackColor = false;
+            this.smileyQuestion_AddQuestionButton.Click += new System.EventHandler(this.smileyQuestionAddQuestionButton_Click);
             // 
             // smileyQuestion_OrderNumericUpDown
             // 
@@ -203,7 +207,8 @@
             // 
             // sliderQuestionTabPage
             // 
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionAddQuestionButton);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_AddQuestionButton);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_EditQuestionButton);
             this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_EndValueCaptionTextBox);
             this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_StartValueCaptionTextBox);
             this.sliderQuestionTabPage.Controls.Add(this.label9);
@@ -219,21 +224,21 @@
             this.sliderQuestionTabPage.Location = new System.Drawing.Point(4, 22);
             this.sliderQuestionTabPage.Name = "sliderQuestionTabPage";
             this.sliderQuestionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.sliderQuestionTabPage.Size = new System.Drawing.Size(720, 515);
+            this.sliderQuestionTabPage.Size = new System.Drawing.Size(720, 491);
             this.sliderQuestionTabPage.TabIndex = 1;
             this.sliderQuestionTabPage.Text = "Slider Question";
             this.sliderQuestionTabPage.UseVisualStyleBackColor = true;
             // 
-            // sliderQuestionAddQuestionButton
+            // sliderQuestion_AddQuestionButton
             // 
-            this.sliderQuestionAddQuestionButton.BackColor = System.Drawing.Color.LightGreen;
-            this.sliderQuestionAddQuestionButton.Location = new System.Drawing.Point(125, 417);
-            this.sliderQuestionAddQuestionButton.Name = "sliderQuestionAddQuestionButton";
-            this.sliderQuestionAddQuestionButton.Size = new System.Drawing.Size(109, 39);
-            this.sliderQuestionAddQuestionButton.TabIndex = 22;
-            this.sliderQuestionAddQuestionButton.Text = "Add Question";
-            this.sliderQuestionAddQuestionButton.UseVisualStyleBackColor = false;
-            this.sliderQuestionAddQuestionButton.Click += new System.EventHandler(this.sliderQuestionAddQuestionButton_Click);
+            this.sliderQuestion_AddQuestionButton.BackColor = System.Drawing.Color.LightGreen;
+            this.sliderQuestion_AddQuestionButton.Location = new System.Drawing.Point(136, 417);
+            this.sliderQuestion_AddQuestionButton.Name = "sliderQuestion_AddQuestionButton";
+            this.sliderQuestion_AddQuestionButton.Size = new System.Drawing.Size(109, 39);
+            this.sliderQuestion_AddQuestionButton.TabIndex = 22;
+            this.sliderQuestion_AddQuestionButton.Text = "Add Question";
+            this.sliderQuestion_AddQuestionButton.UseVisualStyleBackColor = false;
+            this.sliderQuestion_AddQuestionButton.Click += new System.EventHandler(this.sliderQuestionAddQuestionButton_Click);
             // 
             // sliderQuestion_EndValueCaptionTextBox
             // 
@@ -374,7 +379,8 @@
             // 
             // starQuestionTabPage
             // 
-            this.starQuestionTabPage.Controls.Add(this.starQuestionAddQuestionButton);
+            this.starQuestionTabPage.Controls.Add(this.starQuestion_AddQuestionButton);
+            this.starQuestionTabPage.Controls.Add(this.starQuestion_EditQuestionButton);
             this.starQuestionTabPage.Controls.Add(this.starQuestion_QuestionOrderNumericUpDown);
             this.starQuestionTabPage.Controls.Add(this.starQuestion_TextRichTextBox);
             this.starQuestionTabPage.Controls.Add(this.starQuestion_NumberOfStarsNumericUpDown);
@@ -385,21 +391,21 @@
             this.starQuestionTabPage.Location = new System.Drawing.Point(4, 22);
             this.starQuestionTabPage.Name = "starQuestionTabPage";
             this.starQuestionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.starQuestionTabPage.Size = new System.Drawing.Size(720, 515);
+            this.starQuestionTabPage.Size = new System.Drawing.Size(720, 491);
             this.starQuestionTabPage.TabIndex = 2;
             this.starQuestionTabPage.Text = "Star Question";
             this.starQuestionTabPage.UseVisualStyleBackColor = true;
             // 
-            // starQuestionAddQuestionButton
+            // starQuestion_AddQuestionButton
             // 
-            this.starQuestionAddQuestionButton.BackColor = System.Drawing.Color.LightGreen;
-            this.starQuestionAddQuestionButton.Location = new System.Drawing.Point(125, 417);
-            this.starQuestionAddQuestionButton.Name = "starQuestionAddQuestionButton";
-            this.starQuestionAddQuestionButton.Size = new System.Drawing.Size(109, 39);
-            this.starQuestionAddQuestionButton.TabIndex = 13;
-            this.starQuestionAddQuestionButton.Text = "Add Question";
-            this.starQuestionAddQuestionButton.UseVisualStyleBackColor = false;
-            this.starQuestionAddQuestionButton.Click += new System.EventHandler(this.starQuestionAddQuestionButton_Click);
+            this.starQuestion_AddQuestionButton.BackColor = System.Drawing.Color.LightGreen;
+            this.starQuestion_AddQuestionButton.Location = new System.Drawing.Point(136, 417);
+            this.starQuestion_AddQuestionButton.Name = "starQuestion_AddQuestionButton";
+            this.starQuestion_AddQuestionButton.Size = new System.Drawing.Size(109, 39);
+            this.starQuestion_AddQuestionButton.TabIndex = 13;
+            this.starQuestion_AddQuestionButton.Text = "Add Question";
+            this.starQuestion_AddQuestionButton.UseVisualStyleBackColor = false;
+            this.starQuestion_AddQuestionButton.Click += new System.EventHandler(this.starQuestionAddQuestionButton_Click);
             // 
             // starQuestion_QuestionOrderNumericUpDown
             // 
@@ -527,6 +533,45 @@
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // smileyQuestion_EditQuestionButton
+            // 
+            this.smileyQuestion_EditQuestionButton.BackColor = System.Drawing.Color.LightGreen;
+            this.smileyQuestion_EditQuestionButton.Enabled = false;
+            this.smileyQuestion_EditQuestionButton.Location = new System.Drawing.Point(125, 417);
+            this.smileyQuestion_EditQuestionButton.Name = "smileyQuestion_EditQuestionButton";
+            this.smileyQuestion_EditQuestionButton.Size = new System.Drawing.Size(109, 39);
+            this.smileyQuestion_EditQuestionButton.TabIndex = 6;
+            this.smileyQuestion_EditQuestionButton.Text = "Edit Question";
+            this.smileyQuestion_EditQuestionButton.UseVisualStyleBackColor = false;
+            this.smileyQuestion_EditQuestionButton.Visible = false;
+            this.smileyQuestion_EditQuestionButton.Click += new System.EventHandler(this.smileyQuestion_EditQuestionButton_Click);
+            // 
+            // sliderQuestion_EditQuestionButton
+            // 
+            this.sliderQuestion_EditQuestionButton.BackColor = System.Drawing.Color.LightGreen;
+            this.sliderQuestion_EditQuestionButton.Enabled = false;
+            this.sliderQuestion_EditQuestionButton.Location = new System.Drawing.Point(125, 417);
+            this.sliderQuestion_EditQuestionButton.Name = "sliderQuestion_EditQuestionButton";
+            this.sliderQuestion_EditQuestionButton.Size = new System.Drawing.Size(109, 39);
+            this.sliderQuestion_EditQuestionButton.TabIndex = 23;
+            this.sliderQuestion_EditQuestionButton.Text = "Edit Question";
+            this.sliderQuestion_EditQuestionButton.UseVisualStyleBackColor = false;
+            this.sliderQuestion_EditQuestionButton.Visible = false;
+            this.sliderQuestion_EditQuestionButton.Click += new System.EventHandler(this.sliderQuestion_EditQuestionButton_Click);
+            // 
+            // starQuestion_EditQuestionButton
+            // 
+            this.starQuestion_EditQuestionButton.BackColor = System.Drawing.Color.LightGreen;
+            this.starQuestion_EditQuestionButton.Enabled = false;
+            this.starQuestion_EditQuestionButton.Location = new System.Drawing.Point(125, 417);
+            this.starQuestion_EditQuestionButton.Name = "starQuestion_EditQuestionButton";
+            this.starQuestion_EditQuestionButton.Size = new System.Drawing.Size(109, 39);
+            this.starQuestion_EditQuestionButton.TabIndex = 14;
+            this.starQuestion_EditQuestionButton.Text = "Edit Question";
+            this.starQuestion_EditQuestionButton.UseVisualStyleBackColor = false;
+            this.starQuestion_EditQuestionButton.Visible = false;
+            this.starQuestion_EditQuestionButton.Click += new System.EventHandler(this.starQuestion_EditQuestionButton_Click);
+            // 
             // AddQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -573,8 +618,8 @@
         private System.Windows.Forms.Label questionOrderLabel;
         private System.Windows.Forms.TabPage sliderQuestionTabPage;
         private System.Windows.Forms.TabPage starQuestionTabPage;
-        private System.Windows.Forms.Button smileyQuestionAddQuestionButton;
-        private System.Windows.Forms.Button starQuestionAddQuestionButton;
+        private System.Windows.Forms.Button smileyQuestion_AddQuestionButton;
+        private System.Windows.Forms.Button starQuestion_AddQuestionButton;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.NumericUpDown starQuestion_QuestionOrderNumericUpDown;
         private System.Windows.Forms.RichTextBox starQuestion_TextRichTextBox;
@@ -582,7 +627,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button sliderQuestionAddQuestionButton;
+        private System.Windows.Forms.Button sliderQuestion_AddQuestionButton;
         private System.Windows.Forms.TextBox sliderQuestion_EndValueCaptionTextBox;
         private System.Windows.Forms.TextBox sliderQuestion_StartValueCaptionTextBox;
         private System.Windows.Forms.Label label9;
@@ -598,5 +643,8 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Button smileyQuestion_EditQuestionButton;
+        private System.Windows.Forms.Button sliderQuestion_EditQuestionButton;
+        private System.Windows.Forms.Button starQuestion_EditQuestionButton;
     }
 }
