@@ -46,10 +46,11 @@
             // 
             // listView1
             // 
+            this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(20, 47);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(489, 485);
+            this.listView1.Size = new System.Drawing.Size(791, 485);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -57,7 +58,7 @@
             // 
             // addQuestionButton
             // 
-            this.addQuestionButton.Location = new System.Drawing.Point(585, 100);
+            this.addQuestionButton.Location = new System.Drawing.Point(884, 100);
             this.addQuestionButton.Name = "addQuestionButton";
             this.addQuestionButton.Size = new System.Drawing.Size(91, 46);
             this.addQuestionButton.TabIndex = 2;
@@ -67,7 +68,7 @@
             // 
             // editQuestionButton
             // 
-            this.editQuestionButton.Location = new System.Drawing.Point(585, 238);
+            this.editQuestionButton.Location = new System.Drawing.Point(884, 238);
             this.editQuestionButton.Name = "editQuestionButton";
             this.editQuestionButton.Size = new System.Drawing.Size(91, 46);
             this.editQuestionButton.TabIndex = 3;
@@ -76,7 +77,7 @@
             // 
             // deleteQuestionButton
             // 
-            this.deleteQuestionButton.Location = new System.Drawing.Point(585, 387);
+            this.deleteQuestionButton.Location = new System.Drawing.Point(884, 387);
             this.deleteQuestionButton.Name = "deleteQuestionButton";
             this.deleteQuestionButton.Size = new System.Drawing.Size(91, 46);
             this.deleteQuestionButton.TabIndex = 4;
@@ -87,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 613);
+            this.ClientSize = new System.Drawing.Size(1046, 613);
             this.Controls.Add(this.deleteQuestionButton);
             this.Controls.Add(this.editQuestionButton);
             this.Controls.Add(this.addQuestionButton);

@@ -32,31 +32,31 @@
             this.smileyQuestionTabPage = new System.Windows.Forms.TabPage();
             this.smileyQuestionAddQuestionButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.smileyQuestionOrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.smileyQuestionTextRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.smileyQuestion_OrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.smileyQuestion_TextRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.numberOfSmileyFacesLabel = new System.Windows.Forms.Label();
             this.questionTextLabel = new System.Windows.Forms.Label();
             this.questionOrderLabel = new System.Windows.Forms.Label();
             this.sliderQuestionTabPage = new System.Windows.Forms.TabPage();
             this.sliderQuestionAddQuestionButton = new System.Windows.Forms.Button();
-            this.sliderQuestionEndValueCaptionTextBox = new System.Windows.Forms.TextBox();
-            this.sliderQuestionStartValueCaptionTextBox = new System.Windows.Forms.TextBox();
+            this.sliderQuestion_EndValueCaptionTextBox = new System.Windows.Forms.TextBox();
+            this.sliderQuestion_StartValueCaptionTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.sliderQuestionEndValueNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.sliderQuestionStartValueNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.sliderQuestion_EndValueNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.sliderQuestion_StartValueNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.sliderQuestionNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.sliderQuestionTextRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.sliderQuestion_QuestionOrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.sliderQuestion_QuestionTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.starQuestionTabPage = new System.Windows.Forms.TabPage();
             this.starQuestionAddQuestionButton = new System.Windows.Forms.Button();
-            this.starQuestionQuestionOrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.starQuestionTextRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.starQuestionNumberOfStarsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.starQuestion_QuestionOrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.starQuestion_TextRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.starQuestion_NumberOfStarsNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,15 +64,15 @@
             this.tabControl1.SuspendLayout();
             this.smileyQuestionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestionOrderNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestionNumberOfSmileyFacesNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_OrderNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_NumberOfSmileyFacesNumericUpDown)).BeginInit();
             this.sliderQuestionTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestionEndValueNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestionStartValueNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestionNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestion_EndValueNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestion_StartValueNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestion_QuestionOrderNumericUpDown)).BeginInit();
             this.starQuestionTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.starQuestionQuestionOrderNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.starQuestionNumberOfStarsNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starQuestion_QuestionOrderNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starQuestion_NumberOfStarsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,9 +92,9 @@
             // 
             this.smileyQuestionTabPage.Controls.Add(this.smileyQuestionAddQuestionButton);
             this.smileyQuestionTabPage.Controls.Add(this.pictureBox1);
-            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestionOrderNumericUpDown);
-            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestionTextRichTextBox);
-            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestionNumberOfSmileyFacesNumericUpDown);
+            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_OrderNumericUpDown);
+            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_TextRichTextBox);
+            this.smileyQuestionTabPage.Controls.Add(this.smileyQuestion_NumberOfSmileyFacesNumericUpDown);
             this.smileyQuestionTabPage.Controls.Add(this.numberOfSmileyFacesLabel);
             this.smileyQuestionTabPage.Controls.Add(this.questionTextLabel);
             this.smileyQuestionTabPage.Controls.Add(this.questionOrderLabel);
@@ -127,55 +127,55 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // smileyQuestionOrderNumericUpDown
+            // smileyQuestion_OrderNumericUpDown
             // 
-            this.smileyQuestionOrderNumericUpDown.Location = new System.Drawing.Point(125, 24);
-            this.smileyQuestionOrderNumericUpDown.Maximum = new decimal(new int[] {
+            this.smileyQuestion_OrderNumericUpDown.Location = new System.Drawing.Point(125, 24);
+            this.smileyQuestion_OrderNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
-            this.smileyQuestionOrderNumericUpDown.Minimum = new decimal(new int[] {
+            this.smileyQuestion_OrderNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.smileyQuestionOrderNumericUpDown.Name = "smileyQuestionOrderNumericUpDown";
-            this.smileyQuestionOrderNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.smileyQuestionOrderNumericUpDown.TabIndex = 0;
-            this.smileyQuestionOrderNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.smileyQuestionOrderNumericUpDown.Value = new decimal(new int[] {
+            this.smileyQuestion_OrderNumericUpDown.Name = "smileyQuestion_OrderNumericUpDown";
+            this.smileyQuestion_OrderNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.smileyQuestion_OrderNumericUpDown.TabIndex = 0;
+            this.smileyQuestion_OrderNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.smileyQuestion_OrderNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // smileyQuestionTextRichTextBox
+            // smileyQuestion_TextRichTextBox
             // 
-            this.smileyQuestionTextRichTextBox.Location = new System.Drawing.Point(125, 76);
-            this.smileyQuestionTextRichTextBox.Name = "smileyQuestionTextRichTextBox";
-            this.smileyQuestionTextRichTextBox.Size = new System.Drawing.Size(237, 96);
-            this.smileyQuestionTextRichTextBox.TabIndex = 1;
-            this.smileyQuestionTextRichTextBox.Text = "";
+            this.smileyQuestion_TextRichTextBox.Location = new System.Drawing.Point(125, 76);
+            this.smileyQuestion_TextRichTextBox.Name = "smileyQuestion_TextRichTextBox";
+            this.smileyQuestion_TextRichTextBox.Size = new System.Drawing.Size(237, 96);
+            this.smileyQuestion_TextRichTextBox.TabIndex = 1;
+            this.smileyQuestion_TextRichTextBox.Text = "";
             // 
-            // smileyQuestionNumberOfSmileyFacesNumericUpDown
+            // smileyQuestion_NumberOfSmileyFacesNumericUpDown
             // 
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.Location = new System.Drawing.Point(125, 233);
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.Maximum = new decimal(new int[] {
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.Location = new System.Drawing.Point(125, 233);
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.Minimum = new decimal(new int[] {
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.Name = "smileyQuestionNumberOfSmileyFacesNumericUpDown";
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.TabIndex = 3;
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.smileyQuestionNumberOfSmileyFacesNumericUpDown.Value = new decimal(new int[] {
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.Name = "smileyQuestion_NumberOfSmileyFacesNumericUpDown";
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.TabIndex = 3;
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value = new decimal(new int[] {
             2,
             0,
             0,
@@ -210,16 +210,16 @@
             // sliderQuestionTabPage
             // 
             this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionAddQuestionButton);
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionEndValueCaptionTextBox);
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionStartValueCaptionTextBox);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_EndValueCaptionTextBox);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_StartValueCaptionTextBox);
             this.sliderQuestionTabPage.Controls.Add(this.label9);
             this.sliderQuestionTabPage.Controls.Add(this.label8);
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionEndValueNumericUpDown);
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionStartValueNumericUpDown);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_EndValueNumericUpDown);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_StartValueNumericUpDown);
             this.sliderQuestionTabPage.Controls.Add(this.label7);
             this.sliderQuestionTabPage.Controls.Add(this.label6);
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionNumericUpDown);
-            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestionTextRichTextBox);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_QuestionOrderNumericUpDown);
+            this.sliderQuestionTabPage.Controls.Add(this.sliderQuestion_QuestionTextRichTextBox);
             this.sliderQuestionTabPage.Controls.Add(this.label4);
             this.sliderQuestionTabPage.Controls.Add(this.label5);
             this.sliderQuestionTabPage.Location = new System.Drawing.Point(4, 22);
@@ -239,20 +239,21 @@
             this.sliderQuestionAddQuestionButton.TabIndex = 22;
             this.sliderQuestionAddQuestionButton.Text = "Add Question";
             this.sliderQuestionAddQuestionButton.UseVisualStyleBackColor = false;
+            this.sliderQuestionAddQuestionButton.Click += new System.EventHandler(this.sliderQuestionAddQuestionButton_Click);
             // 
-            // sliderQuestionEndValueCaptionTextBox
+            // sliderQuestion_EndValueCaptionTextBox
             // 
-            this.sliderQuestionEndValueCaptionTextBox.Location = new System.Drawing.Point(374, 292);
-            this.sliderQuestionEndValueCaptionTextBox.Name = "sliderQuestionEndValueCaptionTextBox";
-            this.sliderQuestionEndValueCaptionTextBox.Size = new System.Drawing.Size(136, 20);
-            this.sliderQuestionEndValueCaptionTextBox.TabIndex = 21;
+            this.sliderQuestion_EndValueCaptionTextBox.Location = new System.Drawing.Point(374, 292);
+            this.sliderQuestion_EndValueCaptionTextBox.Name = "sliderQuestion_EndValueCaptionTextBox";
+            this.sliderQuestion_EndValueCaptionTextBox.Size = new System.Drawing.Size(136, 20);
+            this.sliderQuestion_EndValueCaptionTextBox.TabIndex = 21;
             // 
-            // sliderQuestionStartValueCaptionTextBox
+            // sliderQuestion_StartValueCaptionTextBox
             // 
-            this.sliderQuestionStartValueCaptionTextBox.Location = new System.Drawing.Point(374, 227);
-            this.sliderQuestionStartValueCaptionTextBox.Name = "sliderQuestionStartValueCaptionTextBox";
-            this.sliderQuestionStartValueCaptionTextBox.Size = new System.Drawing.Size(136, 20);
-            this.sliderQuestionStartValueCaptionTextBox.TabIndex = 20;
+            this.sliderQuestion_StartValueCaptionTextBox.Location = new System.Drawing.Point(374, 227);
+            this.sliderQuestion_StartValueCaptionTextBox.Name = "sliderQuestion_StartValueCaptionTextBox";
+            this.sliderQuestion_StartValueCaptionTextBox.Size = new System.Drawing.Size(136, 20);
+            this.sliderQuestion_StartValueCaptionTextBox.TabIndex = 20;
             // 
             // label9
             // 
@@ -270,47 +271,42 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "Start Value Caption";
             // 
-            // sliderQuestionEndValueNumericUpDown
+            // sliderQuestion_EndValueNumericUpDown
             // 
-            this.sliderQuestionEndValueNumericUpDown.Location = new System.Drawing.Point(125, 292);
-            this.sliderQuestionEndValueNumericUpDown.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.sliderQuestionEndValueNumericUpDown.Minimum = new decimal(new int[] {
+            this.sliderQuestion_EndValueNumericUpDown.Location = new System.Drawing.Point(125, 292);
+            this.sliderQuestion_EndValueNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.sliderQuestionEndValueNumericUpDown.Name = "sliderQuestionEndValueNumericUpDown";
-            this.sliderQuestionEndValueNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.sliderQuestionEndValueNumericUpDown.TabIndex = 17;
-            this.sliderQuestionEndValueNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.sliderQuestionEndValueNumericUpDown.Value = new decimal(new int[] {
-            1,
+            this.sliderQuestion_EndValueNumericUpDown.Name = "sliderQuestion_EndValueNumericUpDown";
+            this.sliderQuestion_EndValueNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.sliderQuestion_EndValueNumericUpDown.TabIndex = 17;
+            this.sliderQuestion_EndValueNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.sliderQuestion_EndValueNumericUpDown.Value = new decimal(new int[] {
+            2,
             0,
             0,
             0});
             // 
-            // sliderQuestionStartValueNumericUpDown
+            // sliderQuestion_StartValueNumericUpDown
             // 
-            this.sliderQuestionStartValueNumericUpDown.Location = new System.Drawing.Point(125, 227);
-            this.sliderQuestionStartValueNumericUpDown.Maximum = new decimal(new int[] {
-            9999999,
+            this.sliderQuestion_StartValueNumericUpDown.Location = new System.Drawing.Point(125, 227);
+            this.sliderQuestion_StartValueNumericUpDown.Maximum = new decimal(new int[] {
+            99,
             0,
             0,
             0});
-            this.sliderQuestionStartValueNumericUpDown.Minimum = new decimal(new int[] {
+            this.sliderQuestion_StartValueNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.sliderQuestionStartValueNumericUpDown.Name = "sliderQuestionStartValueNumericUpDown";
-            this.sliderQuestionStartValueNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.sliderQuestionStartValueNumericUpDown.TabIndex = 16;
-            this.sliderQuestionStartValueNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.sliderQuestionStartValueNumericUpDown.Value = new decimal(new int[] {
+            this.sliderQuestion_StartValueNumericUpDown.Name = "sliderQuestion_StartValueNumericUpDown";
+            this.sliderQuestion_StartValueNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.sliderQuestion_StartValueNumericUpDown.TabIndex = 16;
+            this.sliderQuestion_StartValueNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.sliderQuestion_StartValueNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -333,36 +329,36 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Start Value";
             // 
-            // sliderQuestionNumericUpDown
+            // sliderQuestion_QuestionOrderNumericUpDown
             // 
-            this.sliderQuestionNumericUpDown.Location = new System.Drawing.Point(125, 24);
-            this.sliderQuestionNumericUpDown.Maximum = new decimal(new int[] {
+            this.sliderQuestion_QuestionOrderNumericUpDown.Location = new System.Drawing.Point(125, 24);
+            this.sliderQuestion_QuestionOrderNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
-            this.sliderQuestionNumericUpDown.Minimum = new decimal(new int[] {
+            this.sliderQuestion_QuestionOrderNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.sliderQuestionNumericUpDown.Name = "sliderQuestionNumericUpDown";
-            this.sliderQuestionNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.sliderQuestionNumericUpDown.TabIndex = 10;
-            this.sliderQuestionNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.sliderQuestionNumericUpDown.Value = new decimal(new int[] {
+            this.sliderQuestion_QuestionOrderNumericUpDown.Name = "sliderQuestion_QuestionOrderNumericUpDown";
+            this.sliderQuestion_QuestionOrderNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.sliderQuestion_QuestionOrderNumericUpDown.TabIndex = 10;
+            this.sliderQuestion_QuestionOrderNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.sliderQuestion_QuestionOrderNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // sliderQuestionTextRichTextBox
+            // sliderQuestion_QuestionTextRichTextBox
             // 
-            this.sliderQuestionTextRichTextBox.Location = new System.Drawing.Point(125, 76);
-            this.sliderQuestionTextRichTextBox.Name = "sliderQuestionTextRichTextBox";
-            this.sliderQuestionTextRichTextBox.Size = new System.Drawing.Size(237, 96);
-            this.sliderQuestionTextRichTextBox.TabIndex = 12;
-            this.sliderQuestionTextRichTextBox.Text = "";
+            this.sliderQuestion_QuestionTextRichTextBox.Location = new System.Drawing.Point(125, 76);
+            this.sliderQuestion_QuestionTextRichTextBox.Name = "sliderQuestion_QuestionTextRichTextBox";
+            this.sliderQuestion_QuestionTextRichTextBox.Size = new System.Drawing.Size(237, 96);
+            this.sliderQuestion_QuestionTextRichTextBox.TabIndex = 12;
+            this.sliderQuestion_QuestionTextRichTextBox.Text = "";
             // 
             // label4
             // 
@@ -385,9 +381,9 @@
             // starQuestionTabPage
             // 
             this.starQuestionTabPage.Controls.Add(this.starQuestionAddQuestionButton);
-            this.starQuestionTabPage.Controls.Add(this.starQuestionQuestionOrderNumericUpDown);
-            this.starQuestionTabPage.Controls.Add(this.starQuestionTextRichTextBox);
-            this.starQuestionTabPage.Controls.Add(this.starQuestionNumberOfStarsNumericUpDown);
+            this.starQuestionTabPage.Controls.Add(this.starQuestion_QuestionOrderNumericUpDown);
+            this.starQuestionTabPage.Controls.Add(this.starQuestion_TextRichTextBox);
+            this.starQuestionTabPage.Controls.Add(this.starQuestion_NumberOfStarsNumericUpDown);
             this.starQuestionTabPage.Controls.Add(this.label1);
             this.starQuestionTabPage.Controls.Add(this.label2);
             this.starQuestionTabPage.Controls.Add(this.label3);
@@ -409,56 +405,57 @@
             this.starQuestionAddQuestionButton.TabIndex = 13;
             this.starQuestionAddQuestionButton.Text = "Add Question";
             this.starQuestionAddQuestionButton.UseVisualStyleBackColor = false;
+            this.starQuestionAddQuestionButton.Click += new System.EventHandler(this.starQuestionAddQuestionButton_Click);
             // 
-            // starQuestionQuestionOrderNumericUpDown
+            // starQuestion_QuestionOrderNumericUpDown
             // 
-            this.starQuestionQuestionOrderNumericUpDown.Location = new System.Drawing.Point(125, 24);
-            this.starQuestionQuestionOrderNumericUpDown.Maximum = new decimal(new int[] {
+            this.starQuestion_QuestionOrderNumericUpDown.Location = new System.Drawing.Point(125, 24);
+            this.starQuestion_QuestionOrderNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
-            this.starQuestionQuestionOrderNumericUpDown.Minimum = new decimal(new int[] {
+            this.starQuestion_QuestionOrderNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.starQuestionQuestionOrderNumericUpDown.Name = "starQuestionQuestionOrderNumericUpDown";
-            this.starQuestionQuestionOrderNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.starQuestionQuestionOrderNumericUpDown.TabIndex = 6;
-            this.starQuestionQuestionOrderNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.starQuestionQuestionOrderNumericUpDown.Value = new decimal(new int[] {
+            this.starQuestion_QuestionOrderNumericUpDown.Name = "starQuestion_QuestionOrderNumericUpDown";
+            this.starQuestion_QuestionOrderNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.starQuestion_QuestionOrderNumericUpDown.TabIndex = 6;
+            this.starQuestion_QuestionOrderNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.starQuestion_QuestionOrderNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // starQuestionTextRichTextBox
+            // starQuestion_TextRichTextBox
             // 
-            this.starQuestionTextRichTextBox.Location = new System.Drawing.Point(125, 76);
-            this.starQuestionTextRichTextBox.Name = "starQuestionTextRichTextBox";
-            this.starQuestionTextRichTextBox.Size = new System.Drawing.Size(237, 96);
-            this.starQuestionTextRichTextBox.TabIndex = 8;
-            this.starQuestionTextRichTextBox.Text = "";
+            this.starQuestion_TextRichTextBox.Location = new System.Drawing.Point(125, 76);
+            this.starQuestion_TextRichTextBox.Name = "starQuestion_TextRichTextBox";
+            this.starQuestion_TextRichTextBox.Size = new System.Drawing.Size(237, 96);
+            this.starQuestion_TextRichTextBox.TabIndex = 8;
+            this.starQuestion_TextRichTextBox.Text = "";
             // 
-            // starQuestionNumberOfStarsNumericUpDown
+            // starQuestion_NumberOfStarsNumericUpDown
             // 
-            this.starQuestionNumberOfStarsNumericUpDown.Location = new System.Drawing.Point(125, 233);
-            this.starQuestionNumberOfStarsNumericUpDown.Maximum = new decimal(new int[] {
+            this.starQuestion_NumberOfStarsNumericUpDown.Location = new System.Drawing.Point(125, 233);
+            this.starQuestion_NumberOfStarsNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.starQuestionNumberOfStarsNumericUpDown.Minimum = new decimal(new int[] {
+            this.starQuestion_NumberOfStarsNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.starQuestionNumberOfStarsNumericUpDown.Name = "starQuestionNumberOfStarsNumericUpDown";
-            this.starQuestionNumberOfStarsNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.starQuestionNumberOfStarsNumericUpDown.TabIndex = 11;
-            this.starQuestionNumberOfStarsNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.starQuestionNumberOfStarsNumericUpDown.Value = new decimal(new int[] {
+            this.starQuestion_NumberOfStarsNumericUpDown.Name = "starQuestion_NumberOfStarsNumericUpDown";
+            this.starQuestion_NumberOfStarsNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.starQuestion_NumberOfStarsNumericUpDown.TabIndex = 11;
+            this.starQuestion_NumberOfStarsNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.starQuestion_NumberOfStarsNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -512,17 +509,17 @@
             this.smileyQuestionTabPage.ResumeLayout(false);
             this.smileyQuestionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestionOrderNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestionNumberOfSmileyFacesNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_OrderNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_NumberOfSmileyFacesNumericUpDown)).EndInit();
             this.sliderQuestionTabPage.ResumeLayout(false);
             this.sliderQuestionTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestionEndValueNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestionStartValueNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestionNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestion_EndValueNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestion_StartValueNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderQuestion_QuestionOrderNumericUpDown)).EndInit();
             this.starQuestionTabPage.ResumeLayout(false);
             this.starQuestionTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.starQuestionQuestionOrderNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.starQuestionNumberOfStarsNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starQuestion_QuestionOrderNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starQuestion_NumberOfStarsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
@@ -533,9 +530,9 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage smileyQuestionTabPage;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.NumericUpDown smileyQuestionOrderNumericUpDown;
-        private System.Windows.Forms.RichTextBox smileyQuestionTextRichTextBox;
-        private System.Windows.Forms.NumericUpDown smileyQuestionNumberOfSmileyFacesNumericUpDown;
+        private System.Windows.Forms.NumericUpDown smileyQuestion_OrderNumericUpDown;
+        private System.Windows.Forms.RichTextBox smileyQuestion_TextRichTextBox;
+        private System.Windows.Forms.NumericUpDown smileyQuestion_NumberOfSmileyFacesNumericUpDown;
         private System.Windows.Forms.Label numberOfSmileyFacesLabel;
         private System.Windows.Forms.Label questionTextLabel;
         private System.Windows.Forms.Label questionOrderLabel;
@@ -544,23 +541,23 @@
         private System.Windows.Forms.Button smileyQuestionAddQuestionButton;
         private System.Windows.Forms.Button starQuestionAddQuestionButton;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.NumericUpDown starQuestionQuestionOrderNumericUpDown;
-        private System.Windows.Forms.RichTextBox starQuestionTextRichTextBox;
-        private System.Windows.Forms.NumericUpDown starQuestionNumberOfStarsNumericUpDown;
+        private System.Windows.Forms.NumericUpDown starQuestion_QuestionOrderNumericUpDown;
+        private System.Windows.Forms.RichTextBox starQuestion_TextRichTextBox;
+        private System.Windows.Forms.NumericUpDown starQuestion_NumberOfStarsNumericUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button sliderQuestionAddQuestionButton;
-        private System.Windows.Forms.TextBox sliderQuestionEndValueCaptionTextBox;
-        private System.Windows.Forms.TextBox sliderQuestionStartValueCaptionTextBox;
+        private System.Windows.Forms.TextBox sliderQuestion_EndValueCaptionTextBox;
+        private System.Windows.Forms.TextBox sliderQuestion_StartValueCaptionTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown sliderQuestionEndValueNumericUpDown;
-        private System.Windows.Forms.NumericUpDown sliderQuestionStartValueNumericUpDown;
+        private System.Windows.Forms.NumericUpDown sliderQuestion_EndValueNumericUpDown;
+        private System.Windows.Forms.NumericUpDown sliderQuestion_StartValueNumericUpDown;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown sliderQuestionNumericUpDown;
-        private System.Windows.Forms.RichTextBox sliderQuestionTextRichTextBox;
+        private System.Windows.Forms.NumericUpDown sliderQuestion_QuestionOrderNumericUpDown;
+        private System.Windows.Forms.RichTextBox sliderQuestion_QuestionTextRichTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
     }
