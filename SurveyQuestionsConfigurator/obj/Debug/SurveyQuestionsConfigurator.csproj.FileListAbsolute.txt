@@ -10,3 +10,12 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.CoreCompileInputs.cache
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.exe
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Security.AccessControl.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Security.Permissions.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Security.AccessControl.xml
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Security.Permissions.xml
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.CopyComplete
