@@ -31,7 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.smileyQuestionTabPage = new System.Windows.Forms.TabPage();
             this.smileyQuestionAddQuestionButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.smileyQuestion_OrderNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.smileyQuestion_TextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.smileyQuestion_NumberOfSmileyFacesNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -60,10 +59,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.smileyQuestionTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_OrderNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_NumberOfSmileyFacesNumericUpDown)).BeginInit();
             this.sliderQuestionTabPage.SuspendLayout();
@@ -73,7 +75,9 @@
             this.starQuestionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.starQuestion_QuestionOrderNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starQuestion_NumberOfStarsNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -82,10 +86,10 @@
             this.tabControl1.Controls.Add(this.sliderQuestionTabPage);
             this.tabControl1.Controls.Add(this.starQuestionTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 541);
+            this.tabControl1.Size = new System.Drawing.Size(728, 517);
             this.tabControl1.TabIndex = 0;
             // 
             // smileyQuestionTabPage
@@ -101,7 +105,7 @@
             this.smileyQuestionTabPage.Location = new System.Drawing.Point(4, 22);
             this.smileyQuestionTabPage.Name = "smileyQuestionTabPage";
             this.smileyQuestionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.smileyQuestionTabPage.Size = new System.Drawing.Size(720, 515);
+            this.smileyQuestionTabPage.Size = new System.Drawing.Size(720, 491);
             this.smileyQuestionTabPage.TabIndex = 0;
             this.smileyQuestionTabPage.Text = "Smiley Question";
             this.smileyQuestionTabPage.UseVisualStyleBackColor = true;
@@ -116,16 +120,6 @@
             this.smileyQuestionAddQuestionButton.Text = "Add Question";
             this.smileyQuestionAddQuestionButton.UseVisualStyleBackColor = false;
             this.smileyQuestionAddQuestionButton.Click += new System.EventHandler(this.smileyQuestionAddQuestionButton_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::SurveyQuestionsConfigurator.Properties.Resources.pngwing_com;
-            this.pictureBox1.Location = new System.Drawing.Point(278, 203);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(84, 75);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
             // 
             // smileyQuestion_OrderNumericUpDown
             // 
@@ -487,6 +481,16 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Question Order";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SurveyQuestionsConfigurator.Properties.Resources.pngwing_com;
+            this.pictureBox1.Location = new System.Drawing.Point(278, 203);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(84, 75);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::SurveyQuestionsConfigurator.Properties.Resources.star;
@@ -497,18 +501,45 @@
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(728, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // AddQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(728, 541);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "AddQuestionForm";
             this.Text = "AddQuestionForm";
+            this.Leave += new System.EventHandler(this.AddQuestionForm_Leave);
             this.tabControl1.ResumeLayout(false);
             this.smileyQuestionTabPage.ResumeLayout(false);
             this.smileyQuestionTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_OrderNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.smileyQuestion_NumberOfSmileyFacesNumericUpDown)).EndInit();
             this.sliderQuestionTabPage.ResumeLayout(false);
@@ -520,8 +551,12 @@
             this.starQuestionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.starQuestion_QuestionOrderNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.starQuestion_NumberOfStarsNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -560,5 +595,8 @@
         private System.Windows.Forms.RichTextBox sliderQuestion_QuestionTextRichTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

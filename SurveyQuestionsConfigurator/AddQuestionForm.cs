@@ -19,6 +19,56 @@ namespace SurveyQuestionsConfigurator
         {
             InitializeComponent();
         }
+        public AddQuestionForm(int activeTab, int questionId, string questionType/*, string questionText, int numberOfSmileyFaces*/)
+        {
+            InitializeComponent();
+            foreach (TabPage tab in tabControl1.TabPages)
+            {
+                if (tab.TabIndex == activeTab)
+                {
+                    tabControl1.SelectedTab = tabControl1.TabPages[activeTab];
+                    tab.Enabled = true;
+                }
+                else
+                {
+                    tab.Enabled = false;
+                }
+
+            }
+
+            //var cn = ConfigurationManager.ConnectionStrings["cn"];
+            //SqlDataReader reader = null;
+            //SqlConnection conn = null;
+            //try
+            //{
+            //    conn = new SqlConnection(cn.ConnectionString);
+            //    SqlCommand cmd = new SqlCommand($"select * from Smiley_Questions where QuestionID = {questionId}", conn);
+            //    conn.Open();
+            //    reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+
+            //    }
+            //    reader.Close();
+            //}
+            //catch (SqlException ex)
+            //{
+            //    MessageBox.Show("SQL Error:\n" + ex);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Something went wrong:\n" + ex);
+            //}
+            //finally
+            //{
+            //    reader.Close();
+            //    conn.Close();
+            //}
+            //smileyQuestion_OrderNumericUpDown.Value = questionOrder;
+            //smileyQuestion_TextRichTextBox.Text = questionText;
+            //smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value = numberOfSmileyFaces;
+
+        }
 
         //Smiley question logic
         private void smileyQuestionAddQuestionButton_Click(object sender, EventArgs e)
@@ -223,5 +273,20 @@ values
                 MessageBox.Show("Question text cant be empty", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }// end of event
+
+        private void AddQuestionForm_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
