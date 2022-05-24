@@ -14,6 +14,16 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class Form1 : Form
     {
+        /* 
+       * Global Variables
+       * Access them anywhere
+       * */
+        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings["cn"]; //get connection string information from App.config
+        private SqlConnection conn = null; // Create SqlConnection object to connect to DB
+
+        /*
+         * Question Type Enum to reduce any errors 
+         */
         public enum QuestionType
         {
             SMILEY,
@@ -25,9 +35,10 @@ namespace SurveyQuestionsConfigurator
         public Form1()
         {
             InitializeComponent();
-
-            // Create an instance of a ListView column sorter and assign it
-            // to the ListView control.
+            /*
+             * Create an instance of a ListView column sorter and assign it
+             * to the ListView control.
+             */
             lvwColumnSorter = new ListViewColumnSorter();
             this.createdQuestions_ListView.ListViewItemSorter = lvwColumnSorter;
         }
@@ -36,7 +47,6 @@ namespace SurveyQuestionsConfigurator
         {
             ColumnHeader columnheader;// Used for creating column headers.
             ListViewItem listviewitem;// Used for creating listview items.
-            SqlConnection conn = null;
 
             createdQuestions_ListView.Clear(); // clear first
 
@@ -60,44 +70,20 @@ namespace SurveyQuestionsConfigurator
             columnheader.Text = "Text";
             this.createdQuestions_ListView.Columns.Add(columnheader);
 
-            //columnheader = new ColumnHeader();
-            //columnheader.Text = "Number of Smiley Faces";
-            //this.listView1.Columns.Add(columnheader);
-
-            //columnheader = new ColumnHeader();
-            //columnheader.Text = "Number of stars";
-            //this.listView1.Columns.Add(columnheader);
-
-            //columnheader = new ColumnHeader();
-            //columnheader.Text = "Start Value";
-            //this.listView1.Columns.Add(columnheader);
-
-            //columnheader = new ColumnHeader();
-            //columnheader.Text = "Start Value Caption";
-            //this.listView1.Columns.Add(columnheader);
-
-            //columnheader = new ColumnHeader();
-            //columnheader.Text = "End Value";
-            //this.listView1.Columns.Add(columnheader);
-
-            //columnheader = new ColumnHeader();
-            //columnheader.Text = "End Value Caption";
-            //this.listView1.Columns.Add(columnheader);
-
-
-
-            var cn = ConfigurationManager.ConnectionStrings["cn"];
             SqlDataReader reader = null;
 
+            /*
+             * Connect to every Quesion Type table
+             * And Fill the List View
+             */
             try
             {
                 conn = new SqlConnection(cn.ConnectionString);
                 SqlCommand cmd = new SqlCommand("select * from Smiley_Questions", conn);
                 conn.Open();
                 reader = cmd.ExecuteReader();
-                while (reader.Read())
+                while (reader.Read()) //Read every retrieved record
                 {
-
                     listviewitem = new ListViewItem($"{QuestionType.SMILEY}");
                     listviewitem.SubItems.Add($"{reader[0]}");
                     listviewitem.SubItems.Add($"{reader[1]}");
@@ -109,9 +95,8 @@ namespace SurveyQuestionsConfigurator
 
                 cmd = new SqlCommand("select * from Slider_Questions", conn);
                 reader = cmd.ExecuteReader();
-                while (reader.Read())
+                while (reader.Read()) //Read every retrieved record
                 {
-
                     listviewitem = new ListViewItem($"{QuestionType.SLIDER}");
                     listviewitem.SubItems.Add($"{reader[0]}");
                     listviewitem.SubItems.Add($"{reader[1]}");
@@ -124,7 +109,7 @@ namespace SurveyQuestionsConfigurator
 
                 cmd = new SqlCommand("select * from Star_Questions", conn);
                 reader = cmd.ExecuteReader();
-                while (reader.Read())
+                while (reader.Read()) //Read every retrieved record
                 {
 
                     listviewitem = new ListViewItem($"{QuestionType.STAR}");
@@ -150,30 +135,6 @@ namespace SurveyQuestionsConfigurator
                 conn.Close();
             }
 
-            // Create some listview items consisting of first and last names.
-            //listviewitem = new ListViewItem("John");
-            //listviewitem.SubItems.Add("Smith");
-            //listviewitem.SubItems.Add("3");
-            //this.listView1.Items.Add(listviewitem);
-
-            //listviewitem = new ListViewItem("Bob");
-            //listviewitem.SubItems.Add("Taylor");
-            //this.listView1.Items.Add(listviewitem);
-
-            //listviewitem = new ListViewItem("Kim");
-            //listviewitem.SubItems.Add("Zimmerman");
-            //this.listView1.Items.Add(listviewitem);
-
-            //listviewitem = new ListViewItem("Olivia");
-            //listviewitem.SubItems.Add("Johnson");
-            //this.listView1.Items.Add(listviewitem);
-
-            //this.listView1.Items.Add(`listview`item);
-
-
-            //this.`listView`1.Columns.Add(columnheader);
-
-
             // Loop through and size each column header to fit the column header text.
             foreach (ColumnHeader ch in this.createdQuestions_ListView.Columns)
             {
@@ -183,6 +144,9 @@ namespace SurveyQuestionsConfigurator
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            /*
+            * Build List View on load
+            */
             BuildListView();
         }
 
@@ -193,7 +157,10 @@ namespace SurveyQuestionsConfigurator
             {
                 // Reverse the current sort direction for this column.
                 /*
-                Error	CS0104	'SortOrder' is an ambiguous reference between 'System.Windows.Forms.SortOrder' and 'System.Data.SqlClient.SortOrder'
+                 * before : SortOrder 
+                 * after  : System.Windows.Forms.SortOrder
+                 * Slove error :
+                 * Error CS0104	'SortOrder' is an ambiguous reference between 'System.Windows.Forms.SortOrder' and 'System.Data.SqlClient.SortOrder'
                  */
                 if (lvwColumnSorter.Order == System.Windows.Forms.SortOrder.Ascending)
                 {
@@ -228,7 +195,7 @@ namespace SurveyQuestionsConfigurator
 
         private void deleteQuestionButton_Click(object sender, EventArgs e)
         {
-            if (createdQuestions_ListView.SelectedIndices.Count > 0)
+            if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
             { // general condition
 
                 //Display confirmation dilaog first
@@ -236,23 +203,26 @@ namespace SurveyQuestionsConfigurator
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    var cn = ConfigurationManager.ConnectionStrings["cn"]; //get connection string information from App.config
+                    int questionId = 0; // question to be deleted
 
-                    SqlConnection conn = null; //create a "method scope" SqlConnection object and reference it to null
-
-                    int questionID = 0; // question to be deleted
-                    if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SMILEY.ToString())
+                    /*
+                     * Check the type of the question to be deleted
+                     * Choose appropriate table to query
+                     */
+                    if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SMILEY.ToString()) //SMILEY Question
                     {
                         try
                         {
                             conn = new SqlConnection(cn.ConnectionString);
-                            questionID = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
-                            SqlCommand cmd = new SqlCommand($@"delete from Smiley_Questions where QuestionID = {questionID};", conn);
+                            questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                            SqlCommand cmd = new SqlCommand($@"delete from Smiley_Questions where QuestionID = {questionId};", conn);
                             conn.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
                             if (affectedRows > 0)
                             {
-                                //BuildListView();
+                                /*
+                                 * Rebuild List View after each deletion
+                                 */
                                 BuildListView();
                                 MessageBox.Show("Question Deleted");
                             }
@@ -270,17 +240,20 @@ namespace SurveyQuestionsConfigurator
                             conn.Close();
                         }
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SLIDER.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SLIDER.ToString()) //Slider Question
                     {
                         try
                         {
                             conn = new SqlConnection(cn.ConnectionString);
-                            questionID = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
-                            SqlCommand cmd = new SqlCommand($@"delete from Slider_Questions where QuestionID = {questionID};", conn);
+                            questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                            SqlCommand cmd = new SqlCommand($@"delete from Slider_Questions where QuestionID = {questionId};", conn);
                             conn.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
                             if (affectedRows > 0)
                             {
+                                /*
+                                 * Rebuild List View after each deletion
+                                 */
                                 BuildListView();
                                 MessageBox.Show("Question Deleted");
                             }
@@ -298,18 +271,20 @@ namespace SurveyQuestionsConfigurator
                             conn.Close();
                         }
                     }
-                    else if ((createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString()))
+                    else if ((createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString())) //Star Question
                     {
                         try
                         {
                             conn = new SqlConnection(cn.ConnectionString);
-                            questionID = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
-                            SqlCommand cmd = new SqlCommand($@"delete from Star_Questions where QuestionID = {questionID};", conn);
+                            questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                            SqlCommand cmd = new SqlCommand($@"delete from Star_Questions where QuestionID = {questionId};", conn);
                             conn.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
                             if (affectedRows > 0)
                             {
-                                //BuildListView();
+                                /*
+                                 * Rebuild List View after each deletion
+                                 */
                                 BuildListView();
                                 MessageBox.Show("Question Deleted");
                             }
@@ -329,63 +304,57 @@ namespace SurveyQuestionsConfigurator
                     }
                 }
             }
-
             else
             {
                 MessageBox.Show("Please select an item first", "No selected item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             }
         }//end event 
 
         private void refreshDataButton_Click(object sender, EventArgs e)
         {
+            /*
+            * Rebuild List View when refresh button is pressed
+            */
             BuildListView();
         }
 
         private void editQuestionButton_Click(object sender, EventArgs e)
         {
             AddQuestionForm form2 = null;
-            if (createdQuestions_ListView.SelectedIndices.Count > 0)
+            if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
             {
                 int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                /*
+                 * Choose Editing Form constructor based on Question's Type
+                 */
                 if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SMILEY.ToString())
                 {
-                    //string questionText = createdQuestions_ListView.SelectedItems[0].SubItems[2].Text;
-                    //int numberOfSmileyFaces = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[3].Text);
-                    //form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, questionText, numberOfSmileyFaces);
-                    //MessageBox.Show("" + questionId);
                     form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, QuestionType.SMILEY.ToString());
-
                 }
                 else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SLIDER.ToString())
                 {
-                    //int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
-                    //string questionText = createdQuestions_ListView.SelectedItems[0].SubItems[2].Text;
-                    //int numberOfSmileyFaces = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[3].Text);
-                    //form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, questionText, numberOfSmileyFaces);
                     form2 = new AddQuestionForm((int)QuestionType.SLIDER, questionId, QuestionType.SLIDER.ToString());
-
                 }
                 else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString())
                 {
-                    //int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
-                    //string questionText = createdQuestions_ListView.SelectedItems[0].SubItems[2].Text;
-                    //int numberOfSmileyFaces = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[3].Text);
-                    //form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, questionText, numberOfSmileyFaces);
                     form2 = new AddQuestionForm((int)QuestionType.STAR, questionId, QuestionType.STAR.ToString());
-
                 }
-                //if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SLIDER.ToString())
-                //    form2 = new AddQuestionForm((int)QuestionType.SLIDER);
-                //if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString())
-                //    form2 = new AddQuestionForm((int)QuestionType.STAR);
                 form2.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Please select an item first", "No selected item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             }
+        }
+
+        private void closeApplicationButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Form1_Leave(object sender, EventArgs e)
+        {
+            conn.Close();
         }
     }
 }
