@@ -27,14 +27,16 @@ namespace SurveyQuestionsConfigurator
         public AddQuestionForm()
         {
             InitializeComponent();
+            this.Text = "Add a question";
         }
 
         /*
          * Form constructor for "Editing Mode" or Editing a question
          */
-        public AddQuestionForm(int activeTab, int questionId, string questionType/*, string questionText, int numberOfSmileyFaces*/)
+        public AddQuestionForm(int questionId, string questionType/*, string questionText, int numberOfSmileyFaces*/)
         {
             InitializeComponent();
+            this.Text = "Edit a question";
 
             QuestionId = questionId; //set QuestionId to access it globally
             questionTypeComboBox.Enabled = false;
@@ -42,229 +44,25 @@ namespace SurveyQuestionsConfigurator
 
             if (questionType == Form1.QuestionType.SMILEY.ToString())
             {
-                SelectedQuestionType = 0;
+                SelectedQuestionType = (int)Form1.QuestionType.SMILEY; // 0 
                 InitializeEditingSmileyQuestion(questionId);
             }
             else if (questionType == Form1.QuestionType.SLIDER.ToString())
             {
-                SelectedQuestionType = 1;
+                SelectedQuestionType = (int)Form1.QuestionType.SLIDER; // 1
                 InitializeEditingSlideQuestion(questionId);
             }
             else if (questionType == Form1.QuestionType.STAR.ToString())
             {
-                SelectedQuestionType = 2;
+                SelectedQuestionType = (int)Form1.QuestionType.STAR;
                 InitializeEditingStarQuestion(questionId);
             }
         }
 
-
-        /*
-         * Smiley question logic
-         */
-        private void smileyQuestionAddQuestionButton_Click(object sender, EventArgs e)
+        private void AddQuestionForm_Load(object sender, EventArgs e)
         {
-
-            /*
-             * Declare variables
-             */
-            int questionOrder, NumberOfSmilyFaces;
-            string QuestionText;
-
-            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
-            {
-                /*
-                * Assign values to variables
-                */
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                QuestionText = questionTextRichTextBox.Text;
-                NumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
-
-                /*
-                * Try to insert a new question into "Smiley_Questions" table
-                */
-                try
-                {
-                    conn = new SqlConnection(cn.ConnectionString);
-                    SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
-INSERT INTO Smiley_Questions
-(QuestionOrder, QuestionText, NumberOfSmileyFaces)
-VALUES
-({questionOrder},'{QuestionText}',{NumberOfSmilyFaces})", conn);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
-                catch (SqlException ex)
-                {
-
-                    //2627 -> primary key violation
-                    //2601 -> unique key violation
-                    // ex.Number
-                    if (ex.Number == 2601)
-                    {
-                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("SQL Error:\n" + ex.Message);
-                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong:\n" + ex);
-                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }// end of event
-
-        private void sliderQuestionAddQuestionButton_Click(object sender, EventArgs e)
-        {
-            /*
-             * Declare variables
-             */
-            int questionOrder, questionStartValue, questionEndValue;
-            string questionText, questionStartValueCaption, questionEndValueCaption;
-
-
-            if (CheckSliderQuestionInputFields()) //if Question input fields are not null or empty 
-            {
-
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = (string)questionTextRichTextBox.Text;
-
-                questionStartValueCaption = (string)genericTextBox1.Text;
-                questionEndValueCaption = (string)genericTextBox2.Text;
-
-                questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-
-                /*
-                * Try to insert a new question into "Slider_Questions" table
-                */
-                try
-                {
-                    conn = new SqlConnection(cn.ConnectionString);
-                    SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
-INSERT INTO Slider_Questions
-(QuestionOrder, QuestionText, QuestionStartValue, QuestionEndValue, QuestionStartValueCaption, QuestionEndValueCaption)
-VALUES
-({questionOrder},'{questionText}',{questionStartValue}, {questionEndValue}, '{questionStartValueCaption}', '{questionEndValueCaption}' )",
-conn);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Question added successfully");
-
-
-                }
-                catch (SqlException ex)
-                {
-
-                    //2627 -> primary key violation
-                    if (ex.Number == 2627)
-                    {
-                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("SQL Error:\n" + ex.Message);
-                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong:\n" + ex);
-                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\ncan NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } // end of event
-
-        private void starQuestionAddQuestionButton_Click(object sender, EventArgs e)
-        {
-            /*
-             * Declare variables
-             */
-            int questionOrder, NumberOfStars;
-            string questionText;
-
-            if (CheckStarQuestionInputFields()) //if Question input fields are not null or empty 
-            {
-                questionOrder = Convert.ToInt32(starQuestion_QuestionOrderNumericUpDown.Value);
-                questionText = starQuestion_TextRichTextBox.Text;
-                NumberOfStars = Convert.ToInt32(starQuestion_NumberOfStarsNumericUpDown.Value);
-
-                /*
-                * Try to insert a new question into "Star_Questions" table
-                */
-                try
-                {
-                    conn = new SqlConnection(cn.ConnectionString);
-                    SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
-INSERT INTO Star_Questions
-(QuestionOrder, QuestionText, NumberOfStars)
-values
-({questionOrder}, '{questionText}', {NumberOfStars})", conn);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (SqlException ex)
-                {
-
-                    //2627 -> primary key violation
-                    //2601 -> unique key violation
-                    // ex.Number
-                    if (ex.Number == 2627)
-                    {
-                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("SQL Error:\n" + ex.Message);
-                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong:\n" + ex);
-                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }// end of event
+            questionTypeComboBox.SelectedIndex = SelectedQuestionType;
+        } // event end
 
         private void AddQuestionForm_Leave(object sender, EventArgs e)
         {
@@ -275,176 +73,14 @@ values
         {
 
         }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void smileyQuestion_EditQuestionButton_Click(object sender, EventArgs e)
+        private void closeButton_Click(object sender, EventArgs e)
         {
-            int questionOrder, NumberOfSmilyFaces;
-            string QuestionText;
-
-            if (CheckSmileyQuestionInputFields())
-            {
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                QuestionText = questionTextRichTextBox.Text;
-                NumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
-
-                /*
-                * Try to Update a new question into "Smiley_Questions" table
-                */
-                try
-                {
-                    using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
-                    {
-                        SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
- UPDATE Smiley_Questions
- SET QuestionOrder = {questionOrder}, QuestionText = '{QuestionText}', NumberOfSmileyFaces ={NumberOfSmilyFaces}
- WHERE QuestionID = {QuestionId};
-", conn);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong:\n" + ex);
-                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            this.Close();
         }
-
-        private void starQuestion_EditQuestionButton_Click(object sender, EventArgs e)
-        {
-            int questionOrder, NumberOfStars;
-            string questionText;
-            if (CheckStarQuestionInputFields())
-            {
-                questionOrder = Convert.ToInt32(starQuestion_QuestionOrderNumericUpDown.Value);
-                questionText = starQuestion_TextRichTextBox.Text;
-                NumberOfStars = Convert.ToInt32(starQuestion_NumberOfStarsNumericUpDown.Value);
-
-                /*
-                * Try to Update a new question into "Star_Questions" table
-                */
-                try
-                {
-                    using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
-                    {
-                        SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
- UPDATE Star_Questions
- SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}', NumberOfStars = {NumberOfStars}
- WHERE QuestionID = {QuestionId};
-", conn);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    //2627 -> primary key violation
-                    //2601 -> unique key violation
-                    // ex.Number
-                    if (ex.Number == 2627)
-                    {
-                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("SQL Error:\n" + ex.Message);
-                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
-
-
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong:\n" + ex);
-                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } //end of function
-
-        private void sliderQuestion_EditQuestionButton_Click(object sender, EventArgs e)
-        {
-            int questionOrder, questionStartValue, questionEndValue;
-            string questionText, questionStartValueCaption, questionEndValueCaption;
-
-            if (CheckSliderQuestionInputFields())
-            {
-                //assign variables
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = (string)questionTextRichTextBox.Text;
-                questionStartValueCaption = (string)genericTextBox1.Text;
-                questionEndValueCaption = (string)genericTextBox2.Text;
-                questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-
-                /*
-                * Try to Update a new question into "Slider_Questions" table
-                */
-                try
-                {
-                    using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
-                    {
-                        SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
- UPDATE Slider_Questions
- SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}', QuestionStartValue = {questionStartValue}, QuestionEndValue = {questionEndValue}, QuestionStartValueCaption = '{questionStartValueCaption}', QuestionEndValueCaption = '{questionEndValueCaption}'
- WHERE QuestionID = {QuestionId};
-", conn);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    //2627 -> primary key violation
-                    if (ex.Number == 2627)
-                    {
-                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("SQL Error:\n" + ex.Message);
-                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something went wrong:\n" + ex);
-                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
-                }
-            }
-
-            else
-            {
-                MessageBox.Show("Question text, Start value Caption and End value caption can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } //end of function
 
         private void InitializeEditingSmileyQuestion(int questionId)
         {
@@ -498,7 +134,6 @@ USE {cn.Name}
             editQuestionButton.Enabled = true;
             editQuestionButton.Visible = true;
         } //end function
-
         private void InitializeEditingSlideQuestion(int questionId)
         {
             SqlDataReader reader = null;
@@ -545,7 +180,6 @@ USE {cn.Name}
             editQuestionButton.Enabled = true;
             editQuestionButton.Visible = true;
         } //end function
-
         private void InitializeEditingStarQuestion(int questionId)
         {
             SqlDataReader reader = null;
@@ -589,10 +223,6 @@ USE {cn.Name}
             editQuestionButton.Visible = true;
         }//end function
 
-
-
-
-
         private bool CheckSmileyQuestionInputFields()
         {
             if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
@@ -600,7 +230,6 @@ USE {cn.Name}
 
             return false;
         }
-
         private bool CheckSliderQuestionInputFields()
         {
             if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
@@ -609,7 +238,6 @@ USE {cn.Name}
                         return true;
             return false;
         }
-
         private bool CheckStarQuestionInputFields()
         {
             if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
@@ -618,20 +246,6 @@ USE {cn.Name}
             return false;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void AddQuestionForm_Load(object sender, EventArgs e)
-        {
-            questionTypeComboBox.SelectedIndex = SelectedQuestionType;
-        } // event end
 
         private void questionTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -718,8 +332,10 @@ USE {cn.Name}
             {
                 AddStarQuestion();
             }
-        }// end of function
 
+            ClearInputs();
+
+        }// end of function
         private void editQuestionButton_Click(object sender, EventArgs e)
         {
             if (questionTypeComboBox.SelectedIndex == 0)
@@ -981,7 +597,6 @@ USE {cn.Name}
                 MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }//end of function
-
         private void EditSliderQuestion()
         {
             int questionOrder, questionStartValue, questionEndValue;
@@ -1040,7 +655,6 @@ USE {cn.Name}
                 MessageBox.Show("Question text, Start value Caption and End value caption can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         } //end of function
-
         private void EditStarQuestion()
         {
             int questionOrder, NumberOfStars;
@@ -1101,6 +715,14 @@ USE {cn.Name}
             }
         } //end of function
 
-
+        private void ClearInputs()
+        {
+            questionOrderNumericUpDown.ResetText();
+            questionTextRichTextBox.Clear();
+            genericNumericUpDown1.ResetText();
+            genericNumericUpDown2.ResetText();
+            genericTextBox1.Clear();
+            genericTextBox2.Clear();
+        }
     }
 }

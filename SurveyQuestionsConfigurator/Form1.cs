@@ -232,7 +232,7 @@ namespace SurveyQuestionsConfigurator
                                  * Rebuild List View after each deletion
                                  */
                                 BuildListView();
-                                MessageBox.Show("Question Deleted");
+                                MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (SqlException ex)
@@ -267,7 +267,7 @@ namespace SurveyQuestionsConfigurator
                                  * Rebuild List View after each deletion
                                  */
                                 BuildListView();
-                                MessageBox.Show("Question Deleted");
+                                MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (SqlException ex)
@@ -302,7 +302,7 @@ namespace SurveyQuestionsConfigurator
                                  * Rebuild List View after each deletion
                                  */
                                 BuildListView();
-                                MessageBox.Show("Question Deleted");
+                                MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         catch (SqlException ex)
@@ -344,20 +344,18 @@ namespace SurveyQuestionsConfigurator
             if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
             {
                 int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
-                /*
-                 * Choose Editing Form constructor based on Question's Type
-                 */
+
                 if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SMILEY.ToString())
                 {
-                    form2 = new AddQuestionForm((int)QuestionType.SMILEY, questionId, QuestionType.SMILEY.ToString());
+                    form2 = new AddQuestionForm(questionId, QuestionType.SMILEY.ToString());
                 }
                 else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SLIDER.ToString())
                 {
-                    form2 = new AddQuestionForm((int)QuestionType.SLIDER, questionId, QuestionType.SLIDER.ToString());
+                    form2 = new AddQuestionForm(questionId, QuestionType.SLIDER.ToString());
                 }
                 else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString())
                 {
-                    form2 = new AddQuestionForm((int)QuestionType.STAR, questionId, QuestionType.STAR.ToString());
+                    form2 = new AddQuestionForm(questionId, QuestionType.STAR.ToString());
                 }
                 form2.ShowDialog();
             }
@@ -380,13 +378,17 @@ namespace SurveyQuestionsConfigurator
         private void CheckIfTablesExist()
         {
             /*
-             * Create Tables if they do NOT exist
+             * GET DATABASE NAME FROM APP.CONFIG FILE
              */
+
             try
             {
                 conn = new SqlConnection(cn.ConnectionString);
                 SqlCommand cmd = null;
 
+                /*
+                 * Failed attempt at creating a database that does not exist before
+                 */
                 cmd = new SqlCommand($@"
 USE [master]
 IF DB_ID(N'{cn.Name}') IS NULL
@@ -443,7 +445,9 @@ END
                 conn.Close();
 
 
-
+                /*
+                 * Create Tables if they do NOT exist
+                 */
                 cmd = new SqlCommand($@"
 USE [{cn.Name}]
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
