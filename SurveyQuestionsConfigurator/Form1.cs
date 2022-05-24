@@ -204,26 +204,25 @@ namespace SurveyQuestionsConfigurator
 
         private void deleteQuestionButton_Click(object sender, EventArgs e)
         {
-            if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
-            { // general condition
+            if (createdQuestions_ListView.SelectedItems.Count > 0) //If at least one question is selected
+            {
 
+                var selectedItem = createdQuestions_ListView.SelectedItems[0]; // save selected item before it is unchecked by dialog box
                 //Display confirmation dilaog first
                 var confirmResult = MessageBox.Show("Are you sure to delete this item ??", "Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
                 if (confirmResult == DialogResult.Yes)
                 {
-                    int questionId = 0; // question to be deleted
-
+                    int questionId; // question to be deleted
                     /*
                      * Check the type of the question to be deleted
                      * Choose appropriate table to query
                      */
-                    if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SMILEY.ToString()) //SMILEY Question
+                    if (selectedItem.Text.ToString() == QuestionType.SMILEY.ToString()) //SMILEY Question
                     {
                         try
                         {
                             conn = new SqlConnection(cn.ConnectionString);
-                            questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                            questionId = Convert.ToInt32(selectedItem.SubItems[1].Text);
                             SqlCommand cmd = new SqlCommand($@"delete from Smiley_Questions where QuestionID = {questionId};", conn);
                             conn.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
@@ -250,13 +249,15 @@ namespace SurveyQuestionsConfigurator
                         {
                             conn.Close();
                         }
+                        createdQuestions_ListView.SelectedIndices.Clear();
+
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].Text == QuestionType.SLIDER.ToString()) //Slider Question
+                    else if (selectedItem.Text.ToString() == QuestionType.SLIDER.ToString()) //Slider Question
                     {
                         try
                         {
                             conn = new SqlConnection(cn.ConnectionString);
-                            questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                            questionId = Convert.ToInt32(selectedItem.SubItems[1].Text);
                             SqlCommand cmd = new SqlCommand($@"delete from Slider_Questions where QuestionID = {questionId};", conn);
                             conn.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
@@ -283,13 +284,15 @@ namespace SurveyQuestionsConfigurator
                         {
                             conn.Close();
                         }
+                        createdQuestions_ListView.SelectedIndices.Clear();
+
                     }
-                    else if ((createdQuestions_ListView.SelectedItems[0].Text == QuestionType.STAR.ToString())) //Star Question
+                    else if (selectedItem.Text.ToString() == QuestionType.STAR.ToString()) //Star Question
                     {
                         try
                         {
                             conn = new SqlConnection(cn.ConnectionString);
-                            questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[1].Text);
+                            questionId = Convert.ToInt32(selectedItem.SubItems[1].Text);
                             SqlCommand cmd = new SqlCommand($@"delete from Star_Questions where QuestionID = {questionId};", conn);
                             conn.Open();
                             int affectedRows = cmd.ExecuteNonQuery();
@@ -316,6 +319,8 @@ namespace SurveyQuestionsConfigurator
                         {
                             conn.Close();
                         }
+                        createdQuestions_ListView.SelectedIndices.Clear();
+
                     }
                 }
             }
@@ -526,6 +531,11 @@ END
             {
                 conn.Close();
             }
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            BuildListView();
         }
     }
 }

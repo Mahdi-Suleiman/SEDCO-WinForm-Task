@@ -125,5 +125,8 @@
   <ItemGroup>
     <None Include="Resources\refresh_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\questionMark.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,6 +22,7 @@ namespace SurveyQuestionsConfigurator
         public int QuestionId { get; set; } // create global Question ID property
         private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
         private SqlConnection conn = null; // Create SqlConnection object to connect to DB
+        private int SelectedQuestionType = 0;
 
         public AddQuestionForm()
         {
@@ -73,20 +74,21 @@ namespace SurveyQuestionsConfigurator
          */
         private void smileyQuestionAddQuestionButton_Click(object sender, EventArgs e)
         {
+
             /*
              * Declare variables
              */
             int questionOrder, NumberOfSmilyFaces;
             string QuestionText;
 
-            if (!String.IsNullOrWhiteSpace(smileyQuestion_TextRichTextBox.Text)) //if Question text is not null or empty 
+            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
             {
                 /*
                 * Assign values to variables
                 */
-                questionOrder = Convert.ToInt32(smileyQuestion_OrderNumericUpDown.Value);
-                QuestionText = smileyQuestion_TextRichTextBox.Text;
-                NumberOfSmilyFaces = Convert.ToInt32(smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value);
+                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                QuestionText = questionTextRichTextBox.Text;
+                NumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
 
                 /*
                 * Try to insert a new question into "Smiley_Questions" table
@@ -155,10 +157,10 @@ VALUES
                 questionOrder = Convert.ToInt32(sliderQuestion_QuestionOrderNumericUpDown.Value);
                 questionText = (string)sliderQuestion_QuestionTextRichTextBox.Text;
 
-                questionStartValueCaption = (string)sliderQuestion_StartValueCaptionTextBox.Text;
-                questionEndValueCaption = (string)sliderQuestion_EndValueCaptionTextBox.Text;
+                questionStartValueCaption = (string)genericTextBox1.Text;
+                questionEndValueCaption = (string)genericTextBox2.Text;
 
-                questionStartValue = Convert.ToInt32(sliderQuestion_StartValueNumericUpDown.Value);
+                questionStartValue = Convert.ToInt32(genericNumericUpDown2.Value);
                 questionEndValue = Convert.ToInt32(sliderQuestion_EndValueNumericUpDown.Value);
 
                 /*
@@ -297,9 +299,9 @@ values
 
             if (CheckSmileyQuestionInputFields())
             {
-                questionOrder = Convert.ToInt32(smileyQuestion_OrderNumericUpDown.Value);
-                QuestionText = smileyQuestion_TextRichTextBox.Text;
-                NumberOfSmilyFaces = Convert.ToInt32(smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value);
+                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                QuestionText = questionTextRichTextBox.Text;
+                NumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
 
                 /*
                 * Try to Update a new question into "Smiley_Questions" table
@@ -406,9 +408,9 @@ USE {cn.Name}
                 //assign variables
                 questionOrder = Convert.ToInt32(sliderQuestion_QuestionOrderNumericUpDown.Value);
                 questionText = (string)sliderQuestion_QuestionTextRichTextBox.Text;
-                questionStartValueCaption = (string)sliderQuestion_StartValueCaptionTextBox.Text;
-                questionEndValueCaption = (string)sliderQuestion_EndValueCaptionTextBox.Text;
-                questionStartValue = Convert.ToInt32(sliderQuestion_StartValueNumericUpDown.Value);
+                questionStartValueCaption = (string)genericTextBox1.Text;
+                questionEndValueCaption = (string)genericTextBox2.Text;
+                questionStartValue = Convert.ToInt32(genericNumericUpDown2.Value);
                 questionEndValue = Convert.ToInt32(sliderQuestion_EndValueNumericUpDown.Value);
 
                 /*
@@ -470,9 +472,9 @@ USE {cn.Name}
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    smileyQuestion_OrderNumericUpDown.Value = Convert.ToDecimal(reader[1]);
-                    smileyQuestion_TextRichTextBox.Text = (string)reader[2];
-                    smileyQuestion_NumberOfSmileyFacesNumericUpDown.Value = Convert.ToDecimal(reader[3]);
+                    questionOrderNumericUpDown.Value = Convert.ToDecimal(reader[1]);
+                    questionTextRichTextBox.Text = (string)reader[2];
+                    genericNumericUpDown1.Value = Convert.ToDecimal(reader[3]);
                 }
             }
             catch (SqlException ex)
@@ -501,11 +503,11 @@ USE {cn.Name}
                 conn.Close();
             }
 
-            smileyQuestion_AddQuestionButton.Enabled = false;
-            smileyQuestion_AddQuestionButton.Visible = false;
+            addQuestionButtonaa.Enabled = false;
+            addQuestionButtonaa.Visible = false;
 
-            smileyQuestion_EditQuestionButton.Enabled = true;
-            smileyQuestion_EditQuestionButton.Visible = true;
+            editQuestionButtonaa.Enabled = true;
+            editQuestionButtonaa.Visible = true;
         } //end function
 
         private void InitializeEditingSlideQuestion(int questionId)
@@ -526,11 +528,11 @@ USE {cn.Name}
                 {
                     sliderQuestion_QuestionOrderNumericUpDown.Value = Convert.ToDecimal(reader[1]);
                     sliderQuestion_QuestionTextRichTextBox.Text = (string)reader[2];
-                    sliderQuestion_StartValueNumericUpDown.Value = Convert.ToDecimal(reader[3]);
+                    genericNumericUpDown2.Value = Convert.ToDecimal(reader[3]);
                     sliderQuestion_EndValueNumericUpDown.Value = Convert.ToDecimal(reader[4]);
 
-                    sliderQuestion_StartValueCaptionTextBox.Text = (string)reader[5];
-                    sliderQuestion_EndValueCaptionTextBox.Text = (string)reader[6];
+                    genericTextBox1.Text = (string)reader[5];
+                    genericTextBox2.Text = (string)reader[6];
                 }
             }
             catch (SqlException ex)
@@ -605,7 +607,7 @@ USE {cn.Name}
 
         private bool CheckSmileyQuestionInputFields()
         {
-            if (!String.IsNullOrWhiteSpace(smileyQuestion_TextRichTextBox.Text)) //if Question text is not null or empty 
+            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
                 return true;
 
             return false;
@@ -613,16 +615,16 @@ USE {cn.Name}
 
         private bool CheckSliderQuestionInputFields()
         {
-            if (!String.IsNullOrWhiteSpace(sliderQuestion_QuestionTextRichTextBox.Text)) //if Question text is not null or empty 
-                if (!String.IsNullOrWhiteSpace(sliderQuestion_StartValueCaptionTextBox.Text))
-                    if (!String.IsNullOrWhiteSpace(sliderQuestion_EndValueCaptionTextBox.Text))
+            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(genericTextBox1.Text))
+                    if (!String.IsNullOrWhiteSpace(genericTextBox2.Text))
                         return true;
             return false;
         }
 
         private bool CheckStarQuestionInputFields()
         {
-            if (!String.IsNullOrWhiteSpace(starQuestion_TextRichTextBox.Text)) //if Question text is not null or empty 
+            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
                 return true;
 
             return false;
@@ -637,5 +639,298 @@ USE {cn.Name}
         {
             this.Close();
         }
+
+        private void AddQuestionForm_Load(object sender, EventArgs e)
+        {
+            questionTypeComboBox.SelectedIndex = SelectedQuestionType;
+        } // event end
+
+        private void questionTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (questionTypeComboBox.SelectedIndex == 0)
+            {
+                InitializeSmileyQuestionForm();
+            }
+            else if (questionTypeComboBox.SelectedIndex == 1)
+            {
+                InitializeSliderQuestionForm();
+            }
+            else if (questionTypeComboBox.SelectedIndex == 2)
+            {
+                InitializeStarQuestionForm();
+            }
+        }// event end
+
+        private void InitializeSmileyQuestionForm()
+        {
+            genericLabel1.Visible = true;
+            genericLabel2.Visible = false;
+            genericLabel3.Visible = false;
+            genericLabel4.Visible = false;
+            genericLabel1.Text = "Number Of Smiley Faces (2 -5):";
+
+            genericNumericUpDown1.Visible = true;
+            genericNumericUpDown2.Visible = false;
+            genericNumericUpDown1.Minimum = 2;
+            genericNumericUpDown1.Maximum = 5;
+
+            genericTextBox1.Visible = false;
+            genericTextBox2.Visible = false;
+        } // func. end
+        private void InitializeSliderQuestionForm()
+        {
+            genericLabel1.Visible = true;
+            genericLabel2.Visible = true;
+            genericLabel3.Visible = true;
+            genericLabel4.Visible = true;
+            genericLabel1.Text = "Start Value:";
+            genericLabel2.Text = "End Value:";
+            genericLabel3.Text = "Start Value Caption:";
+            genericLabel4.Text = "End Value Caption:";
+
+            genericNumericUpDown1.Visible = true;
+            genericNumericUpDown2.Visible = true;
+            genericNumericUpDown1.Minimum = 1;
+            genericNumericUpDown1.Maximum = 99;
+            genericNumericUpDown1.Value = 1;
+            genericNumericUpDown2.Minimum = 2;
+            genericNumericUpDown2.Maximum = 100;
+            genericNumericUpDown2.Value = 2;
+
+            genericTextBox1.Visible = true;
+            genericTextBox2.Visible = true;
+        } //func. end
+        private void InitializeStarQuestionForm()
+        {
+            genericLabel1.Visible = true;
+            genericLabel2.Visible = false;
+            genericLabel3.Visible = false;
+            genericLabel4.Visible = false;
+            genericLabel1.Text = "Number Of Stars ( 1 - 10 ):";
+
+            genericNumericUpDown1.Visible = true;
+            genericNumericUpDown2.Visible = false;
+            genericNumericUpDown1.Minimum = 1;
+            genericNumericUpDown1.Maximum = 10;
+
+            genericTextBox1.Visible = false;
+            genericTextBox2.Visible = false;
+        } //func. end
+
+        private void addQuestionButton_Click(object sender, EventArgs e)
+        {
+            if (questionTypeComboBox.SelectedIndex == 0)
+            {
+                AddSmileyQuestion();
+            }
+            else if (questionTypeComboBox.SelectedIndex == 1)
+            {
+                AddSliderQuestion();
+            }
+            else if (questionTypeComboBox.SelectedIndex == 2)
+            {
+                AddStarQuestion();
+            }
+        }// end of event
+
+        private void AddSmileyQuestion()
+        {
+            /*
+             * Declare variables
+             */
+            int questionOrder, NumberOfSmilyFaces;
+            string QuestionText;
+
+            if (CheckSmileyQuestionInputFields()) //if Question text is not null or empty 
+            {
+                /*
+                * Assign values to variables
+                */
+                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                QuestionText = questionTextRichTextBox.Text;
+                NumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                /*
+                * Try to insert a new question into "Smiley_Questions" table
+                */
+                try
+                {
+                    conn = new SqlConnection(cn.ConnectionString);
+                    SqlCommand cmd = new SqlCommand($@"
+USE {cn.Name}
+INSERT INTO Smiley_Questions
+(QuestionOrder, QuestionText, NumberOfSmileyFaces)
+VALUES
+({questionOrder},'{QuestionText}',{NumberOfSmilyFaces})", conn);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (SqlException ex)
+                {
+                    //2627 -> primary key violation
+                    //2601 -> unique key violation
+                    // ex.Number
+                    if (ex.Number == 2601)
+                    {
+                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n"); //write error to log file
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n"); //write error to log file
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void AddSliderQuestion()
+        {
+            /*
+             * Declare variables
+             */
+            int questionOrder, questionStartValue, questionEndValue;
+            string questionText, questionStartValueCaption, questionEndValueCaption;
+
+
+            if (CheckSliderQuestionInputFields()) //if Question input fields are not null or empty 
+            {
+
+                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                questionText = (string)questionTextRichTextBox.Text;
+
+                questionStartValueCaption = (string)genericTextBox1.Text;
+                questionEndValueCaption = (string)genericTextBox2.Text;
+
+                questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+
+                /*
+                * Try to insert a new question into "Slider_Questions" table
+                */
+                try
+                {
+                    conn = new SqlConnection(cn.ConnectionString);
+                    SqlCommand cmd = new SqlCommand($@"
+USE {cn.Name}
+INSERT INTO Slider_Questions
+(QuestionOrder, QuestionText, QuestionStartValue, QuestionEndValue, QuestionStartValueCaption, QuestionEndValueCaption)
+VALUES
+({questionOrder},'{questionText}',{questionStartValue}, {questionEndValue}, '{questionStartValueCaption}', '{questionEndValueCaption}' )",
+            conn);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Question added successfully");
+
+
+                }
+                catch (SqlException ex)
+                {
+
+                    //2627 -> primary key violation
+                    if (ex.Number == 2627)
+                    {
+                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\ncan NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        } // end of event
+        private void AddStarQuestion()
+        {
+            /*
+             * Declare variables
+             */
+            int questionOrder, NumberOfStars;
+            string questionText;
+
+            if (CheckStarQuestionInputFields()) //if Question input fields are not null or empty 
+            {
+                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                questionText = questionTextRichTextBox.Text;
+                NumberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                /*
+                * Try to insert a new question into "Star_Questions" table
+                */
+                try
+                {
+                    conn = new SqlConnection(cn.ConnectionString);
+                    SqlCommand cmd = new SqlCommand($@"
+USE {cn.Name}
+INSERT INTO Star_Questions
+(QuestionOrder, QuestionText, NumberOfStars)
+values
+({questionOrder}, '{questionText}', {NumberOfStars})", conn);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (SqlException ex)
+                {
+
+                    //2627 -> primary key violation
+                    //2601 -> unique key violation
+                    // ex.Number
+                    if (ex.Number == 2627)
+                    {
+                        MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }// end of event
     }
 }
