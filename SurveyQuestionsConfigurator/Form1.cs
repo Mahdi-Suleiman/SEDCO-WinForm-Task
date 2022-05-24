@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,8 @@ namespace SurveyQuestionsConfigurator
        * Global Variables
        * Access them anywhere
        * */
-        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings["cn"]; //get connection string information from App.config
+        //private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings["SurveyQuestionsConfigurator"]; //get connection string information from App.config
+        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
         private SqlConnection conn = null; // Create SqlConnection object to connect to DB
 
         /*
@@ -123,11 +125,13 @@ namespace SurveyQuestionsConfigurator
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL Error:\n" + ex);
+                MessageBox.Show("SQL Error:\n" + ex.Message);
+                Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong:\n" + ex);
+                MessageBox.Show("Something went wrong:\n" + ex.Message);
+                Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
             }
             finally
             {
@@ -144,6 +148,11 @@ namespace SurveyQuestionsConfigurator
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //MessageBox.Show(cn.Name);
+            /*
+             * If tables do not exit, create them
+             */
+            CheckIfTablesExist();
             /*
             * Build List View on load
             */
@@ -230,10 +239,12 @@ namespace SurveyQuestionsConfigurator
                         catch (SqlException ex)
                         {
                             MessageBox.Show("SQL Error\n\n" + ex.Message);
+                            Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Somthing went wrong:\n\n" + ex.Message);
+                            Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                         }
                         finally
                         {
@@ -261,10 +272,12 @@ namespace SurveyQuestionsConfigurator
                         catch (SqlException ex)
                         {
                             MessageBox.Show("SQL Error\n\n" + ex.Message);
+                            Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Somthing went wrong:\n\n" + ex.Message);
+                            Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                         }
                         finally
                         {
@@ -292,10 +305,12 @@ namespace SurveyQuestionsConfigurator
                         catch (SqlException ex)
                         {
                             MessageBox.Show("SQL Error\n\n" + ex.Message);
+                            Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Somthing went wrong:\n\n" + ex.Message);
+                            Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                         }
                         finally
                         {
@@ -355,6 +370,162 @@ namespace SurveyQuestionsConfigurator
         private void Form1_Leave(object sender, EventArgs e)
         {
             conn.Close();
+        }
+
+        private void CheckIfTablesExist()
+        {
+            /*
+             * Create Tables if they do NOT exist
+             */
+            try
+            {
+                conn = new SqlConnection(cn.ConnectionString);
+                SqlCommand cmd = null;
+
+                cmd = new SqlCommand($@"
+USE [master]
+IF DB_ID(N'{cn.Name}') IS NULL
+BEGIN
+/****** Object:  Database [{cn.Name}]    Script Date: 24/05/2022 13:06:25 ******/
+CREATE DATABASE [{cn.Name}]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'{cn.Name}', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\{cn.Name}.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'{cn.Name}_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\{cn.Name}_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [{cn.Name}].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+ALTER DATABASE [{cn.Name}] SET ANSI_NULL_DEFAULT OFF 
+ALTER DATABASE [{cn.Name}] SET ANSI_NULLS OFF 
+ALTER DATABASE [{cn.Name}] SET ANSI_PADDING OFF 
+ALTER DATABASE [{cn.Name}] SET ANSI_WARNINGS OFF 
+ALTER DATABASE [{cn.Name}] SET ARITHABORT OFF 
+ALTER DATABASE [{cn.Name}] SET AUTO_CLOSE OFF 
+ALTER DATABASE [{cn.Name}] SET AUTO_SHRINK OFF 
+ALTER DATABASE [{cn.Name}] SET AUTO_UPDATE_STATISTICS ON 
+ALTER DATABASE [{cn.Name}] SET CURSOR_CLOSE_ON_COMMIT OFF 
+ALTER DATABASE [{cn.Name}] SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE [{cn.Name}] SET CONCAT_NULL_YIELDS_NULL OFF 
+ALTER DATABASE [{cn.Name}] SET NUMERIC_ROUNDABORT OFF 
+ALTER DATABASE [{cn.Name}] SET QUOTED_IDENTIFIER OFF 
+ALTER DATABASE [{cn.Name}] SET RECURSIVE_TRIGGERS OFF 
+ALTER DATABASE [{cn.Name}] SET  DISABLE_BROKER 
+ALTER DATABASE [{cn.Name}] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+ALTER DATABASE [{cn.Name}] SET DATE_CORRELATION_OPTIMIZATION OFF 
+ALTER DATABASE [{cn.Name}] SET TRUSTWORTHY OFF 
+ALTER DATABASE [{cn.Name}] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+ALTER DATABASE [{cn.Name}] SET PARAMETERIZATION SIMPLE 
+ALTER DATABASE [{cn.Name}] SET READ_COMMITTED_SNAPSHOT OFF 
+ALTER DATABASE [{cn.Name}] SET HONOR_BROKER_PRIORITY OFF 
+ALTER DATABASE [{cn.Name}] SET RECOVERY FULL 
+ALTER DATABASE [{cn.Name}] SET  MULTI_USER 
+ALTER DATABASE [{cn.Name}] SET PAGE_VERIFY CHECKSUM  
+ALTER DATABASE [{cn.Name}] SET DB_CHAINING OFF 
+ALTER DATABASE [{cn.Name}] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+ALTER DATABASE [{cn.Name}] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+ALTER DATABASE [{cn.Name}] SET DELAYED_DURABILITY = DISABLED 
+ALTER DATABASE [{cn.Name}] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+ALTER DATABASE [{cn.Name}] SET QUERY_STORE = OFF
+ALTER DATABASE [{cn.Name}] SET  READ_WRITE 
+END
+", conn);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+
+
+                cmd = new SqlCommand($@"
+USE [{cn.Name}]
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Smiley_Questions](
+	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionOrder] [int] NOT NULL,
+	[QuestionText] [text] NOT NULL,
+	[NumberOfSmileyFaces] [int] NOT NULL,
+ CONSTRAINT [PK_Smiley_Faces] PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+", conn);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+
+                cmd = new SqlCommand($@"
+USE [{cn.Name}]
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Slider_Questions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Slider_Questions](
+	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionOrder] [int] NOT NULL,
+	[QuestionText] [text] NOT NULL,
+	[QuestionStartValue] [int] NOT NULL,
+	[QuestionEndValue] [int] NOT NULL,
+	[QuestionStartValueCaption] [varchar](100) NOT NULL,
+	[QuestionEndValueCaption] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_Slider_Questions] PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [IX_Slider_Questions] UNIQUE NONCLUSTERED 
+(
+	[QuestionOrder] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+", conn);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+
+                cmd = new SqlCommand($@"
+USE [{cn.Name}]
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Star_Questions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Star_Questions](
+	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionOrder] [int] NOT NULL,
+	[QuestionText] [text] NOT NULL,
+	[NumberOfStars] [int] NOT NULL,
+ CONSTRAINT [PK_Stars_Questions] PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [IX_Stars_Questions] UNIQUE NONCLUSTERED 
+(
+	[QuestionOrder] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+", conn);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("SQL Error:\n" + ex.Message);
+                Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong:\n" + ex.Message);
+                Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace SurveyQuestionsConfigurator
          * Access them anywhere
          * */
         public int QuestionId { get; set; } // create global Question ID property
-        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings["cn"]; //get connection string information from App.config
+        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
         private SqlConnection conn = null; // Create SqlConnection object to connect to DB
 
         public AddQuestionForm()
@@ -94,7 +95,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     conn = new SqlConnection(cn.ConnectionString);
                     SqlCommand cmd = new SqlCommand($@"
-USE SurveyQuestionsConfigurator
+USE {cn.Name}
 INSERT INTO Smiley_Questions
 (QuestionOrder, QuestionText, NumberOfSmileyFaces)
 VALUES
@@ -119,11 +120,14 @@ VALUES
                     else
                     {
                         MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
+
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                 }
                 finally
                 {
@@ -164,7 +168,7 @@ VALUES
                 {
                     conn = new SqlConnection(cn.ConnectionString);
                     SqlCommand cmd = new SqlCommand($@"
-USE SurveyQuestionsConfigurator
+USE {cn.Name}
 INSERT INTO Slider_Questions
 (QuestionOrder, QuestionText, QuestionStartValue, QuestionEndValue, QuestionStartValueCaption, QuestionEndValueCaption)
 VALUES
@@ -188,11 +192,13 @@ conn);
                     else
                     {
                         MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                 }
                 finally
                 {
@@ -226,7 +232,7 @@ conn);
                 {
                     conn = new SqlConnection(cn.ConnectionString);
                     SqlCommand cmd = new SqlCommand($@"
-USE SurveyQuestionsConfigurator
+USE {cn.Name}
 INSERT INTO Star_Questions
 (QuestionOrder, QuestionText, NumberOfStars)
 values
@@ -249,12 +255,14 @@ values
                     else
                     {
                         MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                     }
                 }
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                 }
                 finally
                 {
@@ -301,7 +309,7 @@ values
                     using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
                     {
                         SqlCommand cmd = new SqlCommand($@"
-USE SurveyQuestionsConfigurator
+USE {cn.Name}
  UPDATE Smiley_Questions
  SET QuestionOrder = {questionOrder}, QuestionText = '{QuestionText}', NumberOfSmileyFaces ={NumberOfSmilyFaces}
  WHERE QuestionID = {QuestionId};
@@ -314,10 +322,12 @@ USE SurveyQuestionsConfigurator
                 catch (SqlException ex)
                 {
                     MessageBox.Show("SQL Error:\n" + ex.Message);
+                    Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                 }
             }
             else
@@ -344,7 +354,7 @@ USE SurveyQuestionsConfigurator
                     using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
                     {
                         SqlCommand cmd = new SqlCommand($@"
-USE SurveyQuestionsConfigurator
+USE {cn.Name}
  UPDATE Star_Questions
  SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}', NumberOfStars = {NumberOfStars}
  WHERE QuestionID = {QuestionId};
@@ -368,12 +378,16 @@ USE SurveyQuestionsConfigurator
                     else
                     {
                         MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
+
+
                     }
                 }
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                 }
             }
             else
@@ -405,7 +419,7 @@ USE SurveyQuestionsConfigurator
                     using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
                     {
                         SqlCommand cmd = new SqlCommand($@"
-USE SurveyQuestionsConfigurator
+USE {cn.Name}
  UPDATE Slider_Questions
  SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}', QuestionStartValue = {questionStartValue}, QuestionEndValue = {questionEndValue}, QuestionStartValueCaption = '{questionStartValueCaption}', QuestionEndValueCaption = '{questionEndValueCaption}'
  WHERE QuestionID = {QuestionId};
@@ -425,11 +439,13 @@ USE SurveyQuestionsConfigurator
                     else
                     {
                         MessageBox.Show("SQL Error:\n" + ex.Message);
+                        Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong:\n" + ex.Message);
+                    MessageBox.Show("Something went wrong:\n" + ex);
+                    Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
                 }
             }
 
@@ -471,12 +487,14 @@ USE SurveyQuestionsConfigurator
                 else
                 {
                     MessageBox.Show("SQL Error:\n" + ex.Message);
+                    Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
                 }
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong:\n" + ex.Message);
+                MessageBox.Show("Something went wrong:\n" + ex);
+                Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
             }
             finally
             {
@@ -518,10 +536,12 @@ USE SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error:\n" + ex.Message);
+                Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong:\n" + ex.Message);
+                MessageBox.Show("Something went wrong:\n" + ex);
+                Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
             }
             finally
             {
@@ -560,10 +580,12 @@ USE SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error:\n" + ex.Message);
+                Trace.TraceError("SQL Error:\n" + ex.Message + "\n");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong:\n" + ex.Message);
+                MessageBox.Show("Something went wrong:\n" + ex);
+                Trace.TraceError("Something went wrong:\n" + ex.Message + "\n");
             }
             finally
             {
