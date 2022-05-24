@@ -79,8 +79,6 @@
             this.createdQuestions_ListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.createdQuestions_ListView.FullRowSelect = true;
             this.createdQuestions_ListView.HideSelection = false;
-            this.createdQuestions_ListView.HotTracking = true;
-            this.createdQuestions_ListView.HoverSelection = true;
             this.createdQuestions_ListView.Location = new System.Drawing.Point(6, 19);
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
             this.createdQuestions_ListView.Size = new System.Drawing.Size(554, 281);
@@ -174,7 +172,7 @@
             this.refreshDataButton.Location = new System.Drawing.Point(568, 19);
             this.refreshDataButton.Margin = new System.Windows.Forms.Padding(5);
             this.refreshDataButton.Name = "refreshDataButton";
-            this.refreshDataButton.Padding = new System.Windows.Forms.Padding(10);
+            this.refreshDataButton.Padding = new System.Windows.Forms.Padding(15);
             this.refreshDataButton.Size = new System.Drawing.Size(33, 34);
             this.refreshDataButton.TabIndex = 8;
             this.toolTip1.SetToolTip(this.refreshDataButton, "Refresh List");

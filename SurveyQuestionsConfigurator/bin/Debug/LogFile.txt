@@ -2,3 +2,51 @@ SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
 InvalidArgument=Value of '0' is not valid for 'index'.
 Parameter name: index
 
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '100' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '90' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '66' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '1' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '90' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+

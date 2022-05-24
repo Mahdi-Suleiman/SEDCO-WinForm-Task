@@ -70,12 +70,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeButton = new System.Windows.Forms.Button();
             this.smilyQuestionDetailsGroupBox = new System.Windows.Forms.GroupBox();
+            this.addQuestionButton = new System.Windows.Forms.Button();
             this.typeOfQuestionGroupBox = new System.Windows.Forms.GroupBox();
             this.questionTypeComboBox = new System.Windows.Forms.ComboBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.editQuestionButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.addQuestionButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.sliderQuestionTabPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -154,7 +154,7 @@
             // sliderQuestion_AddQuestionButton
             // 
             this.sliderQuestion_AddQuestionButton.BackColor = System.Drawing.Color.Transparent;
-            this.sliderQuestion_AddQuestionButton.Location = new System.Drawing.Point(411, 327);
+            this.sliderQuestion_AddQuestionButton.Location = new System.Drawing.Point(380, 327);
             this.sliderQuestion_AddQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.sliderQuestion_AddQuestionButton.Name = "sliderQuestion_AddQuestionButton";
             this.sliderQuestion_AddQuestionButton.Size = new System.Drawing.Size(109, 27);
@@ -251,7 +251,7 @@
             // starQuestion_AddQuestionButton
             // 
             this.starQuestion_AddQuestionButton.BackColor = System.Drawing.Color.Transparent;
-            this.starQuestion_AddQuestionButton.Location = new System.Drawing.Point(415, 229);
+            this.starQuestion_AddQuestionButton.Location = new System.Drawing.Point(381, 228);
             this.starQuestion_AddQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.starQuestion_AddQuestionButton.Name = "starQuestion_AddQuestionButton";
             this.starQuestion_AddQuestionButton.Size = new System.Drawing.Size(109, 27);
@@ -404,7 +404,7 @@
             0});
             this.questionOrderNumericUpDown.Name = "questionOrderNumericUpDown";
             this.questionOrderNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.questionOrderNumericUpDown.TabIndex = 0;
+            this.questionOrderNumericUpDown.TabIndex = 1;
             this.questionOrderNumericUpDown.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.questionOrderNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -417,7 +417,7 @@
             this.questionTextRichTextBox.Location = new System.Drawing.Point(9, 90);
             this.questionTextRichTextBox.Margin = new System.Windows.Forms.Padding(5);
             this.questionTextRichTextBox.Name = "questionTextRichTextBox";
-            this.questionTextRichTextBox.Size = new System.Drawing.Size(317, 77);
+            this.questionTextRichTextBox.Size = new System.Drawing.Size(340, 77);
             this.questionTextRichTextBox.TabIndex = 2;
             this.questionTextRichTextBox.Text = "";
             // 
@@ -425,13 +425,8 @@
             // 
             this.genericNumericUpDown1.Location = new System.Drawing.Point(9, 201);
             this.genericNumericUpDown1.Margin = new System.Windows.Forms.Padding(5);
-            this.genericNumericUpDown1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             this.genericNumericUpDown1.Minimum = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -440,7 +435,7 @@
             this.genericNumericUpDown1.TabIndex = 1;
             this.genericNumericUpDown1.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.genericNumericUpDown1.Value = new decimal(new int[] {
-            2,
+            3,
             0,
             0,
             0});
@@ -474,24 +469,24 @@
             // 
             // genericTextBox2
             // 
-            this.genericTextBox2.Location = new System.Drawing.Point(190, 267);
+            this.genericTextBox2.Location = new System.Drawing.Point(213, 267);
             this.genericTextBox2.Margin = new System.Windows.Forms.Padding(5);
             this.genericTextBox2.Name = "genericTextBox2";
             this.genericTextBox2.Size = new System.Drawing.Size(136, 20);
-            this.genericTextBox2.TabIndex = 4;
+            this.genericTextBox2.TabIndex = 6;
             // 
             // genericTextBox1
             // 
-            this.genericTextBox1.Location = new System.Drawing.Point(190, 201);
+            this.genericTextBox1.Location = new System.Drawing.Point(213, 201);
             this.genericTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.genericTextBox1.Name = "genericTextBox1";
             this.genericTextBox1.Size = new System.Drawing.Size(136, 20);
-            this.genericTextBox1.TabIndex = 2;
+            this.genericTextBox1.TabIndex = 4;
             // 
             // genericLabel4
             // 
             this.genericLabel4.AutoSize = true;
-            this.genericLabel4.Location = new System.Drawing.Point(187, 250);
+            this.genericLabel4.Location = new System.Drawing.Point(210, 250);
             this.genericLabel4.Name = "genericLabel4";
             this.genericLabel4.Size = new System.Drawing.Size(95, 13);
             this.genericLabel4.TabIndex = 19;
@@ -500,7 +495,7 @@
             // genericLabel3
             // 
             this.genericLabel3.AutoSize = true;
-            this.genericLabel3.Location = new System.Drawing.Point(188, 183);
+            this.genericLabel3.Location = new System.Drawing.Point(211, 183);
             this.genericLabel3.Name = "genericLabel3";
             this.genericLabel3.Size = new System.Drawing.Size(98, 13);
             this.genericLabel3.TabIndex = 18;
@@ -529,11 +524,6 @@
             // 
             this.genericNumericUpDown2.Location = new System.Drawing.Point(9, 268);
             this.genericNumericUpDown2.Margin = new System.Windows.Forms.Padding(5);
-            this.genericNumericUpDown2.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
             this.genericNumericUpDown2.Minimum = new decimal(new int[] {
             1,
             0,
@@ -541,7 +531,7 @@
             0});
             this.genericNumericUpDown2.Name = "genericNumericUpDown2";
             this.genericNumericUpDown2.Size = new System.Drawing.Size(120, 20);
-            this.genericNumericUpDown2.TabIndex = 1;
+            this.genericNumericUpDown2.TabIndex = 5;
             this.genericNumericUpDown2.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.genericNumericUpDown2.Value = new decimal(new int[] {
             1,
@@ -572,7 +562,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1256, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1381, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -595,20 +585,21 @@
             // closeButton
             // 
             this.closeButton.BackColor = System.Drawing.Color.Transparent;
-            this.closeButton.Location = new System.Drawing.Point(573, 561);
+            this.closeButton.Location = new System.Drawing.Point(300, 468);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(74, 23);
-            this.closeButton.TabIndex = 15;
+            this.closeButton.TabIndex = 9;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // smilyQuestionDetailsGroupBox
             // 
+            this.smilyQuestionDetailsGroupBox.Controls.Add(this.addQuestionButton);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionTextRichTextBox);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionOrderLabel);
+            this.smilyQuestionDetailsGroupBox.Controls.Add(this.editQuestionButton);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionTextLabel);
-            this.smilyQuestionDetailsGroupBox.Controls.Add(this.addQuestionButton);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionOrderNumericUpDown);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericTextBox2);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericLabel1);
@@ -620,10 +611,20 @@
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericLabel2);
             this.smilyQuestionDetailsGroupBox.Location = new System.Drawing.Point(12, 113);
             this.smilyQuestionDetailsGroupBox.Name = "smilyQuestionDetailsGroupBox";
-            this.smilyQuestionDetailsGroupBox.Size = new System.Drawing.Size(362, 417);
+            this.smilyQuestionDetailsGroupBox.Size = new System.Drawing.Size(362, 349);
             this.smilyQuestionDetailsGroupBox.TabIndex = 7;
             this.smilyQuestionDetailsGroupBox.TabStop = false;
             this.smilyQuestionDetailsGroupBox.Text = "Smily Question Details";
+            // 
+            // addQuestionButton
+            // 
+            this.addQuestionButton.Location = new System.Drawing.Point(270, 315);
+            this.addQuestionButton.Name = "addQuestionButton";
+            this.addQuestionButton.Size = new System.Drawing.Size(79, 23);
+            this.addQuestionButton.TabIndex = 7;
+            this.addQuestionButton.Text = "Add Question";
+            this.addQuestionButton.UseVisualStyleBackColor = true;
+            this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
             // typeOfQuestionGroupBox
             // 
@@ -659,6 +660,16 @@
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
             // 
+            // editQuestionButton
+            // 
+            this.editQuestionButton.Location = new System.Drawing.Point(270, 315);
+            this.editQuestionButton.Name = "editQuestionButton";
+            this.editQuestionButton.Size = new System.Drawing.Size(79, 23);
+            this.editQuestionButton.TabIndex = 8;
+            this.editQuestionButton.Text = "Edit Question";
+            this.editQuestionButton.UseVisualStyleBackColor = true;
+            this.editQuestionButton.Click += new System.EventHandler(this.editQuestionButton_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::SurveyQuestionsConfigurator.Properties.Resources.pngwing_com;
@@ -669,33 +680,13 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // addQuestionButton
-            // 
-            this.addQuestionButton.Location = new System.Drawing.Point(275, 388);
-            this.addQuestionButton.Name = "addQuestionButton";
-            this.addQuestionButton.Size = new System.Drawing.Size(79, 23);
-            this.addQuestionButton.TabIndex = 17;
-            this.addQuestionButton.Text = "Add Question";
-            this.addQuestionButton.UseVisualStyleBackColor = true;
-            this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(55, 552);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // AddQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1256, 683);
+            this.ClientSize = new System.Drawing.Size(1381, 683);
             this.Controls.Add(this.addQuestionButtonaa);
             this.Controls.Add(this.editQuestionButtonaa);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.smilyQuestionDetailsGroupBox);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.typeOfQuestionGroupBox);
@@ -741,7 +732,6 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage smileyQuestionTabPage;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.NumericUpDown questionOrderNumericUpDown;
         private System.Windows.Forms.RichTextBox questionTextRichTextBox;
         private System.Windows.Forms.NumericUpDown genericNumericUpDown1;
@@ -786,6 +776,7 @@
         private System.Windows.Forms.ComboBox questionTypeComboBox;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button addQuestionButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button editQuestionButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
