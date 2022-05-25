@@ -50,3 +50,15 @@ SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
 Value of '90' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
 Parameter name: Value
 
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+

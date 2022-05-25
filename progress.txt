@@ -27,3 +27,21 @@ What is remaining to be done:
 -Error Logging to a file
 -Documentation
 
+********************************************************
+Date : 24/05/2022
+
+
+What is accomplished today: 
+-UI Enhancement
+-Error Logging to a file
+
+What is remaining to be done:
+-Documentation
+********************************************************
+Date : 24/05/2022
+What is accomplished today:
+-UX editing
+-Handling Max Value musst be >>> than Min Value
+
+What is remaining to be done:
+-Reflecting Majd's comments

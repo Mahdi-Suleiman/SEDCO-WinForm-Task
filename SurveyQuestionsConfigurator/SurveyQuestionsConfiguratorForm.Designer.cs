@@ -1,6 +1,6 @@
 ﻿namespace SurveyQuestionsConfigurator
 {
-    partial class Form1
+    partial class SurveyQuestionsConfiguratorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.questionsTabPage = new System.Windows.Forms.TabPage();
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.refreshDataButton = new System.Windows.Forms.Button();
             this.createdQuestions_ListView = new System.Windows.Forms.ListView();
             this.deleteQuestionButton = new System.Windows.Forms.Button();
             this.editQuestionButton = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.closeApplicationButton = new System.Windows.Forms.Button();
-            this.refreshDataButton = new System.Windows.Forms.Button();
             this.questionsTabPage.SuspendLayout();
             this.createdQuestionsGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -74,14 +74,29 @@
             this.createdQuestionsGroupBox.TabStop = false;
             this.createdQuestionsGroupBox.Text = "Created Questions";
             // 
+            // refreshDataButton
+            // 
+            this.refreshDataButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.refresh_icon;
+            this.refreshDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.refreshDataButton.Location = new System.Drawing.Point(6, 311);
+            this.refreshDataButton.Margin = new System.Windows.Forms.Padding(5);
+            this.refreshDataButton.Name = "refreshDataButton";
+            this.refreshDataButton.Padding = new System.Windows.Forms.Padding(15);
+            this.refreshDataButton.Size = new System.Drawing.Size(29, 29);
+            this.refreshDataButton.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.refreshDataButton, "Refresh List");
+            this.refreshDataButton.UseVisualStyleBackColor = true;
+            this.refreshDataButton.Click += new System.EventHandler(this.refreshDataButton_Click);
+            // 
             // createdQuestions_ListView
             // 
             this.createdQuestions_ListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.createdQuestions_ListView.FullRowSelect = true;
+            this.createdQuestions_ListView.GridLines = true;
             this.createdQuestions_ListView.HideSelection = false;
             this.createdQuestions_ListView.Location = new System.Drawing.Point(6, 19);
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
-            this.createdQuestions_ListView.Size = new System.Drawing.Size(554, 281);
+            this.createdQuestions_ListView.Size = new System.Drawing.Size(594, 281);
             this.createdQuestions_ListView.TabIndex = 1;
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
             this.createdQuestions_ListView.View = System.Windows.Forms.View.Details;
@@ -89,7 +104,7 @@
             // 
             // deleteQuestionButton
             // 
-            this.deleteQuestionButton.Location = new System.Drawing.Point(469, 313);
+            this.deleteQuestionButton.Location = new System.Drawing.Point(508, 313);
             this.deleteQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.deleteQuestionButton.Name = "deleteQuestionButton";
             this.deleteQuestionButton.Size = new System.Drawing.Size(91, 25);
@@ -100,7 +115,7 @@
             // 
             // editQuestionButton
             // 
-            this.editQuestionButton.Location = new System.Drawing.Point(358, 313);
+            this.editQuestionButton.Location = new System.Drawing.Point(397, 313);
             this.editQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.editQuestionButton.Name = "editQuestionButton";
             this.editQuestionButton.Size = new System.Drawing.Size(91, 25);
@@ -111,7 +126,7 @@
             // 
             // addQuestionButton
             // 
-            this.addQuestionButton.Location = new System.Drawing.Point(247, 313);
+            this.addQuestionButton.Location = new System.Drawing.Point(286, 313);
             this.addQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.addQuestionButton.Name = "addQuestionButton";
             this.addQuestionButton.Size = new System.Drawing.Size(91, 25);
@@ -165,21 +180,7 @@
             this.closeApplicationButton.UseVisualStyleBackColor = true;
             this.closeApplicationButton.Click += new System.EventHandler(this.closeApplicationButton_Click);
             // 
-            // refreshDataButton
-            // 
-            this.refreshDataButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.refresh_icon;
-            this.refreshDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.refreshDataButton.Location = new System.Drawing.Point(568, 19);
-            this.refreshDataButton.Margin = new System.Windows.Forms.Padding(5);
-            this.refreshDataButton.Name = "refreshDataButton";
-            this.refreshDataButton.Padding = new System.Windows.Forms.Padding(15);
-            this.refreshDataButton.Size = new System.Drawing.Size(33, 34);
-            this.refreshDataButton.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.refreshDataButton, "Refresh List");
-            this.refreshDataButton.UseVisualStyleBackColor = true;
-            this.refreshDataButton.Click += new System.EventHandler(this.refreshDataButton_Click);
-            // 
-            // Form1
+            // SurveyQuestionsConfiguratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -188,7 +189,10 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.MaximumSize = new System.Drawing.Size(636, 484);
+            this.MinimumSize = new System.Drawing.Size(636, 484);
+            this.Name = "SurveyQuestionsConfiguratorForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Survey Questions Configurator";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>sedco_logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -71,11 +74,12 @@
     <Compile Include="AddQuestionForm.Designer.cs">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="CommDB.cs" />
+    <Compile Include="SurveyQuestionsConfiguratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SurveyQuestionsConfiguratorForm.Designer.cs">
+      <DependentUpon>SurveyQuestionsConfiguratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Program.cs" />
@@ -83,8 +87,8 @@
     <EmbeddedResource Include="AddQuestionForm.resx">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="SurveyQuestionsConfiguratorForm.resx">
+      <DependentUpon>SurveyQuestionsConfiguratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,6 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\questionMark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sedco_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sedco_logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

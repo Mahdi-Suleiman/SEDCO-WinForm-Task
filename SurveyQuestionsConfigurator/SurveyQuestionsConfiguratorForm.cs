@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class Form1 : Form
+    public partial class SurveyQuestionsConfiguratorForm : Form
     {
         /* 
        * Global Variables
@@ -34,7 +34,7 @@ namespace SurveyQuestionsConfigurator
         }
         private ListViewColumnSorter lvwColumnSorter;
 
-        public Form1()
+        public SurveyQuestionsConfiguratorForm()
         {
             InitializeComponent();
             /*
@@ -72,6 +72,8 @@ namespace SurveyQuestionsConfigurator
             columnheader.Text = "Text";
             this.createdQuestions_ListView.Columns.Add(columnheader);
 
+            //MessageBox.Show(createdQuestions_ListView.Columns.Count.ToString());
+
             SqlDataReader reader = null;
 
             /*
@@ -90,7 +92,7 @@ namespace SurveyQuestionsConfigurator
                     listviewitem.SubItems.Add($"{reader[0]}");
                     listviewitem.SubItems.Add($"{reader[1]}");
                     listviewitem.SubItems.Add($"{reader[2]}");
-                    listviewitem.SubItems.Add($"{reader[3]}");
+                    //listviewitem.SubItems.Add($"{reader[3]}");
                     this.createdQuestions_ListView.Items.Add(listviewitem);
                 }
                 reader.Close();
@@ -103,7 +105,7 @@ namespace SurveyQuestionsConfigurator
                     listviewitem.SubItems.Add($"{reader[0]}");
                     listviewitem.SubItems.Add($"{reader[1]}");
                     listviewitem.SubItems.Add($"{reader[2]}");
-                    listviewitem.SubItems.Add($"{reader[3]}");
+                    //listviewitem.SubItems.Add($"{reader[3]}");
                     this.createdQuestions_ListView.Items.Add(listviewitem);
                 }
                 reader.Close();
@@ -118,7 +120,7 @@ namespace SurveyQuestionsConfigurator
                     listviewitem.SubItems.Add($"{reader[0]}");
                     listviewitem.SubItems.Add($"{reader[1]}");
                     listviewitem.SubItems.Add($"{reader[2]}");
-                    listviewitem.SubItems.Add($"{reader[3]}");
+                    //listviewitem.SubItems.Add($"{reader[3]}");
                     this.createdQuestions_ListView.Items.Add(listviewitem);
                 }
                 reader.Close();
@@ -320,7 +322,6 @@ namespace SurveyQuestionsConfigurator
                             conn.Close();
                         }
                         createdQuestions_ListView.SelectedIndices.Clear();
-
                     }
                 }
             }
