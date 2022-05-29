@@ -108,7 +108,7 @@
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericLabel2);
             this.smilyQuestionDetailsGroupBox.Location = new System.Drawing.Point(6, 92);
             this.smilyQuestionDetailsGroupBox.Name = "smilyQuestionDetailsGroupBox";
-            this.smilyQuestionDetailsGroupBox.Size = new System.Drawing.Size(362, 349);
+            this.smilyQuestionDetailsGroupBox.Size = new System.Drawing.Size(362, 299);
             this.smilyQuestionDetailsGroupBox.TabIndex = 7;
             this.smilyQuestionDetailsGroupBox.TabStop = false;
             this.smilyQuestionDetailsGroupBox.Text = "Question Details";
@@ -201,7 +201,7 @@
             0});
             this.genericNumericUpDown1.Name = "genericNumericUpDown1";
             this.genericNumericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.genericNumericUpDown1.TabIndex = 1;
+            this.genericNumericUpDown1.TabIndex = 3;
             this.genericNumericUpDown1.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.genericNumericUpDown1.Value = new decimal(new int[] {
             2,

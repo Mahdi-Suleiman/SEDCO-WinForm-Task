@@ -74,7 +74,7 @@
     <Compile Include="AddQuestionForm.Designer.cs">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommDB.cs" />
+    <Compile Include="DataAccessLayer\CommDB.cs" />
     <Compile Include="SurveyQuestionsConfiguratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sedco_logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BusinessLogicLayer\" />
+    <Folder Include="CommonLayer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
