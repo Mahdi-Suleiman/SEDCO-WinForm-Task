@@ -38,10 +38,25 @@ What is accomplished today:
 What is remaining to be done:
 -Documentation
 ********************************************************
-Date : 24/05/2022
+Date : 25/05/2022
 What is accomplished today:
 -UX editing
 -Handling Max Value musst be >>> than Min Value
 
 What is remaining to be done:
 -Reflecting Majd's comments
+
+********************************************************
+Date : 29/05/2022
+What is accomplished today:
+-Apply Multi-Layer architicture
+-Apply some defensive coding
+-Reading about layring & Database Architicture
+-Apply new DB Schema (4 tables in total)
+-Create a new class called CommDB as the Data access layer(Seperate Presentation layer and Data access layer)
+
+What is remaining to be done:
+-Test new DB Schema
+-Standrize error log formating
+-refresh list instantly when adding or editing data
+
