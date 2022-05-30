@@ -107,7 +107,7 @@
             this.createdQuestions_ListView.HideSelection = false;
             this.createdQuestions_ListView.Location = new System.Drawing.Point(3, 16);
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
-            this.createdQuestions_ListView.Size = new System.Drawing.Size(600, 207);
+            this.createdQuestions_ListView.Size = new System.Drawing.Size(600, 284);
             this.createdQuestions_ListView.TabIndex = 1;
             this.createdQuestions_ListView.TileSize = new System.Drawing.Size(170, 60);
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
