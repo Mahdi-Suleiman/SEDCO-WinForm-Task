@@ -80,6 +80,7 @@
             // 
             // refreshDataButton
             // 
+            this.refreshDataButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.refreshDataButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.refresh_icon;
             this.refreshDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.refreshDataButton.Location = new System.Drawing.Point(6, 311);
