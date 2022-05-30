@@ -33,6 +33,10 @@
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
             this.refreshDataButton = new System.Windows.Forms.Button();
             this.createdQuestions_ListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.deleteQuestionButton = new System.Windows.Forms.Button();
             this.editQuestionButton = new System.Windows.Forms.Button();
             this.addQuestionButton = new System.Windows.Forms.Button();
@@ -91,53 +95,85 @@
             // createdQuestions_ListView
             // 
             this.createdQuestions_ListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.createdQuestions_ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.createdQuestions_ListView.Dock = System.Windows.Forms.DockStyle.Top;
             this.createdQuestions_ListView.FullRowSelect = true;
             this.createdQuestions_ListView.GridLines = true;
             this.createdQuestions_ListView.HideSelection = false;
-            this.createdQuestions_ListView.Location = new System.Drawing.Point(6, 19);
+            this.createdQuestions_ListView.Location = new System.Drawing.Point(3, 16);
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
-            this.createdQuestions_ListView.Size = new System.Drawing.Size(594, 281);
+            this.createdQuestions_ListView.Size = new System.Drawing.Size(600, 207);
             this.createdQuestions_ListView.TabIndex = 1;
+            this.createdQuestions_ListView.TileSize = new System.Drawing.Size(170, 60);
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
             this.createdQuestions_ListView.View = System.Windows.Forms.View.Details;
             this.createdQuestions_ListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
+            this.createdQuestions_ListView.DoubleClick += new System.EventHandler(this.editQuestionButton_Click);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "ID";
+            this.columnHeader1.Width = 75;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Order";
+            this.columnHeader2.Width = 75;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Type";
+            this.columnHeader3.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Text";
+            this.columnHeader4.Width = 250;
             // 
             // deleteQuestionButton
             // 
+            this.deleteQuestionButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.deleteQuestionButton.Location = new System.Drawing.Point(508, 313);
             this.deleteQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.deleteQuestionButton.Name = "deleteQuestionButton";
             this.deleteQuestionButton.Size = new System.Drawing.Size(91, 25);
             this.deleteQuestionButton.TabIndex = 4;
-            this.deleteQuestionButton.Text = "Delete Question";
+            this.deleteQuestionButton.Text = "Delete";
             this.deleteQuestionButton.UseVisualStyleBackColor = true;
             this.deleteQuestionButton.Click += new System.EventHandler(this.deleteQuestionButton_Click);
             // 
             // editQuestionButton
             // 
+            this.editQuestionButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.editQuestionButton.Location = new System.Drawing.Point(397, 313);
             this.editQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.editQuestionButton.Name = "editQuestionButton";
             this.editQuestionButton.Size = new System.Drawing.Size(91, 25);
             this.editQuestionButton.TabIndex = 3;
-            this.editQuestionButton.Text = "Edit Question";
+            this.editQuestionButton.Text = "Edit";
             this.editQuestionButton.UseVisualStyleBackColor = true;
             this.editQuestionButton.Click += new System.EventHandler(this.editQuestionButton_Click);
             // 
             // addQuestionButton
             // 
+            this.addQuestionButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.addQuestionButton.Location = new System.Drawing.Point(286, 313);
             this.addQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.addQuestionButton.Name = "addQuestionButton";
             this.addQuestionButton.Size = new System.Drawing.Size(91, 25);
             this.addQuestionButton.TabIndex = 2;
-            this.addQuestionButton.Text = "Add Question";
+            this.addQuestionButton.Text = "Add";
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.questionsTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -171,6 +207,7 @@
             // 
             // closeApplicationButton
             // 
+            this.closeApplicationButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.closeApplicationButton.Location = new System.Drawing.Point(525, 409);
             this.closeApplicationButton.Margin = new System.Windows.Forms.Padding(10);
             this.closeApplicationButton.Name = "closeApplicationButton";
@@ -189,7 +226,8 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(636, 484);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1000, 484);
             this.MinimumSize = new System.Drawing.Size(636, 484);
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -222,6 +260,10 @@
         private System.Windows.Forms.Button refreshDataButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button closeApplicationButton;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

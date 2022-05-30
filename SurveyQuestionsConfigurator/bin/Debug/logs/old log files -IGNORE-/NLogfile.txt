@@ -1,0 +1,17 @@
+2022-05-30 13:25:16.3447 SurveyQuestionsConfigurator.AddQuestionForm OOPS
+ -------------- Error (2022-05-30 13:26:22.5519) --------------
+ 
+ Call Site: SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click
+ Exception Type: 
+ Exception Message: 
+ Stack Trace: 
+ Additional Info: OOPS
+
+ -------------- Error (2022-05-30 13:28:38.3143) --------------
+ 
+ Call Site: SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click
+ Exception Type: 
+ Exception Message: 
+ Stack Trace: 
+ Additional Info: OOPS
+

@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -74,6 +75,8 @@
     <Compile Include="AddQuestionForm.Designer.cs">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLogicLayer\BusinessLogic.cs" />
+    <Compile Include="CommonLayer\CommonLayer.cs" />
     <Compile Include="DataAccessLayer\CommDB.cs" />
     <Compile Include="SurveyQuestionsConfiguratorForm.cs">
       <SubType>Form</SubType>
@@ -138,9 +141,6 @@
   <ItemGroup>
     <Content Include="sedco_logo.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BusinessLogicLayer\" />
-    <Folder Include="CommonLayer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

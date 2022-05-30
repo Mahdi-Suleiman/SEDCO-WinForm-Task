@@ -1,0 +1,9 @@
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:31:14
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+

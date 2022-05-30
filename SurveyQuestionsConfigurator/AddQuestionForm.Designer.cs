@@ -47,7 +47,6 @@
             this.typeOfQuestionGroupBox = new System.Windows.Forms.GroupBox();
             this.questionTypeComboBox = new System.Windows.Forms.ComboBox();
             this.addQuestionButton = new System.Windows.Forms.Button();
-            this.editQuestionButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.smileyQuestionTabPage.SuspendLayout();
@@ -169,6 +168,7 @@
             this.genericTextBox2.Location = new System.Drawing.Point(213, 267);
             this.genericTextBox2.Margin = new System.Windows.Forms.Padding(5);
             this.genericTextBox2.Name = "genericTextBox2";
+            this.genericTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.genericTextBox2.Size = new System.Drawing.Size(136, 20);
             this.genericTextBox2.TabIndex = 6;
             // 
@@ -223,6 +223,7 @@
             this.genericTextBox1.Location = new System.Drawing.Point(213, 201);
             this.genericTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.genericTextBox1.Name = "genericTextBox1";
+            this.genericTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.genericTextBox1.Size = new System.Drawing.Size(136, 20);
             this.genericTextBox1.TabIndex = 4;
             // 
@@ -284,19 +285,9 @@
             this.addQuestionButton.Name = "addQuestionButton";
             this.addQuestionButton.Size = new System.Drawing.Size(79, 23);
             this.addQuestionButton.TabIndex = 7;
-            this.addQuestionButton.Text = "Add Question";
+            this.addQuestionButton.Text = "OK";
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
-            // 
-            // editQuestionButton
-            // 
-            this.editQuestionButton.Location = new System.Drawing.Point(229, 435);
-            this.editQuestionButton.Name = "editQuestionButton";
-            this.editQuestionButton.Size = new System.Drawing.Size(79, 23);
-            this.editQuestionButton.TabIndex = 8;
-            this.editQuestionButton.Text = "Edit Question";
-            this.editQuestionButton.UseVisualStyleBackColor = true;
-            this.editQuestionButton.Click += new System.EventHandler(this.editQuestionButton_Click);
             // 
             // cancelButton
             // 
@@ -316,7 +307,6 @@
             this.ClientSize = new System.Drawing.Size(398, 466);
             this.Controls.Add(this.addQuestionButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.editQuestionButton);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximumSize = new System.Drawing.Size(414, 505);
@@ -360,6 +350,5 @@
         private System.Windows.Forms.ComboBox questionTypeComboBox;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button addQuestionButton;
-        private System.Windows.Forms.Button editQuestionButton;
     }
 }

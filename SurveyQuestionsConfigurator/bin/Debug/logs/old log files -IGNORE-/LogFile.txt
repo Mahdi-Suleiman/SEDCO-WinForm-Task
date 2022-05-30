@@ -1,0 +1,881 @@
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '100' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '90' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '66' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '1' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '10' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Value of '90' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Object reference not set to an instance of an object.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Invalid attempt to call Read when reader is closed.
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 90
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 90
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 90
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 90
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 91
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 93
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 93
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.InvalidOperationException: Invalid attempt to call Read when reader is closed.
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 93
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Short Message:Value cannot be null.
+Parameter name: dataTableLong Message:
+System.ArgumentNullException: Value cannot be null.
+Parameter name: dataTable
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 503
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Short Message:Value cannot be null.
+Parameter name: dataTableLong Message:
+System.ArgumentNullException: Value cannot be null.
+Parameter name: dataTable
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 503
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Short Message:Value cannot be null.
+Parameter name: dataTableLong Message:
+System.ArgumentNullException: Value cannot be null.
+Parameter name: dataTable
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 503
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Short Message:Value cannot be null.
+Parameter name: dataTableLong Message:
+System.ArgumentNullException: Value cannot be null.
+Parameter name: dataTable
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 503
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Short Message:Value cannot be null.
+Parameter name: dataTableLong Message:
+System.ArgumentNullException: Value cannot be null.
+Parameter name: dataTable
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 503
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+Short Message:Value cannot be null.
+Parameter name: dataTableLong Message:
+System.ArgumentNullException: Value cannot be null.
+Parameter name: dataTable
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 503
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 519
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 520
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 520
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 520
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.CommDB.RetrieveSmileyQuestions() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\CommDB.cs:line 520
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 94
+
+SurveyQuestionsConfigurator.exe Error: 0 : SQL Error:
+Short Message:Invalid object name 'Questions'.
+Changed database context to 'SurveyQuestionsConfigurator'.Long Message:
+System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'Questions'.
+Changed database context to 'SurveyQuestionsConfigurator'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.CommDB.AddSmileyQuestion(Int32 questionOrder, String QuestionText, Int32 NumberOfSmilyFaces) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\CommDB.cs:line 58
+ClientConnectionId:f40971e6-cc54-44e4-9029-b2a67a07b95e
+Error Number:208,State:1,Class:16
+
+SurveyQuestionsConfigurator.exe Error: 0 : SQL Error:
+Short Message:The column name 'QuestionEndValue' is specified more than once in the SET clause or column list of an INSERT. A column cannot be assigned more than one value in the same clause. Modify the clause to make sure that a column is updated only once. If this statement updates or inserts columns into a view, column aliasing can conceal the duplication in your code.Long Message:
+System.Data.SqlClient.SqlException (0x80131904): The column name 'QuestionEndValue' is specified more than once in the SET clause or column list of an INSERT. A column cannot be assigned more than one value in the same clause. Modify the clause to make sure that a column is updated only once. If this statement updates or inserts columns into a view, column aliasing can conceal the duplication in your code.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.CommDB.EditSliderQuestion(Int32 questionId, Int32 questionOrder, String questionText, Int32 questionStartValue, Int32 questionEndValue, String questionStartValueCaption, String questionEndValueCaption) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\CommDB.cs:line 317
+ClientConnectionId:f783fd70-eda2-4be1-b327-f5120d45ac60
+Error Number:264,State:1,Class:16
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong while initializing star question form form:
+Short Message:Cannot find column 3.Long Message:
+System.IndexOutOfRangeException: Cannot find column 3.
+   at System.Data.DataColumnCollection.get_Item(Int32 index)
+   at System.Data.DataRow.get_Item(Int32 columnIndex)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingStarQuestion(Int32 questionId) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 182
+
+SurveyQuestionsConfigurator.exe Error: 0 : Something went wrong while initializing star question form form:
+Short Message:Cannot find column 3.Long Message:
+System.IndexOutOfRangeException: Cannot find column 3.
+   at System.Data.DataColumnCollection.get_Item(Int32 index)
+   at System.Data.DataRow.get_Item(Int32 columnIndex)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingStarQuestion(Int32 questionId) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 182
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error:
+Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+
+System.InvalidCastException: Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error:
+Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+
+System.InvalidCastException: Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error:
+Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+
+System.InvalidCastException: Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:11:06
+Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+
+System.InvalidCastException: Unable to cast object of type 'SurveyQuestionsConfigurator.AddQuestionForm' to type 'SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm'.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:19:12
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 348
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:19:31
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 348
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:21:19
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 348
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:26:30
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 348
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:26:35
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 348
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:27:19
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 348
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 11:52:05
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:38:52
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:40:51
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:44:51
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:47:02
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:48:26
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:48:28
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:49:03
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:50:04
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 12:56:30
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:00:26
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:06:42
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 347
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:08:49
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:09:55
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:10:21
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:14:33
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:18:10
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:20:00
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:20:57
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:21:25
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:25:17
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:26:23
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:28:38
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 349
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:44:30
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:44:30) --------------
+ 
+ Call Site: SurveyQuestionsConfigurator
+ Exception Type: System.NullReferenceException`
+ Exception Short Message: Object reference not set to an instance of an object.
+ Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+ Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+ Additional Info: OOPS
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:46:17
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:46:17) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException`
+-Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Additional Info: OOPS
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:48:31
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:48:31) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:48:46
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:48:46) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:49:06
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:49:06) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:49:48
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:49:48) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Inner Excception: 
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:50:50
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:50:50) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+
+Error: 30/05/2022 13:52:42
+Object reference not set to an instance of an object.
+
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- Error (30/05/2022 13:52:42) --------------
+ 
+-Call Site: SurveyQuestionsConfigurator
+-Exception Type: System.NullReferenceException
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (30/05/2022 13:54:53) --------------
+ 
+-Exception Type: System.NullReferenceException
+-Exception Call Site: Void editQuestionButton_Click(System.Object, System.EventArgs)
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message:
+ System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
+

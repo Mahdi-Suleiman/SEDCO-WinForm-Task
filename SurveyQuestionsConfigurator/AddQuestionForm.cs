@@ -9,645 +9,807 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class AddQuestionForm : Form
     {
-        /* 
-         * Global Variables
-         * Access them anywhere
-         * */
-        public int QuestionId { get; set; } // create global Question ID property
-        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
-        private SqlConnection conn = null; // Create SqlConnection object to connect to DB
-        private int SelectedQuestionType = 0;
+        /// 
+        /// Global Variables
+        /// Access them anywhere
+        ///
+        public int QuestionId { get; set; } /// create global Question ID property
+        private string FormState { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
+        private string QuestionType { get; set; }
+        private int SelectedQuestionType { get; set; }
 
+        public enum FormStateType
+        {
+            ADD,
+            EDIT
+        }
+
+        ///
+        /// Form constructor for "Adding Mode" or Editing a question
+        ///
         public AddQuestionForm()
         {
             InitializeComponent();
             this.Text = "Add A Question";
+            FormState = FormStateType.ADD.ToString();
         }
 
-        /*
-         * Form constructor for "Editing Mode" or Editing a question
-         */
-        public AddQuestionForm(int questionId, string questionType/*, string questionText, int numberOfSmileyFaces*/)
+        ///
+        /// Form constructor for "Editing Mode" or Editing a question
+        ///
+        public AddQuestionForm(int questionId, string questionType)
         {
             InitializeComponent();
             this.Text = "Edit A Question";
 
+            FormState = FormStateType.EDIT.ToString();
+
             QuestionId = questionId; //set QuestionId to access it globally
+            QuestionType = questionType;
             questionTypeComboBox.Enabled = false;
 
-            if (questionType == SurveyQuestionsConfiguratorForm.QuestionType.SMILEY.ToString())
+            if (QuestionType.ToUpper() == SurveyQuestionsConfiguratorForm.QuestionType.SMILEY.ToString().ToUpper())
             {
                 SelectedQuestionType = (int)SurveyQuestionsConfiguratorForm.QuestionType.SMILEY; // 0 
-                InitializeEditingSmileyQuestion(questionId);
+                InitializeEditingSmileyQuestion(QuestionId);
             }
-            else if (questionType == SurveyQuestionsConfiguratorForm.QuestionType.SLIDER.ToString())
+            else if (QuestionType.ToUpper() == SurveyQuestionsConfiguratorForm.QuestionType.SLIDER.ToString().ToUpper())
             {
                 SelectedQuestionType = (int)SurveyQuestionsConfiguratorForm.QuestionType.SLIDER; // 1
-                InitializeEditingSlideQuestion(questionId);
+                InitializeEditingSlideQuestion(QuestionId);
             }
-            else if (questionType == SurveyQuestionsConfiguratorForm.QuestionType.STAR.ToString())
+            else if (QuestionType.ToUpper() == SurveyQuestionsConfiguratorForm.QuestionType.STAR.ToString().ToUpper())
             {
                 SelectedQuestionType = (int)SurveyQuestionsConfiguratorForm.QuestionType.STAR; // 2
-                InitializeEditingStarQuestion(questionId);
+                InitializeEditingStarQuestion(QuestionId);
             }
         }
 
         private void AddQuestionForm_Load(object sender, EventArgs e)
         {
-            questionTypeComboBox.SelectedIndex = SelectedQuestionType;
+            try
+            {
+                questionTypeComboBox.SelectedIndex = SelectedQuestionType;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
         } // event end
 
         private void AddQuestionForm_Leave(object sender, EventArgs e)
         {
-            conn.Close();
-        }
+            //conn.Close();
+        } // event end
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
         }
 
         private void InitializeEditingSmileyQuestion(int questionId)
         {
-            QuestionId = questionId;
-            DataTable dt = new DataTable();
-
             ///
             /// Select wanted question from DB and fill input fields  with its data
             ///
             try
             {
+                QuestionId = questionId;
+                DataTable dt = new DataTable();
                 dt = CommDB.RetrieveSingleSmileyQuestion(QuestionId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        questionOrderNumericUpDown.Value = Convert.ToDecimal(row[1]);
-                        questionTextRichTextBox.Text = (string)row[2];
-                        genericNumericUpDown1.Value = Convert.ToDecimal(row[3]);
+                        questionOrderNumericUpDown.Value = Convert.ToDecimal(row[0]);
+                        questionTextRichTextBox.Text = (string)row[1];
+                        genericNumericUpDown1.Value = Convert.ToDecimal(row[2]);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error while retrieveing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Error while retrieveing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL Error while initializing smiley question form:\n" + ex.Message);
-                Trace.TraceError("SQL Error while initializing smiley question form:\nShort Message:" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                MessageBox.Show("SQL Error while initializing smiley question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong while initializing smiley question form:\n" + ex);
-                Trace.TraceError("Something went wrong while initializing smiley question form:\nShort Message:" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                MessageBox.Show("Something went wrong while initializing smiley question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex); //write error to log file
             }
-            finally
-            {
-                //conn.Close();
-            }
-
-            addQuestionButton.Enabled = false;
-            addQuestionButton.Visible = false;
-
-            editQuestionButton.Enabled = true;
-            editQuestionButton.Visible = true;
         } //end function
         private void InitializeEditingSlideQuestion(int questionId)
         {
-            QuestionId = questionId;
-            DataTable dt = new DataTable();
-
             ///
             /// Select wanted question from DB and fill input fields  with its data
             ///
             try
             {
+                QuestionId = questionId;
+                DataTable dt = new DataTable();
                 dt = CommDB.RetrieveSingleSliderQuestion(QuestionId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        questionOrderNumericUpDown.Value = Convert.ToDecimal(row[1]);
-                        questionTextRichTextBox.Text = (string)row[2];
-                        genericNumericUpDown1.Value = Convert.ToDecimal(row[3]);
-                        genericNumericUpDown2.Value = Convert.ToDecimal(row[4]);
+                        questionOrderNumericUpDown.Value = Convert.ToDecimal(row[0]);
+                        questionTextRichTextBox.Text = (string)row[1];
+                        genericNumericUpDown1.Value = Convert.ToDecimal(row[2]);
+                        genericNumericUpDown2.Value = Convert.ToDecimal(row[3]);
 
-                        genericTextBox1.Text = (string)row[5];
-                        genericTextBox2.Text = (string)row[6];
+                        genericTextBox1.Text = (string)row[4];
+                        genericTextBox2.Text = (string)row[5];
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error while retrieveing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Error while retrieveing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL Error while initializing slider question form:\n" + ex.Message);
-                Trace.TraceError("SQL Error while initializing  slider question form:\nShort Message:" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                MessageBox.Show("SQL Error while initializing slider question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong while initializing  slider question form:\n" + ex);
-                Trace.TraceError("Something went wrong while initializing  slider question form:\nShort Message:" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                MessageBox.Show("Something went wrong while initializing slider question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex); //write error to log file
             }
-            finally
-            {
-                //conn.Close();
-            }
-
-            addQuestionButton.Enabled = false;
-            addQuestionButton.Visible = false;
-
-            editQuestionButton.Enabled = true;
-            editQuestionButton.Visible = true;
         } //end function
         private void InitializeEditingStarQuestion(int questionId)
         {
-            QuestionId = questionId;
-            DataTable dt = new DataTable();
-
             ///
             /// Select wanted question from DB and fill input fields  with its data
             ///
             try
             {
+                QuestionId = questionId;
+                DataTable dt = new DataTable();
                 dt = CommDB.RetrieveSingleStarQuestion(QuestionId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        MessageBox.Show(row[3].ToString());
-                        questionOrderNumericUpDown.Value = Convert.ToDecimal(row[1]);
-                        questionTextRichTextBox.Text = (string)row[2];
-                        genericNumericUpDown1.Value = Convert.ToDecimal(row[3]);
+                        questionOrderNumericUpDown.Value = Convert.ToDecimal(row[0]);
+                        questionTextRichTextBox.Text = (string)row[1];
+                        genericNumericUpDown1.Value = Convert.ToDecimal(row[2]);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error while retrieveing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Error while retrieveing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("SQL Error while initializing star question form:\n" + ex.Message);
-                Trace.TraceError("SQL Error while initializing star question form form:\nShort Message:" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                MessageBox.Show("SQL Error while initializing star question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong while initializing star question form form:\n" + ex);
-                Trace.TraceError("Something went wrong while initializing star question form form:\nShort Message:" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                MessageBox.Show("Something went wrong while initializing star question form form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex); //write error to log file
             }
-            finally
-            {
-                //conn.Close();
-            }
-
-            addQuestionButton.Enabled = false;
-            addQuestionButton.Visible = false;
-
-            editQuestionButton.Enabled = true;
-            editQuestionButton.Visible = true;
         }//end function
 
         private bool CheckSmileyQuestionInputFields()
         {
-            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
-                return true;
+            try
+            {
+                if (BusinessLogic.CheckSmileyQuestionInputFields(questionTextRichTextBox)) //if Question text is not null or empty 
+                    return true;
 
-            return false;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
+            }
         }
         private bool CheckSliderQuestionInputFields()
         {
-            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
-                if (!String.IsNullOrWhiteSpace(genericTextBox1.Text))
-                    if (!String.IsNullOrWhiteSpace(genericTextBox2.Text))
-                        if (genericNumericUpDown1.Value < genericNumericUpDown2.Value)
-                            return true;
-            return false;
+            try
+            {
+                if (BusinessLogic.CheckSliderQuestionInputFields(questionTextRichTextBox, genericTextBox1, genericTextBox1,
+                   genericNumericUpDown1, genericNumericUpDown2))  //if Question text is not null or empty 
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
+            }
         }
         private bool CheckStarQuestionInputFields()
         {
-            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text)) //if Question text is not null or empty 
-                return true;
+            try
+            {
+                if (BusinessLogic.CheckStarQuestionInputFields(questionTextRichTextBox))  //if Question text is not null or empty 
+                    return true;
 
-            return false;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
+            }
         }
 
 
         private void questionTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (questionTypeComboBox.SelectedIndex == 0)
+            try
             {
-                InitializeSmileyQuestionForm();
+                if (questionTypeComboBox.SelectedIndex == 0)
+                {
+                    InitializeSmileyQuestionForm();
+                }
+                else if (questionTypeComboBox.SelectedIndex == 1)
+                {
+                    InitializeSliderQuestionForm();
+                }
+                else if (questionTypeComboBox.SelectedIndex == 2)
+                {
+                    InitializeStarQuestionForm();
+                }
             }
-            else if (questionTypeComboBox.SelectedIndex == 1)
+            catch (Exception ex)
             {
-                InitializeSliderQuestionForm();
-            }
-            else if (questionTypeComboBox.SelectedIndex == 2)
-            {
-                InitializeStarQuestionForm();
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
             }
         }// event end
-
         private void InitializeSmileyQuestionForm()
         {
-            genericLabel1.Visible = true;
-            genericLabel2.Visible = false;
-            genericLabel3.Visible = false;
-            genericLabel4.Visible = false;
-            genericLabel1.Text = "Number Of Smiley Faces (2 - 5):";
+            try
+            {
+                genericLabel1.Visible = true;
+                genericLabel2.Visible = false;
+                genericLabel3.Visible = false;
+                genericLabel4.Visible = false;
+                genericLabel1.Text = "Number Of Smiley Faces (2 - 5):";
 
-            genericNumericUpDown1.Visible = true;
-            genericNumericUpDown2.Visible = false;
-            genericNumericUpDown1.Minimum = 2;
-            genericNumericUpDown1.Maximum = 5;
-            //genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
+                genericNumericUpDown1.Visible = true;
+                genericNumericUpDown2.Visible = false;
+                genericNumericUpDown1.Minimum = 2;
+                genericNumericUpDown1.Maximum = 5;
+                //genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
 
-            genericTextBox1.Visible = false;
-            genericTextBox2.Visible = false;
+                genericTextBox1.Visible = false;
+                genericTextBox2.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
         } // func. end
         private void InitializeSliderQuestionForm()
         {
-            genericLabel1.Visible = true;
-            genericLabel2.Visible = true;
-            genericLabel3.Visible = true;
-            genericLabel4.Visible = true;
-            genericLabel1.Text = "Start Value:";
-            genericLabel2.Text = "End Value:";
-            genericLabel3.Text = "Start Value Caption:";
-            genericLabel4.Text = "End Value Caption:";
+            try
+            {
+                genericLabel1.Visible = true;
+                genericLabel2.Visible = true;
+                genericLabel3.Visible = true;
+                genericLabel4.Visible = true;
+                genericLabel1.Text = "Start Value:";
+                genericLabel2.Text = "End Value:";
+                genericLabel3.Text = "Start Value Caption:";
+                genericLabel4.Text = "End Value Caption:";
 
-            genericNumericUpDown1.Visible = true;
-            genericNumericUpDown2.Visible = true;
-            genericNumericUpDown1.Minimum = 1;
-            genericNumericUpDown1.Maximum = 99;
-            //genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
-            genericNumericUpDown2.Minimum = 2;
-            genericNumericUpDown2.Maximum = 100;
-            //genericNumericUpDown2.Value = genericNumericUpDown2.Minimum;
+                genericNumericUpDown1.Visible = true;
+                genericNumericUpDown2.Visible = true;
+                genericNumericUpDown1.Minimum = 1;
+                genericNumericUpDown1.Maximum = 99;
+                //genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
+                genericNumericUpDown2.Minimum = 2;
+                genericNumericUpDown2.Maximum = 100;
+                //genericNumericUpDown2.Value = genericNumericUpDown2.Minimum;
 
-            genericTextBox1.Visible = true;
-            genericTextBox2.Visible = true;
+                genericTextBox1.Visible = true;
+                genericTextBox2.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
         } //func. end
         private void InitializeStarQuestionForm()
         {
-            genericLabel1.Visible = true;
-            genericLabel2.Visible = false;
-            genericLabel3.Visible = false;
-            genericLabel4.Visible = false;
-            genericLabel1.Text = "Number Of Stars (1 - 10):";
+            try
+            {
+                genericLabel1.Visible = true;
+                genericLabel2.Visible = false;
+                genericLabel3.Visible = false;
+                genericLabel4.Visible = false;
+                genericLabel1.Text = "Number Of Stars (1 - 10):";
 
-            genericNumericUpDown1.Visible = true;
-            genericNumericUpDown1.Enabled = true;
-            genericNumericUpDown2.Visible = false;
-            genericNumericUpDown1.Minimum = 1;
-            genericNumericUpDown1.Maximum = 10;
-            //genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
+                genericNumericUpDown1.Visible = true;
+                genericNumericUpDown1.Enabled = true;
+                genericNumericUpDown2.Visible = false;
+                genericNumericUpDown1.Minimum = 1;
+                genericNumericUpDown1.Maximum = 10;
+                //genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
 
-            genericTextBox1.Visible = false;
-            genericTextBox2.Visible = false;
+                genericTextBox1.Visible = false;
+                genericTextBox2.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
         } //func. end
 
         private void addQuestionButton_Click(object sender, EventArgs e)
         {
-            if (questionTypeComboBox.SelectedIndex == 0)
+            try
             {
-                AddSmileyQuestion();
+                bool success = false;
+                if (FormState.ToString().ToUpper() == FormStateType.ADD.ToString().ToUpper())
+                {
+                    try
+                    {
+                        if (questionTypeComboBox.SelectedIndex == 0)
+                        {
+                            success = AddSmileyQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 1)
+                        {
+                            success = AddSliderQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 2)
+                        {
+                            success = AddStarQuestion();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Something wrong happened, please try again\n");
+                        CommonLayer.LogError(ex);
+                    }
+                }
+                else if (FormState.ToString().ToUpper() == FormStateType.EDIT.ToString().ToUpper())
+                {
+                    try
+                    {
+                        if (questionTypeComboBox.SelectedIndex == 0)
+                        {
+                            success = EditSmileyQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 1)
+                        {
+                            success = EditSliderQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 2)
+                        {
+                            success = EditStarQuestion();
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        CommonLayer.LogError(ex);
+                    }
+                }
+
+                if (success)
+                {
+                    this.Close();
+                }
             }
-            else if (questionTypeComboBox.SelectedIndex == 1)
+            catch (Exception ex)
             {
-                AddSliderQuestion();
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonLayer.LogError(ex);
             }
-            else if (questionTypeComboBox.SelectedIndex == 2)
-            {
-                AddStarQuestion();
-            }
-        }// end of function
-        private void editQuestionButton_Click(object sender, EventArgs e)
-        {
-            if (questionTypeComboBox.SelectedIndex == 0)
-            {
-                EditSmileyQuestion();
-            }
-            else if (questionTypeComboBox.SelectedIndex == 1)
-            {
-                EditSliderQuestion();
-            }
-            else if (questionTypeComboBox.SelectedIndex == 2)
-            {
-                EditStarQuestion();
-            }
+
         }// end of function
 
         /// <summary>
         /// Add a smiley question through CommDB Class
         /// </summary>
-        private void AddSmileyQuestion()
+        private bool AddSmileyQuestion()
         {
-            /*
-             * Declare variables
-             */
-            int questionOrder, numberOfSmilyFaces;
-            string questionText;
-
-            if (CheckSmileyQuestionInputFields()) //if Question text is not null or empty 
+            try
             {
                 ///
-                /// Assign values to variables
+                /// Declare variables
                 ///
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = questionTextRichTextBox.Text;
-                numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+                int questionOrder, numberOfSmilyFaces;
+                string questionText;
 
-                ///
-                /// Try to insert a new question into "Smiley_Questions" table
-                ///
-                try
+                if (CheckSmileyQuestionInputFields()) //if Question text is not null or empty 
                 {
-                    int result = CommDB.AddSmileyQuestion(questionOrder, questionText, numberOfSmilyFaces);
-                    switch (result)
+                    ///
+                    /// Assign values to variables
+                    ///
+                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                    questionText = questionTextRichTextBox.Text;
+                    numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                    ///
+                    /// Try to insert a new question into "Smiley_Questions" table
+                    ///
+                    try
                     {
-                        case 1:
-                            MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearInputs();
-                            break;
-                        case 2:
-                            MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case -1:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        int result = CommDB.AddSmileyQuestion(questionOrder, questionText, numberOfSmilyFaces);
+                        switch (result)
+                        {
+                            case 1:
+                                MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearInputs();
+                                return true;
+                                break;
+                            case 2:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case -1:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                        CommonLayer.LogError(ex); //write error to log file
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                    Trace.TraceError("Something went wrong:\nShort Message:\n" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                    MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
             }
         }
 
         /// <summary>
         /// Add a slider question through CommDB Class
         /// </summary>
-        private void AddSliderQuestion()
+        private bool AddSliderQuestion()
         {
-            /*
-             * Declare variables
-             */
-            int questionOrder, questionStartValue, questionEndValue;
-            string questionText, questionStartValueCaption, questionEndValueCaption;
-
-
-            if (CheckSliderQuestionInputFields()) //if Question input fields are not null or empty 
+            try
             {
+                ///
+                /// Declare variables
+                ///
+                int questionOrder, questionStartValue, questionEndValue;
+                string questionText, questionStartValueCaption, questionEndValueCaption;
 
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = (string)questionTextRichTextBox.Text;
-
-                questionStartValueCaption = (string)genericTextBox1.Text;
-                questionEndValueCaption = (string)genericTextBox2.Text;
-
-                questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-
-                /*
-                * Try to insert a new question into "Slider_Questions" table
-                */
-                try
+                ///
+                ///Check if Question input fields are not null or empty 
+                ///
+                if (CheckSliderQuestionInputFields())
                 {
-                    int result = CommDB.AddSliderQuestion(questionOrder, questionText, questionStartValue,
-                        questionEndValue, questionStartValueCaption, questionEndValueCaption);
-                    switch (result)
+
+                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                    questionText = (string)questionTextRichTextBox.Text;
+
+                    questionStartValueCaption = (string)genericTextBox1.Text;
+                    questionEndValueCaption = (string)genericTextBox2.Text;
+
+                    questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                    questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+
+                    ///
+                    /// Try to insert a new question into "Slider_Questions" table
+                    ///
+                    try
                     {
-                        case 1:
-                            MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearInputs();
-                            break;
-                        case 2:
-                            MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case -1:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        int result = CommDB.AddSliderQuestion(questionOrder, questionText, questionStartValue,
+                            questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        switch (result)
+                        {
+                            case 1:
+                                MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearInputs();
+                                return true;
+                                break;
+                            case 2:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case -1:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                        CommonLayer.LogError(ex); //write error to log file
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                    Trace.TraceError("Something went wrong:\nShort Message:\n" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                    MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
             }
         } // end of function
 
         /// <summary>
         /// Add a star question through CommDB Class
         /// </summary>
-        private void AddStarQuestion()
+        private bool AddStarQuestion()
         {
-            /*
-             * Declare variables
-             */
-            int questionOrder, numberOfStars;
-            string questionText;
-
-            if (CheckStarQuestionInputFields()) //if Question input fields are not null or empty 
+            try
             {
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = questionTextRichTextBox.Text;
-                numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+                ///
+                /// Declare variables
+                ///
+                int questionOrder, numberOfStars;
+                string questionText;
 
-                /*
-                * Try to insert a new question into "Star_Questions" table
-                */
-                try
+                if (CheckStarQuestionInputFields()) //if Question input fields are not null or empty 
                 {
-                    int result = CommDB.AddStarQuestion(questionOrder, questionText, numberOfStars);
-                    switch (result)
+                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                    questionText = questionTextRichTextBox.Text;
+                    numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                    ///
+                    /// Try to insert a new question into "Star_Questions" table
+                    ///
+                    try
                     {
-                        case 1:
-                            MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearInputs();
-                            break;
-                        case 2:
-                            MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case -1:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        int result = CommDB.AddStarQuestion(questionOrder, questionText, numberOfStars);
+                        switch (result)
+                        {
+                            case 1:
+                                MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearInputs();
+                                return true;
+                                break;
+                            case 2:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case -1:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                        CommonLayer.LogError(ex); //write error to log file
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                    Trace.TraceError("Something went wrong:\nShort Message:\n" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                    MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
             }
         }// end of function
 
         /// <summary>
         /// Edit a smiley question through CommDB Class
         /// </summary>
-        private void EditSmileyQuestion()
+        private bool EditSmileyQuestion()
         {
-            int questionOrder, numberOfSmilyFaces;
-            string questionText;
-
-            if (CheckSmileyQuestionInputFields())
+            try
             {
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = questionTextRichTextBox.Text;
-                numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+                int questionOrder, numberOfSmilyFaces;
+                string questionText;
 
-                /*
-                * Try to Update a new question into "Smiley_Questions" table
-                */
-                try
+                if (CheckSmileyQuestionInputFields())
                 {
-                    int result = CommDB.EditSmileyQuestion(QuestionId, questionOrder, questionText, numberOfSmilyFaces);
-                    switch (result)
+                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                    questionText = questionTextRichTextBox.Text;
+                    numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                    ///
+                    /// Try to Update a new question into "Smiley_Questions" table
+                    ///
+                    try
                     {
-                        case 1:
-                            MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case 2:
-                            MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case -1:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        int result = CommDB.EditSmileyQuestion(QuestionId, questionOrder, questionText, numberOfSmilyFaces);
+                        switch (result)
+                        {
+                            case 1:
+                                MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return true;
+                                break;
+                            case 2:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case -1:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                        CommonLayer.LogError(ex); //write error to log file
                     }
                 }
-                catch (SqlException ex)
+                else
                 {
-                    MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                    Trace.TraceError("Something went wrong:\nShort Message:\n" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                    MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
             }
         }//end of function
 
         /// <summary>
         /// Edit a slider question through CommDB Class
         /// </summary>
-        private void EditSliderQuestion()
+        private bool EditSliderQuestion()
         {
-            int questionOrder, questionStartValue, questionEndValue;
-            string questionText, questionStartValueCaption, questionEndValueCaption;
-
-            if (CheckSliderQuestionInputFields())
+            try
             {
-                //assign variables
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = (string)questionTextRichTextBox.Text;
-                questionStartValueCaption = (string)genericTextBox1.Text;
-                questionEndValueCaption = (string)genericTextBox2.Text;
-                questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+                int questionOrder, questionStartValue, questionEndValue;
+                string questionText, questionStartValueCaption, questionEndValueCaption;
 
-                /*
-                * Try to Update a new question into "Slider_Questions" table
-                */
-                try
+                if (CheckSliderQuestionInputFields())
                 {
-                    int result = CommDB.EditSliderQuestion(QuestionId, questionOrder, questionText, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
-                    switch (result)
+                    //assign variables
+                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                    questionText = (string)questionTextRichTextBox.Text;
+                    questionStartValueCaption = (string)genericTextBox1.Text;
+                    questionEndValueCaption = (string)genericTextBox2.Text;
+                    questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                    questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+
+                    ///
+                    /// Try to Update a new question into "Slider_Questions" table
+                    ///
+                    try
                     {
-                        case 1:
-                            MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case 2:
-                            MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case -1:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        int result = CommDB.EditSliderQuestion(QuestionId, questionOrder, questionText, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        switch (result)
+                        {
+                            case 1:
+                                MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return true;
+                                break;
+                            case 2:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case -1:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                        CommonLayer.LogError(ex); //write error to log file
                     }
                 }
-                catch (SqlException ex)
+                else
                 {
-                    MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                    Trace.TraceError("Something went wrong:\nShort Message:\n" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                    MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
             }
         } //end of function
 
         /// <summary>
         /// Edit a star question through CommDB Class
         /// </summary>
-        private void EditStarQuestion()
+        private bool EditStarQuestion()
         {
-            int questionOrder, numberOfStars;
-            string questionText;
-            if (CheckStarQuestionInputFields())
+            try
             {
-                questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                questionText = questionTextRichTextBox.Text;
-                numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
-
-                /*
-                * Try to Update a new question into "Star_Questions" table
-                */
-                try
+                int questionOrder, numberOfStars;
+                string questionText;
+                if (CheckStarQuestionInputFields())
                 {
-                    int result = CommDB.EditStarQuestion(QuestionId, questionOrder, questionText, numberOfStars);
-                    switch (result)
+                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                    questionText = questionTextRichTextBox.Text;
+                    numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                    ///
+                    /// Try to Update a new question into "Star_Questions" table
+                    ///
+                    try
                     {
-                        case 1:
-                            MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case 2:
-                            MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
-                        case -1:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        int result = CommDB.EditStarQuestion(QuestionId, questionOrder, questionText, numberOfStars);
+                        switch (result)
+                        {
+                            case 1:
+                                MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return true;
+                                break;
+                            case 2:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case -1:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                        CommonLayer.LogError(ex); //write error to log file
                     }
                 }
-                catch (SqlException ex)
+                else
                 {
-                    MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                    Trace.TraceError("Something went wrong:\nShort Message:\n" + ex.Message + "Long Message:\n" + ex + "\n"); //write error to log file
+                    MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+                return false;
             }
         } //end of function
 
         private void ClearInputs()
         {
-            questionOrderNumericUpDown.Value = questionOrderNumericUpDown.Minimum;
-            questionTextRichTextBox.Clear();
-            genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
-            genericNumericUpDown2.Value = genericNumericUpDown2.Minimum;
-            genericTextBox1.Clear();
-            genericTextBox2.Clear();
+            try
+            {
+                questionOrderNumericUpDown.Value = questionOrderNumericUpDown.Minimum;
+                questionTextRichTextBox.Clear();
+                genericNumericUpDown1.Value = genericNumericUpDown1.Minimum;
+                genericNumericUpDown2.Value = genericNumericUpDown2.Minimum;
+                genericTextBox1.Clear();
+                genericTextBox2.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
         }
 
     }
