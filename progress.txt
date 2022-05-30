@@ -60,3 +60,15 @@ What is remaining to be done:
 -Standrize error log formating
 -refresh list instantly when adding or editing data
 
+********************************************************
+Date : 30/05/2022
+What is accomplished today:
+-Improve Error logging (format and functionality)
+-UI fixed
+-Generate new Database script for the new schema
+-Refresh list on add/edit
+-Almost Try catch everything -> more of a definsive coding approach
+-CRUD Testing
+
+What is remaining to be done:
+-Documentation
