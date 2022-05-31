@@ -146,7 +146,6 @@ VALUES
 
         } // end of function
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -207,7 +206,6 @@ values
             }
 
         }// end of function
-
 
         /// <summary>
         /// 
@@ -676,118 +674,118 @@ where Q.QuestionID = {QuestionId}", conn);
             }
         } // end func.
 
-        public static int CheckIfTablesExist()
-        {
-            try
-            {
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = null;
+        //        public static int CheckIfTablesExist()
+        //        {
+        //            try
+        //            {
+        //                conn = new SqlConnection(cn.ConnectionString);
+        //                SqlCommand cmd = null;
 
 
-                ///
-                /// Create Tables if they do NOT exist
-                ///
-                cmd = new SqlCommand($@"
-USE [{cn.Name}]
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[Smiley_Questions](
-	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
-	[QuestionOrder] [int] NOT NULL,
-	[QuestionText] [text] NOT NULL,
-	[NumberOfSmileyFaces] [int] NOT NULL,
- CONSTRAINT [PK_Smiley_Faces] PRIMARY KEY CLUSTERED 
-(
-	[QuestionID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+        //                ///
+        //                /// Create Tables if they do NOT exist
+        //                ///
+        //                cmd = new SqlCommand($@"
+        //USE [{cn.Name}]
+        //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
+        //BEGIN
+        //CREATE TABLE [dbo].[Smiley_Questions](
+        //	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+        //	[QuestionOrder] [int] NOT NULL,
+        //	[QuestionText] [text] NOT NULL,
+        //	[NumberOfSmileyFaces] [int] NOT NULL,
+        // CONSTRAINT [PK_Smiley_Faces] PRIMARY KEY CLUSTERED 
+        //(
+        //	[QuestionID] ASC
+        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+        //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+        //END
+        //", conn);
+        //                conn.Open();
+        //                cmd.ExecuteNonQuery();
+        //                conn.Close();
 
 
-                cmd = new SqlCommand($@"
-USE [{cn.Name}]
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Slider_Questions]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[Slider_Questions](
-	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
-	[QuestionOrder] [int] NOT NULL,
-	[QuestionText] [text] NOT NULL,
-	[QuestionStartValue] [int] NOT NULL,
-	[QuestionEndValue] [int] NOT NULL,
-	[QuestionStartValueCaption] [varchar](100) NOT NULL,
-	[QuestionEndValueCaption] [varchar](100) NOT NULL,
- CONSTRAINT [PK_Slider_Questions] PRIMARY KEY CLUSTERED 
-(
-	[QuestionID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [IX_Slider_Questions] UNIQUE NONCLUSTERED 
-(
-	[QuestionOrder] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+        //                cmd = new SqlCommand($@"
+        //USE [{cn.Name}]
+        //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Slider_Questions]') AND type in (N'U'))
+        //BEGIN
+        //CREATE TABLE [dbo].[Slider_Questions](
+        //	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+        //	[QuestionOrder] [int] NOT NULL,
+        //	[QuestionText] [text] NOT NULL,
+        //	[QuestionStartValue] [int] NOT NULL,
+        //	[QuestionEndValue] [int] NOT NULL,
+        //	[QuestionStartValueCaption] [varchar](100) NOT NULL,
+        //	[QuestionEndValueCaption] [varchar](100) NOT NULL,
+        // CONSTRAINT [PK_Slider_Questions] PRIMARY KEY CLUSTERED 
+        //(
+        //	[QuestionID] ASC
+        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+        // CONSTRAINT [IX_Slider_Questions] UNIQUE NONCLUSTERED 
+        //(
+        //	[QuestionOrder] ASC
+        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+        //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+        //END
+        //", conn);
+        //                conn.Open();
+        //                cmd.ExecuteNonQuery();
+        //                conn.Close();
 
 
-                cmd = new SqlCommand($@"
-USE [{cn.Name}]
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Star_Questions]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[Star_Questions](
-	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
-	[QuestionOrder] [int] NOT NULL,
-	[QuestionText] [text] NOT NULL,
-	[NumberOfStars] [int] NOT NULL,
- CONSTRAINT [PK_Stars_Questions] PRIMARY KEY CLUSTERED 
-(
-	[QuestionID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [IX_Stars_Questions] UNIQUE NONCLUSTERED 
-(
-	[QuestionOrder] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+        //                cmd = new SqlCommand($@"
+        //USE [{cn.Name}]
+        //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Star_Questions]') AND type in (N'U'))
+        //BEGIN
+        //CREATE TABLE [dbo].[Star_Questions](
+        //	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+        //	[QuestionOrder] [int] NOT NULL,
+        //	[QuestionText] [text] NOT NULL,
+        //	[NumberOfStars] [int] NOT NULL,
+        // CONSTRAINT [PK_Stars_Questions] PRIMARY KEY CLUSTERED 
+        //(
+        //	[QuestionID] ASC
+        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+        // CONSTRAINT [IX_Stars_Questions] UNIQUE NONCLUSTERED 
+        //(
+        //	[QuestionOrder] ASC
+        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+        //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+        //END
+        //", conn);
+        //                conn.Open();
+        //                cmd.ExecuteNonQuery();
+        //                conn.Close();
 
-                return 1;
-            }
-            catch (SqlException ex)
-            {
-                //2627 -> unique key violation
-                // ex.Number
-                if (ex.Number == 2627)
-                {
-                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 2;
-                }
-                else
-                {
-                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonLayer.LogError(ex); //write error to log file
-                    return -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonLayer.LogError(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        } //end func.
+        //                return 1;
+        //            }
+        //            catch (SqlException ex)
+        //            {
+        //                //2627 -> unique key violation
+        //                // ex.Number
+        //                if (ex.Number == 2627)
+        //                {
+        //                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                    return 2;
+        //                }
+        //                else
+        //                {
+        //                    //MessageBox.Show("SQL Error:\n" + ex.Message);
+        //                    CommonLayer.LogError(ex); //write error to log file
+        //                    return -1;
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
+        //                CommonLayer.LogError(ex); //write error to log file
+        //                return -1;
+        //            }
+        //            finally
+        //            {
+        //                conn.Close();
+        //            }
+        //        } //end func.
     }
 }

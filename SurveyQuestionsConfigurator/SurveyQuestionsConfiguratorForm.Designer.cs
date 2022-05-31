@@ -139,7 +139,6 @@
             // 
             this.deleteQuestionButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.deleteQuestionButton.Location = new System.Drawing.Point(508, 313);
-            this.deleteQuestionButton.Margin = new System.Windows.Forms.Padding(10);
             this.deleteQuestionButton.Name = "deleteQuestionButton";
             this.deleteQuestionButton.Size = new System.Drawing.Size(91, 25);
             this.deleteQuestionButton.TabIndex = 4;
@@ -150,8 +149,7 @@
             // editQuestionButton
             // 
             this.editQuestionButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.editQuestionButton.Location = new System.Drawing.Point(397, 313);
-            this.editQuestionButton.Margin = new System.Windows.Forms.Padding(10);
+            this.editQuestionButton.Location = new System.Drawing.Point(411, 313);
             this.editQuestionButton.Name = "editQuestionButton";
             this.editQuestionButton.Size = new System.Drawing.Size(91, 25);
             this.editQuestionButton.TabIndex = 3;
@@ -162,8 +160,7 @@
             // addQuestionButton
             // 
             this.addQuestionButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.addQuestionButton.Location = new System.Drawing.Point(286, 313);
-            this.addQuestionButton.Margin = new System.Windows.Forms.Padding(10);
+            this.addQuestionButton.Location = new System.Drawing.Point(314, 313);
             this.addQuestionButton.Name = "addQuestionButton";
             this.addQuestionButton.Size = new System.Drawing.Size(91, 25);
             this.addQuestionButton.TabIndex = 2;
