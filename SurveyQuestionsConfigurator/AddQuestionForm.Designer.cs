@@ -126,18 +126,18 @@
             this.questionOrderLabel.AutoSize = true;
             this.questionOrderLabel.Location = new System.Drawing.Point(6, 21);
             this.questionOrderLabel.Name = "questionOrderLabel";
-            this.questionOrderLabel.Size = new System.Drawing.Size(81, 13);
+            this.questionOrderLabel.Size = new System.Drawing.Size(36, 13);
             this.questionOrderLabel.TabIndex = 0;
-            this.questionOrderLabel.Text = "Question Order:";
+            this.questionOrderLabel.Text = "Order:";
             // 
             // questionTextLabel
             // 
             this.questionTextLabel.AutoSize = true;
             this.questionTextLabel.Location = new System.Drawing.Point(6, 72);
             this.questionTextLabel.Name = "questionTextLabel";
-            this.questionTextLabel.Size = new System.Drawing.Size(76, 13);
+            this.questionTextLabel.Size = new System.Drawing.Size(31, 13);
             this.questionTextLabel.TabIndex = 1;
-            this.questionTextLabel.Text = "Question Text:";
+            this.questionTextLabel.Text = "Text:";
             // 
             // questionOrderNumericUpDown
             // 

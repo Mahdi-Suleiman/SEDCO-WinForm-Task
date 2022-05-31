@@ -314,8 +314,8 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = true;
                 genericLabel3.Visible = true;
                 genericLabel4.Visible = true;
-                genericLabel1.Text = "Start Value:";
-                genericLabel2.Text = "End Value:";
+                genericLabel1.Text = "Slider start Value (1 - 99):";
+                genericLabel2.Text = "Slider end Value (2 - 100):";
                 genericLabel3.Text = "Start Value Caption:";
                 genericLabel4.Text = "End Value Caption:";
 
