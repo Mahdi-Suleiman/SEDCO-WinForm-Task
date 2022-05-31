@@ -112,7 +112,7 @@
             this.createdQuestions_ListView.TileSize = new System.Drawing.Size(170, 60);
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
             this.createdQuestions_ListView.View = System.Windows.Forms.View.Details;
-            this.createdQuestions_ListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
+            this.createdQuestions_ListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.createdQuestions_ListView_ColumnClick);
             this.createdQuestions_ListView.DoubleClick += new System.EventHandler(this.editQuestionButton_Click);
             // 
             // columnHeader1
@@ -233,9 +233,8 @@
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Survey Questions Configurator";
-            this.Activated += new System.EventHandler(this.Form1_Activated);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Leave += new System.EventHandler(this.Form1_Leave);
+            this.Activated += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Activated);
+            this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.questionsTabPage.ResumeLayout(false);
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);

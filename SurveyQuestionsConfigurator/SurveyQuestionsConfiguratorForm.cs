@@ -15,34 +15,30 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class SurveyQuestionsConfiguratorForm : Form
     {
-        /// 
-        /// Global Variables
-        /// Access them anywhere
-        ///
+        /// <summary>
+        /// Used for sorting listview columns on click
+        /// </summary>
+        private ListViewColumnSorter lvwColumnSorter;
 
-        /// 
-        ///get connection string information from App.config
-        ///
-        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0];
-
-        ///
+        /// <summary>
         /// Question Type Enum to reduce errors
-        ///
+        /// </summary>
         public enum QuestionType
         {
             SMILEY,
             SLIDER,
             STAR
         }
-        private ListViewColumnSorter lvwColumnSorter;
 
         public SurveyQuestionsConfiguratorForm()
         {
             InitializeComponent();
-            ///
+
+
+            /// <summary>
             /// Create an instance of a ListView column sorter and assign it
             /// to the ListView control.
-            ///
+            /// </summary>
             lvwColumnSorter = new ListViewColumnSorter();
             this.createdQuestions_ListView.ListViewItemSorter = lvwColumnSorter;
         }
@@ -104,9 +100,9 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        } // end func.
+        } //end func.
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void SurveyQuestionsConfiguratorForm_Load(object sender, EventArgs e)
         {
             try
             {
@@ -138,9 +134,22 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
-        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void SurveyQuestionsConfiguratorForm_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                BuildListView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n");
+                CommonLayer.LogError(ex);
+            }
+        }//end event 
+
+        private void createdQuestions_ListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             try
             {
@@ -178,7 +187,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
         private void addQuestionButton_Click(object sender, EventArgs e)
         {
@@ -192,7 +201,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -205,7 +214,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
         private void deleteQuestionButton_Click(object sender, EventArgs e)
         {
@@ -277,7 +286,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
         private void editQuestionButton_Click(object sender, EventArgs e)
         {
@@ -312,7 +321,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
         private void closeApplicationButton_Click(object sender, EventArgs e)
         {
@@ -325,24 +334,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 CommonLayer.LogError(ex);
             }
-        }
+        }//end event 
 
-        private void Form1_Leave(object sender, EventArgs e)
-        {
-            //conn.Close();
-        }
-
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-            try
-            {
-                BuildListView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
-            }
-        }
     }
 }
