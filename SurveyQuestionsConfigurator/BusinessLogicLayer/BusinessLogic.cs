@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         } // end func.
@@ -40,7 +41,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         } // end func.
@@ -57,7 +58,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         } // end func.

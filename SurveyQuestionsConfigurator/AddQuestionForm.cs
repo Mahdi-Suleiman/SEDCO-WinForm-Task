@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonLayer;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
-
 namespace SurveyQuestionsConfigurator
 {
     public partial class AddQuestionForm : Form
@@ -74,7 +74,8 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+
+                Helper.LogError(ex);
             }
         } // event end
 
@@ -91,7 +92,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
         }
 
@@ -122,13 +123,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing smiley question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing smiley question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
             }
         } //end function
         private void InitializeEditingSlideQuestion(int questionId)
@@ -162,13 +163,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing slider question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing slider question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
             }
         } //end function
         private void InitializeEditingStarQuestion(int questionId)
@@ -198,13 +199,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing star question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing star question form form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
             }
         }//end function
 
@@ -220,7 +221,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         }
@@ -236,7 +237,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         }
@@ -252,7 +253,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         }
@@ -278,7 +279,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
         }// event end
         private void InitializeSmileyQuestionForm()
@@ -303,7 +304,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
         } // func. end
         private void InitializeSliderQuestionForm()
@@ -334,7 +335,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
         } //func. end
         private void InitializeStarQuestionForm()
@@ -360,7 +361,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
         } //func. end
 
@@ -389,7 +390,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something wrong happened, please try again\n");
-                        CommonLayer.LogError(ex);
+                        Helper.LogError(ex);
                     }
                 }
                 else if (FormState.ToString().ToUpper() == FormStateType.EDIT.ToString().ToUpper())
@@ -413,7 +414,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        CommonLayer.LogError(ex);
+                        Helper.LogError(ex);
                     }
                 }
 
@@ -425,7 +426,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
 
         }// end of function
@@ -476,7 +477,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonLayer.LogError(ex); //write error to log file
+                        Helper.LogError(ex); //write error to log file
                     }
                 }
                 else
@@ -488,7 +489,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         }
@@ -546,7 +547,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonLayer.LogError(ex); //write error to log file
+                        Helper.LogError(ex); //write error to log file
                     }
                 }
                 else
@@ -558,7 +559,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         } // end of function
@@ -606,7 +607,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonLayer.LogError(ex); //write error to log file
+                        Helper.LogError(ex); //write error to log file
                     }
                 }
                 else
@@ -618,7 +619,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         }// end of function
@@ -662,7 +663,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonLayer.LogError(ex); //write error to log file
+                        Helper.LogError(ex); //write error to log file
                     }
                 }
                 else
@@ -674,7 +675,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         }//end of function
@@ -722,7 +723,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonLayer.LogError(ex); //write error to log file
+                        Helper.LogError(ex); //write error to log file
                     }
                 }
                 else
@@ -734,7 +735,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         } //end of function
@@ -777,7 +778,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonLayer.LogError(ex); //write error to log file
+                        Helper.LogError(ex); //write error to log file
                     }
                 }
                 else
@@ -789,7 +790,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
                 return false;
             }
         } //end of function
@@ -808,7 +809,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonLayer.LogError(ex);
+                Helper.LogError(ex);
             }
         }
 

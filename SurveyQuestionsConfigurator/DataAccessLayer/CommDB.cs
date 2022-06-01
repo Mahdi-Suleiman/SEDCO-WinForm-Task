@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonLayer;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace SurveyQuestionsConfigurator
 {
     public class CommDB
@@ -65,14 +65,14 @@ VALUES
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonLayer.LogError(ex); //write error to log file
+                    Helper.LogError(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -130,13 +130,13 @@ VALUES
                 }
                 else
                 {
-                    CommonLayer.LogError(ex); //write error to log file
+                    Helper.LogError(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -190,14 +190,14 @@ values
                 }
                 else
                 {
-                    CommonLayer.LogError(ex); //write error to log file
+                    Helper.LogError(ex); //write error to log file
                     return -1;
                 }
             }
 
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -255,14 +255,14 @@ WHERE QuestionID = {QuestionId}", conn);
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonLayer.LogError(ex); //write error to log file
+                    Helper.LogError(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             //finally
@@ -319,13 +319,13 @@ WHERE QuestionID = {QuestionId}", conn);
                 }
                 else
                 {
-                    CommonLayer.LogError(ex); //write error to log file
+                    Helper.LogError(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
         } //end func.
@@ -376,14 +376,14 @@ WHERE QuestionID = {QuestionId}", conn);
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonLayer.LogError(ex); //write error to log file
+                    Helper.LogError(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
         } //end func.
@@ -401,12 +401,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -437,12 +437,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -474,12 +474,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -511,12 +511,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return -1;
             }
             finally
@@ -545,12 +545,12 @@ SELECT QuestionID, QuestionOrder, QuestionType, QuestionText FROM Questions", co
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             finally
@@ -584,12 +584,12 @@ where Questions.QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             finally
@@ -622,12 +622,12 @@ where Q.QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             finally
@@ -660,12 +660,12 @@ where Q.QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonLayer.LogError(ex); //write error to log file
+                Helper.LogError(ex); //write error to log file
                 return null;
             }
             finally
@@ -772,14 +772,14 @@ where Q.QuestionID = {QuestionId}", conn);
         //                else
         //                {
         //                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-        //                    CommonLayer.LogError(ex); //write error to log file
+        //                    Helper.LogError(ex); //write error to log file
         //                    return -1;
         //                }
         //            }
         //            catch (Exception ex)
         //            {
         //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
-        //                CommonLayer.LogError(ex); //write error to log file
+        //                Helper.LogError(ex); //write error to log file
         //                return -1;
         //            }
         //            finally

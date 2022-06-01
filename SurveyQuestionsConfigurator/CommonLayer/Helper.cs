@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SurveyQuestionsConfigurator
+namespace SurveyQuestionsConfigurator.CommonLayer
 {
-    public class CommonLayer
+    public class Helper
     {
         public static void LogError(Exception ex)
         {
@@ -16,10 +16,8 @@ namespace SurveyQuestionsConfigurator
  
 -Exception Type: {ex.GetType()}
 -Exception Call Site: {ex.TargetSite}
--Exception Stack Trace: {ex.StackTrace}
 -Exception Short Message: {ex.Message}
--Exception Long Message:
- {ex}
+-Exception Stack Trace: {ex.StackTrace}
 ");
         }
     }

@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.smileyQuestionTabPage = new System.Windows.Forms.TabPage();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.smilyQuestionDetailsGroupBox = new System.Windows.Forms.GroupBox();
             this.questionTextRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -48,8 +46,6 @@
             this.questionTypeComboBox = new System.Windows.Forms.ComboBox();
             this.addQuestionButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.smileyQuestionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.smilyQuestionDetailsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.questionOrderNumericUpDown)).BeginInit();
@@ -58,32 +54,10 @@
             this.typeOfQuestionGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.smileyQuestionTabPage);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(380, 417);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // smileyQuestionTabPage
-            // 
-            this.smileyQuestionTabPage.Controls.Add(this.pictureBox3);
-            this.smileyQuestionTabPage.Controls.Add(this.smilyQuestionDetailsGroupBox);
-            this.smileyQuestionTabPage.Controls.Add(this.typeOfQuestionGroupBox);
-            this.smileyQuestionTabPage.Location = new System.Drawing.Point(4, 22);
-            this.smileyQuestionTabPage.Name = "smileyQuestionTabPage";
-            this.smileyQuestionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.smileyQuestionTabPage.Size = new System.Drawing.Size(372, 391);
-            this.smileyQuestionTabPage.TabIndex = 0;
-            this.smileyQuestionTabPage.Text = "Question Details";
-            this.smileyQuestionTabPage.UseVisualStyleBackColor = true;
-            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::SurveyQuestionsConfigurator.Properties.Resources.questionMark;
-            this.pictureBox3.Location = new System.Drawing.Point(281, 11);
+            this.pictureBox3.Location = new System.Drawing.Point(287, 17);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
             this.pictureBox3.Size = new System.Drawing.Size(87, 65);
@@ -105,7 +79,7 @@
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericTextBox1);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericNumericUpDown2);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericLabel2);
-            this.smilyQuestionDetailsGroupBox.Location = new System.Drawing.Point(6, 92);
+            this.smilyQuestionDetailsGroupBox.Location = new System.Drawing.Point(12, 98);
             this.smilyQuestionDetailsGroupBox.Name = "smilyQuestionDetailsGroupBox";
             this.smilyQuestionDetailsGroupBox.Size = new System.Drawing.Size(362, 299);
             this.smilyQuestionDetailsGroupBox.TabIndex = 7;
@@ -258,7 +232,7 @@
             // typeOfQuestionGroupBox
             // 
             this.typeOfQuestionGroupBox.Controls.Add(this.questionTypeComboBox);
-            this.typeOfQuestionGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.typeOfQuestionGroupBox.Location = new System.Drawing.Point(12, 12);
             this.typeOfQuestionGroupBox.Name = "typeOfQuestionGroupBox";
             this.typeOfQuestionGroupBox.Size = new System.Drawing.Size(269, 70);
             this.typeOfQuestionGroupBox.TabIndex = 16;
@@ -281,9 +255,9 @@
             // 
             // addQuestionButton
             // 
-            this.addQuestionButton.Location = new System.Drawing.Point(229, 435);
+            this.addQuestionButton.Location = new System.Drawing.Point(218, 403);
             this.addQuestionButton.Name = "addQuestionButton";
-            this.addQuestionButton.Size = new System.Drawing.Size(79, 23);
+            this.addQuestionButton.Size = new System.Drawing.Size(75, 23);
             this.addQuestionButton.TabIndex = 7;
             this.addQuestionButton.Text = "OK";
             this.addQuestionButton.UseVisualStyleBackColor = true;
@@ -292,9 +266,9 @@
             // cancelButton
             // 
             this.cancelButton.BackColor = System.Drawing.Color.Transparent;
-            this.cancelButton.Location = new System.Drawing.Point(314, 435);
+            this.cancelButton.Location = new System.Drawing.Point(299, 403);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(74, 23);
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = false;
@@ -304,19 +278,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 466);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(383, 432);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.addQuestionButton);
+            this.Controls.Add(this.smilyQuestionDetailsGroupBox);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.typeOfQuestionGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximumSize = new System.Drawing.Size(414, 505);
-            this.MinimumSize = new System.Drawing.Size(414, 505);
+            this.MaximumSize = new System.Drawing.Size(399, 471);
+            this.MinimumSize = new System.Drawing.Size(399, 471);
             this.Name = "AddQuestionForm";
             this.Text = "Add a question";
             this.Load += new System.EventHandler(this.AddQuestionForm_Load);
             this.Leave += new System.EventHandler(this.AddQuestionForm_Leave);
-            this.tabControl1.ResumeLayout(false);
-            this.smileyQuestionTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.smilyQuestionDetailsGroupBox.ResumeLayout(false);
             this.smilyQuestionDetailsGroupBox.PerformLayout();
@@ -329,9 +304,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage smileyQuestionTabPage;
         private System.Windows.Forms.NumericUpDown questionOrderNumericUpDown;
         private System.Windows.Forms.RichTextBox questionTextRichTextBox;
         private System.Windows.Forms.NumericUpDown genericNumericUpDown1;
