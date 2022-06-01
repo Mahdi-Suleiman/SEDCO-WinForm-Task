@@ -75,7 +75,7 @@ namespace SurveyQuestionsConfigurator
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
 
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         } // event end
 
@@ -92,7 +92,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }
 
@@ -105,7 +105,7 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                dt = CommDB.RetrieveSingleSmileyQuestion(QuestionId);
+                dt = DbConnect.RetrieveSingleSmileyQuestion(QuestionId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -123,13 +123,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing smiley question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing smiley question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
             }
         } //end function
         private void InitializeEditingSlideQuestion(int questionId)
@@ -141,7 +141,7 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                dt = CommDB.RetrieveSingleSliderQuestion(QuestionId);
+                dt = DbConnect.RetrieveSingleSliderQuestion(QuestionId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -163,13 +163,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing slider question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing slider question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
             }
         } //end function
         private void InitializeEditingStarQuestion(int questionId)
@@ -181,7 +181,7 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                dt = CommDB.RetrieveSingleStarQuestion(QuestionId);
+                dt = DbConnect.RetrieveSingleStarQuestion(QuestionId);
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -199,13 +199,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing star question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing star question form form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
             }
         }//end function
 
@@ -221,7 +221,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         }
@@ -237,7 +237,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         }
@@ -253,7 +253,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         }
@@ -279,7 +279,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }// event end
         private void InitializeSmileyQuestionForm()
@@ -304,7 +304,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         } // func. end
         private void InitializeSliderQuestionForm()
@@ -335,7 +335,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         } //func. end
         private void InitializeStarQuestionForm()
@@ -361,7 +361,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         } //func. end
 
@@ -390,7 +390,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something wrong happened, please try again\n");
-                        Helper.LogError(ex);
+                        CommonHelpers.Logger(ex);
                     }
                 }
                 else if (FormState.ToString().ToUpper() == FormStateType.EDIT.ToString().ToUpper())
@@ -414,7 +414,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Helper.LogError(ex);
+                        CommonHelpers.Logger(ex);
                     }
                 }
 
@@ -426,13 +426,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
 
         }// end of function
 
         /// <summary>
-        /// Add a smiley question through CommDB Class
+        /// Add a smiley question through DbConnect Class
         /// </summary>
         private bool AddSmileyQuestion()
         {
@@ -458,7 +458,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = CommDB.AddSmileyQuestion(questionOrder, questionText, numberOfSmilyFaces);
+                        int result = DbConnect.AddSmileyQuestion(questionOrder, questionText, numberOfSmilyFaces);
                         switch (result)
                         {
                             case 1:
@@ -477,7 +477,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        Helper.LogError(ex); //write error to log file
+                        CommonHelpers.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -489,13 +489,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         }
 
         /// <summary>
-        /// Add a slider question through CommDB Class
+        /// Add a slider question through DbConnect Class
         /// </summary>
         private bool AddSliderQuestion()
         {
@@ -527,7 +527,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = CommDB.AddSliderQuestion(questionOrder, questionText, questionStartValue,
+                        int result = DbConnect.AddSliderQuestion(questionOrder, questionText, questionStartValue,
                             questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         switch (result)
                         {
@@ -547,7 +547,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        Helper.LogError(ex); //write error to log file
+                        CommonHelpers.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -559,13 +559,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         } // end of function
 
         /// <summary>
-        /// Add a star question through CommDB Class
+        /// Add a star question through DbConnect Class
         /// </summary>
         private bool AddStarQuestion()
         {
@@ -588,7 +588,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = CommDB.AddStarQuestion(questionOrder, questionText, numberOfStars);
+                        int result = DbConnect.AddStarQuestion(questionOrder, questionText, numberOfStars);
                         switch (result)
                         {
                             case 1:
@@ -607,7 +607,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        Helper.LogError(ex); //write error to log file
+                        CommonHelpers.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -619,13 +619,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         }// end of function
 
         /// <summary>
-        /// Edit a smiley question through CommDB Class
+        /// Edit a smiley question through DbConnect Class
         /// </summary>
         private bool EditSmileyQuestion()
         {
@@ -645,7 +645,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = CommDB.EditSmileyQuestion(QuestionId, questionOrder, questionText, numberOfSmilyFaces);
+                        int result = DbConnect.EditSmileyQuestion(QuestionId, questionOrder, questionText, numberOfSmilyFaces);
                         switch (result)
                         {
                             case 1:
@@ -663,7 +663,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        Helper.LogError(ex); //write error to log file
+                        CommonHelpers.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -675,13 +675,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         }//end of function
 
         /// <summary>
-        /// Edit a slider question through CommDB Class
+        /// Edit a slider question through DbConnect Class
         /// </summary>
         private bool EditSliderQuestion()
         {
@@ -705,7 +705,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = CommDB.EditSliderQuestion(QuestionId, questionOrder, questionText, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        int result = DbConnect.EditSliderQuestion(QuestionId, questionOrder, questionText, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         switch (result)
                         {
                             case 1:
@@ -723,7 +723,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        Helper.LogError(ex); //write error to log file
+                        CommonHelpers.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -735,13 +735,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         } //end of function
 
         /// <summary>
-        /// Edit a star question through CommDB Class
+        /// Edit a star question through DbConnect Class
         /// </summary>
         private bool EditStarQuestion()
         {
@@ -760,7 +760,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = CommDB.EditStarQuestion(QuestionId, questionOrder, questionText, numberOfStars);
+                        int result = DbConnect.EditStarQuestion(QuestionId, questionOrder, questionText, numberOfStars);
                         switch (result)
                         {
                             case 1:
@@ -778,7 +778,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        Helper.LogError(ex); //write error to log file
+                        CommonHelpers.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -790,7 +790,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         } //end of function
@@ -809,7 +809,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }
 

@@ -65,7 +65,7 @@ namespace SurveyQuestionsConfigurator
                 ///
                 try
                 {
-                    dt = CommDB.RetrieveQuestions();
+                    dt = DbConnect.RetrieveQuestions();
                     foreach (DataRow row in dt.Rows)
                     {
                         //listviewitem = new ListViewItem($"{QuestionType.SMILEY}");
@@ -79,13 +79,13 @@ namespace SurveyQuestionsConfigurator
                 catch (SqlException ex)
                 {
                     MessageBox.Show("SQL Error:\n" + ex);
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                 }
                 catch (Exception ex)
                 {
 
                     MessageBox.Show("Something went wrong:\n" + ex);
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                 }
 
                 // Loop through and size each column header to fit the column header text.
@@ -98,7 +98,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         } //end func.
 
@@ -110,7 +110,7 @@ namespace SurveyQuestionsConfigurator
                 // Check if tables exist
                 // If tables do not exit, create them.
                 //
-                //int checkIfTablesExistResult = CommDB.CheckIfTablesExist();
+                //int checkIfTablesExistResult = DbConnect.CheckIfTablesExist();
                 //switch (checkIfTablesExistResult)
                 //{
                 //    case 1:
@@ -132,7 +132,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -145,7 +145,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -185,7 +185,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -199,7 +199,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -212,7 +212,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -237,7 +237,7 @@ namespace SurveyQuestionsConfigurator
                         try
                         {
                             questionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
-                            int result = CommDB.DeleteQuestion(questionId);
+                            int result = DbConnect.DeleteQuestion(questionId);
                             createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
                             switch (result)
                             {
@@ -256,7 +256,7 @@ namespace SurveyQuestionsConfigurator
                         catch (SqlException ex)
                         {
                             MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                            Helper.LogError(ex); //write error to log file
+                            CommonHelpers.Logger(ex); //write error to log file
                         }
                     }
                 }
@@ -268,7 +268,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -284,7 +284,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -319,7 +319,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 
@@ -332,7 +332,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }//end event 
 

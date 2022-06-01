@@ -22,7 +22,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         } // end func.
@@ -41,7 +41,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         } // end func.
@@ -58,7 +58,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
                 return false;
             }
         } // end func.

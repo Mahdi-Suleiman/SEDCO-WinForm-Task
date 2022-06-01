@@ -76,12 +76,12 @@
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessLogicLayer\BusinessLogic.cs" />
-    <Compile Include="CommonLayer\Helper.cs" />
+    <Compile Include="CommonLayer\CommonHelpers.cs" />
     <Compile Include="CommonLayer\Question.cs" />
     <Compile Include="CommonLayer\SliderQuestion.cs" />
     <Compile Include="CommonLayer\SmileyQuestion.cs" />
     <Compile Include="CommonLayer\StarQuestion.cs" />
-    <Compile Include="DataAccessLayer\CommDB.cs" />
+    <Compile Include="DataAccessLayer\DbConnect.cs" />
     <Compile Include="SurveyQuestionsConfiguratorForm.cs">
       <SubType>Form</SubType>
     </Compile>

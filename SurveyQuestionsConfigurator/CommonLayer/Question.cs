@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.CommonLayer
 {
-    internal class Question
+    public class Question
     {
         public enum QuestionType
         {
@@ -18,7 +18,7 @@ namespace SurveyQuestionsConfigurator.CommonLayer
         public int ID { get; set; }
         public int Order { get; set; }
         public string Text { get; set; }
-        public QuestionType Type { get; set; }
+        public int Type { get; set; }
 
         public Question(int id, int order, string text, int type)
         {
@@ -27,13 +27,17 @@ namespace SurveyQuestionsConfigurator.CommonLayer
                 ID = id;
                 Order = order;
                 Text = text;
-                Type = (QuestionType)type;
+                Type = type;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex);
+                CommonHelpers.Logger(ex);
             }
         }
+
+        public Question(Question question) :
+            this(question.ID, question.Order, question.Text, question.Type)
+        { }
 
     }
 }

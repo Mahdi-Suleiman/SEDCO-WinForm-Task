@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.CommonLayer
 {
-    public class Helper
+    public class CommonHelpers
     {
-        public static void LogError(Exception ex)
+        public static void Logger(Exception ex)
         {
             Trace.TraceError($@"
  -------------- ({DateTime.Now}) --------------

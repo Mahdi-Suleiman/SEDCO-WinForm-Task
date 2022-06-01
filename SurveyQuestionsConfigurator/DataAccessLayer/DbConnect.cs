@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace SurveyQuestionsConfigurator
 {
-    public class CommDB
+    public class DbConnect
     {
         public static int QuestionId { get; set; } // create global Question ID property
         private static ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
@@ -65,14 +65,14 @@ VALUES
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -130,13 +130,13 @@ VALUES
                 }
                 else
                 {
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -190,14 +190,14 @@ values
                 }
                 else
                 {
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                     return -1;
                 }
             }
 
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -255,14 +255,14 @@ WHERE QuestionID = {QuestionId}", conn);
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             //finally
@@ -319,13 +319,13 @@ WHERE QuestionID = {QuestionId}", conn);
                 }
                 else
                 {
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
         } //end func.
@@ -376,14 +376,14 @@ WHERE QuestionID = {QuestionId}", conn);
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Helper.LogError(ex); //write error to log file
+                    CommonHelpers.Logger(ex); //write error to log file
                     return -1;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
         } //end func.
@@ -401,12 +401,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -437,12 +437,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -474,12 +474,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -511,12 +511,12 @@ WHERE QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return 2;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return -1;
             }
             finally
@@ -545,12 +545,12 @@ SELECT QuestionID, QuestionOrder, QuestionType, QuestionText FROM Questions", co
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             finally
@@ -584,12 +584,12 @@ where Questions.QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             finally
@@ -622,12 +622,12 @@ where Q.QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             finally
@@ -660,12 +660,12 @@ where Q.QuestionID = {QuestionId}", conn);
             }
             catch (SqlException ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                Helper.LogError(ex); //write error to log file
+                CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
             finally
@@ -772,14 +772,14 @@ where Q.QuestionID = {QuestionId}", conn);
         //                else
         //                {
         //                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-        //                    Helper.LogError(ex); //write error to log file
+        //                    CommonHelpers.Logger(ex); //write error to log file
         //                    return -1;
         //                }
         //            }
         //            catch (Exception ex)
         //            {
         //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
-        //                Helper.LogError(ex); //write error to log file
+        //                CommonHelpers.Logger(ex); //write error to log file
         //                return -1;
         //            }
         //            finally
