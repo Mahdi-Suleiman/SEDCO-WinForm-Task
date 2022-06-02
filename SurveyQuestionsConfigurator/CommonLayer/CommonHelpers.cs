@@ -17,6 +17,7 @@ namespace SurveyQuestionsConfigurator.CommonLayer
 -Exception Type: {ex.GetType()}
 -Exception Call Site: {ex.TargetSite}
 -Exception Short Message: {ex.Message}
+-Exception Long Message: {ex}
 -Exception Stack Trace: {ex.StackTrace}
 ");
         }

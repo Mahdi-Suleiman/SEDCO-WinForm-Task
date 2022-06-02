@@ -9,3 +9,1020 @@ SurveyQuestionsConfigurator.exe Error: 0 :
  System.NullReferenceException: Object reference not set to an instance of an object.
    at SurveyQuestionsConfigurator.AddQuestionForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 346
 
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (01/06/2022 18:04:00) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@NumberOfSmileyFaces".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DbConnect.AddSmileyQuestion(Int32 questionOrder, String questionText, Int32 NumberOfSmilyFaces) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 65
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (01/06/2022 18:06:05) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@NumberOfSmileyFaces".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DbConnect.AddSmileyQuestion(Int32 questionOrder, String questionText, Int32 NumberOfSmilyFaces) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 66
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 11:29:19) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 11:45:11) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Conversion failed when converting the varchar value 'SLIDER' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 11:45:47) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Conversion failed when converting the varchar value 'SLIDER' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 11:46:07) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Conversion failed when converting the varchar value 'SLIDER' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 11:52:58) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Conversion failed when converting the varchar value 'SLIDER' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:03:27) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Conversion failed when converting the varchar value 'SLIDER' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:04:48) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Conversion failed when converting the varchar value 'SLIDER' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:06:17) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:08:23) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Incorrect syntax near '@ConnName'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 63
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:12:41) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Incorrect syntax near '@ConnName'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 63
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:18:16) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Incorrect syntax near '@ConnName'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 63
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:19:59) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Incorrect syntax near '@ConnName'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 63
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:20:47) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Incorrect syntax near '@ConnName'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 63
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:21:59) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Incorrect syntax near '@ConnName'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 63
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:24:33) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The INSERT statement conflicted with the CHECK constraint "CK_QuestionType". The conflict occurred in database "SurveyQuestionsConfigurator", table "dbo.Questions", column 'QuestionType'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:34:54) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Conversion failed when converting the varchar value '@Type' to data type int.
+Changed database context to 'SurveyQuestionsConfigurator'.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:36:07) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@Order int,@Text nvarchar(8),@Type bigint,@NumberOfSmileyFaces ' expects the parameter '@Type', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:37:16) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@Order int,@Text nvarchar(10),@Type bigint,@NumberOfSmileyFaces' expects the parameter '@Type', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:41:17) --------------
+ 
+-Exception Type: System.InvalidCastException
+-Exception Call Site: Void ValidateType(System.Object)
+-Exception Short Message: The SqlParameterCollection only accepts non-null SqlParameter type objects, not SqlParameter[] objects.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlParameterCollection.ValidateType(Object value)
+   at System.Data.SqlClient.SqlParameterCollection.Add(Object value)
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 58
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:43:30) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@Order".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:44:12) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@QuestionOrder int,@QuestionText nvarchar(8),@QuestionType bigi' expects the parameter '@QuestionType', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:45:04) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@QuestionType".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:46:55) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@Order int,@Text nvarchar(6),@Type bigint,@NumberOfSmileyFaces ' expects the parameter '@Type', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:50:36) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@Order int,@Text nvarchar(12),@Type bigint,@NumberOfSmileyFaces' expects the parameter '@Type', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:51:59) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@NumberOfSmileyFaces".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:52:01) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@NumberOfSmileyFaces".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:53:00) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Must declare the scalar variable "@NumberOfSmileyFaces".
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:53:42) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@Order int,@Text nvarchar(12),@Type bigint,@NumberOfSmileyFaces' expects the parameter '@Type', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:53:45) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The parameterized query '(@Order int,@Text nvarchar(12),@Type bigint,@NumberOfSmileyFaces' expects the parameter '@Type', which was not supplied.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:55:18) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The variable name '@Type' has already been declared. Variable names must be unique within a query batch or stored procedure.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 12:55:21) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: The variable name '@Type' has already been declared. Variable names must be unique within a query batch or stored procedure.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 62
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:05:58) --------------
+ 
+-Exception Type: System.NullReferenceException
+-Exception Call Site: Void editQuestionButton_Click(System.Object, System.EventArgs)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 317
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:09:35) --------------
+ 
+-Exception Type: System.NullReferenceException
+-Exception Call Site: Void editQuestionButton_Click(System.Object, System.EventArgs)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 317
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:26:42) --------------
+ 
+-Exception Type: System.NullReferenceException
+-Exception Call Site: Void editQuestionButton_Click(System.Object, System.EventArgs)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 317
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:27:34) --------------
+ 
+-Exception Type: System.NullReferenceException
+-Exception Call Site: Void editQuestionButton_Click(System.Object, System.EventArgs)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 311
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:29:05) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: System.Windows.Forms.ListViewItem get_Item(Int32)
+-Exception Short Message: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+-Exception Stack Trace:    at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 299
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:29:20) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: System.Windows.Forms.ListViewItem get_Item(Int32)
+-Exception Short Message: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+-Exception Stack Trace:    at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 299
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:29:23) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: System.Windows.Forms.ListViewItem get_Item(Int32)
+-Exception Short Message: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+-Exception Stack Trace:    at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 299
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:32:55) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: System.Windows.Forms.ListViewItem get_Item(Int32)
+-Exception Short Message: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+-Exception Stack Trace:    at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 299
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:33:07) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: System.Windows.Forms.ListViewItem get_Item(Int32)
+-Exception Short Message: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+-Exception Stack Trace:    at System.Windows.Forms.ListView.SelectedListViewItemCollection.get_Item(Int32 index)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 299
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:43:49) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: Void set_Value(System.Decimal)
+-Exception Short Message: Value of '0' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+-Exception Stack Trace:    at System.Windows.Forms.NumericUpDown.set_Value(Decimal value)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingSmileyQuestion(Int32 questionId) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 116
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 13:44:07) --------------
+ 
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: Void set_Value(System.Decimal)
+-Exception Short Message: Value of '0' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+-Exception Stack Trace:    at System.Windows.Forms.NumericUpDown.set_Value(Decimal value)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingSmileyQuestion(Int32 questionId) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 116
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:27:14) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Violation of UNIQUE KEY constraint 'IX_Smiley_Questions'. Cannot insert duplicate key in object 'dbo.Smiley_Questions'. The duplicate key value is (2).
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:27:19) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Violation of UNIQUE KEY constraint 'IX_Smiley_Questions'. Cannot insert duplicate key in object 'dbo.Smiley_Questions'. The duplicate key value is (2).
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:27:45) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:29:14) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:29:25) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:31:05) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+ClientConnectionId:35c05f02-a567-4a3d-af23-16cf8155219c
+Error Number:2628,State:1,Class:16
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 15:31:08) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'SurveyQuestionsConfigurator.dbo.Questions', column 'QuestionText'. Truncated value: '7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7777777777
+7'.
+Cannot insert the value NULL into column 'QuestionID', table 'SurveyQuestionsConfigurator.dbo.Smiley_Questions'; column does not allow nulls. INSERT fails.
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+ClientConnectionId:35c05f02-a567-4a3d-af23-16cf8155219c
+Error Number:2628,State:1,Class:16
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.AddSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 60
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 16:05:59) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Violation of UNIQUE KEY constraint 'IX_Questions'. Cannot insert duplicate key in object 'dbo.Questions'. The duplicate key value is (2, 0).
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'IX_Questions'. Cannot insert duplicate key in object 'dbo.Questions'. The duplicate key value is (2, 0).
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.EditSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 262
+ClientConnectionId:174887ad-1401-4fd0-b5ad-60674749a5ed
+Error Number:2627,State:1,Class:14
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.EditSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 262
+
+SurveyQuestionsConfigurator.exe Error: 0 : 
+ -------------- (02/06/2022 16:06:02) --------------
+ 
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Violation of UNIQUE KEY constraint 'IX_Questions'. Cannot insert duplicate key in object 'dbo.Questions'. The duplicate key value is (3, 0).
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'IX_Questions'. Cannot insert duplicate key in object 'dbo.Questions'. The duplicate key value is (3, 0).
+Changed database context to 'SurveyQuestionsConfigurator'.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.EditSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 262
+ClientConnectionId:174887ad-1401-4fd0-b5ad-60674749a5ed
+Error Number:2627,State:1,Class:14
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.EditSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 262
+

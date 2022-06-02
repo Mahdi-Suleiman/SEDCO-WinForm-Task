@@ -20,6 +20,18 @@ namespace SurveyQuestionsConfigurator.CommonLayer
         public string Text { get; set; }
         public int Type { get; set; }
 
+        public Question(int id)
+        {
+            try
+            {
+                ID = id;
+            }
+            catch (Exception ex)
+            {
+                CommonHelpers.Logger(ex);
+            }
+        }
+
         public Question(int id, int order, string text, int type)
         {
             try

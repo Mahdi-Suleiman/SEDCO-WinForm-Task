@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.CommonLayer
 {
-    internal class SmileyQuestion : Question
+    public class SmileyQuestion : Question
     {
         public int NumberOfSmileyFaces { get; set; }
 
@@ -15,5 +15,14 @@ namespace SurveyQuestionsConfigurator.CommonLayer
         {
             NumberOfSmileyFaces = numberOfSmileyFaces;
         }
+
+        public SmileyQuestion(int id) :
+
+            base(id)
+        { }
+
+        public SmileyQuestion(SmileyQuestion smileyQuestion) :
+            this(smileyQuestion.ID, smileyQuestion.Order, smileyQuestion.Text, smileyQuestion.Type, smileyQuestion.NumberOfSmileyFaces)
+        { }
     }
 }

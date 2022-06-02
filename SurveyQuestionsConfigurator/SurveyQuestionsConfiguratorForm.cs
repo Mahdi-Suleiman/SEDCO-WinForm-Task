@@ -1,4 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonLayer;
+using SurveyQuestionsConfigurator.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,12 +24,6 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Question Type Enum to reduce errors
         /// </summary>
-        public enum QuestionType
-        {
-            SMILEY,
-            SLIDER,
-            STAR
-        }
 
         public SurveyQuestionsConfiguratorForm()
         {
@@ -57,21 +52,22 @@ namespace SurveyQuestionsConfigurator
                     item.Remove();
                 }
 
-
                 DataTable dt = new DataTable();
-                ///
-                /// Connect to every Quesion Type table
+                /// <summary>
+                /// Connect to Quesion table
                 /// And Fill the List View
-                ///
+                /// </summary>
                 try
                 {
-                    dt = DbConnect.RetrieveQuestions();
+                    BusinessLogic businessLogic = new BusinessLogic();
+                    dt = businessLogic.GetAllQuestions();
+
                     foreach (DataRow row in dt.Rows)
                     {
-                        //listviewitem = new ListViewItem($"{QuestionType.SMILEY}");
+                        //listviewitem = new ListViewItem($"{Question.QuestionType.SMILEY}");
                         listviewitem = new ListViewItem($"{row[0]}");
                         listviewitem.SubItems.Add($"{row[1]}");
-                        listviewitem.SubItems.Add($"{row[2]}");
+                        listviewitem.SubItems.Add($"{(Question.QuestionType)row[2]}");
                         listviewitem.SubItems.Add($"{row[3].ToString()}");
                         this.createdQuestions_ListView.Items.Add(listviewitem);
                     }
@@ -113,13 +109,13 @@ namespace SurveyQuestionsConfigurator
                 //int checkIfTablesExistResult = DbConnect.CheckIfTablesExist();
                 //switch (checkIfTablesExistResult)
                 //{
-                //    case 1:
+                //    case (int)CommonEnums.ErrorType.SUCCESS:
                 //        //MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //        break;
-                //    case 2:
+                //    case (int)CommonEnums.ErrorType.SQLVIOLATION:
                 //        MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //        break;
-                //    case -1:
+                //    case (int)CommonEnums.ErrorType.ERROR:
                 //        MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //        break;
                 //}
@@ -230,6 +226,7 @@ namespace SurveyQuestionsConfigurator
                     if (confirmResult == DialogResult.Yes)
                     {
                         int questionId; // question to be deleted
+                        int result;
                         ///
                         /// Check the type of the question to be deleted
                         /// Choose appropriate table to query
@@ -237,18 +234,20 @@ namespace SurveyQuestionsConfigurator
                         try
                         {
                             questionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
-                            int result = DbConnect.DeleteQuestion(questionId);
+                            BusinessLogic businessLogic = new BusinessLogic();
+                            result = businessLogic.DeleteQuestion(questionId);
+
                             createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
                             switch (result)
                             {
-                                case 1:
+                                case (int)CommonEnums.ErrorType.SUCCESS:
                                     BuildListView();
                                     MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
-                                case 2:
+                                case (int)CommonEnums.ErrorType.SQLVIOLATION:
                                     MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
-                                case -1:
+                                case (int)CommonEnums.ErrorType.ERROR:
                                     MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                             }
@@ -296,18 +295,17 @@ namespace SurveyQuestionsConfigurator
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
                     int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
-                    //MessageBox.Show(createdQuestions_ListView.SelectedItems[0].SubItems[3].Text.ToLower());
-                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToLower() == QuestionType.SMILEY.ToString().ToLower())
+                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Question.QuestionType.SMILEY.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, QuestionType.SMILEY.ToString());
+                        form2 = new AddQuestionForm(questionId, (int)Question.QuestionType.SMILEY);
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToLower() == QuestionType.SLIDER.ToString().ToLower())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Question.QuestionType.SLIDER.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, QuestionType.SLIDER.ToString());
+                        form2 = new AddQuestionForm(questionId, (int)Question.QuestionType.SLIDER);
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToLower() == QuestionType.STAR.ToString().ToLower())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Question.QuestionType.STAR.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, QuestionType.STAR.ToString());
+                        form2 = new AddQuestionForm(questionId, (int)Question.QuestionType.STAR);
                     }
                     form2.ShowDialog();
                 }

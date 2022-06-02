@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.CommonLayer
 {
-    internal class StarQuestion : Question
+    public class StarQuestion : Question
     {
         public int NumberOfStars { get; set; }
 
@@ -15,5 +15,14 @@ namespace SurveyQuestionsConfigurator.CommonLayer
         {
             NumberOfStars = numberOfStars;
         }
+
+        public StarQuestion(int id) :
+
+            base(id)
+        { }
+
+        public StarQuestion(StarQuestion starQuestion) :
+         this(starQuestion.ID, starQuestion.Order, starQuestion.Text, starQuestion.Type, starQuestion.NumberOfStars)
+        { }
     }
 }

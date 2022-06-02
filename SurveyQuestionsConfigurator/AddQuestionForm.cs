@@ -15,7 +15,7 @@ namespace SurveyQuestionsConfigurator
         ///
         public int QuestionId { get; set; } /// create global Question ID property
         private string FormState { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
-        private string QuestionType { get; set; }
+        //private string QuestionType { get; set; }
         private int SelectedQuestionType { get; set; }
 
         public enum FormStateType
@@ -37,7 +37,7 @@ namespace SurveyQuestionsConfigurator
         ///
         /// Form constructor for "Editing Mode" or Editing a question
         ///
-        public AddQuestionForm(int questionId, string questionType)
+        public AddQuestionForm(int questionId, int questionType)
         {
             InitializeComponent();
             this.Text = "Edit A Question";
@@ -45,23 +45,23 @@ namespace SurveyQuestionsConfigurator
             FormState = FormStateType.EDIT.ToString();
 
             QuestionId = questionId; //set QuestionId to access it globally
-            QuestionType = questionType;
+            //QuestionType = questionType;
             questionTypeComboBox.Enabled = false;
 
-            if (QuestionType.ToUpper() == SurveyQuestionsConfiguratorForm.QuestionType.SMILEY.ToString().ToUpper())
+            if (questionType == (int)Question.QuestionType.SMILEY)
             {
-                SelectedQuestionType = (int)SurveyQuestionsConfiguratorForm.QuestionType.SMILEY; // 0 
-                InitializeEditingSmileyQuestion(QuestionId);
+                SelectedQuestionType = (int)Question.QuestionType.SMILEY; // 0 
+                InitializeEditingSmileyQuestion(questionId);
             }
-            else if (QuestionType.ToUpper() == SurveyQuestionsConfiguratorForm.QuestionType.SLIDER.ToString().ToUpper())
+            else if (questionType == (int)Question.QuestionType.SLIDER)
             {
-                SelectedQuestionType = (int)SurveyQuestionsConfiguratorForm.QuestionType.SLIDER; // 1
-                InitializeEditingSlideQuestion(QuestionId);
+                SelectedQuestionType = (int)Question.QuestionType.SLIDER; // 1
+                InitializeEditingSlideQuestion(questionId);
             }
-            else if (QuestionType.ToUpper() == SurveyQuestionsConfiguratorForm.QuestionType.STAR.ToString().ToUpper())
+            else if (questionType == (int)Question.QuestionType.STAR)
             {
-                SelectedQuestionType = (int)SurveyQuestionsConfiguratorForm.QuestionType.STAR; // 2
-                InitializeEditingStarQuestion(QuestionId);
+                SelectedQuestionType = (int)Question.QuestionType.STAR; // 2
+                InitializeEditingStarQuestion(questionId);
             }
         }
 
@@ -105,7 +105,10 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                dt = DbConnect.RetrieveSingleSmileyQuestion(QuestionId);
+                BusinessLogic businessLogic = new BusinessLogic();
+
+                dt = businessLogic.GetSingleSmileyQuestion(questionId);
+
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -141,7 +144,10 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                dt = DbConnect.RetrieveSingleSliderQuestion(QuestionId);
+                BusinessLogic businessLogic = new BusinessLogic();
+
+                dt = businessLogic.GetSingleSliderQuestion(questionId);
+
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -181,7 +187,10 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                dt = DbConnect.RetrieveSingleStarQuestion(QuestionId);
+
+                BusinessLogic businessLogic = new BusinessLogic();
+                dt = businessLogic.GetSingleStarQuestion(questionId);
+
                 if (dt != null)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -213,7 +222,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (BusinessLogic.CheckSmileyQuestionInputFields(questionTextRichTextBox)) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 8000) //if Question text is not null or empty 
                     return true;
 
                 return false;
@@ -225,13 +234,17 @@ namespace SurveyQuestionsConfigurator
                 return false;
             }
         }
+
+
         private bool CheckSliderQuestionInputFields()
         {
             try
             {
-                if (BusinessLogic.CheckSliderQuestionInputFields(questionTextRichTextBox, genericTextBox1, genericTextBox1,
-                   genericNumericUpDown1, genericNumericUpDown2))  //if Question text is not null or empty 
-                    return true;
+                if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 8000) //if Question text is not null or empty 
+                    if (!String.IsNullOrWhiteSpace(genericTextBox1.Text) && genericTextBox1.TextLength < 100)
+                        if (!String.IsNullOrWhiteSpace(genericTextBox2.Text) && genericTextBox2.TextLength < 100)
+                            if (genericNumericUpDown1.Value < genericNumericUpDown2.Value)
+                                return true;
                 return false;
             }
             catch (Exception ex)
@@ -245,7 +258,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (BusinessLogic.CheckStarQuestionInputFields(questionTextRichTextBox))  //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 8000) //if Question text is not null or empty 
                     return true;
 
                 return false;
@@ -440,9 +453,10 @@ namespace SurveyQuestionsConfigurator
             {
                 ///
                 /// Declare variables
-                ///
+                ///Question.Question.QuestionType.
                 int questionOrder, numberOfSmilyFaces;
                 string questionText;
+                int result;
 
                 if (CheckSmileyQuestionInputFields()) //if Question text is not null or empty 
                 {
@@ -458,18 +472,21 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = DbConnect.AddSmileyQuestion(questionOrder, questionText, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, (int)Question.QuestionType.SMILEY, numberOfSmilyFaces);
+                        BusinessLogic businessLogic = new BusinessLogic();
+                        result = businessLogic.AddSmileyQuestion(smileyQuestion);
+
                         switch (result)
                         {
-                            case 1:
+                            case (int)CommonEnums.ErrorType.SUCCESS:
                                 MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearInputs();
                                 return true;
                                 break;
-                            case 2:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case -1:
+                            case (int)CommonEnums.ErrorType.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -506,40 +523,40 @@ namespace SurveyQuestionsConfigurator
                 ///
                 int questionOrder, questionStartValue, questionEndValue;
                 string questionText, questionStartValueCaption, questionEndValueCaption;
-
+                int result;
                 ///
                 ///Check if Question input fields are not null or empty 
                 ///
                 if (CheckSliderQuestionInputFields())
                 {
-
-                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    questionText = (string)questionTextRichTextBox.Text;
-
-                    questionStartValueCaption = (string)genericTextBox1.Text;
-                    questionEndValueCaption = (string)genericTextBox2.Text;
-
-                    questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                    questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-
                     ///
                     /// Try to insert a new question into "Slider_Questions" table
                     ///
                     try
                     {
-                        int result = DbConnect.AddSliderQuestion(questionOrder, questionText, questionStartValue,
-                            questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                        questionText = (string)questionTextRichTextBox.Text;
+                        questionStartValueCaption = (string)genericTextBox1.Text;
+                        questionEndValueCaption = (string)genericTextBox2.Text;
+                        questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                        questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+
+
+                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (int)Question.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        BusinessLogic businessLogic = new BusinessLogic();
+                        result = businessLogic.AddSliderQuestion(sliderQuestion);
+
                         switch (result)
                         {
-                            case 1:
+                            case (int)CommonEnums.ErrorType.SUCCESS:
                                 MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearInputs();
                                 return true;
                                 break;
-                            case 2:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case -1:
+                            case (int)CommonEnums.ErrorType.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -576,6 +593,7 @@ namespace SurveyQuestionsConfigurator
                 ///
                 int questionOrder, numberOfStars;
                 string questionText;
+                int result;
 
                 if (CheckStarQuestionInputFields()) //if Question input fields are not null or empty 
                 {
@@ -588,18 +606,21 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        int result = DbConnect.AddStarQuestion(questionOrder, questionText, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (int)Question.QuestionType.STAR, numberOfStars);
+                        BusinessLogic businessLogic = new BusinessLogic();
+                        result = businessLogic.AddStarQuestion(starQuestion);
+
                         switch (result)
                         {
-                            case 1:
+                            case (int)CommonEnums.ErrorType.SUCCESS:
                                 MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearInputs();
                                 return true;
                                 break;
-                            case 2:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case -1:
+                            case (int)CommonEnums.ErrorType.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -631,31 +652,36 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                int questionOrder, numberOfSmilyFaces;
+                int questionId, questionOrder, numberOfSmilyFaces;
                 string questionText;
+                int result;
 
                 if (CheckSmileyQuestionInputFields())
                 {
-                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    questionText = questionTextRichTextBox.Text;
-                    numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
-
                     ///
                     /// Try to Update a new question into "Smiley_Questions" table
                     ///
                     try
                     {
-                        int result = DbConnect.EditSmileyQuestion(QuestionId, questionOrder, questionText, numberOfSmilyFaces);
+                        questionId = QuestionId;
+                        questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                        questionText = questionTextRichTextBox.Text;
+                        numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, (int)Question.QuestionType.SMILEY, numberOfSmilyFaces);
+                        BusinessLogic businessLogic = new BusinessLogic();
+                        result = businessLogic.EditSmileyQuestion(smileyQuestion);
+
                         switch (result)
                         {
-                            case 1:
+                            case (int)CommonEnums.ErrorType.SUCCESS:
                                 MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                                 break;
-                            case 2:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case -1:
+                            case (int)CommonEnums.ErrorType.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -687,35 +713,39 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                int questionOrder, questionStartValue, questionEndValue;
+                int questionId, questionOrder, questionStartValue, questionEndValue;
                 string questionText, questionStartValueCaption, questionEndValueCaption;
+                int result;
 
                 if (CheckSliderQuestionInputFields())
                 {
-                    //assign variables
-                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    questionText = (string)questionTextRichTextBox.Text;
-                    questionStartValueCaption = (string)genericTextBox1.Text;
-                    questionEndValueCaption = (string)genericTextBox2.Text;
-                    questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                    questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-
                     ///
                     /// Try to Update a new question into "Slider_Questions" table
                     ///
                     try
                     {
-                        int result = DbConnect.EditSliderQuestion(QuestionId, questionOrder, questionText, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        questionId = QuestionId;
+                        questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                        questionText = (string)questionTextRichTextBox.Text;
+                        questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                        questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+                        questionStartValueCaption = (string)genericTextBox1.Text;
+                        questionEndValueCaption = (string)genericTextBox2.Text;
+
+                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (int)Question.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        BusinessLogic businessLogic = new BusinessLogic();
+                        result = businessLogic.EditSliderQuestion(sliderQuestion);
+
                         switch (result)
                         {
-                            case 1:
+                            case (int)CommonEnums.ErrorType.SUCCESS:
                                 MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                                 break;
-                            case 2:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case -1:
+                            case (int)CommonEnums.ErrorType.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -747,30 +777,36 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                int questionOrder, numberOfStars;
+                int questionId, questionOrder, numberOfStars;
                 string questionText;
+                int result;
+
                 if (CheckStarQuestionInputFields())
                 {
-                    questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    questionText = questionTextRichTextBox.Text;
-                    numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
-
                     ///
                     /// Try to Update a new question into "Star_Questions" table
                     ///
                     try
                     {
-                        int result = DbConnect.EditStarQuestion(QuestionId, questionOrder, questionText, numberOfStars);
+                        questionId = QuestionId;
+                        questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                        questionText = questionTextRichTextBox.Text;
+                        numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (int)Question.QuestionType.STAR, numberOfStars);
+                        BusinessLogic businessLogic = new BusinessLogic();
+                        result = businessLogic.EditStarQuestion(starQuestion);
+
                         switch (result)
                         {
-                            case 1:
+                            case (int)CommonEnums.ErrorType.SUCCESS:
                                 MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                                 break;
-                            case 2:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case -1:
+                            case (int)CommonEnums.ErrorType.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }

@@ -90,6 +90,7 @@
             // 
             this.questionTextRichTextBox.Location = new System.Drawing.Point(9, 90);
             this.questionTextRichTextBox.Margin = new System.Windows.Forms.Padding(5);
+            this.questionTextRichTextBox.MaxLength = 7999;
             this.questionTextRichTextBox.Name = "questionTextRichTextBox";
             this.questionTextRichTextBox.Size = new System.Drawing.Size(340, 77);
             this.questionTextRichTextBox.TabIndex = 2;
@@ -141,6 +142,7 @@
             // 
             this.genericTextBox2.Location = new System.Drawing.Point(213, 267);
             this.genericTextBox2.Margin = new System.Windows.Forms.Padding(5);
+            this.genericTextBox2.MaxLength = 99;
             this.genericTextBox2.Name = "genericTextBox2";
             this.genericTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.genericTextBox2.Size = new System.Drawing.Size(136, 20);
@@ -196,6 +198,7 @@
             // 
             this.genericTextBox1.Location = new System.Drawing.Point(213, 201);
             this.genericTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.genericTextBox1.MaxLength = 99;
             this.genericTextBox1.Name = "genericTextBox1";
             this.genericTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.genericTextBox1.Size = new System.Drawing.Size(136, 20);

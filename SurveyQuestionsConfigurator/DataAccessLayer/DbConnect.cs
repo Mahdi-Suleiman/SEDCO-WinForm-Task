@@ -8,13 +8,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace SurveyQuestionsConfigurator
+
+namespace SurveyQuestionsConfigurator.DataAccessLayer
 {
     public class DbConnect
     {
-        public static int QuestionId { get; set; } // create global Question ID property
-        private static ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
-        private static SqlConnection conn = null; // Create SqlConnection object to connect to DB
+        //public   int QuestionId { get; set; } // create global Question ID property
+        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
+        private SqlConnection conn = null; // Create SqlConnection object to connect to DB
 
         /// <summary>
         /// 
@@ -27,31 +28,37 @@ namespace SurveyQuestionsConfigurator
         /// 2 -> Unique key violation
         /// -1 -> Error
         /// </returns>
-        public static int AddSmileyQuestion(int questionOrder, string questionText, int NumberOfSmilyFaces)
+        public int AddSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             ///
             /// Try to insert a new question into "Smiley_Questions" table
             ///
             try
             {
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
 INSERT INTO Questions
 (QuestionOrder, QuestionText, QuestionType)
 VALUES
-({questionOrder}, '{questionText}', 'SMILEY')
+(@Order, @Text, @Type)
+
 INSERT INTO Smiley_Questions
 (QuestionID, NumberOfSmileyFaces)
 VALUES
-((SELECT QuestionID FROM Questions WHERE QuestionOrder = {questionOrder} AND QuestionType = 'SMILEY') ,{NumberOfSmilyFaces})", conn);
+((SELECT QuestionID FROM Questions WHERE QuestionOrder = @Order AND QuestionType = @Type) ,@NumberOfSmileyFaces)", conn);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
-
-                //MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //ClearInputs();
-                return 1;
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@Order", smileyQuestion.Order),
+                new SqlParameter("@Text", smileyQuestion.Text),
+                new SqlParameter("@Type", smileyQuestion.Type),
+                new SqlParameter("@NumberOfSmileyFaces", smileyQuestion.NumberOfSmileyFaces)
+                };
+                    cmd.Parameters.AddRange(parameters);
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                }
             }
             catch (SqlException ex)
             {
@@ -60,24 +67,20 @@ VALUES
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 2;
+                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
                 }
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
                     CommonHelpers.Logger(ex); //write error to log file
-                    return -1;
+                    return (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
+                return (int)CommonEnums.ErrorType.ERROR;
             }
         } //end func.
 
@@ -95,53 +98,59 @@ VALUES
         /// 2 -> Unique key violation
         /// -1 -> Error
         /// </returns>
-        public static int AddSliderQuestion(int questionOrder, string questionText, int questionStartValue,
-            int questionEndValue, string questionStartValueCaption, string questionEndValueCaption)
+        public int AddSliderQuestion(SliderQuestion sliderQuestion)
         {
             ///
             /// Try to insert a new question into "Slider_Questions" table
             ///
             try
             {
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
 INSERT INTO Questions
 (QuestionOrder, QuestionText, QuestionType)
 VALUES
-({questionOrder}, '{questionText}', 'SLIDER')
+(@Order, @Text, @Type)
 
 INSERT INTO Slider_Questions
 (QuestionID, QuestionStartValue, QuestionEndValue, QuestionStartValueCaption, QuestionEndValueCaption)
 VALUES
-((SELECT QuestionID FROM Questions WHERE QuestionOrder = {questionOrder} AND QuestionType = 'SLIDER'), {questionStartValue}, {questionEndValue}, '{questionStartValueCaption}', '{questionEndValueCaption}' )",
-        conn);
+((SELECT QuestionID FROM Questions WHERE QuestionOrder = @Order AND QuestionType = @Type), @StartValue, @EndValue, @StartValueCaption, @EndValueCaption )", conn);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                return 1;
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@Order", sliderQuestion.Order),
+                new SqlParameter("@Text", sliderQuestion.Text),
+                new SqlParameter("@Type",sliderQuestion.Type),
+                new SqlParameter("@StartValue", sliderQuestion.StartValue),
+                new SqlParameter("@EndValue", sliderQuestion.EndValue),
+                new SqlParameter("@StartValueCaption", sliderQuestion.StartValueCaption),
+                new SqlParameter("@EndValueCaption", sliderQuestion.EndValueCaption),
+                };
+                    cmd.Parameters.AddRange(parameters);
+
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                }
             }
             catch (SqlException ex)
             {
                 //2627 -> unique key violation
                 if (ex.Number == 2627)
                 {
-                    return 2;
+                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
                 }
                 else
                 {
                     CommonHelpers.Logger(ex); //write error to log file
-                    return -1;
+                    return (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
+                return (int)CommonEnums.ErrorType.ERROR;
             }
 
         } // end of function
@@ -157,52 +166,55 @@ VALUES
         /// 2 -> Unique key violation
         /// -1 -> Error
         /// </returns>
-        public static int AddStarQuestion(int questionOrder, string questionText, int numberOfStars)
+        public int AddStarQuestion(StarQuestion starQuestion)
         {
             ///
             // Try to insert a new question into "Star_Questions" table
             //
             try
             {
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
 INSERT INTO Questions
 (QuestionOrder, QuestionText, QuestionType)
 VALUES
-({questionOrder}, '{questionText}', 'STAR')
+(@Order, @Text, @Type)
 
 INSERT INTO Star_Questions
 (QuestionID,  NumberOfStars)
 values
-((SELECT QuestionID FROM Questions WHERE QuestionOrder = {questionOrder} AND QuestionType = 'STAR'), {numberOfStars})", conn);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                return 1;
+((SELECT QuestionID FROM Questions WHERE QuestionOrder = @Order AND QuestionType = @Type), @NumberOfStars)", conn);
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@Order", starQuestion.Order),
+                new SqlParameter("@Text", starQuestion.Text),
+                new SqlParameter("@Type",starQuestion.Type),
+                new SqlParameter("@NumberOfStars", starQuestion.NumberOfStars)
+                };
+                    cmd.Parameters.AddRange(parameters);
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                }
             }
             catch (SqlException ex)
             {
                 //2627 -> unique key violation
                 if (ex.Number == 2627)
                 {
-                    return 2;
+                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
                 }
                 else
                 {
                     CommonHelpers.Logger(ex); //write error to log file
-                    return -1;
+                    return (int)CommonEnums.ErrorType.ERROR;
                 }
             }
 
             catch (Exception ex)
             {
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
+                return (int)CommonEnums.ErrorType.ERROR;
             }
 
         }// end of function
@@ -219,28 +231,35 @@ values
         /// 2 -> Unique key violation
         /// -1 -> Error
         /// </returns>
-        public static int EditSmileyQuestion(int questionId, int questionOrder, string QuestionText, int NumberOfSmilyFaces)
+        public int EditSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             ///
             /// Try to Update a new question into "Smiley_Questions" table
             ///
             try
             {
-                QuestionId = questionId;
-                using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
+                using (conn = new SqlConnection(cn.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
 UPDATE Questions
-SET QuestionOrder = {questionOrder}, QuestionText = '{QuestionText}'
-WHERE QuestionID = {QuestionId}
+SET QuestionOrder = @Order, QuestionText = @Text
+WHERE QuestionID = @ID
 
 UPDATE Smiley_Questions
-SET NumberOfSmileyFaces = {NumberOfSmilyFaces}
-WHERE QuestionID = {QuestionId}", conn);
+SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+WHERE QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@Order", smileyQuestion.Order),
+                new SqlParameter("@Text", smileyQuestion.Text),
+                new SqlParameter("@ID", smileyQuestion.ID),
+                new SqlParameter("@NumberOfSmileyFaces", smileyQuestion.NumberOfSmileyFaces)
+                };
+                    cmd.Parameters.AddRange(parameters);
+
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    return 1;
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (SqlException ex)
@@ -250,25 +269,22 @@ WHERE QuestionID = {QuestionId}", conn);
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 2;
+                    CommonHelpers.Logger(ex); //write error to log file
+                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
                 }
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
                     CommonHelpers.Logger(ex); //write error to log file
-                    return -1;
+                    return (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
+                return (int)CommonEnums.ErrorType.ERROR;
             }
-            //finally
-            //{
-            //    conn.Close();
-            //}
 
         }//end of function
 
@@ -287,25 +303,35 @@ WHERE QuestionID = {QuestionId}", conn);
         /// 2 -> Unique key violation
         /// -1 -> Error
         /// </returns>
-        public static int EditSliderQuestion(int questionId, int questionOrder, string questionText, int questionStartValue, int questionEndValue, string questionStartValueCaption, string questionEndValueCaption)
+        public int EditSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
-                QuestionId = questionId;
-                using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
+                using (conn = new SqlConnection(cn.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
 UPDATE Questions
-SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}'
-WHERE QuestionID = {QuestionId}
+SET QuestionOrder = @Order, QuestionText = @Text
+WHERE QuestionID = @ID
 
 UPDATE Slider_Questions
-SET QuestionStartValue = {questionStartValue}, QuestionEndValue = {questionEndValue}, QuestionStartValueCaption = '{questionStartValueCaption}', QuestionEndValueCaption = '{questionEndValueCaption}'
-WHERE QuestionID = {QuestionId}", conn);
+SET QuestionStartValue = @StartValue, QuestionEndValue = @EndValue, QuestionStartValueCaption = @StartValueCaption, QuestionEndValueCaption = @EndValueCaption
+WHERE QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID", sliderQuestion.ID),
+                new SqlParameter("@Order", sliderQuestion.Order),
+                new SqlParameter("@Text", sliderQuestion.Text),
+                new SqlParameter("@StartValue", sliderQuestion.StartValue),
+                new SqlParameter("@EndValue", sliderQuestion.EndValue),
+                new SqlParameter("@StartValueCaption", sliderQuestion.StartValueCaption),
+                new SqlParameter("@EndValueCaption", sliderQuestion.EndValueCaption),
+                };
+                    cmd.Parameters.AddRange(parameters);
+
                     conn.Open();
-                    cmd.ExecuteNonQuery();
-                    return 1;
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -315,18 +341,18 @@ WHERE QuestionID = {QuestionId}", conn);
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 2;
+                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
                 }
                 else
                 {
                     CommonHelpers.Logger(ex); //write error to log file
-                    return -1;
+                    return (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
+                return (int)CommonEnums.ErrorType.ERROR;
             }
         } //end func.
 
@@ -342,26 +368,32 @@ WHERE QuestionID = {QuestionId}", conn);
         /// 2 -> Unique key violation
         /// -1 -> Error
         /// </returns>
-        public static int EditStarQuestion(int questionId, int questionOrder, string questionText, int numberOfStars)
+        public int EditStarQuestion(StarQuestion starQuestion)
         {
             try
             {
-                QuestionId = questionId;
-                using (SqlConnection conn = new SqlConnection(cn.ConnectionString))
+                using (conn = new SqlConnection(cn.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
 UPDATE Questions
-SET QuestionOrder = {questionOrder}, QuestionText = '{questionText}'
-WHERE QuestionID = {QuestionId}
+SET QuestionOrder = @Order, QuestionText = @Text
+WHERE QuestionID = @ID
 
 UPDATE Star_Questions
-SET NumberOfStars = {numberOfStars}
-WHERE QuestionID = {QuestionId}", conn);
+SET NumberOfStars = @NumberOfStars
+WHERE QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID", starQuestion.ID),
+                new SqlParameter("@Order", starQuestion.Order),
+                new SqlParameter("@Text", starQuestion.Text),
+                new SqlParameter("@NumberOfStars", starQuestion.NumberOfStars)
+                };
+                    cmd.Parameters.AddRange(parameters);
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 1;
                 }
             }
             catch (SqlException ex)
@@ -371,177 +403,72 @@ WHERE QuestionID = {QuestionId}", conn);
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return 2;
+                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
                 }
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
                     CommonHelpers.Logger(ex); //write error to log file
-                    return -1;
+                    return (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
+                return (int)CommonEnums.ErrorType.ERROR;
             }
         } //end func.
 
-        public static int DeleteQuestion(int questionId)
+        public int DeleteQuestion(int questionId)
         {
             try
             {
-                QuestionId = questionId;
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"delete from Questions where QuestionID = {QuestionId};", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                return 1;
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand($@"delete from Questions where QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID", questionId),
+                };
+                    cmd.Parameters.AddRange(parameters);
+
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                }
             }
             catch (SqlException ex)
             {
                 CommonHelpers.Logger(ex); //write error to log file
-                return 2;
+                return (int)CommonEnums.ErrorType.SQLVIOLATION;
             }
             catch (Exception ex)
             {
                 CommonHelpers.Logger(ex); //write error to log file
-                return -1;
+                return (int)CommonEnums.ErrorType.ERROR;
             }
-            finally
-            {
-                conn.Close();
-            }
+
         } //end func.
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="questionId"></param>
-        /// <returns>
-        /// 1 -> Success
-        /// 2 -> SQL Error
-        /// -1 -> Error
-        /// </returns>
-        public static int DeleteSmileyQuestion(int questionId)
-        {
-            try
-            {
-                QuestionId = questionId;
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"delete from Smiley_Questions where QuestionID = {QuestionId};", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                return 1;
-            }
-            catch (SqlException ex)
-            {
-                CommonHelpers.Logger(ex); //write error to log file
-                return 2;
-            }
-            catch (Exception ex)
-            {
-                CommonHelpers.Logger(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        } //end func.
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="questionId"></param>
-        /// <returns>
-        /// 1 -> Success
-        /// 2 -> SQL Error
-        /// -1 -> Error
-        /// </returns>
-        public static int DeleteSliderQuestion(int questionId)
-        {
-            try
-            {
-                QuestionId = questionId;
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"delete from Slider_Questions where QuestionID = {questionId};", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                return 1;
-                // BuildListView();
-            }
-            catch (SqlException ex)
-            {
-                CommonHelpers.Logger(ex); //write error to log file
-                return 2;
-            }
-            catch (Exception ex)
-            {
-                CommonHelpers.Logger(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        } //end func.
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="questionId"></param>
-        /// <returns>
-        /// 1 -> Success
-        /// 2 -> SQL Error
-        /// -1 -> Error
-        /// </returns>
-        public static int DeleteStarQuestion(int questionId)
-        {
-            try
-            {
-                QuestionId = questionId;
-                conn = new SqlConnection(cn.ConnectionString);
-                SqlCommand cmd = new SqlCommand($@"delete from Star_Questions where QuestionID = {QuestionId};", conn);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                return 1;
-                // BuildListView();
-            }
-            catch (SqlException ex)
-            {
-                CommonHelpers.Logger(ex); //write error to log file
-                return 2;
-            }
-            catch (Exception ex)
-            {
-                CommonHelpers.Logger(ex); //write error to log file
-                return -1;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        } //end func.
-
-        public static DataTable RetrieveQuestions()
+        public DataTable GetAllQuestions()
         {
 
             try
             {
-                SqlDataAdapter adapter = null;
-                DataTable dt = new DataTable();
-                SqlCommand cmd = null;
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlDataAdapter adapter = null;
+                    DataTable dt = new DataTable();
+                    SqlCommand cmd = null;
 
-                conn = new SqlConnection(cn.ConnectionString);
-                cmd = new SqlCommand($@"
+                    cmd = new SqlCommand($@"
 USE {cn.Name}
 SELECT QuestionID, QuestionOrder, QuestionType, QuestionText FROM Questions", conn);
-                conn.Open();
-                adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                return dt;
+                    conn.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    return dt;
+                }
             }
             catch (SqlException ex)
             {
@@ -553,34 +480,36 @@ SELECT QuestionID, QuestionOrder, QuestionType, QuestionText FROM Questions", co
                 CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
-            finally
-            {
-                conn.Close();
-            }
         } //end func.
 
-        public static DataTable RetrieveSingleSmileyQuestion(int questionId)
+        public DataTable GetSingleSmileyQuestion(int questionId)
         {
             try
             {
-                QuestionId = questionId;
-                SqlDataAdapter adapter = null;
-                DataTable dt = new DataTable();
-                SqlCommand cmd = null;
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlDataAdapter adapter = null;
+                    DataTable dt = new DataTable();
+                    SqlCommand cmd = null;
 
-
-                conn = new SqlConnection(cn.ConnectionString);
-                cmd = new SqlCommand($@"
+                    cmd = new SqlCommand($@"
 USE {cn.Name}
 select Questions.QuestionOrder, Questions.QuestionText, Smiley_Questions.NumberOfSmileyFaces
 from Questions
 inner join Smiley_Questions
 on Questions.QuestionID = Smiley_Questions.QuestionID
-where Questions.QuestionID = {QuestionId}", conn);
-                conn.Open();
-                adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                return dt;
+where Questions.QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID", questionId),
+                };
+                    cmd.Parameters.AddRange(parameters);
+
+                    conn.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    return dt;
+                }
             }
             catch (SqlException ex)
             {
@@ -592,33 +521,36 @@ where Questions.QuestionID = {QuestionId}", conn);
                 CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
-            finally
-            {
-                conn.Close();
-            }
         } // end func.
 
-        public static DataTable RetrieveSingleSliderQuestion(int questionId)
+        public DataTable GetSingleSliderQuestion(int questionId)
         {
             try
             {
-                QuestionId = questionId;
-                SqlDataAdapter adapter = null;
-                DataTable dt = new DataTable();
-                SqlCommand cmd = null;
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlDataAdapter adapter = null;
+                    DataTable dt = new DataTable();
+                    SqlCommand cmd = null;
 
-                conn = new SqlConnection(cn.ConnectionString);
-                cmd = new SqlCommand($@"
+                    cmd = new SqlCommand($@"
 USE {cn.Name}
 select Q.QuestionOrder, Q.QuestionText, SQ.QuestionStartValue, SQ.QuestionEndValue, SQ.QuestionStartValueCaption, SQ.QuestionEndValueCaption
 from Questions AS Q
 inner join Slider_Questions AS SQ
 on Q.QuestionID = SQ.QuestionID
-where Q.QuestionID = {QuestionId}", conn);
-                conn.Open();
-                adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                return dt;
+where Q.QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID", questionId),
+                };
+                    cmd.Parameters.AddRange(parameters);
+
+                    conn.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    return dt;
+                }
             }
             catch (SqlException ex)
             {
@@ -630,33 +562,37 @@ where Q.QuestionID = {QuestionId}", conn);
                 CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
-            finally
-            {
-                conn.Close();
-            }
         } // end func.
 
-        public static DataTable RetrieveSingleStarQuestion(int questionId)
+        public DataTable GetSingleStarQuestion(int questionId)
         {
             try
             {
-                QuestionId = questionId;
-                SqlDataAdapter adapter = null;
-                DataTable dt = new DataTable();
-                SqlCommand cmd = null;
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlDataAdapter adapter = null;
+                    DataTable dt = new DataTable();
+                    SqlCommand cmd = null;
 
-                conn = new SqlConnection(cn.ConnectionString);
-                cmd = new SqlCommand($@"
+                    cmd = new SqlCommand($@"
 USE {cn.Name}
 select Q.QuestionOrder, Q.QuestionText, StQ.NumberOfStars
 from Questions AS Q
 inner join Star_Questions AS StQ
 on Q.QuestionID = StQ.QuestionID
-where Q.QuestionID = {QuestionId}", conn);
-                conn.Open();
-                adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                return dt;
+where Q.QuestionID = @ID", conn);
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID", questionId),
+                };
+                    cmd.Parameters.AddRange(parameters);
+
+
+                    conn.Open();
+                    adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    return dt;
+                }
             }
             catch (SqlException ex)
             {
@@ -668,13 +604,10 @@ where Q.QuestionID = {QuestionId}", conn);
                 CommonHelpers.Logger(ex); //write error to log file
                 return null;
             }
-            finally
-            {
-                conn.Close();
-            }
+
         } // end func.
 
-        //        public static int CheckIfTablesExist()
+        //        public   int CheckIfTablesExist()
         //        {
         //            try
         //            {
@@ -702,7 +635,7 @@ where Q.QuestionID = {QuestionId}", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                cmd.ExecuteNonQuery();
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
         //                conn.Close();
 
 
@@ -730,7 +663,7 @@ where Q.QuestionID = {QuestionId}", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                cmd.ExecuteNonQuery();
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
         //                conn.Close();
 
 
@@ -755,10 +688,10 @@ where Q.QuestionID = {QuestionId}", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                cmd.ExecuteNonQuery();
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
         //                conn.Close();
 
-        //                return 1;
+        //                return (int)CommonEnums.ErrorState.SUCCESS;
         //            }
         //            catch (SqlException ex)
         //            {
@@ -767,20 +700,20 @@ where Q.QuestionID = {QuestionId}", conn);
         //                if (ex.Number == 2627)
         //                {
         //                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                    return 2;
+        //                    return (int)CommonEnums.ErrorState.SQLVIOLATION;
         //                }
         //                else
         //                {
         //                    //MessageBox.Show("SQL Error:\n" + ex.Message);
         //                    CommonHelpers.Logger(ex); //write error to log file
-        //                    return -1;
+        //                    return (int)CommonEnums.ErrorState.ERROR;
         //                }
         //            }
         //            catch (Exception ex)
         //            {
         //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
         //                CommonHelpers.Logger(ex); //write error to log file
-        //                return -1;
+        //                return (int)CommonEnums.ErrorState.ERROR;
         //            }
         //            finally
         //            {
