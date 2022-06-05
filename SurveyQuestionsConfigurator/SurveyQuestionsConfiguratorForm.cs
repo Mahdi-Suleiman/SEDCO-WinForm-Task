@@ -74,13 +74,12 @@ namespace SurveyQuestionsConfigurator
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("SQL Error:\n" + ex);
+                    MessageBox.Show("SQL Error in build list view:\n" + ex);
                     CommonHelpers.Logger(ex); //write error to log file
                 }
                 catch (Exception ex)
                 {
-
-                    MessageBox.Show("Something went wrong:\n" + ex);
+                    MessageBox.Show("Something went wrong in build list view:\n" + ex);
                     CommonHelpers.Logger(ex); //write error to log file
                 }
 

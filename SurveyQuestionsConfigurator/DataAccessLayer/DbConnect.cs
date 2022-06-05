@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SurveyQuestionsConfigurator.DataAccessLayer
 {
@@ -35,19 +36,45 @@ namespace SurveyQuestionsConfigurator.DataAccessLayer
             ///
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+
+                /*
 INSERT INTO Questions
-(QuestionOrder, QuestionText, QuestionType)
+([Order], [Text], [Type])
 VALUES
 (@Order, @Text, @Type)
 
 INSERT INTO Smiley_Questions
-(QuestionID, NumberOfSmileyFaces)
+(ID, NumberOfSmileyFaces)
 VALUES
-((SELECT QuestionID FROM Questions WHERE QuestionOrder = @Order AND QuestionType = @Type) ,@NumberOfSmileyFaces)", conn);
+((SELECT ID FROM Questions WHERE [Order] = @Order AND [Type] = @Type) ,@NumberOfSmileyFaces)
+                */
+                using (conn = new SqlConnection(cn.ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand($@"
+USE {cn.Name}
+
+   IF NOT EXISTS (SELECT * FROM Questions 
+                   WHERE [Order] = @Order
+                   AND [Type] = @Type)
+   BEGIN
+       INSERT INTO Questions 
+        ([Order], [Text], [Type])
+        VALUES 
+        (@Order, @Text, @Type)
+   END
+   IF (@@IDENTITY IS NOT NULL)
+    BEGIN
+       INSERT INTO Smiley_Questions(ID, NumberOfSmileyFaces )
+       OUTPUT @@IDENTITY
+       VALUES (@@IDENTITY, @NumberOfSmileyFaces)
+   END
+", conn);
+                    /*
+                     *    ELSE
+	BEGIN
+		select NULL
+	END
+                     */
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@Order", smileyQuestion.Order),
@@ -57,7 +84,22 @@ VALUES
                 };
                     cmd.Parameters.AddRange(parameters);
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)CommonEnums.ErrorType.SUCCESS;
+                    }
+                    else if (result == null)
+                    {
+                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    }
+                    else
+                    {
+                        return (int)CommonEnums.ErrorType.ERROR;
+                    }
+                    //return cmd.ExecuteScalar()) != null ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (SqlException ex)
@@ -109,15 +151,23 @@ VALUES
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
-INSERT INTO Questions
-(QuestionOrder, QuestionText, QuestionType)
-VALUES
-(@Order, @Text, @Type)
-
-INSERT INTO Slider_Questions
-(QuestionID, QuestionStartValue, QuestionEndValue, QuestionStartValueCaption, QuestionEndValueCaption)
-VALUES
-((SELECT QuestionID FROM Questions WHERE QuestionOrder = @Order AND QuestionType = @Type), @StartValue, @EndValue, @StartValueCaption, @EndValueCaption )", conn);
+   IF NOT EXISTS (SELECT * FROM Questions 
+                   WHERE [Order] = @Order
+                   AND [Type] = @Type)
+   BEGIN
+       INSERT INTO Questions 
+        ([Order], [Text], [Type])
+        VALUES 
+        (@Order, @Text, @Type)
+   END
+   IF (@@IDENTITY IS NOT NULL)
+    BEGIN
+       INSERT INTO Slider_Questions
+       (ID, StartValue, EndValue, StartValueCaption, EndValueCaption)
+       OUTPUT @@IDENTITY
+       VALUES (@@IDENTITY, @StartValue, @EndValue, @StartValueCaption, @EndValueCaption)
+   END
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@Order", sliderQuestion.Order),
@@ -131,7 +181,20 @@ VALUES
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)CommonEnums.ErrorType.SUCCESS;
+                    }
+                    else if (result == null)
+                    {
+                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    }
+                    else
+                    {
+                        return (int)CommonEnums.ErrorType.ERROR;
+                    }
                 }
             }
             catch (SqlException ex)
@@ -177,15 +240,24 @@ VALUES
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
-INSERT INTO Questions
-(QuestionOrder, QuestionText, QuestionType)
-VALUES
-(@Order, @Text, @Type)
 
-INSERT INTO Star_Questions
-(QuestionID,  NumberOfStars)
-values
-((SELECT QuestionID FROM Questions WHERE QuestionOrder = @Order AND QuestionType = @Type), @NumberOfStars)", conn);
+   IF NOT EXISTS (SELECT * FROM Questions 
+                   WHERE [Order] = @Order
+                   AND [Type] = @Type)
+   BEGIN
+       INSERT INTO Questions 
+        ([Order], [Text], [Type])
+        VALUES 
+        (@Order, @Text, @Type)
+   END
+   IF (@@IDENTITY IS NOT NULL)
+    BEGIN
+       INSERT INTO Star_Questions(ID,  NumberOfStars)
+       OUTPUT @@IDENTITY
+       VALUES (@@IDENTITY, @NumberOfStars)
+   END
+
+", conn);
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@Order", starQuestion.Order),
                 new SqlParameter("@Text", starQuestion.Text),
@@ -194,7 +266,20 @@ values
                 };
                     cmd.Parameters.AddRange(parameters);
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)CommonEnums.ErrorType.SUCCESS;
+                    }
+                    else if (result == null)
+                    {
+                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    }
+                    else
+                    {
+                        return (int)CommonEnums.ErrorType.ERROR;
+                    }
                 }
             }
             catch (SqlException ex)
@@ -236,30 +321,105 @@ values
             ///
             /// Try to Update a new question into "Smiley_Questions" table
             ///
+            /*
+             * IF NOT EXISTS (SELECT * FROM Questions 
+                WHERE [Order] = @Order
+                AND [Type] = @Type)
+
+
+            
+DECLARE @@MyOrder as INT
+SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
+
+IF  (@@MyOrder = @Order OR @@MyOrder IS NOT NULL )
+
+BEGIN
+    UPDATE Questions
+    SET [Order] = @Order, [Text] = @Text
+    WHERE ID = @ID
+END
+if @@ROWCOUNT <> 0
+BEGIN
+    UPDATE Smiley_Questions
+    SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+    WHERE ID = @ID
+	select @@ROWCOUNT
+END
+
+
+USE SurveyQuestionsConfigurator
+             */
             try
             {
                 using (conn = new SqlConnection(cn.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
-UPDATE Questions
-SET QuestionOrder = @Order, QuestionText = @Text
-WHERE QuestionID = @ID
 
-UPDATE Smiley_Questions
-SET NumberOfSmileyFaces = @NumberOfSmileyFaces
-WHERE QuestionID = @ID", conn);
+DECLARE @@MyOrder as INT
+SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
+
+IF NOT EXISTS (SELECT * FROM Questions 
+                WHERE [Order] = @Order
+                AND [Type] = @Type)
+    BEGIN
+	    UPDATE Questions
+	    SET [Order] = @Order, [Text] = @Text
+	    WHERE ID = @ID
+    END
+
+    if @@ROWCOUNT <> 0
+    BEGIN
+	    UPDATE Smiley_Questions
+	    SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+	    WHERE ID = @ID
+	    select @@ROWCOUNT
+    END
+
+ELSE
+    BEGIN
+		IF (@@MyOrder = @order)
+		    BEGIN
+	            UPDATE Questions
+	            SET [Text] = @Text
+	            WHERE ID = @ID
+            END
+
+            if @@ROWCOUNT <> 0
+            BEGIN
+	            UPDATE Smiley_Questions
+	            SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+	            WHERE ID = @ID
+	            select @@ROWCOUNT
+            END
+     END
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@Order", smileyQuestion.Order),
                 new SqlParameter("@Text", smileyQuestion.Text),
                 new SqlParameter("@ID", smileyQuestion.ID),
+                new SqlParameter("@Type", smileyQuestion.Type),
                 new SqlParameter("@NumberOfSmileyFaces", smileyQuestion.NumberOfSmileyFaces)
                 };
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)CommonEnums.ErrorType.SUCCESS;
+                    }
+                    else if (result == null)
+                    {
+                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    }
+                    else
+                    {
+                        return (int)CommonEnums.ErrorType.ERROR;
+                    }
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                 }
             }
             catch (SqlException ex)
@@ -311,18 +471,49 @@ WHERE QuestionID = @ID", conn);
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
-UPDATE Questions
-SET QuestionOrder = @Order, QuestionText = @Text
-WHERE QuestionID = @ID
+DECLARE @@MyOrder as INT
+SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-UPDATE Slider_Questions
-SET QuestionStartValue = @StartValue, QuestionEndValue = @EndValue, QuestionStartValueCaption = @StartValueCaption, QuestionEndValueCaption = @EndValueCaption
-WHERE QuestionID = @ID", conn);
+IF NOT EXISTS (SELECT * FROM Questions 
+                WHERE [Order] = @Order
+                AND [Type] = @Type)
+    BEGIN
+        UPDATE Questions
+        SET [Order] = @Order, [Text] = @Text
+        WHERE ID = @ID
+    END
+    if @@ROWCOUNT <> 0
+    BEGIN
+        UPDATE Slider_Questions
+        SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
+        WHERE ID = @ID
+	    select @@ROWCOUNT
+    END
+
+ELSE
+    BEGIN
+		IF (@@MyOrder = @order)
+		    BEGIN
+                UPDATE Questions
+                SET [Order] = @Order, [Text] = @Text
+                WHERE ID = @ID
+            END
+        if @@ROWCOUNT <> 0
+            BEGIN
+                UPDATE Slider_Questions
+                SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
+                WHERE ID = @ID
+	            select @@ROWCOUNT
+            END
+     END
+
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", sliderQuestion.ID),
                 new SqlParameter("@Order", sliderQuestion.Order),
                 new SqlParameter("@Text", sliderQuestion.Text),
+                new SqlParameter("@Type", sliderQuestion.Type),
                 new SqlParameter("@StartValue", sliderQuestion.StartValue),
                 new SqlParameter("@EndValue", sliderQuestion.EndValue),
                 new SqlParameter("@StartValueCaption", sliderQuestion.StartValueCaption),
@@ -331,7 +522,21 @@ WHERE QuestionID = @ID", conn);
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)CommonEnums.ErrorType.SUCCESS;
+                    }
+                    else if (result == null)
+                    {
+                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    }
+                    else
+                    {
+                        return (int)CommonEnums.ErrorType.ERROR;
+                    }
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -376,23 +581,70 @@ WHERE QuestionID = @ID", conn);
                 {
                     SqlCommand cmd = new SqlCommand($@"
 USE {cn.Name}
-UPDATE Questions
-SET QuestionOrder = @Order, QuestionText = @Text
-WHERE QuestionID = @ID
 
-UPDATE Star_Questions
-SET NumberOfStars = @NumberOfStars
-WHERE QuestionID = @ID", conn);
+DECLARE @@MyOrder as INT
+SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
+
+IF NOT EXISTS (SELECT * FROM Questions 
+                WHERE [Order] = @Order
+                AND [Type] = @Type)
+    BEGIN
+	    UPDATE Questions
+	    SET [Order] = @Order, [Text] = @Text
+	    WHERE ID = @ID
+    END
+
+    if @@ROWCOUNT <> 0
+        BEGIN
+            UPDATE Star_Questions
+            SET NumberOfStars = @NumberOfStars
+            WHERE ID = @ID
+	        select @@ROWCOUNT
+        END
+
+ELSE
+    BEGIN
+		IF (@@MyOrder = @order)
+		    BEGIN
+	            UPDATE Questions
+	            SET [Text] = @Text
+	            WHERE ID = @ID
+            END
+
+            if @@ROWCOUNT <> 0
+                BEGIN
+                    UPDATE Star_Questions
+                    SET NumberOfStars = @NumberOfStars
+                    WHERE ID = @ID
+	                select @@ROWCOUNT
+                END
+     END
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", starQuestion.ID),
                 new SqlParameter("@Order", starQuestion.Order),
                 new SqlParameter("@Text", starQuestion.Text),
+                new SqlParameter("@Type", starQuestion.Type),
                 new SqlParameter("@NumberOfStars", starQuestion.NumberOfStars)
                 };
                     cmd.Parameters.AddRange(parameters);
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)CommonEnums.ErrorType.SUCCESS;
+                    }
+                    else if (result == null)
+                    {
+                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    }
+                    else
+                    {
+                        return (int)CommonEnums.ErrorType.ERROR;
+                    }
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -426,7 +678,7 @@ WHERE QuestionID = @ID", conn);
             {
                 using (conn = new SqlConnection(cn.ConnectionString))
                 {
-                    SqlCommand cmd = new SqlCommand($@"delete from Questions where QuestionID = @ID", conn);
+                    SqlCommand cmd = new SqlCommand($@"delete from Questions where ID = @ID", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
@@ -463,7 +715,7 @@ WHERE QuestionID = @ID", conn);
 
                     cmd = new SqlCommand($@"
 USE {cn.Name}
-SELECT QuestionID, QuestionOrder, QuestionType, QuestionText FROM Questions", conn);
+SELECT ID, [Order], [Type], [Text] FROM Questions", conn);
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(dt);
@@ -494,11 +746,11 @@ SELECT QuestionID, QuestionOrder, QuestionType, QuestionText FROM Questions", co
 
                     cmd = new SqlCommand($@"
 USE {cn.Name}
-select Questions.QuestionOrder, Questions.QuestionText, Smiley_Questions.NumberOfSmileyFaces
+select Questions.[Order], Questions.[Text], Smiley_Questions.NumberOfSmileyFaces
 from Questions
 inner join Smiley_Questions
-on Questions.QuestionID = Smiley_Questions.QuestionID
-where Questions.QuestionID = @ID", conn);
+on Questions.ID = Smiley_Questions.ID
+where Questions.ID = @ID", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
@@ -535,11 +787,11 @@ where Questions.QuestionID = @ID", conn);
 
                     cmd = new SqlCommand($@"
 USE {cn.Name}
-select Q.QuestionOrder, Q.QuestionText, SQ.QuestionStartValue, SQ.QuestionEndValue, SQ.QuestionStartValueCaption, SQ.QuestionEndValueCaption
+select Q.[Order], Q.[Text], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
 from Questions AS Q
 inner join Slider_Questions AS SQ
-on Q.QuestionID = SQ.QuestionID
-where Q.QuestionID = @ID", conn);
+on Q.ID = SQ.ID
+where Q.ID = @ID", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
@@ -576,11 +828,11 @@ where Q.QuestionID = @ID", conn);
 
                     cmd = new SqlCommand($@"
 USE {cn.Name}
-select Q.QuestionOrder, Q.QuestionText, StQ.NumberOfStars
+select Q.[Order], Q.[Text], StQ.NumberOfStars
 from Questions AS Q
 inner join Star_Questions AS StQ
-on Q.QuestionID = StQ.QuestionID
-where Q.QuestionID = @ID", conn);
+on Q.ID = StQ.ID
+where Q.ID = @ID", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
@@ -649,7 +901,7 @@ where Q.QuestionID = @ID", conn);
         //	[QuestionText] [text] NOT NULL,
         //	[QuestionStartValue] [int] NOT NULL,
         //	[QuestionEndValue] [int] NOT NULL,
-        //	[QuestionStartValueCaption] [varchar](100) NOT NULL,
+        //	[StartValueCaption] [varchar](100) NOT NULL,
         //	[QuestionEndValueCaption] [varchar](100) NOT NULL,
         // CONSTRAINT [PK_Slider_Questions] PRIMARY KEY CLUSTERED 
         //(
