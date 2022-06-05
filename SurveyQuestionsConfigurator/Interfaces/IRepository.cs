@@ -1,4 +1,4 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
+﻿using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.Interfaces
 {
-    public interface IRepository
+    public interface IRepository<T> where T : class
     {
-        //int Add(Question entity);
-        //DataTable Update(Question entity);
-        //DataTable Get(Guid id);
-        //DataTable Delete(Guid id);
-        //DataTable GetAll();
+        T Add(T entity);
+        T Update(T entity);
+        T Get(Guid id);
+        T Delete(Guid id);
+        T GetAll();
     }
 }

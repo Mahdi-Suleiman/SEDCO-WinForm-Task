@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SurveyQuestionsConfigurator.CommonLayer
+namespace SurveyQuestionsConfigurator.Entities
 {
     public class StarQuestion : Question
     {

@@ -1,5 +1,7 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
-using SurveyQuestionsConfigurator.DataAccessLayer;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.DataAccess;
+using SurveyQuestionsConfigurator.Entities;
+using SurveyQuestionsConfigurator.Logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace SurveyQuestionsConfigurator
 {
     public partial class SurveyQuestionsConfiguratorForm : Form
@@ -64,10 +67,10 @@ namespace SurveyQuestionsConfigurator
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        //listviewitem = new ListViewItem($"{Question.QuestionType.SMILEY}");
+                        //listviewitem = new ListViewItem($"{Question.Question.SMILEY}");
                         listviewitem = new ListViewItem($"{row[0]}");
                         listviewitem.SubItems.Add($"{row[1]}");
-                        listviewitem.SubItems.Add($"{(Question.QuestionType)row[2]}");
+                        listviewitem.SubItems.Add($"{(Types.Question)row[2]}");
                         listviewitem.SubItems.Add($"{row[3].ToString()}");
                         this.createdQuestions_ListView.Items.Add(listviewitem);
                     }
@@ -75,12 +78,12 @@ namespace SurveyQuestionsConfigurator
                 catch (SqlException ex)
                 {
                     MessageBox.Show("SQL Error in build list view:\n" + ex);
-                    CommonHelpers.Logger(ex); //write error to log file
+                    Helper.Logger(ex); //write error to log file
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Something went wrong in build list view:\n" + ex);
-                    CommonHelpers.Logger(ex); //write error to log file
+                    Helper.Logger(ex); //write error to log file
                 }
 
                 // Loop through and size each column header to fit the column header text.
@@ -93,7 +96,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         } //end func.
 
@@ -108,13 +111,13 @@ namespace SurveyQuestionsConfigurator
                 //int checkIfTablesExistResult = DbConnect.CheckIfTablesExist();
                 //switch (checkIfTablesExistResult)
                 //{
-                //    case (int)CommonEnums.ErrorType.SUCCESS:
+                //    case (int)CommonEnums.Error.SUCCESS:
                 //        //MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //        break;
-                //    case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                //    case (int)CommonEnums.Error.SQLVIOLATION:
                 //        MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //        break;
-                //    case (int)CommonEnums.ErrorType.ERROR:
+                //    case (int)CommonEnums.Error.ERROR:
                 //        MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //        break;
                 //}
@@ -127,7 +130,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -140,7 +143,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -180,7 +183,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -194,7 +197,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -207,7 +210,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -234,19 +237,19 @@ namespace SurveyQuestionsConfigurator
                         {
                             questionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
                             BusinessLogic businessLogic = new BusinessLogic();
-                            result = businessLogic.DeleteQuestion(questionId);
+                            result = businessLogic.DeleteQuestionByID(questionId);
 
                             createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
                             switch (result)
                             {
-                                case (int)CommonEnums.ErrorType.SUCCESS:
+                                case (int)Types.Error.SUCCESS:
                                     BuildListView();
                                     MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
-                                case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                                case (int)Types.Error.SQLVIOLATION:
                                     MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
-                                case (int)CommonEnums.ErrorType.ERROR:
+                                case (int)Types.Error.ERROR:
                                     MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                             }
@@ -254,7 +257,7 @@ namespace SurveyQuestionsConfigurator
                         catch (SqlException ex)
                         {
                             MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                            CommonHelpers.Logger(ex); //write error to log file
+                            Helper.Logger(ex); //write error to log file
                         }
                     }
                 }
@@ -266,7 +269,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -282,7 +285,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -294,17 +297,17 @@ namespace SurveyQuestionsConfigurator
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
                     int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
-                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Question.QuestionType.SMILEY.ToString())
+                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Types.Question.SMILEY.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, (int)Question.QuestionType.SMILEY);
+                        form2 = new AddQuestionForm(questionId, (int)Types.Question.SMILEY);
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Question.QuestionType.SLIDER.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.Question.SLIDER.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, (int)Question.QuestionType.SLIDER);
+                        form2 = new AddQuestionForm(questionId, (int)Types.Question.SLIDER);
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Question.QuestionType.STAR.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.Question.STAR.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, (int)Question.QuestionType.STAR);
+                        form2 = new AddQuestionForm(questionId, (int)Types.Question.STAR);
                     }
                     form2.ShowDialog();
                 }
@@ -316,7 +319,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 
@@ -329,7 +332,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }//end event 
 

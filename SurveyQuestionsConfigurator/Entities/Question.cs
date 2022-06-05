@@ -1,20 +1,16 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SurveyQuestionsConfigurator.CommonLayer
+namespace SurveyQuestionsConfigurator.Entities
 {
     public class Question
     {
-        public enum QuestionType
-        {
-            SMILEY = 0,
-            SLIDER = 1,
-            STAR = 2
-        }
+
         public int ID { get; set; }
         public int Order { get; set; }
         public string Text { get; set; }
@@ -28,7 +24,7 @@ namespace SurveyQuestionsConfigurator.CommonLayer
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }
 
@@ -43,7 +39,7 @@ namespace SurveyQuestionsConfigurator.CommonLayer
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }
 

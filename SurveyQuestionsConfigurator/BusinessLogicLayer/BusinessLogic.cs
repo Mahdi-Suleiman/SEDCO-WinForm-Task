@@ -1,5 +1,6 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
-using SurveyQuestionsConfigurator.Repository;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.Entities;
+using SurveyQuestionsConfigurator.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SurveyQuestionsConfigurator
+namespace SurveyQuestionsConfigurator.Logic
 {
     public class BusinessLogic
     {
@@ -17,19 +18,19 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
-                if (CheckSmileyQuestionInputFields(smileyQuestion))
+                if (CheckSmileyQuestionValues(smileyQuestion))
                 {
                     return smileyQuestionRepository.Add(smileyQuestion);
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
@@ -38,23 +39,23 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
-                if (CheckSmileyQuestionInputFields(smileyQuestion))
+                if (CheckSmileyQuestionValues(smileyQuestion))
                 {
                     return smileyQuestionRepository.Update(smileyQuestion);
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
-        public DataTable GetSingleSmileyQuestion(int questionId)
+        public DataTable GetSmileyQuestionByID(int questionId)
         {
             try
             {
@@ -70,7 +71,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return null;
             }
         }
@@ -80,19 +81,19 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
-                if (CheckSliderQuestionInputFields(sliderQuestion))
+                if (CheckSliderQuestionValues(sliderQuestion))
                 {
                     return sliderQuestionRepository.Add(sliderQuestion);
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
@@ -101,23 +102,23 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
-                if (CheckSliderQuestionInputFields(sliderQuestion))
+                if (CheckSliderQuestionValues(sliderQuestion))
                 {
                     return sliderQuestionRepository.Update(sliderQuestion);
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
-        public DataTable GetSingleSliderQuestion(int questionId)
+        public DataTable GetSliderQuestionByID(int questionId)
         {
             try
             {
@@ -133,7 +134,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return null;
             }
         }
@@ -144,19 +145,19 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
-                if (CheckStarQuestionInputFields(starQuestion))
+                if (CheckStarQuestionValues(starQuestion))
                 {
                     return starQuestionRepository.Add(starQuestion);
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
@@ -165,23 +166,23 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
-                if (CheckStarQuestionInputFields(starQuestion))
+                if (CheckStarQuestionValues(starQuestion))
                 {
                     return starQuestionRepository.Update(starQuestion);
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
-        public DataTable GetSingleStarQuestion(int questionId)
+        public DataTable GetStarQuestionByID(int questionId)
         {
             try
             {
@@ -197,12 +198,12 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return null;
             }
         }
 
-        public int DeleteQuestion(int questionId)
+        public int DeleteQuestionByID(int questionId)
         {
             try
             {
@@ -214,13 +215,13 @@ namespace SurveyQuestionsConfigurator
                 }
                 else
                 {
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
@@ -233,13 +234,13 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return null;
             }
         }
 
 
-        public bool CheckSmileyQuestionInputFields(SmileyQuestion smileyQuestion)
+        public bool CheckSmileyQuestionValues(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -252,12 +253,12 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 //MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         } // end func.
 
-        public bool CheckSliderQuestionInputFields(SliderQuestion sliderQuestion)
+        public bool CheckSliderQuestionValues(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -271,12 +272,12 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 //MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         } // end func.
 
-        public bool CheckStarQuestionInputFields(StarQuestion starQuestion)
+        public bool CheckStarQuestionValues(StarQuestion starQuestion)
         {
             try
             {
@@ -289,7 +290,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 //MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         } // end func.

@@ -1,4 +1,5 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SurveyQuestionsConfigurator.DataAccessLayer
+namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
@@ -88,18 +89,18 @@ USE {cn.Name}
 
                     if (result != null)
                     {
-                        return (int)CommonEnums.ErrorType.SUCCESS;
+                        return (int)Types.Error.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                        return (int)Types.Error.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)CommonEnums.ErrorType.ERROR;
+                        return (int)Types.Error.ERROR;
                     }
-                    //return cmd.ExecuteScalar()) != null ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.SQLVIOLATION;
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    //return cmd.ExecuteScalar()) != null ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.SQLVIOLATION;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
                 }
             }
             catch (SqlException ex)
@@ -109,20 +110,20 @@ USE {cn.Name}
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    return (int)Types.Error.SQLVIOLATION;
                 }
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
         } //end func.
 
@@ -185,15 +186,15 @@ USE {cn.Name}
 
                     if (result != null)
                     {
-                        return (int)CommonEnums.ErrorType.SUCCESS;
+                        return (int)Types.Error.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                        return (int)Types.Error.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)CommonEnums.ErrorType.ERROR;
+                        return (int)Types.Error.ERROR;
                     }
                 }
             }
@@ -202,18 +203,18 @@ USE {cn.Name}
                 //2627 -> unique key violation
                 if (ex.Number == 2627)
                 {
-                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    return (int)Types.Error.SQLVIOLATION;
                 }
                 else
                 {
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
 
         } // end of function
@@ -270,15 +271,15 @@ USE {cn.Name}
 
                     if (result != null)
                     {
-                        return (int)CommonEnums.ErrorType.SUCCESS;
+                        return (int)Types.Error.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                        return (int)Types.Error.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)CommonEnums.ErrorType.ERROR;
+                        return (int)Types.Error.ERROR;
                     }
                 }
             }
@@ -287,19 +288,19 @@ USE {cn.Name}
                 //2627 -> unique key violation
                 if (ex.Number == 2627)
                 {
-                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    return (int)Types.Error.SQLVIOLATION;
                 }
                 else
                 {
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.ERROR;
                 }
             }
 
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
 
         }// end of function
@@ -409,17 +410,17 @@ ELSE
 
                     if (result != null)
                     {
-                        return (int)CommonEnums.ErrorType.SUCCESS;
+                        return (int)Types.Error.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                        return (int)Types.Error.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)CommonEnums.ErrorType.ERROR;
+                        return (int)Types.Error.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
                 }
             }
             catch (SqlException ex)
@@ -429,21 +430,21 @@ ELSE
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.SQLVIOLATION;
                 }
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
 
         }//end of function
@@ -526,17 +527,17 @@ ELSE
 
                     if (result != null)
                     {
-                        return (int)CommonEnums.ErrorType.SUCCESS;
+                        return (int)Types.Error.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                        return (int)Types.Error.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)CommonEnums.ErrorType.ERROR;
+                        return (int)Types.Error.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -546,18 +547,18 @@ ELSE
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    return (int)Types.Error.SQLVIOLATION;
                 }
                 else
                 {
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
         } //end func.
 
@@ -634,17 +635,17 @@ ELSE
 
                     if (result != null)
                     {
-                        return (int)CommonEnums.ErrorType.SUCCESS;
+                        return (int)Types.Error.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                        return (int)Types.Error.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)CommonEnums.ErrorType.ERROR;
+                        return (int)Types.Error.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -655,20 +656,20 @@ ELSE
                 if (ex.Number == 2627)
                 {
                     //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                    return (int)Types.Error.SQLVIOLATION;
                 }
                 else
                 {
                     //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    CommonHelpers.Logger(ex); //write error to log file
-                    return (int)CommonEnums.ErrorType.ERROR;
+                    Helper.Logger(ex); //write error to log file
+                    return (int)Types.Error.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
         } //end func.
 
@@ -686,18 +687,18 @@ ELSE
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+                    return cmd.ExecuteNonQuery() > 0 ? (int)Types.Error.SUCCESS : (int)Types.Error.ERROR;
                 }
             }
             catch (SqlException ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.SQLVIOLATION;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.SQLVIOLATION;
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
 
         } //end func.
@@ -724,12 +725,12 @@ SELECT ID, [Order], [Type], [Text] FROM Questions", conn);
             }
             catch (SqlException ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
         } //end func.
@@ -765,12 +766,12 @@ where Questions.ID = @ID", conn);
             }
             catch (SqlException ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
         } // end func.
@@ -806,12 +807,12 @@ where Q.ID = @ID", conn);
             }
             catch (SqlException ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
         } // end func.
@@ -848,12 +849,12 @@ where Q.ID = @ID", conn);
             }
             catch (SqlException ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
                 return null;
             }
 
@@ -887,7 +888,7 @@ where Q.ID = @ID", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
         //                conn.Close();
 
 
@@ -915,7 +916,7 @@ where Q.ID = @ID", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
         //                conn.Close();
 
 
@@ -940,7 +941,7 @@ where Q.ID = @ID", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorType.SUCCESS : (int)CommonEnums.ErrorType.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
         //                conn.Close();
 
         //                return (int)CommonEnums.ErrorState.SUCCESS;
@@ -957,14 +958,14 @@ where Q.ID = @ID", conn);
         //                else
         //                {
         //                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-        //                    CommonHelpers.Logger(ex); //write error to log file
+        //                    Helper.Logger(ex); //write error to log file
         //                    return (int)CommonEnums.ErrorState.ERROR;
         //                }
         //            }
         //            catch (Exception ex)
         //            {
         //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
-        //                CommonHelpers.Logger(ex); //write error to log file
+        //                Helper.Logger(ex); //write error to log file
         //                return (int)CommonEnums.ErrorState.ERROR;
         //            }
         //            finally

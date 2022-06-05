@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SurveyQuestionsConfigurator.CommonLayer
+namespace SurveyQuestionsConfigurator.CommonHelpers
 {
-    public class CommonHelpers
+    public class Helper
     {
         public static void Logger(Exception ex)
         {

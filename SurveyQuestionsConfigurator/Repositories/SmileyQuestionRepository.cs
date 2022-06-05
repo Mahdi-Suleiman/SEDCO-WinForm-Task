@@ -1,5 +1,6 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
-using SurveyQuestionsConfigurator.DataAccessLayer;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.DataAccess;
+using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace SurveyQuestionsConfigurator.Repository
+
+
+namespace SurveyQuestionsConfigurator.Repositories
 {
     public class SmileyQuestionRepository : GenericRepository
     {
@@ -26,8 +29,8 @@ namespace SurveyQuestionsConfigurator.Repository
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
 
@@ -40,7 +43,7 @@ namespace SurveyQuestionsConfigurator.Repository
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return null;
             }
         }
@@ -54,8 +57,8 @@ namespace SurveyQuestionsConfigurator.Repository
             }
             catch (Exception ex)
             {
-                CommonHelpers.Logger(ex);
-                return (int)CommonEnums.ErrorType.ERROR;
+                Helper.Logger(ex);
+                return (int)Types.Error.ERROR;
             }
         }
     }

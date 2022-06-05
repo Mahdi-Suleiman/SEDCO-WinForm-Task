@@ -4,15 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SurveyQuestionsConfigurator.CommonLayer
+namespace SurveyQuestionsConfigurator.Entities
 {
-    public class CommonEnums
+    public class Types
     {
-        public enum ErrorType
+        public enum Error
         {
             SUCCESS,
             ERROR,
             SQLVIOLATION
+        }
+
+        public enum Question
+        {
+            SMILEY = 0,
+            SLIDER = 1,
+            STAR = 2
         }
     }
 }

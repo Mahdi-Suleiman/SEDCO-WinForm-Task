@@ -1,4 +1,7 @@
-﻿using SurveyQuestionsConfigurator.CommonLayer;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.Entities;
+using SurveyQuestionsConfigurator.Logic;
+using SurveyQuestionsConfigurator.Logic;
 using System;
 using System.Configuration;
 using System.Data;
@@ -15,7 +18,7 @@ namespace SurveyQuestionsConfigurator
         ///
         public int QuestionId { get; set; } /// create global Question ID property
         private string FormState { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
-        //private string QuestionType { get; set; }
+        //private string Question { get; set; }
         private int SelectedQuestionType { get; set; }
 
         public enum FormStateType
@@ -45,22 +48,22 @@ namespace SurveyQuestionsConfigurator
             FormState = FormStateType.EDIT.ToString();
 
             QuestionId = questionId; //set QuestionId to access it globally
-            //QuestionType = questionType;
+            //Question = questionType;
             questionTypeComboBox.Enabled = false;
 
-            if (questionType == (int)Question.QuestionType.SMILEY)
+            if (questionType == (int)Types.Question.SMILEY)
             {
-                SelectedQuestionType = (int)Question.QuestionType.SMILEY; // 0 
+                SelectedQuestionType = (int)Types.Question.SMILEY; // 0 
                 InitializeEditingSmileyQuestion(questionId);
             }
-            else if (questionType == (int)Question.QuestionType.SLIDER)
+            else if (questionType == (int)Types.Question.SLIDER)
             {
-                SelectedQuestionType = (int)Question.QuestionType.SLIDER; // 1
+                SelectedQuestionType = (int)Types.Question.SLIDER; // 1
                 InitializeEditingSlideQuestion(questionId);
             }
-            else if (questionType == (int)Question.QuestionType.STAR)
+            else if (questionType == (int)Types.Question.STAR)
             {
-                SelectedQuestionType = (int)Question.QuestionType.STAR; // 2
+                SelectedQuestionType = (int)Types.Question.STAR; // 2
                 InitializeEditingStarQuestion(questionId);
             }
         }
@@ -75,7 +78,7 @@ namespace SurveyQuestionsConfigurator
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
 
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         } // event end
 
@@ -92,7 +95,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }
 
@@ -107,7 +110,7 @@ namespace SurveyQuestionsConfigurator
                 DataTable dt = new DataTable();
                 BusinessLogic businessLogic = new BusinessLogic();
 
-                dt = businessLogic.GetSingleSmileyQuestion(questionId);
+                dt = businessLogic.GetSmileyQuestionByID(questionId);
 
                 if (dt != null)
                 {
@@ -126,13 +129,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing smiley question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing smiley question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
             }
         } //end function
         private void InitializeEditingSlideQuestion(int questionId)
@@ -144,9 +147,9 @@ namespace SurveyQuestionsConfigurator
             {
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
-                BusinessLogic businessLogic = new BusinessLogic();
+                BusinessLogic businessLogic = new Logic();
 
-                dt = businessLogic.GetSingleSliderQuestion(questionId);
+                dt = businessLogic.GetSliderQuestionByID(questionId);
 
                 if (dt != null)
                 {
@@ -169,13 +172,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing slider question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing slider question form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
             }
         } //end function
         private void InitializeEditingStarQuestion(int questionId)
@@ -188,8 +191,8 @@ namespace SurveyQuestionsConfigurator
                 QuestionId = questionId;
                 DataTable dt = new DataTable();
 
-                BusinessLogic businessLogic = new BusinessLogic();
-                dt = businessLogic.GetSingleStarQuestion(questionId);
+                BusinessLogic businessLogic = new Logic();
+                dt = businessLogic.GetStarQuestionByID(questionId);
 
                 if (dt != null)
                 {
@@ -208,13 +211,13 @@ namespace SurveyQuestionsConfigurator
             catch (SqlException ex)
             {
                 MessageBox.Show("SQL Error while initializing star question form:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while initializing star question form form:\n" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex); //write error to log file
+                Helper.Logger(ex); //write error to log file
             }
         }//end function
 
@@ -230,7 +233,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         }
@@ -250,7 +253,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         }
@@ -266,7 +269,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         }
@@ -292,7 +295,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }// event end
         private void InitializeSmileyQuestionForm()
@@ -317,7 +320,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         } // func. end
         private void InitializeSliderQuestionForm()
@@ -348,7 +351,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         } //func. end
         private void InitializeStarQuestionForm()
@@ -374,7 +377,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         } //func. end
 
@@ -403,7 +406,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something wrong happened, please try again\n");
-                        CommonHelpers.Logger(ex);
+                        Helper.Logger(ex);
                     }
                 }
                 else if (FormState.ToString().ToUpper() == FormStateType.EDIT.ToString().ToUpper())
@@ -427,7 +430,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        CommonHelpers.Logger(ex);
+                        Helper.Logger(ex);
                     }
                 }
 
@@ -439,7 +442,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
 
         }// end of function
@@ -453,7 +456,7 @@ namespace SurveyQuestionsConfigurator
             {
                 ///
                 /// Declare variables
-                ///Question.Question.QuestionType.
+                ///Question.Question.Question.
                 int questionOrder, numberOfSmilyFaces;
                 string questionText;
                 int result;
@@ -472,21 +475,21 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, (int)Question.QuestionType.SMILEY, numberOfSmilyFaces);
-                        BusinessLogic businessLogic = new BusinessLogic();
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, (int)Types.Question.SMILEY, numberOfSmilyFaces);
+                        BusinessLogic businessLogic = new Logic();
                         result = businessLogic.AddSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
-                            case (int)CommonEnums.ErrorType.SUCCESS:
+                            case (int)Types.Error.SUCCESS:
                                 MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearInputs();
                                 return true;
                                 break;
-                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                            case (int)Types.Error.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)CommonEnums.ErrorType.ERROR:
+                            case (int)Types.Error.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -494,7 +497,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonHelpers.Logger(ex); //write error to log file
+                        Helper.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -506,7 +509,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         }
@@ -542,21 +545,21 @@ namespace SurveyQuestionsConfigurator
                         questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
 
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (int)Question.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
-                        BusinessLogic businessLogic = new BusinessLogic();
+                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (int)Types.Question.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        BusinessLogic businessLogic = new Logic();
                         result = businessLogic.AddSliderQuestion(sliderQuestion);
 
                         switch (result)
                         {
-                            case (int)CommonEnums.ErrorType.SUCCESS:
+                            case (int)Types.Error.SUCCESS:
                                 MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearInputs();
                                 return true;
                                 break;
-                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                            case (int)Types.Error.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)CommonEnums.ErrorType.ERROR:
+                            case (int)Types.Error.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -564,7 +567,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonHelpers.Logger(ex); //write error to log file
+                        Helper.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -576,7 +579,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         } // end of function
@@ -606,21 +609,21 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (int)Question.QuestionType.STAR, numberOfStars);
-                        BusinessLogic businessLogic = new BusinessLogic();
+                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (int)Types.Question.STAR, numberOfStars);
+                        BusinessLogic businessLogic = new Logic();
                         result = businessLogic.AddStarQuestion(starQuestion);
 
                         switch (result)
                         {
-                            case (int)CommonEnums.ErrorType.SUCCESS:
+                            case (int)Types.Error.SUCCESS:
                                 MessageBox.Show("Question inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 ClearInputs();
                                 return true;
                                 break;
-                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                            case (int)Types.Error.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)CommonEnums.ErrorType.ERROR:
+                            case (int)Types.Error.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -628,7 +631,7 @@ namespace SurveyQuestionsConfigurator
                     catch (Exception ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonHelpers.Logger(ex); //write error to log file
+                        Helper.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -640,7 +643,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         }// end of function
@@ -668,20 +671,20 @@ namespace SurveyQuestionsConfigurator
                         questionText = questionTextRichTextBox.Text;
                         numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, (int)Question.QuestionType.SMILEY, numberOfSmilyFaces);
-                        BusinessLogic businessLogic = new BusinessLogic();
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, (int)Types.Question.SMILEY, numberOfSmilyFaces);
+                        BusinessLogic businessLogic = new Logic();
                         result = businessLogic.EditSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
-                            case (int)CommonEnums.ErrorType.SUCCESS:
+                            case (int)Types.Error.SUCCESS:
                                 MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                                 break;
-                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                            case (int)Types.Error.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)CommonEnums.ErrorType.ERROR:
+                            case (int)Types.Error.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -689,7 +692,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonHelpers.Logger(ex); //write error to log file
+                        Helper.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -701,7 +704,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         }//end of function
@@ -732,20 +735,20 @@ namespace SurveyQuestionsConfigurator
                         questionStartValueCaption = (string)genericTextBox1.Text;
                         questionEndValueCaption = (string)genericTextBox2.Text;
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (int)Question.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
-                        BusinessLogic businessLogic = new BusinessLogic();
+                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (int)Types.Question.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        BusinessLogic businessLogic = new Logic();
                         result = businessLogic.EditSliderQuestion(sliderQuestion);
 
                         switch (result)
                         {
-                            case (int)CommonEnums.ErrorType.SUCCESS:
+                            case (int)Types.Error.SUCCESS:
                                 MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                                 break;
-                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                            case (int)Types.Error.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)CommonEnums.ErrorType.ERROR:
+                            case (int)Types.Error.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -753,7 +756,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonHelpers.Logger(ex); //write error to log file
+                        Helper.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -765,7 +768,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         } //end of function
@@ -793,20 +796,20 @@ namespace SurveyQuestionsConfigurator
                         questionText = questionTextRichTextBox.Text;
                         numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (int)Question.QuestionType.STAR, numberOfStars);
-                        BusinessLogic businessLogic = new BusinessLogic();
+                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (int)Types.Question.STAR, numberOfStars);
+                        BusinessLogic businessLogic = new Logic();
                         result = businessLogic.EditStarQuestion(starQuestion);
 
                         switch (result)
                         {
-                            case (int)CommonEnums.ErrorType.SUCCESS:
+                            case (int)Types.Error.SUCCESS:
                                 MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                                 break;
-                            case (int)CommonEnums.ErrorType.SQLVIOLATION:
+                            case (int)Types.Error.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)CommonEnums.ErrorType.ERROR:
+                            case (int)Types.Error.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -814,7 +817,7 @@ namespace SurveyQuestionsConfigurator
                     catch (SqlException ex)
                     {
                         MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
-                        CommonHelpers.Logger(ex); //write error to log file
+                        Helper.Logger(ex); //write error to log file
                     }
                 }
                 else
@@ -826,7 +829,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
                 return false;
             }
         } //end of function
@@ -845,7 +848,7 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n");
-                CommonHelpers.Logger(ex);
+                Helper.Logger(ex);
             }
         }
 
