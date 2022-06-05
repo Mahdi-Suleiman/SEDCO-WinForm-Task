@@ -294,7 +294,6 @@
             this.Name = "AddQuestionForm";
             this.Text = "Add a question";
             this.Load += new System.EventHandler(this.AddQuestionForm_Load);
-            this.Leave += new System.EventHandler(this.AddQuestionForm_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.smilyQuestionDetailsGroupBox.ResumeLayout(false);
             this.smilyQuestionDetailsGroupBox.PerformLayout();

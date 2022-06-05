@@ -1,0 +1,2 @@
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\obj\Debug\SurveyQuestionsConfigurator.DataAccess.csproj.AssemblyReference.cache
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\obj\Debug\SurveyQuestionsConfigurator.DataAccess.csproj.CoreCompileInputs.cache

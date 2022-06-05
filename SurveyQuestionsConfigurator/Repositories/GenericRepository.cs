@@ -1,6 +1,6 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.DataAccess;
-using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Interfaces;
 using System;
 using System.Collections.Generic;

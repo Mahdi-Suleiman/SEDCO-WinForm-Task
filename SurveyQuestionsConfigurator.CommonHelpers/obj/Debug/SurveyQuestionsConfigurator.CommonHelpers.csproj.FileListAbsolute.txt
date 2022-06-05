@@ -1,0 +1,6 @@
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonHelpers\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonHelpers\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonHelpers\obj\Debug\SurveyQuestionsConfigurator.CommonHelpers.csproj.AssemblyReference.cache
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonHelpers\obj\Debug\SurveyQuestionsConfigurator.CommonHelpers.csproj.CoreCompileInputs.cache
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonHelpers\obj\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonHelpers\obj\Debug\SurveyQuestionsConfigurator.CommonHelpers.pdb

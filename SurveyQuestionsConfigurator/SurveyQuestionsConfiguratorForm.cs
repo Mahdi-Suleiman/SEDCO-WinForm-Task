@@ -1,11 +1,9 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.DataAccess;
-using SurveyQuestionsConfigurator.Entities;
+using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.Logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -19,15 +17,16 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class SurveyQuestionsConfiguratorForm : Form
     {
+        #region Properties & Attributes
+
         /// <summary>
         /// Used for sorting listview columns on click
         /// </summary>
         private ListViewColumnSorter lvwColumnSorter;
 
-        /// <summary>
-        /// Question Type Enum to reduce errors
-        /// </summary>
+        #endregion
 
+        #region Constructor
         public SurveyQuestionsConfiguratorForm()
         {
             InitializeComponent();
@@ -41,6 +40,12 @@ namespace SurveyQuestionsConfigurator
             this.createdQuestions_ListView.ListViewItemSorter = lvwColumnSorter;
         }
 
+        #endregion
+
+        #region Functions
+        /// <summary>
+        /// Build List View When Needed (On ADD, EDIT, ...etc)
+        /// </summary>
         public void BuildListView()
         {
             try
@@ -55,7 +60,7 @@ namespace SurveyQuestionsConfigurator
                     item.Remove();
                 }
 
-                DataTable dt = new DataTable();
+                DataTable dataTable = new DataTable();
                 /// <summary>
                 /// Connect to Quesion table
                 /// And Fill the List View
@@ -63,9 +68,9 @@ namespace SurveyQuestionsConfigurator
                 try
                 {
                     BusinessLogic businessLogic = new BusinessLogic();
-                    dt = businessLogic.GetAllQuestions();
+                    dataTable = businessLogic.GetAllQuestions();
 
-                    foreach (DataRow row in dt.Rows)
+                    foreach (DataRow row in dataTable.Rows)
                     {
                         //listviewitem = new ListViewItem($"{Question.Question.SMILEY}");
                         listviewitem = new ListViewItem($"{row[0]}");
@@ -75,53 +80,36 @@ namespace SurveyQuestionsConfigurator
                         this.createdQuestions_ListView.Items.Add(listviewitem);
                     }
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("SQL Error in build list view:\n" + ex);
-                    Helper.Logger(ex); //write error to log file
-                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong in build list view:\n" + ex);
+                    //MessageBox.Show("SQL Error in build list view:\n" + ex);
                     Helper.Logger(ex); //write error to log file
                 }
+
 
                 // Loop through and size each column header to fit the column header text.
                 //foreach (ColumnHeader ch in this.createdQuestions_ListView.Columns)
                 //{
                 //    ch.Width = -2;
                 //}
+
+                ///size Text column header to fit the column header text.
                 this.createdQuestions_ListView.Columns[3].Width = -2;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         } //end func.
 
+        #endregion
+
+        #region Event Handlers
         private void SurveyQuestionsConfiguratorForm_Load(object sender, EventArgs e)
         {
             try
             {
-                //
-                // Check if tables exist
-                // If tables do not exit, create them.
-                //
-                //int checkIfTablesExistResult = DbConnect.CheckIfTablesExist();
-                //switch (checkIfTablesExistResult)
-                //{
-                //    case (int)CommonEnums.Error.SUCCESS:
-                //        //MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //        break;
-                //    case (int)CommonEnums.Error.SQLVIOLATION:
-                //        MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //        break;
-                //    case (int)CommonEnums.Error.ERROR:
-                //        MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //        break;
-                //}
-
                 ///
                 /// Build List View on load
                 ///
@@ -129,11 +117,16 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
 
+        /// <summary>
+        /// Refresh When Add Question Form Is Closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SurveyQuestionsConfiguratorForm_Activated(object sender, EventArgs e)
         {
             try
@@ -142,16 +135,21 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
 
+        /// <summary>
+        /// Sort List For Each Column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createdQuestions_ListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             try
             {
-                // Determine if clicked column is already the column that is being sorted.
+                /// Determine if clicked column is already the column that is being sorted.
                 if (e.Column == lvwColumnSorter.SortColumn)
                 {
                     // Reverse the current sort direction for this column.
@@ -196,7 +194,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
@@ -209,7 +207,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
@@ -254,9 +252,9 @@ namespace SurveyQuestionsConfigurator
                                     break;
                             }
                         }
-                        catch (SqlException ex)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Something went wrong\nPlease try again\n" + ex.Message);
+                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                             Helper.Logger(ex); //write error to log file
                         }
                     }
@@ -284,7 +282,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
@@ -318,7 +316,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
@@ -331,14 +329,11 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Helper.Logger(ex);
             }
         }//end event 
 
-        private void createdQuestions_ListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

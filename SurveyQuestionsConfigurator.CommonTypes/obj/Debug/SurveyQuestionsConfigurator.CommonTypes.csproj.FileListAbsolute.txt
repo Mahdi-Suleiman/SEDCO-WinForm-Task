@@ -1,0 +1,6 @@
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonTypes\obj\Debug\SurveyQuestionsConfigurator.CommonTypes.csproj.AssemblyReference.cache
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonTypes\obj\Debug\SurveyQuestionsConfigurator.CommonTypes.csproj.CoreCompileInputs.cache
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonTypes\obj\Debug\SurveyQuestionsConfigurator.CommonTypes.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.CommonTypes\obj\Debug\SurveyQuestionsConfigurator.CommonTypes.pdb

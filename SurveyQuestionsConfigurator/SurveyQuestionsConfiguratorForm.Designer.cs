@@ -80,7 +80,6 @@
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
             this.createdQuestions_ListView.View = System.Windows.Forms.View.Details;
             this.createdQuestions_ListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.createdQuestions_ListView_ColumnClick);
-            this.createdQuestions_ListView.SelectedIndexChanged += new System.EventHandler(this.createdQuestions_ListView_SelectedIndexChanged);
             this.createdQuestions_ListView.DoubleClick += new System.EventHandler(this.editQuestionButton_Click);
             // 
             // columnHeader1

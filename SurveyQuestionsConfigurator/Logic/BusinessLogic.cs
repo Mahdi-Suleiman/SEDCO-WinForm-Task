@@ -1,4 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
@@ -252,7 +253,6 @@ namespace SurveyQuestionsConfigurator.Logic
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something wrong happened, please try again\n");
                 Helper.Logger(ex);
                 return false;
             }
@@ -271,7 +271,6 @@ namespace SurveyQuestionsConfigurator.Logic
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something wrong happened, please try again\n");
                 Helper.Logger(ex);
                 return false;
             }
@@ -289,7 +288,6 @@ namespace SurveyQuestionsConfigurator.Logic
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something wrong happened, please try again\n");
                 Helper.Logger(ex);
                 return false;
             }

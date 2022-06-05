@@ -36,6 +36,18 @@
     <ApplicationIcon>sedco_logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SurveyQuestionsConfigurator.CommonHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.CommonTypes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -75,7 +87,7 @@
     <Compile Include="AddQuestionForm.Designer.cs">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessLogicLayer\Logic.cs" />
+    <Compile Include="Logic\BusinessLogic.cs" />
     <Compile Include="CommonTypes\Types.cs" />
     <Compile Include="CommonHelpers\Helper.cs" />
     <Compile Include="Entities\Question.cs" />

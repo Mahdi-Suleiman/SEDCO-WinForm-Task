@@ -1,4 +1,4 @@
-﻿using SurveyQuestionsConfigurator.Entities;
+﻿using SurveyQuestionsConfigurator.CommonTypes;
 using System;
 using System.Collections.Generic;
 using System.Data;

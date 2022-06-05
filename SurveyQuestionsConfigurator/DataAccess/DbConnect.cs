@@ -1,4 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
-        //public   int QuestionId { get; set; } // create global Question ID property
-        private ConnectionStringSettings cn = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
-        private SqlConnection conn = null; // Create SqlConnection object to connect to DB
+        private ConnectionStringSettings connectionString = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
 
         /// <summary>
         /// 
@@ -37,22 +35,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
             ///
             try
             {
-
-                /*
-INSERT INTO Questions
-([Order], [Text], [Type])
-VALUES
-(@Order, @Text, @Type)
-
-INSERT INTO Smiley_Questions
-(ID, NumberOfSmileyFaces)
-VALUES
-((SELECT ID FROM Questions WHERE [Order] = @Order AND [Type] = @Type) ,@NumberOfSmileyFaces)
-                */
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 
    IF NOT EXISTS (SELECT * FROM Questions 
                    WHERE [Order] = @Order
@@ -70,12 +56,6 @@ USE {cn.Name}
        VALUES (@@IDENTITY, @NumberOfSmileyFaces)
    END
 ", conn);
-                    /*
-                     *    ELSE
-	BEGIN
-		select NULL
-	END
-                     */
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@Order", smileyQuestion.Order),
@@ -99,29 +79,15 @@ USE {cn.Name}
                     {
                         return (int)Types.Error.ERROR;
                     }
-                    //return cmd.ExecuteScalar()) != null ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.SQLVIOLATION;
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
                 }
             }
             catch (SqlException ex)
             {
-                //2627 -> unique key violation
-                // ex.Number
-                if (ex.Number == 2627)
-                {
-                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return (int)Types.Error.SQLVIOLATION;
-                }
-                else
-                {
-                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.ERROR;
-                }
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Helper.Logger(ex); //write error to log file
                 return (int)Types.Error.ERROR;
             }
@@ -148,10 +114,10 @@ USE {cn.Name}
             ///
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
    IF NOT EXISTS (SELECT * FROM Questions 
                    WHERE [Order] = @Order
                    AND [Type] = @Type)
@@ -200,16 +166,8 @@ USE {cn.Name}
             }
             catch (SqlException ex)
             {
-                //2627 -> unique key violation
-                if (ex.Number == 2627)
-                {
-                    return (int)Types.Error.SQLVIOLATION;
-                }
-                else
-                {
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.ERROR;
-                }
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
             catch (Exception ex)
             {
@@ -237,10 +195,10 @@ USE {cn.Name}
             //
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 
    IF NOT EXISTS (SELECT * FROM Questions 
                    WHERE [Order] = @Order
@@ -285,16 +243,8 @@ USE {cn.Name}
             }
             catch (SqlException ex)
             {
-                //2627 -> unique key violation
-                if (ex.Number == 2627)
-                {
-                    return (int)Types.Error.SQLVIOLATION;
-                }
-                else
-                {
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.ERROR;
-                }
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
 
             catch (Exception ex)
@@ -322,40 +272,12 @@ USE {cn.Name}
             ///
             /// Try to Update a new question into "Smiley_Questions" table
             ///
-            /*
-             * IF NOT EXISTS (SELECT * FROM Questions 
-                WHERE [Order] = @Order
-                AND [Type] = @Type)
-
-
-            
-DECLARE @@MyOrder as INT
-SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
-
-IF  (@@MyOrder = @Order OR @@MyOrder IS NOT NULL )
-
-BEGIN
-    UPDATE Questions
-    SET [Order] = @Order, [Text] = @Text
-    WHERE ID = @ID
-END
-if @@ROWCOUNT <> 0
-BEGIN
-    UPDATE Smiley_Questions
-    SET NumberOfSmileyFaces = @NumberOfSmileyFaces
-    WHERE ID = @ID
-	select @@ROWCOUNT
-END
-
-
-USE SurveyQuestionsConfigurator
-             */
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 
 DECLARE @@MyOrder as INT
 SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
@@ -425,20 +347,9 @@ ELSE
             }
             catch (SqlException ex)
             {
-                //2627 -> unique key violation
-                // ex.Number
-                if (ex.Number == 2627)
-                {
-                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.SQLVIOLATION;
-                }
-                else
-                {
-                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.ERROR;
-                }
+                //MessageBox.Show("SQL Error:\n" + ex.Message);
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
             catch (Exception ex)
             {
@@ -468,10 +379,10 @@ ELSE
         {
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 DECLARE @@MyOrder as INT
 SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
@@ -543,17 +454,8 @@ ELSE
             }
             catch (SqlException ex)
             {
-                //2627 -> primary key violation
-                if (ex.Number == 2627)
-                {
-                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return (int)Types.Error.SQLVIOLATION;
-                }
-                else
-                {
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.ERROR;
-                }
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
             catch (Exception ex)
             {
@@ -578,10 +480,10 @@ ELSE
         {
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 
 DECLARE @@MyOrder as INT
 SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
@@ -645,29 +547,15 @@ ELSE
                     {
                         return (int)Types.Error.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
-                    //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (SqlException ex)
             {
-                //2627 -> unique key violation
-                // ex.Number
-                if (ex.Number == 2627)
-                {
-                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return (int)Types.Error.SQLVIOLATION;
-                }
-                else
-                {
-                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-                    Helper.Logger(ex); //write error to log file
-                    return (int)Types.Error.ERROR;
-                }
+                Helper.Logger(ex); //write error to log file
+                return (int)Types.Error.ERROR;
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Helper.Logger(ex); //write error to log file
                 return (int)Types.Error.ERROR;
             }
@@ -677,7 +565,7 @@ ELSE
         {
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"delete from Questions where ID = @ID", conn);
 
@@ -708,19 +596,19 @@ ELSE
 
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 SELECT ID, [Order], [Type], [Text] FROM Questions", conn);
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    adapter.Fill(dataTable);
+                    return dataTable;
                 }
             }
             catch (SqlException ex)
@@ -739,14 +627,14 @@ SELECT ID, [Order], [Type], [Text] FROM Questions", conn);
         {
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 select Questions.[Order], Questions.[Text], Smiley_Questions.NumberOfSmileyFaces
 from Questions
 inner join Smiley_Questions
@@ -760,8 +648,8 @@ where Questions.ID = @ID", conn);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    adapter.Fill(dataTable);
+                    return dataTable;
                 }
             }
             catch (SqlException ex)
@@ -780,14 +668,14 @@ where Questions.ID = @ID", conn);
         {
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 select Q.[Order], Q.[Text], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
 from Questions AS Q
 inner join Slider_Questions AS SQ
@@ -801,8 +689,8 @@ where Q.ID = @ID", conn);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    adapter.Fill(dataTable);
+                    return dataTable;
                 }
             }
             catch (SqlException ex)
@@ -821,14 +709,14 @@ where Q.ID = @ID", conn);
         {
             try
             {
-                using (conn = new SqlConnection(cn.ConnectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {cn.Name}
+USE {connectionString.Name}
 select Q.[Order], Q.[Text], StQ.NumberOfStars
 from Questions AS Q
 inner join Star_Questions AS StQ
@@ -843,8 +731,8 @@ where Q.ID = @ID", conn);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    adapter.Fill(dataTable);
+                    return dataTable;
                 }
             }
             catch (SqlException ex)
@@ -864,7 +752,7 @@ where Q.ID = @ID", conn);
         //        {
         //            try
         //            {
-        //                conn = new SqlConnection(cn.ConnectionString);
+        //                conn = new SqlConnection(connectionString.ConnectionString);
         //                SqlCommand cmd = null;
 
 
@@ -872,7 +760,7 @@ where Q.ID = @ID", conn);
         //                /// Create Tables if they do NOT exist
         //                ///
         //                cmd = new SqlCommand($@"
-        //USE [{cn.Name}]
+        //USE [{connectionString.Name}]
         //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
         //BEGIN
         //CREATE TABLE [dbo].[Smiley_Questions](
@@ -893,7 +781,7 @@ where Q.ID = @ID", conn);
 
 
         //                cmd = new SqlCommand($@"
-        //USE [{cn.Name}]
+        //USE [{connectionString.Name}]
         //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Slider_Questions]') AND type in (N'U'))
         //BEGIN
         //CREATE TABLE [dbo].[Slider_Questions](
@@ -921,7 +809,7 @@ where Q.ID = @ID", conn);
 
 
         //                cmd = new SqlCommand($@"
-        //USE [{cn.Name}]
+        //USE [{connectionString.Name}]
         //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Star_Questions]') AND type in (N'U'))
         //BEGIN
         //CREATE TABLE [dbo].[Star_Questions](
