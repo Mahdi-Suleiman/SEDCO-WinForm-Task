@@ -17,27 +17,27 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                DbConnect dbConnect = new DbConnect();
+                dbConnect = new DbConnect();
                 return dbConnect.AddSliderQuestion(sliderQuestion);
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
-        public DataTable Get(int id)
+        public int Get(int id, ref DataTable dataTable)
         {
             try
             {
-                DbConnect dbConnect = new DbConnect();
-                return dbConnect.GetSingleSliderQuestion(id);
+                dbConnect = new DbConnect();
+                return dbConnect.GetSingleSliderQuestion(id, ref dataTable);
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return null;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
@@ -45,13 +45,13 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                DbConnect dbConnect = new DbConnect();
+                dbConnect = new DbConnect();
                 return dbConnect.EditSliderQuestion(sliderQuestion);
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
     }

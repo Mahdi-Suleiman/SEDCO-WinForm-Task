@@ -7,18 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.CommonHelpers", "..\SurveyQuestionsConfigurator.CommonHelpers\SurveyQuestionsConfigurator.CommonHelpers.csproj", "{AA2A8FD2-4A84-4F1E-866D-9F15ED24FB71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.CommonTypes", "..\SurveyQuestionsConfigurator.CommonTypes\SurveyQuestionsConfigurator.CommonTypes.csproj", "{707CBB8D-D1F8-465B-9875-2493DE7D5971}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.Entities", "..\SurveyQuestionsConfigurator.Entities\SurveyQuestionsConfigurator.Entities.csproj", "{91DF31AF-24D9-4B8E-BB66-D89C6FE1A6EF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{AA2A8FD2-4A84-4F1E-866D-9F15ED24FB71} = {AA2A8FD2-4A84-4F1E-866D-9F15ED24FB71}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.DataAccess", "..\SurveyQuestionsConfigurator.DataAccess\SurveyQuestionsConfigurator.DataAccess.csproj", "{ACCED7EF-2354-4B3A-A2BF-9F9312661C7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.Repositories", "..\SurveyQuestionsConfigurator.Repositories\SurveyQuestionsConfigurator.Repositories.csproj", "{27EF687A-F908-4801-8CE7-0C2B2C2C90A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.Logic", "..\SurveyQuestionsConfigurator.Logic\SurveyQuestionsConfigurator.Logic.csproj", "{7C769B86-7E56-485E-85B9-1E004DD3A0A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyQuestionsConfigurator.QuestionLogic", "..\SurveyQuestionsConfigurator.Logic\SurveyQuestionsConfigurator.QuestionLogic.csproj", "{7C769B86-7E56-485E-85B9-1E004DD3A0A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +29,6 @@ Global
 		{AA2A8FD2-4A84-4F1E-866D-9F15ED24FB71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA2A8FD2-4A84-4F1E-866D-9F15ED24FB71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA2A8FD2-4A84-4F1E-866D-9F15ED24FB71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{707CBB8D-D1F8-465B-9875-2493DE7D5971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{707CBB8D-D1F8-465B-9875-2493DE7D5971}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{707CBB8D-D1F8-465B-9875-2493DE7D5971}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{707CBB8D-D1F8-465B-9875-2493DE7D5971}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91DF31AF-24D9-4B8E-BB66-D89C6FE1A6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91DF31AF-24D9-4B8E-BB66-D89C6FE1A6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91DF31AF-24D9-4B8E-BB66-D89C6FE1A6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -10,13 +10,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Windows.Forms;
 
 namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
         private ConnectionStringSettings connectionString = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
+
+        #region INSERT Methods
 
         /// <summary>
         /// 
@@ -27,7 +28,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// 1 -> Success
         /// 2 -> Unique key violation
-        /// -1 -> Error
+        /// -1 -> ErrorCode
         /// </returns>
         public int AddSmileyQuestion(SmileyQuestion smileyQuestion)
         {
@@ -39,23 +40,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {connectionString.Name}
 
-   IF NOT EXISTS (SELECT * FROM Questions 
-                   WHERE [Order] = @Order
-                   AND [Type] = @Type)
-   BEGIN
-       INSERT INTO Questions 
-        ([Order], [Text], [Type])
-        VALUES 
-        (@Order, @Text, @Type)
-   END
-   IF (@@IDENTITY IS NOT NULL)
-    BEGIN
-       INSERT INTO Smiley_Questions(ID, NumberOfSmileyFaces )
-       OUTPUT @@IDENTITY
-       VALUES (@@IDENTITY, @NumberOfSmileyFaces)
-   END
+                    IF NOT EXISTS (SELECT * FROM Questions 
+                                    WHERE [Order] = @Order
+                                    AND [Type] = @Type)
+                    BEGIN
+                         INSERT INTO Questions 
+                         ([Order], [Text], [Type])
+                         VALUES 
+                         (@Order, @Text, @Type)
+                    END
+                    IF (@@IDENTITY IS NOT NULL)
+                    BEGIN
+                         INSERT INTO Smiley_Questions(ID, NumberOfSmileyFaces )
+                         OUTPUT @@IDENTITY
+                         VALUES (@@IDENTITY, @NumberOfSmileyFaces)
+                    END
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -70,27 +70,22 @@ USE {connectionString.Name}
 
                     if (result != null)
                     {
-                        return (int)Types.Error.SUCCESS;
+                        return (int)Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.Error.SQLVIOLATION;
+                        return (int)Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.Error.ERROR;
+                        return (int)Types.ErrorCode.ERROR;
                     }
                 }
             }
-            catch (SqlException ex)
-            {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
-            }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -106,7 +101,7 @@ USE {connectionString.Name}
         /// <returns>
         /// 1 -> Success
         /// 2 -> Unique key violation
-        /// -1 -> Error
+        /// -1 -> ErrorCode
         /// </returns>
         public int AddSliderQuestion(SliderQuestion sliderQuestion)
         {
@@ -118,23 +113,23 @@ USE {connectionString.Name}
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {connectionString.Name}
-   IF NOT EXISTS (SELECT * FROM Questions 
-                   WHERE [Order] = @Order
-                   AND [Type] = @Type)
-   BEGIN
-       INSERT INTO Questions 
-        ([Order], [Text], [Type])
-        VALUES 
-        (@Order, @Text, @Type)
-   END
-   IF (@@IDENTITY IS NOT NULL)
-    BEGIN
-       INSERT INTO Slider_Questions
-       (ID, StartValue, EndValue, StartValueCaption, EndValueCaption)
-       OUTPUT @@IDENTITY
-       VALUES (@@IDENTITY, @StartValue, @EndValue, @StartValueCaption, @EndValueCaption)
-   END
+
+                    IF NOT EXISTS (SELECT * FROM Questions 
+                                       WHERE [Order] = @Order
+                                       AND [Type] = @Type)
+                        BEGIN
+                            INSERT INTO Questions 
+                            ([Order], [Text], [Type])
+                            VALUES 
+                            (@Order, @Text, @Type)
+                        END
+                    IF (@@IDENTITY IS NOT NULL)
+                        BEGIN
+                            INSERT INTO Slider_Questions
+                            (ID, StartValue, EndValue, StartValueCaption, EndValueCaption)
+                            OUTPUT @@IDENTITY
+                            VALUES (@@IDENTITY, @StartValue, @EndValue, @StartValueCaption, @EndValueCaption)
+                        END
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -153,27 +148,22 @@ USE {connectionString.Name}
 
                     if (result != null)
                     {
-                        return (int)Types.Error.SUCCESS;
+                        return (int)Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.Error.SQLVIOLATION;
+                        return (int)Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.Error.ERROR;
+                        return (int)Types.ErrorCode.ERROR;
                     }
                 }
             }
-            catch (SqlException ex)
-            {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
-            }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
 
         } // end of function
@@ -187,7 +177,7 @@ USE {connectionString.Name}
         /// <returns>
         /// 1 -> Success
         /// 2 -> Unique key violation
-        /// -1 -> Error
+        /// -1 -> ErrorCode
         /// </returns>
         public int AddStarQuestion(StarQuestion starQuestion)
         {
@@ -199,23 +189,22 @@ USE {connectionString.Name}
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {connectionString.Name}
 
-   IF NOT EXISTS (SELECT * FROM Questions 
-                   WHERE [Order] = @Order
-                   AND [Type] = @Type)
-   BEGIN
-       INSERT INTO Questions 
-        ([Order], [Text], [Type])
-        VALUES 
-        (@Order, @Text, @Type)
-   END
-   IF (@@IDENTITY IS NOT NULL)
-    BEGIN
-       INSERT INTO Star_Questions(ID,  NumberOfStars)
-       OUTPUT @@IDENTITY
-       VALUES (@@IDENTITY, @NumberOfStars)
-   END
+                    IF NOT EXISTS (SELECT * FROM Questions 
+                                    WHERE [Order] = @Order
+                                    AND [Type] = @Type)
+                        BEGIN
+                        INSERT INTO Questions 
+                            ([Order], [Text], [Type])
+                            VALUES 
+                            (@Order, @Text, @Type)
+                        END
+                    IF (@@IDENTITY IS NOT NULL)
+                        BEGIN
+                            INSERT INTO Star_Questions(ID,  NumberOfStars)
+                            OUTPUT @@IDENTITY
+                            VALUES (@@IDENTITY, @NumberOfStars)
+                        END
 
 ", conn);
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -230,31 +219,29 @@ USE {connectionString.Name}
 
                     if (result != null)
                     {
-                        return (int)Types.Error.SUCCESS;
+                        return (int)Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.Error.SQLVIOLATION;
+                        return (int)Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.Error.ERROR;
+                        return (int)Types.ErrorCode.ERROR;
                     }
                 }
             }
-            catch (SqlException ex)
-            {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
-            }
-
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
 
         }// end of function
+
+        #endregion
+
+        #region UPDATE Methods
 
         /// <summary>
         /// 
@@ -266,7 +253,7 @@ USE {connectionString.Name}
         /// <returns>
         /// 1 -> Success
         /// 2 -> Unique key violation
-        /// -1 -> Error
+        /// -1 -> ErrorCode
         /// </returns>
         public int EditSmileyQuestion(SmileyQuestion smileyQuestion)
         {
@@ -278,45 +265,44 @@ USE {connectionString.Name}
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {connectionString.Name}
 
-DECLARE @@MyOrder as INT
-SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
+                    DECLARE @@MyOrder as INT
+                    SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-IF NOT EXISTS (SELECT * FROM Questions 
-                WHERE [Order] = @Order
-                AND [Type] = @Type)
-    BEGIN
-	    UPDATE Questions
-	    SET [Order] = @Order, [Text] = @Text
-	    WHERE ID = @ID
-    END
+                    IF NOT EXISTS (SELECT * FROM Questions 
+                                    WHERE [Order] = @Order
+                                    AND [Type] = @Type)
+                        BEGIN
+	                        UPDATE Questions
+	                        SET [Order] = @Order, [Text] = @Text
+	                        WHERE ID = @ID
+                        END
 
-    if @@ROWCOUNT <> 0
-    BEGIN
-	    UPDATE Smiley_Questions
-	    SET NumberOfSmileyFaces = @NumberOfSmileyFaces
-	    WHERE ID = @ID
-	    select @@ROWCOUNT
-    END
+                    IF @@ROWCOUNT <> 0
+                        BEGIN
+	                        UPDATE Smiley_Questions
+	                        SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+	                        WHERE ID = @ID
+	                        select @@ROWCOUNT
+                        END
 
-ELSE
-    BEGIN
-		IF (@@MyOrder = @order)
-		    BEGIN
-	            UPDATE Questions
-	            SET [Text] = @Text
-	            WHERE ID = @ID
-            END
+                    ELSE
+                        BEGIN
+		                    IF (@@MyOrder = @order)
+		                        BEGIN
+	                                UPDATE Questions
+	                                SET [Text] = @Text
+	                                WHERE ID = @ID
+                                END
 
-            if @@ROWCOUNT <> 0
-            BEGIN
-	            UPDATE Smiley_Questions
-	            SET NumberOfSmileyFaces = @NumberOfSmileyFaces
-	            WHERE ID = @ID
-	            select @@ROWCOUNT
-            END
-     END
+                            IF @@ROWCOUNT <> 0
+                                BEGIN
+	                                UPDATE Smiley_Questions
+	                                SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+	                                WHERE ID = @ID
+	                                select @@ROWCOUNT
+                                END
+                         END
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -333,30 +319,24 @@ ELSE
 
                     if (result != null)
                     {
-                        return (int)Types.Error.SUCCESS;
+                        return (int)Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.Error.SQLVIOLATION;
+                        return (int)Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.Error.ERROR;
+                        return (int)Types.ErrorCode.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
                 }
-            }
-            catch (SqlException ex)
-            {
-                //MessageBox.Show("SQL Error:\n" + ex.Message);
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
 
         }//end of function
@@ -374,7 +354,7 @@ ELSE
         /// <returns>
         /// 1 -> Success
         /// 2 -> Unique key violation
-        /// -1 -> Error
+        /// -1 -> ErrorCode
         /// </returns>
         public int EditSliderQuestion(SliderQuestion sliderQuestion)
         {
@@ -383,42 +363,42 @@ ELSE
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {connectionString.Name}
-DECLARE @@MyOrder as INT
-SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-IF NOT EXISTS (SELECT * FROM Questions 
-                WHERE [Order] = @Order
-                AND [Type] = @Type)
-    BEGIN
-        UPDATE Questions
-        SET [Order] = @Order, [Text] = @Text
-        WHERE ID = @ID
-    END
-    if @@ROWCOUNT <> 0
-    BEGIN
-        UPDATE Slider_Questions
-        SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
-        WHERE ID = @ID
-	    select @@ROWCOUNT
-    END
+                    DECLARE @@MyOrder as INT
+                    SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-ELSE
-    BEGIN
-		IF (@@MyOrder = @order)
-		    BEGIN
-                UPDATE Questions
-                SET [Order] = @Order, [Text] = @Text
-                WHERE ID = @ID
-            END
-        if @@ROWCOUNT <> 0
-            BEGIN
-                UPDATE Slider_Questions
-                SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
-                WHERE ID = @ID
-	            select @@ROWCOUNT
-            END
-     END
+                    IF NOT EXISTS (SELECT * FROM Questions 
+                                    WHERE [Order] = @Order
+                                    AND [Type] = @Type)
+                        BEGIN
+                            UPDATE Questions
+                            SET [Order] = @Order, [Text] = @Text
+                            WHERE ID = @ID
+                        END
+                    IF @@ROWCOUNT <> 0
+                        BEGIN
+                            UPDATE Slider_Questions
+                            SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
+                            WHERE ID = @ID
+	                        select @@ROWCOUNT
+                        END
+
+                    ELSE
+                        BEGIN
+		                    IF (@@MyOrder = @order)
+		                        BEGIN
+                                    UPDATE Questions
+                                    SET [Order] = @Order, [Text] = @Text
+                                    WHERE ID = @ID
+                                END
+                            IF @@ROWCOUNT <> 0
+                                BEGIN
+                                    UPDATE Slider_Questions
+                                    SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
+                                    WHERE ID = @ID
+	                                select @@ROWCOUNT
+                                END
+                         END
 
 ", conn);
 
@@ -439,29 +419,24 @@ ELSE
 
                     if (result != null)
                     {
-                        return (int)Types.Error.SUCCESS;
+                        return (int)Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.Error.SQLVIOLATION;
+                        return (int)Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.Error.ERROR;
+                        return (int)Types.ErrorCode.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (SqlException ex)
-            {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
-            }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -475,7 +450,7 @@ ELSE
         /// <returns>
         /// 1 -> Success
         /// 2 -> Unique key violation
-        /// -1 -> Error
+        /// -1 -> ErrorCode
         /// </returns>
         public int EditStarQuestion(StarQuestion starQuestion)
         {
@@ -484,45 +459,44 @@ ELSE
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-USE {connectionString.Name}
 
-DECLARE @@MyOrder as INT
-SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
+                    DECLARE @@MyOrder as INT
+                    SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-IF NOT EXISTS (SELECT * FROM Questions 
-                WHERE [Order] = @Order
-                AND [Type] = @Type)
-    BEGIN
-	    UPDATE Questions
-	    SET [Order] = @Order, [Text] = @Text
-	    WHERE ID = @ID
-    END
+                    IF NOT EXISTS (SELECT * FROM Questions 
+                                    WHERE [Order] = @Order
+                                    AND [Type] = @Type)
+                        BEGIN
+	                        UPDATE Questions
+	                        SET [Order] = @Order, [Text] = @Text
+	                        WHERE ID = @ID
+                        END
 
-    if @@ROWCOUNT <> 0
-        BEGIN
-            UPDATE Star_Questions
-            SET NumberOfStars = @NumberOfStars
-            WHERE ID = @ID
-	        select @@ROWCOUNT
-        END
+                    IF @@ROWCOUNT <> 0
+                            BEGIN
+                                UPDATE Star_Questions
+                                SET NumberOfStars = @NumberOfStars
+                                WHERE ID = @ID
+	                            select @@ROWCOUNT
+                            END
 
-ELSE
-    BEGIN
-		IF (@@MyOrder = @order)
-		    BEGIN
-	            UPDATE Questions
-	            SET [Text] = @Text
-	            WHERE ID = @ID
-            END
+                    ELSE
+                        BEGIN
+		                    IF (@@MyOrder = @order)
+		                        BEGIN
+	                                UPDATE Questions
+	                                SET [Text] = @Text
+	                                WHERE ID = @ID
+                                END
 
-            if @@ROWCOUNT <> 0
-                BEGIN
-                    UPDATE Star_Questions
-                    SET NumberOfStars = @NumberOfStars
-                    WHERE ID = @ID
-	                select @@ROWCOUNT
-                END
-     END
+                            IF @@ROWCOUNT <> 0
+                                BEGIN
+                                    UPDATE Star_Questions
+                                    SET NumberOfStars = @NumberOfStars
+                                    WHERE ID = @ID
+	                                select @@ROWCOUNT
+                                END
+                         END
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -538,29 +512,28 @@ ELSE
 
                     if (result != null)
                     {
-                        return (int)Types.Error.SUCCESS;
+                        return (int)Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.Error.SQLVIOLATION;
+                        return (int)Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.Error.ERROR;
+                        return (int)Types.ErrorCode.ERROR;
                     }
                 }
             }
-            catch (SqlException ex)
-            {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
-            }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
         } //end func.
+
+        #endregion
+
+        #region DELETE Methods
 
         public int DeleteQuestion(int questionId)
         {
@@ -576,71 +549,69 @@ ELSE
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)Types.Error.SUCCESS : (int)Types.Error.ERROR;
+                    return cmd.ExecuteNonQuery() > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR;
                 }
-            }
-            catch (SqlException ex)
-            {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.SQLVIOLATION;
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
 
         } //end func.
 
-        public DataTable GetAllQuestions()
-        {
+        #endregion
 
+        #region GET Methods
+
+        public int GetAllQuestions(ref DataTable dataTable)
+        {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {connectionString.Name}
-SELECT ID, [Order], [Type], [Text] FROM Questions", conn);
+
+                    SELECT ID, [Order], [Type], [Text] FROM Questions
+", conn);
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
+                    //return dt;
                 }
             }
             catch (SqlException ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
         } //end func.
 
-        public DataTable GetSingleSmileyQuestion(int questionId)
+        public int GetSingleSmileyQuestion(int questionId, ref DataTable dataTable)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {connectionString.Name}
-select Questions.[Order], Questions.[Text], Smiley_Questions.NumberOfSmileyFaces
-from Questions
-inner join Smiley_Questions
-on Questions.ID = Smiley_Questions.ID
-where Questions.ID = @ID", conn);
+
+                    select Questions.[Order], Questions.[Text], Smiley_Questions.NumberOfSmileyFaces
+                    from Questions
+                    inner join Smiley_Questions
+                    on Questions.ID = Smiley_Questions.ID
+                    where Questions.ID = @ID
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
@@ -649,39 +620,40 @@ where Questions.ID = @ID", conn);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+
+                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY;
+                    //return dt;
                 }
             }
             catch (SqlException ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
         } // end func.
 
-        public DataTable GetSingleSliderQuestion(int questionId)
+        public int GetSingleSliderQuestion(int questionId, ref DataTable dataTable)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {connectionString.Name}
-select Q.[Order], Q.[Text], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
-from Questions AS Q
-inner join Slider_Questions AS SQ
-on Q.ID = SQ.ID
-where Q.ID = @ID", conn);
+
+                    select Q.[Order], Q.[Text], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
+                    from Questions AS Q
+                    inner join Slider_Questions AS SQ
+                    on Q.ID = SQ.ID
+                    where Q.ID = @ID
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
@@ -690,64 +662,63 @@ where Q.ID = @ID", conn);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY;
                 }
             }
             catch (SqlException ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
         } // end func.
 
-        public DataTable GetSingleStarQuestion(int questionId)
+        public int GetSingleStarQuestion(int questionId, ref DataTable dataTable)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
-                    DataTable dt = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
-USE {connectionString.Name}
-select Q.[Order], Q.[Text], StQ.NumberOfStars
-from Questions AS Q
-inner join Star_Questions AS StQ
-on Q.ID = StQ.ID
-where Q.ID = @ID", conn);
+
+                    select Q.[Order], Q.[Text], StQ.NumberOfStars
+                    from Questions AS Q
+                    inner join Star_Questions AS StQ
+                    on Q.ID = StQ.ID
+                    where Q.ID = @ID
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),
                 };
                     cmd.Parameters.AddRange(parameters);
 
-
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
-                    return dt;
+                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY;
                 }
             }
             catch (SqlException ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex); //write error to log file
-                return null;
+                Logger.LogError(ex); //write error to log file
+                return (int)Types.ErrorCode.ERROR;
             }
 
         } // end func.
+
+        #endregion
 
         //        public   int CheckIfTablesExist()
         //        {
@@ -777,7 +748,7 @@ where Q.ID = @ID", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
         //                conn.Close();
 
 
@@ -805,7 +776,7 @@ where Q.ID = @ID", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
         //                conn.Close();
 
 
@@ -830,7 +801,7 @@ where Q.ID = @ID", conn);
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.Error.SUCCESS : (int)CommonEnums.Error.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
         //                conn.Close();
 
         //                return (int)CommonEnums.ErrorState.SUCCESS;
@@ -841,20 +812,20 @@ where Q.ID = @ID", conn);
         //                // ex.Number
         //                if (ex.Number == 2627)
         //                {
-        //                    //MessageBox.Show("This Question order is already in use\nTry using another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                    //MessageBox.Show("This Question order is already in use\nTry using another one", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Information);
         //                    return (int)CommonEnums.ErrorState.SQLVIOLATION;
         //                }
         //                else
         //                {
-        //                    //MessageBox.Show("SQL Error:\n" + ex.Message);
-        //                    Helper.Logger(ex); //write error to log file
+        //                    //MessageBox.Show("SQL ErrorCode:\n" + ex.Message);
+        //                    Logger.LogError(ex); //write error to log file
         //                    return (int)CommonEnums.ErrorState.ERROR;
         //                }
         //            }
         //            catch (Exception ex)
         //            {
         //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
-        //                Helper.Logger(ex); //write error to log file
+        //                Logger.LogError(ex); //write error to log file
         //                return (int)CommonEnums.ErrorState.ERROR;
         //            }
         //            finally

@@ -36,27 +36,6 @@
     <ApplicationIcon>sedco_logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SurveyQuestionsConfigurator.CommonHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.CommonTypes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.DataAccess">
-      <HintPath>..\SurveyQuestionsConfigurator.DataAccess\bin\Debug\SurveyQuestionsConfigurator.DataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.Logic">
-      <HintPath>..\SurveyQuestionsConfigurator.Logic\bin\Debug\SurveyQuestionsConfigurator.Logic.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.Repositories">
-      <HintPath>..\SurveyQuestionsConfigurator.Repositories\bin\Debug\SurveyQuestionsConfigurator.Repositories.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -96,19 +75,6 @@
     <Compile Include="AddQuestionForm.Designer.cs">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logic\BusinessLogic.cs" />
-    <Compile Include="CommonTypes\Types.cs" />
-    <Compile Include="CommonHelpers\Helper.cs" />
-    <Compile Include="Entities\Question.cs" />
-    <Compile Include="Entities\SliderQuestion.cs" />
-    <Compile Include="Entities\SmileyQuestion.cs" />
-    <Compile Include="Entities\StarQuestion.cs" />
-    <Compile Include="DataAccess\DbConnect.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\SliderQuestionRepository.cs" />
-    <Compile Include="Repositories\SmileyQuestionRepository.cs" />
-    <Compile Include="Repositories\StarQuestionRepository.cs" />
     <Compile Include="SurveyQuestionsConfiguratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +138,22 @@
   <ItemGroup>
     <Content Include="sedco_logo.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.CommonHelpers\SurveyQuestionsConfigurator.CommonHelpers.csproj">
+      <Project>{aa2a8fd2-4a84-4f1e-866d-9f15ed24fb71}</Project>
+      <Name>SurveyQuestionsConfigurator.CommonHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.Entities\SurveyQuestionsConfigurator.Entities.csproj">
+      <Project>{91df31af-24d9-4b8e-bb66-d89c6fe1a6ef}</Project>
+      <Name>SurveyQuestionsConfigurator.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.Logic\SurveyQuestionsConfigurator.QuestionLogic.csproj">
+      <Project>{7c769b86-7e56-485e-85b9-1e004dd3a0a4}</Project>
+      <Name>SurveyQuestionsConfigurator.QuestionLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,7 +22,7 @@ namespace SurveyQuestionsConfigurator.Entities
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -37,7 +37,7 @@ namespace SurveyQuestionsConfigurator.Entities
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
+                Logger.LogError(ex);
             }
         }
 

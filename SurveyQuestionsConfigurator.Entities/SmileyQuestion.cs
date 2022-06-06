@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,15 @@ namespace SurveyQuestionsConfigurator.Entities
         public SmileyQuestion(int id, int order, string text, int type, int numberOfSmileyFaces) :
             base(id, order, text, type)
         {
-            NumberOfSmileyFaces = numberOfSmileyFaces;
+            try
+            {
+                NumberOfSmileyFaces = numberOfSmileyFaces;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+
         }
 
         public SmileyQuestion(int id) :

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,14 @@ namespace SurveyQuestionsConfigurator.Entities
         public StarQuestion(int id, int order, string text, int type, int numberOfStars) :
             base(id, order, text, type)
         {
-            NumberOfStars = numberOfStars;
+            try
+            {
+                NumberOfStars = numberOfStars;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
         }
 
         public StarQuestion(int id) :

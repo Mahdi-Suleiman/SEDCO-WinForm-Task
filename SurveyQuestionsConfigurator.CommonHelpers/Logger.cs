@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.CommonHelpers
 {
-    public class Helper
+    public class Logger
     {
-        public static void Logger(Exception ex)
+        public static void LogError(Exception ex)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
             }
         }
 
-        //Log error in case main "Logger" faced an exception
+        //Log error in case main "LogError" faced an exception
         public static void BackUpLogger(Exception ex)
         {
             try

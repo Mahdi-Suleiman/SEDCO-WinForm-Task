@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,17 @@ namespace SurveyQuestionsConfigurator.Entities
         public SliderQuestion(int id, int order, string text, int type, int startValue, int endValue, string startValueCaption, string endValueCaption) :
       base(id, order, text, type)
         {
-            StartValue = startValue;
-            EndValue = endValue;
-            StartValueCaption = startValueCaption;
-            EndValueCaption = endValueCaption;
+            try
+            {
+                StartValue = startValue;
+                EndValue = endValue;
+                StartValueCaption = startValueCaption;
+                EndValueCaption = endValueCaption;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
         }
 
         public SliderQuestion(int id) :

@@ -20,32 +20,34 @@ namespace SurveyQuestionsConfigurator.Repositories
         /// GetAll
         /// Find
         ///</>
+        ///
+        protected DbConnect dbConnect = null;
 
         public int Delete(int id)
         {
             try
             {
-                DbConnect dbConnect = new DbConnect();
+                dbConnect = new DbConnect();
                 return dbConnect.DeleteQuestion(id);
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
-        public DataTable GetAll()
+        public int GetAll(ref DataTable dataTable)
         {
             try
             {
-                DbConnect dbConnect = new DbConnect();
-                return dbConnect.GetAllQuestions();
+                dbConnect = new DbConnect();
+                return dbConnect.GetAllQuestions(ref dataTable);
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return null;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
     }

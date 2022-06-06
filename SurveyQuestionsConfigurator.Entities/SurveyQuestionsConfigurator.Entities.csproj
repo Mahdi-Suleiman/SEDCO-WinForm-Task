@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SurveyQuestionsConfigurator.CommonHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +46,16 @@
     <Compile Include="SliderQuestion.cs" />
     <Compile Include="SmileyQuestion.cs" />
     <Compile Include="StarQuestion.cs" />
+    <Compile Include="Types.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.CommonHelpers\SurveyQuestionsConfigurator.CommonHelpers.csproj">
+      <Project>{aa2a8fd2-4a84-4f1e-866d-9f15ed24fb71}</Project>
+      <Name>SurveyQuestionsConfigurator.CommonHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

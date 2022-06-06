@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SurveyQuestionsConfigurator.Logic
+namespace SurveyQuestionsConfigurator.QuestionLogic
 {
-    public class BusinessLogic
+    public class QuestionManager
     {
+        #region Add Question Functions
         public int AddSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             try
@@ -24,58 +25,15 @@ namespace SurveyQuestionsConfigurator.Logic
                 }
                 else
                 {
-                    return (int)Types.Error.ERROR;
+                    return (int)Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
-
-        public int EditSmileyQuestion(SmileyQuestion smileyQuestion)
-        {
-            try
-            {
-                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
-                if (CheckSmileyQuestionValues(smileyQuestion))
-                {
-                    return smileyQuestionRepository.Update(smileyQuestion);
-                }
-                else
-                {
-                    return (int)Types.Error.ERROR;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
-            }
-        }
-
-        public DataTable GetSmileyQuestionByID(int questionId)
-        {
-            try
-            {
-                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
-                if (questionId > 0)
-                {
-                    return smileyQuestionRepository.Get(questionId);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.Logger(ex);
-                return null;
-            }
-        }
-
         public int AddSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
@@ -87,59 +45,15 @@ namespace SurveyQuestionsConfigurator.Logic
                 }
                 else
                 {
-                    return (int)Types.Error.ERROR;
+                    return (int)Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
-
-        public int EditSliderQuestion(SliderQuestion sliderQuestion)
-        {
-            try
-            {
-                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
-                if (CheckSliderQuestionValues(sliderQuestion))
-                {
-                    return sliderQuestionRepository.Update(sliderQuestion);
-                }
-                else
-                {
-                    return (int)Types.Error.ERROR;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
-            }
-        }
-
-        public DataTable GetSliderQuestionByID(int questionId)
-        {
-            try
-            {
-                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
-                if (questionId > 0)
-                {
-                    return sliderQuestionRepository.Get(questionId);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.Logger(ex);
-                return null;
-            }
-        }
-
-
         public int AddStarQuestion(StarQuestion starQuestion)
         {
             try
@@ -151,16 +65,59 @@ namespace SurveyQuestionsConfigurator.Logic
                 }
                 else
                 {
-                    return (int)Types.Error.ERROR;
+                    return (int)Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
+        #endregion
+
+        #region Edit Question Functions
+        public int EditSmileyQuestion(SmileyQuestion smileyQuestion)
+        {
+            try
+            {
+                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
+                if (CheckSmileyQuestionValues(smileyQuestion))
+                {
+                    return smileyQuestionRepository.Update(smileyQuestion);
+                }
+                else
+                {
+                    return (int)Types.ErrorCode.ERROR;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
+            }
+        }
+        public int EditSliderQuestion(SliderQuestion sliderQuestion)
+        {
+            try
+            {
+                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
+                if (CheckSliderQuestionValues(sliderQuestion))
+                {
+                    return sliderQuestionRepository.Update(sliderQuestion);
+                }
+                else
+                {
+                    return (int)Types.ErrorCode.ERROR;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
+            }
+        }
         public int EditStarQuestion(StarQuestion starQuestion)
         {
             try
@@ -172,37 +129,96 @@ namespace SurveyQuestionsConfigurator.Logic
                 }
                 else
                 {
-                    return (int)Types.Error.ERROR;
+                    return (int)Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
-        public DataTable GetStarQuestionByID(int questionId)
+        #endregion
+
+        #region Get Question Functions
+        public int GetSmileyQuestionByID(int questionId, ref DataTable dataTable)
+        {
+            try
+            {
+                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
+                if (questionId > 0)
+                {
+                    return smileyQuestionRepository.Get(questionId, ref dataTable);
+                }
+                else
+                {
+                    return (int)Types.ErrorCode.ERROR;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
+            }
+        }
+        public int GetSliderQuestionByID(int questionId, ref DataTable dataTable)
+        {
+            try
+            {
+                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
+                if (questionId > 0)
+                {
+                    return sliderQuestionRepository.Get(questionId, ref dataTable);
+                }
+                else
+                {
+                    return (int)Types.ErrorCode.ERROR;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
+            }
+        }
+        public int GetStarQuestionByID(int questionId, ref DataTable dataTable)
         {
             try
             {
                 StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
                 if (questionId > 0)
                 {
-                    return starQuestionRepository.Get(questionId);
+                    return starQuestionRepository.Get(questionId, ref dataTable);
                 }
                 else
                 {
-                    return null;
+                    return (int)Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return null;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
+            }
+        }
+        public int GetAllQuestions(ref DataTable dataTable)
+        {
+            try
+            {
+                GenericRepository repository = new GenericRepository();
+                return repository.GetAll(ref dataTable);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
+        #endregion
+
+        #region Delete Question Functions
         public int DeleteQuestionByID(int questionId)
         {
             try
@@ -215,30 +231,20 @@ namespace SurveyQuestionsConfigurator.Logic
                 }
                 else
                 {
-                    return (int)Types.Error.ERROR;
+                    return (int)Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
-                return (int)Types.Error.ERROR;
+                Logger.LogError(ex);
+                return (int)Types.ErrorCode.ERROR;
             }
         }
 
-        public DataTable GetAllQuestions()
-        {
-            try
-            {
-                GenericRepository repository = new GenericRepository();
-                return repository.GetAll();
-            }
-            catch (Exception ex)
-            {
-                Helper.Logger(ex);
-                return null;
-            }
-        }
+        #endregion
 
+
+        #region Validation Functions
 
         public bool CheckSmileyQuestionValues(SmileyQuestion smileyQuestion)
         {
@@ -252,7 +258,7 @@ namespace SurveyQuestionsConfigurator.Logic
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
+                Logger.LogError(ex);
                 return false;
             }
         } // end func.
@@ -270,7 +276,7 @@ namespace SurveyQuestionsConfigurator.Logic
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
+                Logger.LogError(ex);
                 return false;
             }
         } // end func.
@@ -287,9 +293,11 @@ namespace SurveyQuestionsConfigurator.Logic
             }
             catch (Exception ex)
             {
-                Helper.Logger(ex);
+                Logger.LogError(ex);
                 return false;
             }
         } // end func.
+
+        #endregion
     }
 }

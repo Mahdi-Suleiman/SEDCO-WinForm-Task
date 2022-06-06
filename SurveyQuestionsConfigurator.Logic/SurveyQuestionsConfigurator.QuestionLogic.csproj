@@ -31,18 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SurveyQuestionsConfigurator.CommonHelpers">
-      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.CommonTypes">
-      <HintPath>..\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.Entities">
-      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="SurveyQuestionsConfigurator.Repositories">
-      <HintPath>..\SurveyQuestionsConfigurator.Repositories\bin\Debug\SurveyQuestionsConfigurator.Repositories.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,8 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic.cs" />
+    <Compile Include="QuestionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.CommonHelpers\SurveyQuestionsConfigurator.CommonHelpers.csproj">
+      <Project>{aa2a8fd2-4a84-4f1e-866d-9f15ed24fb71}</Project>
+      <Name>SurveyQuestionsConfigurator.CommonHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.Entities\SurveyQuestionsConfigurator.Entities.csproj">
+      <Project>{91df31af-24d9-4b8e-bb66-d89c6fe1a6ef}</Project>
+      <Name>SurveyQuestionsConfigurator.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.Repositories\SurveyQuestionsConfigurator.Repositories.csproj">
+      <Project>{27ef687a-f908-4801-8ce7-0c2b2c2c90a4}</Project>
+      <Name>SurveyQuestionsConfigurator.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
