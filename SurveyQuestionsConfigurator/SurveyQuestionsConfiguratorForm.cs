@@ -1,5 +1,6 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
 using SurveyQuestionsConfigurator.CommonTypes;
+using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
 using System.Collections.Generic;
@@ -64,31 +65,31 @@ namespace SurveyQuestionsConfigurator
                 /// </summary>
                 try
                 {
-                    DataTable dataTable = new DataTable();
+                    List<Question> questionsList = new List<Question>();
                     QuestionManager questionManager = new QuestionManager();
 
-                    int result = questionManager.GetAllQuestions(ref dataTable);
+                    int result = questionManager.GetAllQuestions(ref questionsList);
                     switch (result)
                     {
                         case (int)Types.ErrorCode.SUCCESS:
-                            foreach (DataRow row in dataTable.Rows)
+                            foreach (Question q in questionsList)
                             {
                                 //listviewitem = new ListViewItem($"{Question.Question.SMILEY}");
-                                listviewitem = new ListViewItem($"{row[0]}");
-                                listviewitem.SubItems.Add($"{row[1]}");
-                                listviewitem.SubItems.Add($"{(Types.Question)row[2]}");
-                                listviewitem.SubItems.Add($"{row[3].ToString()}");
+                                listviewitem = new ListViewItem($"{q.ID}");
+                                listviewitem.SubItems.Add($"{q.Order}");
+                                listviewitem.SubItems.Add($"{(Types.Question)q.Type}");
+                                listviewitem.SubItems.Add($"{q.Text}");
                                 this.createdQuestions_ListView.Items.Add(listviewitem);
                             }
                             break;
                         case (int)Types.ErrorCode.EMPTY:
-                            MessageBox.Show("No questions created\nAdd questions to start seeing them appear in the list", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No questions created\nAdd questions to start seeing them appear in the list", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         case (int)Types.ErrorCode.SQLVIOLATION:
-                            MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         case (int)Types.ErrorCode.ERROR:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                 }
@@ -110,7 +111,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         } //end func.
@@ -129,7 +130,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -147,7 +148,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -201,12 +202,12 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                AddQuestionForm form2 = new AddQuestionForm();
-                form2.ShowDialog(this);
+                AddQuestionForm addQuestionForm = new AddQuestionForm();
+                addQuestionForm.ShowDialog(this);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -219,7 +220,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -257,16 +258,16 @@ namespace SurveyQuestionsConfigurator
                                     MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
                                 case (int)Types.ErrorCode.SQLVIOLATION:
-                                    MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                                 case (int)Types.ErrorCode.ERROR:
-                                    MessageBox.Show("Something wrong happened\nPlease try again", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                             Logger.LogError(ex); //write error to log file
                         }
                     }
@@ -294,7 +295,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -303,23 +304,25 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                AddQuestionForm form2 = null;
+                AddQuestionForm addQuestionForm = null;
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
                     int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
                     if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Types.Question.SMILEY.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, (int)Types.Question.SMILEY);
+                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.Question.SMILEY);
+                        addQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.Question.SLIDER.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, (int)Types.Question.SLIDER);
+                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.Question.SLIDER);
+                        addQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.Question.STAR.ToString())
                     {
-                        form2 = new AddQuestionForm(questionId, (int)Types.Question.STAR);
+                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.Question.STAR);
+                        addQuestionForm.ShowDialog();
                     }
-                    form2.ShowDialog();
                 }
                 else
                 {
@@ -328,7 +331,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -341,7 +344,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "ErrorCode", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 

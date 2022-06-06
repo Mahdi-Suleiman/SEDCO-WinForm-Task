@@ -34,12 +34,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        public int Get(int id, ref DataTable dataTable)
+        public int Get(ref SmileyQuestion smileyQuestion)
         {
             try
             {
                 dbConnect = new DbConnect();
-                return dbConnect.GetSingleSmileyQuestion(id, ref dataTable);
+                return dbConnect.GetSmileyQuestionByID(ref smileyQuestion);
             }
             catch (Exception ex)
             {

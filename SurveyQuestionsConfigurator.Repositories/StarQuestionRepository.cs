@@ -27,12 +27,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        public int Get(int id, ref DataTable dataTable)
+        public int Get(ref StarQuestion starQuestion)
         {
             try
             {
                 dbConnect = new DbConnect();
-                return dbConnect.GetSingleStarQuestion(id, ref dataTable);
+                return dbConnect.GetStarQuestionByID(ref starQuestion);
             }
             catch (Exception ex)
             {

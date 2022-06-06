@@ -564,23 +564,30 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
         #region GET Methods
 
-        public int GetAllQuestions(ref DataTable dataTable)
+        public int GetAllQuestions(ref List<Question> questionsList)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
 
-                    SELECT ID, [Order], [Type], [Text] FROM Questions
+                    SELECT * FROM Questions
 ", conn);
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
-                    //return dt;
+                    adapter.Fill(dataTable);
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        Question q = new Question((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"]);
+                        questionsList.Add(q);
+                    }
+                    return questionsList.Count > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -595,18 +602,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } //end func.
 
-        public int GetSingleSmileyQuestion(int questionId, ref DataTable dataTable)
+        public int GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
 
-                    select Questions.[Order], Questions.[Text], Smiley_Questions.NumberOfSmileyFaces
+                    select Questions.*, Smiley_Questions.NumberOfSmileyFaces
                     from Questions
                     inner join Smiley_Questions
                     on Questions.ID = Smiley_Questions.ID
@@ -614,15 +622,20 @@ namespace SurveyQuestionsConfigurator.DataAccess
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter("@ID", questionId),
+                new SqlParameter("@ID", smileyQuestion.ID),
                 };
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dataTable);
 
-                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY;
-                    //return dt;
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        smileyQuestion = new SmileyQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["NumberOfSmileyFaces"]);
+                    }
+
+                    return smileyQuestion.NumberOfSmileyFaces > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -637,18 +650,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } // end func.
 
-        public int GetSingleSliderQuestion(int questionId, ref DataTable dataTable)
+        public int GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
 
-                    select Q.[Order], Q.[Text], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
+                    select Q.*, SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
                     from Questions AS Q
                     inner join Slider_Questions AS SQ
                     on Q.ID = SQ.ID
@@ -656,13 +670,21 @@ namespace SurveyQuestionsConfigurator.DataAccess
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter("@ID", questionId),
+                new SqlParameter("@ID", sliderQuestion.ID),
                 };
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY;
+                    adapter.Fill(dataTable);
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        sliderQuestion = new SliderQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["StartValue"],
+                          (int)row["EndValue"], row["StartValueCaption"].ToString(), row["EndValueCaption"].ToString());
+                    }
+
+                    return sliderQuestion.StartValue > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -677,18 +699,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } // end func.
 
-        public int GetSingleStarQuestion(int questionId, ref DataTable dataTable)
+        public int GetStarQuestionByID(ref StarQuestion starQuestion)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlDataAdapter adapter = null;
+                    DataTable dataTable = new DataTable();
                     SqlCommand cmd = null;
 
                     cmd = new SqlCommand($@"
 
-                    select Q.[Order], Q.[Text], StQ.NumberOfStars
+                    select Q.*, StQ.NumberOfStars
                     from Questions AS Q
                     inner join Star_Questions AS StQ
                     on Q.ID = StQ.ID
@@ -696,13 +719,20 @@ namespace SurveyQuestionsConfigurator.DataAccess
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter("@ID", questionId),
+                new SqlParameter("@ID", starQuestion.ID),
                 };
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
-                    return adapter.Fill(dataTable) > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY;
+                    adapter.Fill(dataTable);
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        starQuestion = new StarQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["NumberOfStars"]);
+                    }
+
+                    return starQuestion.NumberOfStars > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
                 }
             }
             catch (SqlException ex)

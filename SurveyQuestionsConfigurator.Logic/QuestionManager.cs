@@ -142,14 +142,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Get Question Functions
-        public int GetSmileyQuestionByID(int questionId, ref DataTable dataTable)
+        public int GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
         {
             try
             {
                 SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
-                if (questionId > 0)
+                if (smileyQuestion.ID > 0)
                 {
-                    return smileyQuestionRepository.Get(questionId, ref dataTable);
+                    return smileyQuestionRepository.Get(ref smileyQuestion);
                 }
                 else
                 {
@@ -162,14 +162,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return (int)Types.ErrorCode.ERROR;
             }
         }
-        public int GetSliderQuestionByID(int questionId, ref DataTable dataTable)
+        public int GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
         {
             try
             {
                 SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
-                if (questionId > 0)
+                if (sliderQuestion.ID > 0)
                 {
-                    return sliderQuestionRepository.Get(questionId, ref dataTable);
+                    return sliderQuestionRepository.Get(ref sliderQuestion);
                 }
                 else
                 {
@@ -182,14 +182,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return (int)Types.ErrorCode.ERROR;
             }
         }
-        public int GetStarQuestionByID(int questionId, ref DataTable dataTable)
+        public int GetStarQuestionByID(ref StarQuestion starQuestion)
         {
             try
             {
                 StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
-                if (questionId > 0)
+                if (starQuestion.ID > 0)
                 {
-                    return starQuestionRepository.Get(questionId, ref dataTable);
+                    return starQuestionRepository.Get(ref starQuestion);
                 }
                 else
                 {
@@ -202,12 +202,12 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return (int)Types.ErrorCode.ERROR;
             }
         }
-        public int GetAllQuestions(ref DataTable dataTable)
+        public int GetAllQuestions(ref List<Question> questionsList)
         {
             try
             {
                 GenericRepository repository = new GenericRepository();
-                return repository.GetAll(ref dataTable);
+                return repository.GetAll(ref questionsList);
             }
             catch (Exception ex)
             {

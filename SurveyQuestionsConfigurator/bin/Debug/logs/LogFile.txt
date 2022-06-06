@@ -1916,3 +1916,207 @@ Error Number:2627,State:1,Class:14
    at System.Data.SqlClient.SqlCommand.ExecuteScalar()
    at SurveyQuestionsConfigurator.DataAccessLayer.DbConnect.EditSmileyQuestion(SmileyQuestion smileyQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\DataAccessLayer\DbConnect.cs:line 408
 
+
+ -------------- (06/06/2022 14:46:30) --------------
+
+-Exception Type: System.ArgumentException
+-Exception Call Site: System.Data.DataColumn GetDataColumn(System.String)
+-Exception Short Message: Column 'ID' does not belong to table .
+-Exception Long Message: System.ArgumentException: Column 'ID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.GetSingleSmileyQuestion(Int32 questionId, List`1& questionsList) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 635
+-Exception Stack Trace:    at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.GetSingleSmileyQuestion(Int32 questionId, List`1& questionsList) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 635
+
+
+ -------------- (06/06/2022 15:22:20) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 323
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 323
+
+
+ -------------- (06/06/2022 15:22:51) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 323
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 323
+
+
+ -------------- (06/06/2022 15:29:03) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 323
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 323
+
+
+ -------------- (06/06/2022 15:32:09) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+
+
+ -------------- (06/06/2022 15:36:02) --------------
+
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: Void set_Value(System.Decimal)
+-Exception Short Message: Value of '0' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+-Exception Long Message: System.ArgumentOutOfRangeException: Value of '0' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+   at System.Windows.Forms.NumericUpDown.set_Value(Decimal value)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingSmileyQuestion(Int32 questionId) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 219
+-Exception Stack Trace:    at System.Windows.Forms.NumericUpDown.set_Value(Decimal value)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingSmileyQuestion(Int32 questionId) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 219
+
+
+ -------------- (06/06/2022 15:37:50) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+
+
+ -------------- (06/06/2022 15:37:57) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+
+
+ -------------- (06/06/2022 15:38:11) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+
+
+ -------------- (06/06/2022 15:45:12) --------------
+
+-Exception Type: System.ObjectDisposedException
+-Exception Call Site: Void CreateHandle()
+-Exception Short Message: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+-Exception Long Message: System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'AddQuestionForm'.
+   at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+-Exception Stack Trace:    at System.Windows.Forms.Control.CreateHandle()
+   at System.Windows.Forms.Form.CreateHandle()
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   at System.Windows.Forms.Form.ShowDialog()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.editQuestionButton_Click(Object sender, EventArgs e) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\SurveyQuestionsConfiguratorForm.cs:line 314
+

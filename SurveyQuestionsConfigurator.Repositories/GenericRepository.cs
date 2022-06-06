@@ -1,6 +1,7 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
 using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.DataAccess;
+using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,12 +38,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
-        public int GetAll(ref DataTable dataTable)
+        public int GetAll(ref List<Question> questionsList)
         {
             try
             {
                 dbConnect = new DbConnect();
-                return dbConnect.GetAllQuestions(ref dataTable);
+                return dbConnect.GetAllQuestions(ref questionsList);
             }
             catch (Exception ex)
             {
