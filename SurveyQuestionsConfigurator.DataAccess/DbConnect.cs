@@ -40,6 +40,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
 
                     IF NOT EXISTS (SELECT * FROM Questions 
                                     WHERE [Order] = @Order
@@ -56,6 +57,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                          OUTPUT @@IDENTITY
                          VALUES (@@IDENTITY, @NumberOfSmileyFaces)
                     END
+
+                    COMMIT TRANSACTION
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -113,6 +116,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
 
                     IF NOT EXISTS (SELECT * FROM Questions 
                                        WHERE [Order] = @Order
@@ -130,6 +134,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             OUTPUT @@IDENTITY
                             VALUES (@@IDENTITY, @StartValue, @EndValue, @StartValueCaption, @EndValueCaption)
                         END
+
+                    COMMIT TRANSACTION
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -189,6 +195,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
 
                     IF NOT EXISTS (SELECT * FROM Questions 
                                     WHERE [Order] = @Order
@@ -206,6 +213,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             VALUES (@@IDENTITY, @NumberOfStars)
                         END
 
+                    COMMIT TRANSACTION
 ", conn);
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@Order", starQuestion.Order),
@@ -265,6 +273,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
 
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
@@ -303,6 +312,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 	                                select @@ROWCOUNT
                                 END
                          END
+
+                    COMMIT TRANSACTION
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -363,6 +374,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
 
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
@@ -400,6 +412,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 END
                          END
 
+                    COMMIT TRANSACTION
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -459,6 +472,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
 
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
@@ -497,6 +511,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 	                                select @@ROWCOUNT
                                 END
                          END
+
+                    COMMIT TRANSACTION
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -541,7 +557,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
-                    SqlCommand cmd = new SqlCommand($@"delete from Questions where ID = @ID", conn);
+                    SqlCommand cmd = new SqlCommand($@"
+                    BEGIN TRANSACTION
+
+                    delete from Questions where ID = @ID
+
+                    COMMIT TRANSACTION
+", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
                 new SqlParameter("@ID", questionId),

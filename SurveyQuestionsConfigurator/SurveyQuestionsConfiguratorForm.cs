@@ -254,8 +254,8 @@ namespace SurveyQuestionsConfigurator
                             switch (result)
                             {
                                 case (int)Types.ErrorCode.SUCCESS:
-                                    BuildListView();
                                     MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    //BuildListView();
                                     break;
                                 case (int)Types.ErrorCode.SQLVIOLATION:
                                     MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
