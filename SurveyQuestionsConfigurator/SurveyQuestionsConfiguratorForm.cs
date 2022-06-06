@@ -82,9 +82,6 @@ namespace SurveyQuestionsConfigurator
                                 this.createdQuestions_ListView.Items.Add(listviewitem);
                             }
                             break;
-                        case (int)Types.ErrorCode.EMPTY:
-                            MessageBox.Show("No questions created\nAdd questions to start seeing them appear in the list", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
                         case (int)Types.ErrorCode.SQLVIOLATION:
                             MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
