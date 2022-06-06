@@ -56,5 +56,11 @@
     <Compile Include="SmileyQuestionRepository.cs" />
     <Compile Include="StarQuestionRepository.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator\SurveyQuestionsConfigurator.csproj">
+      <Project>{F5CC0842-D80C-455C-8408-57F146A02EC2}</Project>
+      <Name>SurveyQuestionsConfigurator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

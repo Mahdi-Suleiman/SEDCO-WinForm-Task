@@ -31,7 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SurveyQuestionsConfigurator.CommonHelpers">
+      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.CommonTypes">
+      <HintPath>..\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.Entities">
+      <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.Entities.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

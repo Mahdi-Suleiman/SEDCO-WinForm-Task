@@ -44,9 +44,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SurveyQuestionsConfigurator.CommonTypes\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.dll</HintPath>
     </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.DataAccess">
+      <HintPath>..\SurveyQuestionsConfigurator.DataAccess\bin\Debug\SurveyQuestionsConfigurator.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="SurveyQuestionsConfigurator.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SurveyQuestionsConfigurator.Entities\bin\Debug\SurveyQuestionsConfigurator.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.Logic">
+      <HintPath>..\SurveyQuestionsConfigurator.Logic\bin\Debug\SurveyQuestionsConfigurator.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="SurveyQuestionsConfigurator.Repositories">
+      <HintPath>..\SurveyQuestionsConfigurator.Repositories\bin\Debug\SurveyQuestionsConfigurator.Repositories.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

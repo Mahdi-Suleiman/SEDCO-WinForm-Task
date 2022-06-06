@@ -25,3 +25,9 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.pdb
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.CommonTypes.pdb
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Entities.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.DataAccess.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Logic.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Repositories.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.DataAccess.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Logic.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Repositories.pdb
