@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator.Entities
 {
@@ -16,7 +17,7 @@ namespace SurveyQuestionsConfigurator.Entities
         public string EndValueCaption { get; set; }
         #endregion
 
-        public SliderQuestion(int id, int order, string text, int type, int startValue, int endValue, string startValueCaption, string endValueCaption) :
+        public SliderQuestion(int id, int order, string text, QuestionType type, int startValue, int endValue, string startValueCaption, string endValueCaption) :
       base(id, order, text, type)
         {
             try

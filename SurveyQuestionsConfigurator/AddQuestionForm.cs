@@ -1,5 +1,4 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
@@ -9,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
-using static SurveyQuestionsConfigurator.Entites.Types;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator
 {
@@ -21,8 +20,8 @@ namespace SurveyQuestionsConfigurator
         /// Access them anywhere
         ///
         public int QuestionId { get; set; } /// create global Question ID property
-        private string StateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
-        private int SelectedQuestionType { get; set; }
+        private FormStateType StateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
+        private QuestionType SelectedQuestionType { get; set; }
 
         public enum FormStateType
         {
@@ -42,7 +41,7 @@ namespace SurveyQuestionsConfigurator
             {
                 InitializeComponent();
                 this.Text = "Add A Question";
-                StateForm = FormStateType.ADD.ToString();
+                StateForm = FormStateType.ADD;
             }
             catch (Exception ex)
             {
@@ -54,32 +53,32 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Form constructor for "Editing A Question"
         /// </summary>
-        public AddQuestionForm(int questionId, int questionType)
+        public AddQuestionForm(int questionId, QuestionType questionType)
         {
             try
             {
                 InitializeComponent();
                 this.Text = "Edit A Question";
 
-                StateForm = FormStateType.EDIT.ToString();
+                StateForm = FormStateType.EDIT;
 
                 QuestionId = questionId; //set QuestionId to access it globally
                                          //Question = questionType;
                 questionTypeComboBox.Enabled = false;
 
-                if (questionType == (int)Types.QuestionType.SMILEY)
+                if (questionType == Types.QuestionType.SMILEY)
                 {
-                    SelectedQuestionType = (int)Types.QuestionType.SMILEY; // 0 
+                    SelectedQuestionType = Types.QuestionType.SMILEY; // 0 
                     InitializeEditingSmileyQuestion(questionId);
                 }
-                else if (questionType == (int)Types.QuestionType.SLIDER)
+                else if (questionType == Types.QuestionType.SLIDER)
                 {
-                    SelectedQuestionType = (int)Types.QuestionType.SLIDER; // 1
+                    SelectedQuestionType = Types.QuestionType.SLIDER; // 1
                     InitializeEditingSliderQuestion(questionId);
                 }
-                else if (questionType == (int)Types.QuestionType.STAR)
+                else if (questionType == Types.QuestionType.STAR)
                 {
-                    SelectedQuestionType = (int)Types.QuestionType.STAR; // 2
+                    SelectedQuestionType = Types.QuestionType.STAR; // 2
                     InitializeEditingStarQuestion(questionId);
                 }
             }
@@ -100,7 +99,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                questionTypeComboBox.SelectedIndex = SelectedQuestionType;
+                questionTypeComboBox.SelectedIndex = (int)SelectedQuestionType;
             }
             catch (Exception ex)
             {
@@ -209,22 +208,22 @@ namespace SurveyQuestionsConfigurator
                 QuestionManager questionManager = new QuestionManager();
                 SmileyQuestion smileyQuestion = new SmileyQuestion(questionId);
 
-                int result = questionManager.GetSmileyQuestionByID(ref smileyQuestion);
+                ErrorCode result = questionManager.GetSmileyQuestionByID(ref smileyQuestion);
                 switch (result)
                 {
-                    case (int)Types.ErrorCode.SUCCESS:
+                    case Types.ErrorCode.SUCCESS:
                         questionOrderNumericUpDown.Value = Convert.ToDecimal(smileyQuestion.Order);
                         questionTextRichTextBox.Text = smileyQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(smileyQuestion.NumberOfSmileyFaces);
                         break;
-                    case (int)Types.ErrorCode.EMPTY:
+                    case Types.ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
-                    case (int)Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQLVIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case (int)Types.ErrorCode.ERROR:
+                    case Types.ErrorCode.ERROR:
                         MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -250,10 +249,10 @@ namespace SurveyQuestionsConfigurator
                 QuestionManager questionManager = new QuestionManager();
                 SliderQuestion sliderQuestion = new SliderQuestion(questionId);
 
-                int result = questionManager.GetSliderQuestionByID(ref sliderQuestion);
+                ErrorCode result = questionManager.GetSliderQuestionByID(ref sliderQuestion);
                 switch (result)
                 {
-                    case (int)Types.ErrorCode.SUCCESS:
+                    case Types.ErrorCode.SUCCESS:
                         questionOrderNumericUpDown.Value = Convert.ToDecimal(sliderQuestion.Order);
                         questionTextRichTextBox.Text = sliderQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(sliderQuestion.StartValue);
@@ -261,14 +260,14 @@ namespace SurveyQuestionsConfigurator
                         genericTextBox1.Text = sliderQuestion.StartValueCaption.ToString();
                         genericTextBox2.Text = sliderQuestion.EndValueCaption.ToString();
                         break;
-                    case (int)Types.ErrorCode.EMPTY:
+                    case Types.ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
-                    case (int)Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQLVIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case (int)Types.ErrorCode.ERROR:
+                    case Types.ErrorCode.ERROR:
                         MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -295,21 +294,21 @@ namespace SurveyQuestionsConfigurator
                 QuestionManager questionManager = new QuestionManager();
                 StarQuestion starQuestion = new StarQuestion(questionId);
 
-                int result = questionManager.GetStarQuestionByID(ref starQuestion);
+                ErrorCode result = questionManager.GetStarQuestionByID(ref starQuestion);
                 switch (result)
                 {
-                    case (int)Types.ErrorCode.SUCCESS:
+                    case Types.ErrorCode.SUCCESS:
                         questionOrderNumericUpDown.Value = Convert.ToDecimal(starQuestion.Order);
                         questionTextRichTextBox.Text = starQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(starQuestion.NumberOfStars);
                         break;
-                    case (int)Types.ErrorCode.EMPTY:
+                    case Types.ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case (int)Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQLVIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case (int)Types.ErrorCode.ERROR:
+                    case Types.ErrorCode.ERROR:
                         MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -518,7 +517,7 @@ namespace SurveyQuestionsConfigurator
                 ///Question.Question.Question.
                 int questionOrder, numberOfSmilyFaces;
                 string questionText;
-                int result;
+                ErrorCode result;
 
                 if (CheckSmileyQuestionInputFields()) //if Question text is not null or empty 
                 {
@@ -534,20 +533,20 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, (int)Types.QuestionType.SMILEY, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, Types.QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.AddSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -584,7 +583,7 @@ namespace SurveyQuestionsConfigurator
                 ///
                 int questionOrder, questionStartValue, questionEndValue;
                 string questionText, questionStartValueCaption, questionEndValueCaption;
-                int result;
+                ErrorCode result;
                 ///
                 ///Check if Question input fields are not null or empty 
                 ///
@@ -609,14 +608,14 @@ namespace SurveyQuestionsConfigurator
 
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -653,7 +652,7 @@ namespace SurveyQuestionsConfigurator
                 ///
                 int questionOrder, numberOfStars;
                 string questionText;
-                int result;
+                ErrorCode result;
 
                 if (CheckStarQuestionInputFields()) //if Question input fields are not null or empty 
                 {
@@ -672,14 +671,14 @@ namespace SurveyQuestionsConfigurator
 
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -715,7 +714,7 @@ namespace SurveyQuestionsConfigurator
             {
                 int questionId, questionOrder, numberOfSmilyFaces;
                 string questionText;
-                int result;
+                ErrorCode result;
 
                 if (CheckSmileyQuestionInputFields())
                 {
@@ -729,19 +728,19 @@ namespace SurveyQuestionsConfigurator
                         questionText = questionTextRichTextBox.Text;
                         numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, (int)Types.QuestionType.SMILEY, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, Types.QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.EditSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -775,7 +774,7 @@ namespace SurveyQuestionsConfigurator
             {
                 int questionId, questionOrder, questionStartValue, questionEndValue;
                 string questionText, questionStartValueCaption, questionEndValueCaption;
-                int result;
+                ErrorCode result;
 
                 if (CheckSliderQuestionInputFields())
                 {
@@ -798,13 +797,13 @@ namespace SurveyQuestionsConfigurator
 
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -838,7 +837,7 @@ namespace SurveyQuestionsConfigurator
             {
                 int questionId, questionOrder, numberOfStars;
                 string questionText;
-                int result;
+                ErrorCode result;
 
                 if (CheckStarQuestionInputFields())
                 {
@@ -858,13 +857,13 @@ namespace SurveyQuestionsConfigurator
 
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }

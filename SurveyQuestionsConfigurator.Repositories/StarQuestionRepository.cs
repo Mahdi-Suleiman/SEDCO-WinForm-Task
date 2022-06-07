@@ -1,6 +1,4 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.DataAccess;
-using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,12 +6,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
     public class StarQuestionRepository : GenericRepository
     {
-        public int Add(StarQuestion starQuestion)
+        public ErrorCode Add(StarQuestion starQuestion)
         {
             try
             {
@@ -22,11 +21,11 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
-        public int Get(ref StarQuestion starQuestion)
+        public ErrorCode Get(ref StarQuestion starQuestion)
         {
             try
             {
@@ -35,11 +34,11 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
-        public int Update(StarQuestion starQuestion)
+        public ErrorCode Update(StarQuestion starQuestion)
         {
             try
             {
@@ -48,7 +47,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
     }

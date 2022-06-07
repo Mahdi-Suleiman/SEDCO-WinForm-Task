@@ -1,5 +1,4 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
@@ -8,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator.QuestionLogic
 {
@@ -19,7 +19,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         GenericRepository repository = new GenericRepository();
 
         #region Add Question Functions
-        public int AddSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode AddSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -29,16 +29,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int AddSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode AddSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -48,16 +48,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int AddStarQuestion(StarQuestion starQuestion)
+        public ErrorCode AddStarQuestion(StarQuestion starQuestion)
         {
             try
             {
@@ -67,20 +67,20 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
         #endregion
 
         #region Edit Question Functions
-        public int EditSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode EditSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -90,16 +90,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int EditSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode EditSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -109,16 +109,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int EditStarQuestion(StarQuestion starQuestion)
+        public ErrorCode EditStarQuestion(StarQuestion starQuestion)
         {
             try
             {
@@ -128,20 +128,20 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
         #endregion
 
         #region Get Question Functions
-        public int GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
+        public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -151,16 +151,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
+        public ErrorCode GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
         {
             try
             {
@@ -170,16 +170,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int GetStarQuestionByID(ref StarQuestion starQuestion)
+        public ErrorCode GetStarQuestionByID(ref StarQuestion starQuestion)
         {
             try
             {
@@ -189,16 +189,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
-        public int GetAllQuestions(ref List<Question> questionsList)
+        public ErrorCode GetAllQuestions(ref List<Question> questionsList)
         {
             try
             {
@@ -207,14 +207,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
         #endregion
 
         #region Delete Question Functions
-        public int DeleteQuestionByID(int questionId)
+        public ErrorCode DeleteQuestionByID(int questionId)
         {
             try
             {
@@ -225,13 +225,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return (int)Types.ErrorCode.ERROR;
+                    return Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 

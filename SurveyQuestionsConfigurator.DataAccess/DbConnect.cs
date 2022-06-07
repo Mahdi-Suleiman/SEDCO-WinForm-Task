@@ -1,5 +1,4 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator.DataAccess
 {
@@ -30,7 +30,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public int AddSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode AddSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             ///
             /// Try to insert a new question into "Smiley_Questions" table
@@ -72,22 +72,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return (int)Types.ErrorCode.SUCCESS;
+                        return Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.ErrorCode.SQLVIOLATION;
+                        return Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.ErrorCode.ERROR;
+                        return Types.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -105,7 +105,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public int AddSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode AddSliderQuestion(SliderQuestion sliderQuestion)
         {
             ///
             /// Try to insert a new question into "Slider_Questions" table
@@ -152,22 +152,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return (int)Types.ErrorCode.SUCCESS;
+                        return Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.ErrorCode.SQLVIOLATION;
+                        return Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.ErrorCode.ERROR;
+                        return Types.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
 
         } // end of function
@@ -183,7 +183,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public int AddStarQuestion(StarQuestion starQuestion)
+        public ErrorCode AddStarQuestion(StarQuestion starQuestion)
         {
             ///
             // Try to insert a new question into "Star_Questions" table
@@ -224,22 +224,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return (int)Types.ErrorCode.SUCCESS;
+                        return Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.ErrorCode.SQLVIOLATION;
+                        return Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.ErrorCode.ERROR;
+                        return Types.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
 
         }// end of function
@@ -260,7 +260,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public int EditSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode EditSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             ///
             /// Try to Update a new question into "Smiley_Questions" table
@@ -326,24 +326,24 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return (int)Types.ErrorCode.SUCCESS;
+                        return Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.ErrorCode.SQLVIOLATION;
+                        return Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.ErrorCode.ERROR;
+                        return Types.ErrorCode.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
 
         }//end of function
@@ -363,7 +363,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public int EditSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode EditSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -427,24 +427,24 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return (int)Types.ErrorCode.SUCCESS;
+                        return Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.ErrorCode.SQLVIOLATION;
+                        return Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.ErrorCode.ERROR;
+                        return Types.ErrorCode.ERROR;
                     }
-                    //return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
+                    //return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -460,7 +460,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public int EditStarQuestion(StarQuestion starQuestion)
+        public ErrorCode EditStarQuestion(StarQuestion starQuestion)
         {
             try
             {
@@ -522,22 +522,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return (int)Types.ErrorCode.SUCCESS;
+                        return Types.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return (int)Types.ErrorCode.SQLVIOLATION;
+                        return Types.ErrorCode.SQLVIOLATION;
                     }
                     else
                     {
-                        return (int)Types.ErrorCode.ERROR;
+                        return Types.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -545,7 +545,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
         #region DELETE Methods
 
-        public int DeleteQuestion(int questionId)
+        public ErrorCode DeleteQuestion(int questionId)
         {
             try
             {
@@ -565,13 +565,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR;
+                    return cmd.ExecuteNonQuery() > 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
 
         } //end func.
@@ -580,7 +580,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
         #region GET Methods
 
-        public int GetAllQuestions(ref List<Question> questionsList)
+        public ErrorCode GetAllQuestions(ref List<Question> questionsList)
         {
             try
             {
@@ -600,25 +600,25 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        Question q = new Question((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"]);
+                        Question q = new Question((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"]);
                         questionsList.Add(q);
                     }
-                    return questionsList.Count >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
+                    return questionsList.Count >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.SQLVIOLATION;
+                return Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         } //end func.
 
-        public int GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
+        public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -648,25 +648,25 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        smileyQuestion = new SmileyQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["NumberOfSmileyFaces"]);
+                        smileyQuestion = new SmileyQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"], (int)row["NumberOfSmileyFaces"]);
                     }
 
-                    return smileyQuestion.NumberOfSmileyFaces >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
+                    return smileyQuestion.NumberOfSmileyFaces >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.SQLVIOLATION;
+                return Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         } // end func.
 
-        public int GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
+        public ErrorCode GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
         {
             try
             {
@@ -696,26 +696,26 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        sliderQuestion = new SliderQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["StartValue"],
-                          (int)row["EndValue"], row["StartValueCaption"].ToString(), row["EndValueCaption"].ToString());
+                        sliderQuestion = new SliderQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"], (int)row["StartValue"],
+                           (int)row["EndValue"], row["StartValueCaption"].ToString(), row["EndValueCaption"].ToString());
                     }
 
-                    return sliderQuestion.StartValue >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
+                    return sliderQuestion.StartValue >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.SQLVIOLATION;
+                return Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         } // end func.
 
-        public int GetStarQuestionByID(ref StarQuestion starQuestion)
+        public ErrorCode GetStarQuestionByID(ref StarQuestion starQuestion)
         {
             try
             {
@@ -745,21 +745,21 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        starQuestion = new StarQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["NumberOfStars"]);
+                        starQuestion = new StarQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"], (int)row["NumberOfStars"]);
                     }
 
-                    return starQuestion.NumberOfStars >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
+                    return starQuestion.NumberOfStars >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.SQLVIOLATION;
+                return Types.ErrorCode.SQLVIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
 
         } // end func.
@@ -794,7 +794,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
         //                conn.Close();
 
 
@@ -822,7 +822,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
         //                conn.Close();
 
 
@@ -847,10 +847,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //END
         //", conn);
         //                conn.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ? (int)CommonEnums.ErrorCode.SUCCESS : (int)CommonEnums.ErrorCode.ERROR;
+        //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
         //                conn.Close();
 
-        //                return (int)CommonEnums.ErrorState.SUCCESS;
+        //                return  CommonEnums.ErrorState.SUCCESS;
         //            }
         //            catch (SqlException ex)
         //            {
@@ -859,20 +859,20 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //                if (ex.Number == 2627)
         //                {
         //                    //MessageBox.Show("This Question order is already in use\nTry using another one", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                    return (int)CommonEnums.ErrorState.SQLVIOLATION;
+        //                    return  CommonEnums.ErrorState.SQLVIOLATION;
         //                }
         //                else
         //                {
         //                    //MessageBox.Show("SQL ErrorCode:\n" + ex.Message);
         //                    Logger.LogError(ex); //write error to log file
-        //                    return (int)CommonEnums.ErrorState.ERROR;
+        //                    return  CommonEnums.ErrorState.ERROR;
         //                }
         //            }
         //            catch (Exception ex)
         //            {
         //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
         //                Logger.LogError(ex); //write error to log file
-        //                return (int)CommonEnums.ErrorState.ERROR;
+        //                return  CommonEnums.ErrorState.ERROR;
         //            }
         //            finally
         //            {

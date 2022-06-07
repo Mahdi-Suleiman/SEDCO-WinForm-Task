@@ -1,6 +1,4 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.DataAccess;
-using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
@@ -20,7 +18,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         //    this.smileyQuestion = new SmileyQuestion(smileyQuestion);
         //}
 
-        public int Add(SmileyQuestion smileyQuestion)
+        public ErrorCode Add(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -29,11 +27,11 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
-        public int Get(ref SmileyQuestion smileyQuestion)
+        public ErrorCode Get(ref SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -42,11 +40,11 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
 
-        public int Update(SmileyQuestion smileyQuestion)
+        public ErrorCode Update(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -55,7 +53,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return (int)Types.ErrorCode.ERROR;
+                return Types.ErrorCode.ERROR;
             }
         }
     }

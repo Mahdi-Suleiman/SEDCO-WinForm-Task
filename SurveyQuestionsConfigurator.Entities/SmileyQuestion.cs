@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator.Entities
 {
@@ -11,7 +12,7 @@ namespace SurveyQuestionsConfigurator.Entities
     {
         public int NumberOfSmileyFaces { get; set; }
 
-        public SmileyQuestion(int id, int order, string text, int type, int numberOfSmileyFaces) :
+        public SmileyQuestion(int id, int order, string text, QuestionType type, int numberOfSmileyFaces) :
             base(id, order, text, type)
         {
             try

@@ -1,5 +1,4 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
@@ -13,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SurveyQuestionsConfigurator.Entities.Types;
 
 namespace SurveyQuestionsConfigurator
 {
@@ -75,10 +75,10 @@ namespace SurveyQuestionsConfigurator
                 ///size Text column header to fit the column header text.
                 this.createdQuestions_ListView.Columns[3].Width = -2;
 
-                int result = questionManager.GetAllQuestions(ref questionsList);
+                ErrorCode result = questionManager.GetAllQuestions(ref questionsList);
                 switch (result)
                 {
-                    case (int)Types.ErrorCode.SUCCESS:
+                    case Types.ErrorCode.SUCCESS:
                         {
                             if (!addQuestionButton.Enabled)
                             {
@@ -103,7 +103,7 @@ namespace SurveyQuestionsConfigurator
                             }
                         }
                         break;
-                    case (int)Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQLVIOLATION:
                         if (addQuestionButton.Enabled)
                         {
                             addQuestionButton.Enabled = false;
@@ -116,7 +116,7 @@ namespace SurveyQuestionsConfigurator
                         }
                         break;
 
-                    case (int)Types.ErrorCode.ERROR:
+                    case Types.ErrorCode.ERROR:
                         break;
                 }
             }
@@ -249,7 +249,7 @@ namespace SurveyQuestionsConfigurator
                     if (confirmResult == DialogResult.Yes)
                     {
                         int questionId; // question to be deleted
-                        int result;
+                        ErrorCode result;
                         ///
                         /// Check the type of the question to be deleted
                         /// Choose appropriate table to query
@@ -261,14 +261,14 @@ namespace SurveyQuestionsConfigurator
                         createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
                         switch (result)
                         {
-                            case (int)Types.ErrorCode.SUCCESS:
+                            case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //BuildListView();
                                 break;
-                            case (int)Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
-                            case (int)Types.ErrorCode.ERROR:
+                            case Types.ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -312,17 +312,17 @@ namespace SurveyQuestionsConfigurator
                     int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
                     if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Types.QuestionType.SMILEY.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.QuestionType.SMILEY);
+                        addQuestionForm = new AddQuestionForm(questionId, Types.QuestionType.SMILEY);
                         addQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.QuestionType.SLIDER.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.QuestionType.SLIDER);
+                        addQuestionForm = new AddQuestionForm(questionId, Types.QuestionType.SLIDER);
                         addQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.QuestionType.STAR.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.QuestionType.STAR);
+                        addQuestionForm = new AddQuestionForm(questionId, Types.QuestionType.STAR);
                         addQuestionForm.ShowDialog();
                     }
                 }
