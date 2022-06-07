@@ -1,5 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -42,9 +42,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     SqlCommand cmd = new SqlCommand($@"
                     BEGIN TRANSACTION
 
-                    IF NOT EXISTS (SELECT * FROM Questions 
-                                    WHERE [Order] = @Order
-                                    AND [Type] = @Type)
+                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @Order) = 0)
+
                     BEGIN
                          INSERT INTO Questions 
                          ([Order], [Text], [Type])
@@ -118,9 +117,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     SqlCommand cmd = new SqlCommand($@"
                     BEGIN TRANSACTION
 
-                    IF NOT EXISTS (SELECT * FROM Questions 
-                                       WHERE [Order] = @Order
-                                       AND [Type] = @Type)
+                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @Order) = 0)
+
                         BEGIN
                             INSERT INTO Questions 
                             ([Order], [Text], [Type])
@@ -197,9 +195,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     SqlCommand cmd = new SqlCommand($@"
                     BEGIN TRANSACTION
 
-                    IF NOT EXISTS (SELECT * FROM Questions 
-                                    WHERE [Order] = @Order
-                                    AND [Type] = @Type)
+                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @Order) = 0)
+
                         BEGIN
                         INSERT INTO Questions 
                             ([Order], [Text], [Type])
@@ -278,9 +275,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-                    IF NOT EXISTS (SELECT * FROM Questions 
-                                    WHERE [Order] = @Order
-                                    AND [Type] = @Type)
+                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @Order) = 0)
+
                         BEGIN
 	                        UPDATE Questions
 	                        SET [Order] = @Order, [Text] = @Text
@@ -379,9 +375,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-                    IF NOT EXISTS (SELECT * FROM Questions 
-                                    WHERE [Order] = @Order
-                                    AND [Type] = @Type)
+                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @Order) = 0)
+
                         BEGIN
                             UPDATE Questions
                             SET [Order] = @Order, [Text] = @Text
@@ -477,9 +472,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
-                    IF NOT EXISTS (SELECT * FROM Questions 
-                                    WHERE [Order] = @Order
-                                    AND [Type] = @Type)
+                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @Order) = 0)
+
                         BEGIN
 	                        UPDATE Questions
 	                        SET [Order] = @Order, [Text] = @Text
@@ -598,7 +592,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     cmd = new SqlCommand($@"
 
-                    SELECT * FROM Questions
+                    SELECT [ID], [Order], [Text], [Type] FROM Questions
 ", conn);
                     conn.Open();
                     adapter = new SqlDataAdapter(cmd);
@@ -609,7 +603,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         Question q = new Question((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"]);
                         questionsList.Add(q);
                     }
-                    return questionsList.Count > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
+                    return questionsList.Count >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -636,11 +630,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     cmd = new SqlCommand($@"
 
-                    select Questions.*, Smiley_Questions.NumberOfSmileyFaces
-                    from Questions
-                    inner join Smiley_Questions
-                    on Questions.ID = Smiley_Questions.ID
-                    where Questions.ID = @ID
+                    select Q.[ID], Q.[Order], Q.[Text], Q.[Type], SmQ.NumberOfSmileyFaces
+                    from Questions AS Q
+                    inner join Smiley_Questions AS SmQ
+                    on Q.ID = SmQ.ID
+                    where Q.ID = @ID
 ", conn);
 
                     SqlParameter[] parameters = new SqlParameter[] {
@@ -657,7 +651,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         smileyQuestion = new SmileyQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["NumberOfSmileyFaces"]);
                     }
 
-                    return smileyQuestion.NumberOfSmileyFaces > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
+                    return smileyQuestion.NumberOfSmileyFaces >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -684,7 +678,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     cmd = new SqlCommand($@"
 
-                    select Q.*, SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
+                    select Q.[ID], Q.[Order], Q.[Text], Q.[Type], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
                     from Questions AS Q
                     inner join Slider_Questions AS SQ
                     on Q.ID = SQ.ID
@@ -706,7 +700,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                           (int)row["EndValue"], row["StartValueCaption"].ToString(), row["EndValueCaption"].ToString());
                     }
 
-                    return sliderQuestion.StartValue > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
+                    return sliderQuestion.StartValue >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -733,7 +727,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     cmd = new SqlCommand($@"
 
-                    select Q.*, StQ.NumberOfStars
+                    select Q.[ID], Q.[Order], Q.[Text], Q.[Type], StQ.NumberOfStars
                     from Questions AS Q
                     inner join Star_Questions AS StQ
                     on Q.ID = StQ.ID
@@ -754,7 +748,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         starQuestion = new StarQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (int)row["Type"], (int)row["NumberOfStars"]);
                     }
 
-                    return starQuestion.NumberOfStars > 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.EMPTY; // RETURN INT32
+                    return starQuestion.NumberOfStars >= 0 ? (int)Types.ErrorCode.SUCCESS : (int)Types.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)

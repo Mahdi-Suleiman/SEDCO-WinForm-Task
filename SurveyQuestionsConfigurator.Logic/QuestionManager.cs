@@ -1,5 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
@@ -13,12 +13,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class QuestionManager
     {
+        SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
+        SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
+        StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
+        GenericRepository repository = new GenericRepository();
+
         #region Add Question Functions
         public int AddSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             try
             {
-                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
                 if (CheckSmileyQuestionValues(smileyQuestion))
                 {
                     return smileyQuestionRepository.Add(smileyQuestion);
@@ -38,7 +42,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
                 if (CheckSliderQuestionValues(sliderQuestion))
                 {
                     return sliderQuestionRepository.Add(sliderQuestion);
@@ -58,7 +61,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
                 if (CheckStarQuestionValues(starQuestion))
                 {
                     return starQuestionRepository.Add(starQuestion);
@@ -82,7 +84,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
                 if (CheckSmileyQuestionValues(smileyQuestion))
                 {
                     return smileyQuestionRepository.Update(smileyQuestion);
@@ -102,7 +103,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
                 if (CheckSliderQuestionValues(sliderQuestion))
                 {
                     return sliderQuestionRepository.Update(sliderQuestion);
@@ -122,7 +122,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
                 if (CheckStarQuestionValues(starQuestion))
                 {
                     return starQuestionRepository.Update(starQuestion);
@@ -146,7 +145,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
                 if (smileyQuestion.ID > 0)
                 {
                     return smileyQuestionRepository.Get(ref smileyQuestion);
@@ -166,7 +164,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
                 if (sliderQuestion.ID > 0)
                 {
                     return sliderQuestionRepository.Get(ref sliderQuestion);
@@ -186,7 +183,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
                 if (starQuestion.ID > 0)
                 {
                     return starQuestionRepository.Get(ref starQuestion);
@@ -206,7 +202,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                GenericRepository repository = new GenericRepository();
                 return repository.GetAll(ref questionsList);
             }
             catch (Exception ex)
@@ -224,7 +219,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             try
             {
                 Question question = new Question(questionId);
-                GenericRepository repository = new GenericRepository();
                 if (questionId > 0)
                 {
                     return repository.Delete(questionId);
@@ -250,7 +244,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(smileyQuestion.Text) && smileyQuestion.Text.Length < 8000) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(smileyQuestion.Text) && smileyQuestion.Text.Length < 4000) //if Question text is not null or empty 
                     if (smileyQuestion.NumberOfSmileyFaces >= 2 && smileyQuestion.NumberOfSmileyFaces <= 5)
                         return true;
 
@@ -267,7 +261,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(sliderQuestion.Text)) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(sliderQuestion.Text) && sliderQuestion.Text.Length < 4000) //if Question text is not null or empty 
                     if (!String.IsNullOrWhiteSpace(sliderQuestion.StartValueCaption) && sliderQuestion.StartValueCaption.Length < 100)
                         if (!String.IsNullOrWhiteSpace(sliderQuestion.EndValueCaption) && sliderQuestion.EndValueCaption.Length < 100)
                             if (sliderQuestion.StartValue < sliderQuestion.EndValue)
@@ -285,7 +279,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(starQuestion.Text) && starQuestion.Text.Length < 8000) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(starQuestion.Text) && starQuestion.Text.Length < 4000) //if Question text is not null or empty 
                     if (starQuestion.NumberOfStars >= 1 && starQuestion.NumberOfStars <= 10)
                         return true;
 

@@ -44,6 +44,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.closeApplicationButton = new System.Windows.Forms.Button();
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.createdQuestionsGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             this.createdQuestions_ListView.GridLines = true;
             this.createdQuestions_ListView.HideSelection = false;
             this.createdQuestions_ListView.Location = new System.Drawing.Point(6, 19);
+            this.createdQuestions_ListView.MultiSelect = false;
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
             this.createdQuestions_ListView.Size = new System.Drawing.Size(600, 284);
             this.createdQuestions_ListView.TabIndex = 1;
@@ -169,6 +171,7 @@
             // 
             // createdQuestionsGroupBox
             // 
+            this.createdQuestionsGroupBox.Controls.Add(this.errorLabel);
             this.createdQuestionsGroupBox.Controls.Add(this.createdQuestions_ListView);
             this.createdQuestionsGroupBox.Controls.Add(this.refreshDataButton);
             this.createdQuestionsGroupBox.Controls.Add(this.addQuestionButton);
@@ -180,6 +183,18 @@
             this.createdQuestionsGroupBox.TabIndex = 10;
             this.createdQuestionsGroupBox.TabStop = false;
             this.createdQuestionsGroupBox.Text = "Questions";
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(35, 314);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(58, 13);
+            this.errorLabel.TabIndex = 11;
+            this.errorLabel.Text = "Error Label";
+            this.errorLabel.Visible = false;
             // 
             // SurveyQuestionsConfiguratorForm
             // 
@@ -202,6 +217,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.createdQuestionsGroupBox.ResumeLayout(false);
+            this.createdQuestionsGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,6 +239,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.GroupBox createdQuestionsGroupBox;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
 

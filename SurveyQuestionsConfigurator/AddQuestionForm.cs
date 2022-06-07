@@ -1,5 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
@@ -67,19 +67,19 @@ namespace SurveyQuestionsConfigurator
                                          //Question = questionType;
                 questionTypeComboBox.Enabled = false;
 
-                if (questionType == (int)Types.Question.SMILEY)
+                if (questionType == (int)Types.QuestionType.SMILEY)
                 {
-                    SelectedQuestionType = (int)Types.Question.SMILEY; // 0 
+                    SelectedQuestionType = (int)Types.QuestionType.SMILEY; // 0 
                     InitializeEditingSmileyQuestion(questionId);
                 }
-                else if (questionType == (int)Types.Question.SLIDER)
+                else if (questionType == (int)Types.QuestionType.SLIDER)
                 {
-                    SelectedQuestionType = (int)Types.Question.SLIDER; // 1
+                    SelectedQuestionType = (int)Types.QuestionType.SLIDER; // 1
                     InitializeEditingSliderQuestion(questionId);
                 }
-                else if (questionType == (int)Types.Question.STAR)
+                else if (questionType == (int)Types.QuestionType.STAR)
                 {
-                    SelectedQuestionType = (int)Types.Question.STAR; // 2
+                    SelectedQuestionType = (int)Types.QuestionType.STAR; // 2
                     InitializeEditingStarQuestion(questionId);
                 }
             }
@@ -322,7 +322,16 @@ namespace SurveyQuestionsConfigurator
         }//end function
         #endregion
 
-        #region Check Input Fields Methods Before Passing Data To Next Layer
+        #region Validation Methods
+        private bool QuestionInputFields()
+        {
+            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 4000) //if Question text is not null or empty 
+                return true;
+
+            return false;
+        }
+
+
         /// <summary>
         /// Check smiley question input fields
         /// </summary>
@@ -330,8 +339,9 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 8000) //if Question text is not null or empty 
-                    return true;
+                if (QuestionInputFields()) //if Question text is not null or empty 
+                    if (genericNumericUpDown1.Value >= 2 && genericNumericUpDown1.Value <= 5)
+                        return true;
 
                 return false;
             }
@@ -350,7 +360,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 8000) //if Question text is not null or empty 
+                if (QuestionInputFields()) //if Question text is not null or empty 
                     if (!String.IsNullOrWhiteSpace(genericTextBox1.Text) && genericTextBox1.TextLength < 100)
                         if (!String.IsNullOrWhiteSpace(genericTextBox2.Text) && genericTextBox2.TextLength < 100)
                             if (genericNumericUpDown1.Value < genericNumericUpDown2.Value)
@@ -372,8 +382,9 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 8000) //if Question text is not null or empty 
-                    return true;
+                if (QuestionInputFields()) //if Question text is not null or empty 
+                    if (genericNumericUpDown1.Value >= 1 && genericNumericUpDown1.Value <= 10)
+                        return true;
 
                 return false;
             }
@@ -523,14 +534,14 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, (int)Types.Question.SMILEY, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, (int)Types.QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.AddSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
                             case (int)Types.ErrorCode.SUCCESS:
-                                MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
                             case (int)Types.ErrorCode.SQLVIOLATION:
@@ -592,14 +603,14 @@ namespace SurveyQuestionsConfigurator
                         questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
 
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (int)Types.Question.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (int)Types.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.AddSliderQuestion(sliderQuestion);
 
                         switch (result)
                         {
                             case (int)Types.ErrorCode.SUCCESS:
-                                MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
                             case (int)Types.ErrorCode.SQLVIOLATION:
@@ -655,14 +666,14 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (int)Types.Question.STAR, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (int)Types.QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.AddStarQuestion(starQuestion);
 
                         switch (result)
                         {
                             case (int)Types.ErrorCode.SUCCESS:
-                                MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
                             case (int)Types.ErrorCode.SQLVIOLATION:
@@ -718,14 +729,14 @@ namespace SurveyQuestionsConfigurator
                         questionText = questionTextRichTextBox.Text;
                         numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, (int)Types.Question.SMILEY, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, (int)Types.QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.EditSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
                             case (int)Types.ErrorCode.SUCCESS:
-                                MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                             case (int)Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -781,14 +792,14 @@ namespace SurveyQuestionsConfigurator
                         questionStartValueCaption = (string)genericTextBox1.Text;
                         questionEndValueCaption = (string)genericTextBox2.Text;
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (int)Types.Question.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (int)Types.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.EditSliderQuestion(sliderQuestion);
 
                         switch (result)
                         {
                             case (int)Types.ErrorCode.SUCCESS:
-                                MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                             case (int)Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -841,14 +852,14 @@ namespace SurveyQuestionsConfigurator
                         questionText = questionTextRichTextBox.Text;
                         numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (int)Types.Question.STAR, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (int)Types.QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.EditStarQuestion(starQuestion);
 
                         switch (result)
                         {
                             case (int)Types.ErrorCode.SUCCESS:
-                                MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
                             case (int)Types.ErrorCode.SQLVIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -1,5 +1,5 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
@@ -44,72 +44,85 @@ namespace SurveyQuestionsConfigurator
         #endregion
 
         #region Functions
+
+        public void ClearViewList()
+        {
+            foreach (ListViewItem item in createdQuestions_ListView.Items)
+            {
+                item.Remove();
+            }
+        }
+
+
         /// <summary>
         /// Build List View When Needed (On ADD, EDIT, ...etc)
         /// </summary>
         public void BuildListView()
         {
+            /// <summary>
+            /// Connect to Quesion table
+            /// And Fill the List View
+            /// </summary>
             try
             {
                 ListViewItem listviewitem;// Used for creating listview items.
+                List<Question> questionsList = new List<Question>();
+                QuestionManager questionManager = new QuestionManager();
 
-                ///remove all rows -> refresh
-                foreach (ListViewItem item in createdQuestions_ListView.Items)
+                ///Hide ID Column
+                createdQuestions_ListView.Columns[0].Width = 0;
+
+                ///size Text column header to fit the column header text.
+                this.createdQuestions_ListView.Columns[3].Width = -2;
+
+                int result = questionManager.GetAllQuestions(ref questionsList);
+                switch (result)
                 {
-                    item.Remove();
-                }
+                    case (int)Types.ErrorCode.SUCCESS:
+                        {
+                            if (!addQuestionButton.Enabled)
+                            {
+                                createdQuestions_ListView.Enabled = true;
+                                addQuestionButton.Enabled = true;
+                                editQuestionButton.Enabled = true;
+                                deleteQuestionButton.Enabled = true;
 
-                /// <summary>
-                /// Connect to Quesion table
-                /// And Fill the List View
-                /// </summary>
-                try
-                {
-                    List<Question> questionsList = new List<Question>();
-                    QuestionManager questionManager = new QuestionManager();
+                                errorLabel.Visible = false;
+                            }
 
-                    int result = questionManager.GetAllQuestions(ref questionsList);
-                    switch (result)
-                    {
-                        case (int)Types.ErrorCode.SUCCESS:
+                            ClearViewList();
+
                             foreach (Question q in questionsList)
                             {
                                 //listviewitem = new ListViewItem($"{Question.Question.SMILEY}");
                                 listviewitem = new ListViewItem($"{q.ID}");
                                 listviewitem.SubItems.Add($"{q.Order}");
-                                listviewitem.SubItems.Add($"{(Types.Question)q.Type}");
+                                listviewitem.SubItems.Add($"{(Types.QuestionType)q.Type}");
                                 listviewitem.SubItems.Add($"{q.Text}");
                                 this.createdQuestions_ListView.Items.Add(listviewitem);
                             }
-                            break;
-                        case (int)Types.ErrorCode.SQLVIOLATION:
-                            MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        case (int)Types.ErrorCode.ERROR:
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                    }
+                        }
+                        break;
+                    case (int)Types.ErrorCode.SQLVIOLATION:
+                        if (addQuestionButton.Enabled)
+                        {
+                            addQuestionButton.Enabled = false;
+                            editQuestionButton.Enabled = false;
+                            deleteQuestionButton.Enabled = false;
+
+                            errorLabel.Visible = true;
+                            errorLabel.Text = "You're Offilne, Please Try Againt Later";
+                            createdQuestions_ListView.Enabled = false;
+                        }
+                        break;
+
+                    case (int)Types.ErrorCode.ERROR:
+                        break;
                 }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show("SQL ErrorCode in build list view:\n" + ex);
-                    Logger.LogError(ex); //write error to log file
-                }
-
-
-                // Loop through and size each column header to fit the column header text.
-                //foreach (ColumnHeader ch in this.createdQuestions_ListView.Columns)
-                //{
-                //    ch.Width = -2;
-                //}
-
-                ///size Text column header to fit the column header text.
-                this.createdQuestions_ListView.Columns[3].Width = -2;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Logger.LogError(ex);
+                Logger.LogError(ex); //write error to log file
             }
         } //end func.
 
@@ -241,31 +254,23 @@ namespace SurveyQuestionsConfigurator
                         /// Check the type of the question to be deleted
                         /// Choose appropriate table to query
                         ///
-                        try
-                        {
-                            questionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
-                            QuestionManager questionManager = new QuestionManager();
-                            result = questionManager.DeleteQuestionByID(questionId);
+                        questionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
+                        QuestionManager questionManager = new QuestionManager();
+                        result = questionManager.DeleteQuestionByID(questionId);
 
-                            createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
-                            switch (result)
-                            {
-                                case (int)Types.ErrorCode.SUCCESS:
-                                    MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    //BuildListView();
-                                    break;
-                                case (int)Types.ErrorCode.SQLVIOLATION:
-                                    MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    break;
-                                case (int)Types.ErrorCode.ERROR:
-                                    MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    break;
-                            }
-                        }
-                        catch (Exception ex)
+                        createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
+                        switch (result)
                         {
-                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                            Logger.LogError(ex); //write error to log file
+                            case (int)Types.ErrorCode.SUCCESS:
+                                //MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //BuildListView();
+                                break;
+                            case (int)Types.ErrorCode.SQLVIOLATION:
+                                MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case (int)Types.ErrorCode.ERROR:
+                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
                         }
                     }
                 }
@@ -276,7 +281,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }//end event 
@@ -305,19 +310,19 @@ namespace SurveyQuestionsConfigurator
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
                     int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
-                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Types.Question.SMILEY.ToString())
+                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Types.QuestionType.SMILEY.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.Question.SMILEY);
+                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.QuestionType.SMILEY);
                         addQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.Question.SLIDER.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.QuestionType.SLIDER.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.Question.SLIDER);
+                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.QuestionType.SLIDER);
                         addQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.Question.STAR.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Types.QuestionType.STAR.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.Question.STAR);
+                        addQuestionForm = new AddQuestionForm(questionId, (int)Types.QuestionType.STAR);
                         addQuestionForm.ShowDialog();
                     }
                 }

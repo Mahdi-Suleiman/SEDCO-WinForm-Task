@@ -1,6 +1,6 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.DataAccess;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.AddSliderQuestion(sliderQuestion);
             }
             catch (Exception ex)
@@ -31,7 +30,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.GetSliderQuestionByID(ref sliderQuestion);
             }
             catch (Exception ex)
@@ -45,7 +43,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.EditSliderQuestion(sliderQuestion);
             }
             catch (Exception ex)

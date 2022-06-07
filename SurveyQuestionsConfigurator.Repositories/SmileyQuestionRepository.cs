@@ -1,6 +1,6 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.DataAccess;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.AddSmileyQuestion(smileyQuestion);
             }
             catch (Exception ex)
@@ -38,7 +37,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.GetSmileyQuestionByID(ref smileyQuestion);
             }
             catch (Exception ex)
@@ -52,7 +50,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.EditSmileyQuestion(smileyQuestion);
             }
             catch (Exception ex)

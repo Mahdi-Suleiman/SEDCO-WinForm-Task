@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SurveyQuestionsConfigurator.CommonTypes
+namespace SurveyQuestionsConfigurator.Entites
 {
     public class Types
     {
@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator.CommonTypes
             EMPTY
         }
 
-        public enum Question
+        public enum QuestionType
         {
             SMILEY = 0,
             SLIDER = 1,

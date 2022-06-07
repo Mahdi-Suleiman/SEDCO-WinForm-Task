@@ -1,6 +1,6 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
-using SurveyQuestionsConfigurator.CommonTypes;
 using SurveyQuestionsConfigurator.DataAccess;
+using SurveyQuestionsConfigurator.Entites;
 using SurveyQuestionsConfigurator.Entities;
 using System;
 using System.Collections.Generic;
@@ -22,13 +22,12 @@ namespace SurveyQuestionsConfigurator.Repositories
         /// Find
         ///</>
         ///
-        protected DbConnect dbConnect = null;
+        protected DbConnect dbConnect = new DbConnect();
 
         public int Delete(int id)
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.DeleteQuestion(id);
             }
             catch (Exception ex)
@@ -42,7 +41,6 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                dbConnect = new DbConnect();
                 return dbConnect.GetAllQuestions(ref questionsList);
             }
             catch (Exception ex)
