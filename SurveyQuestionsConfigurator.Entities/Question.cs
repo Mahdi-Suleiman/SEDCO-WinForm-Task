@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SurveyQuestionsConfigurator.Entites.Types;
 
 namespace SurveyQuestionsConfigurator.Entities
 {
@@ -12,7 +13,7 @@ namespace SurveyQuestionsConfigurator.Entities
         public int ID { get; set; }
         public int Order { get; set; }
         public string Text { get; set; }
-        public int Type { get; set; }
+        public QuestionType Type { get; set; }
 
         public Question(int id)
         {
@@ -26,7 +27,7 @@ namespace SurveyQuestionsConfigurator.Entities
             }
         }
 
-        public Question(int id, int order, string text, int type)
+        public Question(int id, int order, string text, QuestionType type)
         {
             try
             {

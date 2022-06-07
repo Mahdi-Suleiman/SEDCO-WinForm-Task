@@ -53,7 +53,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
 ");
                 }
             }
-            catch (Exception ex2)
+            catch
             {
 
             }

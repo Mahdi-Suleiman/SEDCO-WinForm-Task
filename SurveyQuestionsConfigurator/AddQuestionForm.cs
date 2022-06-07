@@ -9,7 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
-
+using static SurveyQuestionsConfigurator.Entites.Types;
 
 namespace SurveyQuestionsConfigurator
 {
@@ -603,7 +603,7 @@ namespace SurveyQuestionsConfigurator
                         questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
 
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (int)Types.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (QuestionType)Types.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.AddSliderQuestion(sliderQuestion);
 
@@ -666,7 +666,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (int)Types.QuestionType.STAR, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (QuestionType)Types.QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.AddStarQuestion(starQuestion);
 
@@ -792,7 +792,7 @@ namespace SurveyQuestionsConfigurator
                         questionStartValueCaption = (string)genericTextBox1.Text;
                         questionEndValueCaption = (string)genericTextBox2.Text;
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (int)Types.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (QuestionType)Types.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.EditSliderQuestion(sliderQuestion);
 
@@ -852,7 +852,7 @@ namespace SurveyQuestionsConfigurator
                         questionText = questionTextRichTextBox.Text;
                         numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (int)Types.QuestionType.STAR, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (QuestionType)Types.QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.EditStarQuestion(starQuestion);
 
