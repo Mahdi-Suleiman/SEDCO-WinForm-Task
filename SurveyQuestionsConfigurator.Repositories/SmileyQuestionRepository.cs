@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SurveyQuestionsConfigurator.Entities.Types;
+using static SurveyQuestionsConfigurator.Entities.Generic;
 
 namespace SurveyQuestionsConfigurator.Repositories
 {
@@ -27,7 +27,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
 
@@ -40,7 +40,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
 
@@ -53,7 +53,7 @@ namespace SurveyQuestionsConfigurator.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
     }

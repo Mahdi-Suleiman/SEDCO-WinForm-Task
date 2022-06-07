@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SurveyQuestionsConfigurator.Entities.Types;
+using static SurveyQuestionsConfigurator.Entities.Generic;
 
 namespace SurveyQuestionsConfigurator.DataAccess
 {
@@ -40,9 +40,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
 
                     IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.ORDER}) = 0)
+
+                    BEGIN TRANSACTION
 
                     BEGIN
                          INSERT INTO Questions 
@@ -72,22 +73,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return Types.ErrorCode.SUCCESS;
+                        return Generic.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return Types.ErrorCode.SQL_VIOLATION;
+                        return Generic.ErrorCode.SQL_VIOLATION;
                     }
                     else
                     {
-                        return Types.ErrorCode.ERROR;
+                        return Generic.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -115,9 +116,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
-
                     IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.ORDER}) = 0)
+
+                    BEGIN TRANSACTION
 
                         BEGIN
                             INSERT INTO Questions 
@@ -152,22 +153,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return Types.ErrorCode.SUCCESS;
+                        return Generic.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return Types.ErrorCode.SQL_VIOLATION;
+                        return Generic.ErrorCode.SQL_VIOLATION;
                     }
                     else
                     {
-                        return Types.ErrorCode.ERROR;
+                        return Generic.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
 
         } // end of function
@@ -193,9 +194,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
 
                     IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.ORDER}) = 0)
+
+                    BEGIN TRANSACTION
 
                         BEGIN
                         INSERT INTO Questions 
@@ -224,22 +226,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return Types.ErrorCode.SUCCESS;
+                        return Generic.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return Types.ErrorCode.SQL_VIOLATION;
+                        return Generic.ErrorCode.SQL_VIOLATION;
                     }
                     else
                     {
-                        return Types.ErrorCode.ERROR;
+                        return Generic.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
 
         }// end of function
@@ -270,12 +272,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
 
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @{QuestionColumn.ID})
 
                     IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.ORDER}) = 0)
+
+                    BEGIN TRANSACTION
 
                         BEGIN
 	                        UPDATE Questions
@@ -326,15 +329,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return Types.ErrorCode.SUCCESS;
+                        return Generic.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return Types.ErrorCode.SQL_VIOLATION;
+                        return Generic.ErrorCode.SQL_VIOLATION;
                     }
                     else
                     {
-                        return Types.ErrorCode.ERROR;
+                        return Generic.ErrorCode.ERROR;
                     }
                     //return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
                 }
@@ -343,7 +346,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
 
         }//end of function
@@ -370,12 +373,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
 
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @{QuestionColumn.ID})
 
                     IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.ORDER}) = 0)
+
+                    BEGIN TRANSACTION
 
                         BEGIN
                             UPDATE Questions
@@ -427,15 +431,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return Types.ErrorCode.SUCCESS;
+                        return Generic.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return Types.ErrorCode.SQL_VIOLATION;
+                        return Generic.ErrorCode.SQL_VIOLATION;
                     }
                     else
                     {
-                        return Types.ErrorCode.ERROR;
+                        return Generic.ErrorCode.ERROR;
                     }
                     //return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
                     //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -444,7 +448,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -467,12 +471,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection conn = new SqlConnection(connectionString.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
 
                     DECLARE @@MyOrder as INT
                     SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @{QuestionColumn.ID})
 
                     IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.ORDER}) = 0)
+
+                    BEGIN TRANSACTION
 
                         BEGIN
 	                        UPDATE Questions
@@ -521,22 +526,22 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     if (result != null)
                     {
-                        return Types.ErrorCode.SUCCESS;
+                        return Generic.ErrorCode.SUCCESS;
                     }
                     else if (result == null)
                     {
-                        return Types.ErrorCode.SQL_VIOLATION;
+                        return Generic.ErrorCode.SQL_VIOLATION;
                     }
                     else
                     {
-                        return Types.ErrorCode.ERROR;
+                        return Generic.ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -564,13 +569,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     cmd.Parameters.AddRange(parameters);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR;
+                    return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
 
         } //end func.
@@ -602,18 +607,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         Question q = new Question((int)(int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"]);
                         questionsList.Add(q);
                     }
-                    return questionsList.Count >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
+                    return questionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.SQL_VIOLATION;
+                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         } //end func.
 
@@ -650,18 +655,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         smileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"], (int)row[$"{QuestionColumn.NUMBER_OF_SMILEY_FACES}"]);
                     }
 
-                    return smileyQuestion.NumberOfSmileyFaces >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
+                    return smileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.SQL_VIOLATION;
+                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         } // end func.
 
@@ -699,18 +704,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             (int)row[$"{QuestionColumn.START_VALUE}"], (int)row[$"{QuestionColumn.END_VALUE}"], (string)row[$"{QuestionColumn.START_VALUE_CAPTION}"], (string)row[$"{QuestionColumn.END_VALUE_CAPTION}"]);
                     }
 
-                    return sliderQuestion.StartValue >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
+                    return sliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.SQL_VIOLATION;
+                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         } // end func.
 
@@ -747,18 +752,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         starQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"], (int)row[$"{QuestionColumn.NUMBER_OF_STARS}"]);
                     }
 
-                    return starQuestion.NumberOfStars >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
+                    return starQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.SQL_VIOLATION;
+                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
 
         } // end func.

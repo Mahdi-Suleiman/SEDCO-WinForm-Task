@@ -46,7 +46,7 @@
     <Compile Include="SliderQuestion.cs" />
     <Compile Include="SmileyQuestion.cs" />
     <Compile Include="StarQuestion.cs" />
-    <Compile Include="Types.cs" />
+    <Compile Include="Generic.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

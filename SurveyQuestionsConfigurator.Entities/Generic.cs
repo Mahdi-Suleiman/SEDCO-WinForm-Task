@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SurveyQuestionsConfigurator.Entities
 {
-    public class Types
+    public class Generic
     {
         public enum ErrorCode
         {

@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static SurveyQuestionsConfigurator.Entities.Types;
+using static SurveyQuestionsConfigurator.Entities.Generic;
 
 namespace SurveyQuestionsConfigurator.QuestionLogic
 {
@@ -29,13 +29,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode AddSliderQuestion(SliderQuestion sliderQuestion)
@@ -48,13 +48,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode AddStarQuestion(StarQuestion starQuestion)
@@ -67,13 +67,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
 
@@ -90,13 +90,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode EditSliderQuestion(SliderQuestion sliderQuestion)
@@ -109,13 +109,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode EditStarQuestion(StarQuestion starQuestion)
@@ -128,13 +128,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
 
@@ -151,13 +151,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
@@ -170,13 +170,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode GetStarQuestionByID(ref StarQuestion starQuestion)
@@ -189,13 +189,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
         public ErrorCode GetAllQuestions(ref List<Question> questionsList)
@@ -207,7 +207,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
 
@@ -225,13 +225,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 }
                 else
                 {
-                    return Types.ErrorCode.ERROR;
+                    return Generic.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Types.ErrorCode.ERROR;
+                return Generic.ErrorCode.ERROR;
             }
         }
 
