@@ -1,7 +1,8 @@
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.Properties.Resources.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.exe.config
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.exe
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.pdb
-C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.CommonHelpers.dll
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Entities.dll
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\SurveyQuestionsConfigurator.Logic.dll
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\bin\Debug\System.Configuration.ConfigurationManager.dll
@@ -23,7 +24,6 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.SuggestedBindingRedirects.cache
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.AddQuestionForm.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.resources
-C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.Properties.Resources.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.GenerateResource.cache
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.CoreCompileInputs.cache
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.CopyComplete

@@ -103,7 +103,7 @@ namespace SurveyQuestionsConfigurator
                             }
                         }
                         break;
-                    case Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQL_VIOLATION:
                         if (addQuestionButton.Enabled)
                         {
                             addQuestionButton.Enabled = false;
@@ -265,7 +265,7 @@ namespace SurveyQuestionsConfigurator
                                 //MessageBox.Show("Question deleted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //BuildListView();
                                 break;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                             case Types.ErrorCode.ERROR:

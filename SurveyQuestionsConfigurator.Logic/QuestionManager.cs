@@ -23,7 +23,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (CheckSmileyQuestionValues(smileyQuestion))
+                if (CheckSmileyQuestionValues(smileyQuestion) == ErrorCode.SUCCESS)
                 {
                     return smileyQuestionRepository.Add(smileyQuestion);
                 }
@@ -42,7 +42,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (CheckSliderQuestionValues(sliderQuestion))
+                if (CheckSliderQuestionValues(sliderQuestion) == ErrorCode.SUCCESS)
                 {
                     return sliderQuestionRepository.Add(sliderQuestion);
                 }
@@ -61,7 +61,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (CheckStarQuestionValues(starQuestion))
+                if (CheckStarQuestionValues(starQuestion) == ErrorCode.SUCCESS)
                 {
                     return starQuestionRepository.Add(starQuestion);
                 }
@@ -84,7 +84,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (CheckSmileyQuestionValues(smileyQuestion))
+                if (CheckSmileyQuestionValues(smileyQuestion) == ErrorCode.SUCCESS)
                 {
                     return smileyQuestionRepository.Update(smileyQuestion);
                 }
@@ -103,7 +103,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (CheckSliderQuestionValues(sliderQuestion))
+                if (CheckSliderQuestionValues(sliderQuestion) == ErrorCode.SUCCESS)
                 {
                     return sliderQuestionRepository.Update(sliderQuestion);
                 }
@@ -122,7 +122,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (CheckStarQuestionValues(starQuestion))
+                if (CheckStarQuestionValues(starQuestion) == ErrorCode.SUCCESS)
                 {
                     return starQuestionRepository.Update(starQuestion);
                 }
@@ -240,24 +240,24 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
         #region Validation Functions
 
-        public bool CheckSmileyQuestionValues(SmileyQuestion smileyQuestion)
+        public ErrorCode CheckSmileyQuestionValues(SmileyQuestion smileyQuestion)
         {
             try
             {
                 if (!String.IsNullOrWhiteSpace(smileyQuestion.Text) && smileyQuestion.Text.Length < 4000) //if Question text is not null or empty 
                     if (smileyQuestion.NumberOfSmileyFaces >= 2 && smileyQuestion.NumberOfSmileyFaces <= 5)
-                        return true;
+                        return ErrorCode.SUCCESS;
 
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         } // end func.
 
-        public bool CheckSliderQuestionValues(SliderQuestion sliderQuestion)
+        public ErrorCode CheckSliderQuestionValues(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -265,30 +265,31 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                     if (!String.IsNullOrWhiteSpace(sliderQuestion.StartValueCaption) && sliderQuestion.StartValueCaption.Length < 100)
                         if (!String.IsNullOrWhiteSpace(sliderQuestion.EndValueCaption) && sliderQuestion.EndValueCaption.Length < 100)
                             if (sliderQuestion.StartValue < sliderQuestion.EndValue)
-                                return true;
-                return false;
+                                return ErrorCode.SUCCESS;
+
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         } // end func.
 
-        public bool CheckStarQuestionValues(StarQuestion starQuestion)
+        public ErrorCode CheckStarQuestionValues(StarQuestion starQuestion)
         {
             try
             {
                 if (!String.IsNullOrWhiteSpace(starQuestion.Text) && starQuestion.Text.Length < 4000) //if Question text is not null or empty 
                     if (starQuestion.NumberOfStars >= 1 && starQuestion.NumberOfStars <= 10)
-                        return true;
+                        return ErrorCode.SUCCESS;
 
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         } // end func.
 

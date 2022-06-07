@@ -130,7 +130,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 bool OperationSuccess = false;
-                if (StateForm.ToString().ToUpper() == FormStateType.ADD.ToString().ToUpper())
+                if (StateForm == FormStateType.ADD)
                 {
                     try
                     {
@@ -153,7 +153,7 @@ namespace SurveyQuestionsConfigurator
                         Logger.LogError(ex);
                     }
                 }
-                else if (StateForm.ToString().ToUpper() == FormStateType.EDIT.ToString().ToUpper())
+                else if (StateForm == FormStateType.EDIT)
                 {
                     try
                     {
@@ -220,7 +220,7 @@ namespace SurveyQuestionsConfigurator
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
-                    case Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQL_VIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case Types.ErrorCode.ERROR:
@@ -264,7 +264,7 @@ namespace SurveyQuestionsConfigurator
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
-                    case Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQL_VIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case Types.ErrorCode.ERROR:
@@ -305,7 +305,7 @@ namespace SurveyQuestionsConfigurator
                     case Types.ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case Types.ErrorCode.SQLVIOLATION:
+                    case Types.ErrorCode.SQL_VIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     case Types.ErrorCode.ERROR:
@@ -543,7 +543,7 @@ namespace SurveyQuestionsConfigurator
                                 //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
                             case Types.ErrorCode.ERROR:
@@ -612,7 +612,7 @@ namespace SurveyQuestionsConfigurator
                                 //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
                             case Types.ErrorCode.ERROR:
@@ -675,7 +675,7 @@ namespace SurveyQuestionsConfigurator
                                 //MessageBox.Show("Question inserted successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 //ClearInputs();
                                 return true;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
                             case Types.ErrorCode.ERROR:
@@ -737,7 +737,7 @@ namespace SurveyQuestionsConfigurator
                             case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
                             case Types.ErrorCode.ERROR:
@@ -800,7 +800,7 @@ namespace SurveyQuestionsConfigurator
                             case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
                             case Types.ErrorCode.ERROR:
@@ -860,7 +860,7 @@ namespace SurveyQuestionsConfigurator
                             case Types.ErrorCode.SUCCESS:
                                 //MessageBox.Show("Question updated successfully\nPress OK to see changes", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return true;
-                            case Types.ErrorCode.SQLVIOLATION:
+                            case Types.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 break;
                             case Types.ErrorCode.ERROR:

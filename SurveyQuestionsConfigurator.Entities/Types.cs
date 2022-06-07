@@ -12,7 +12,7 @@ namespace SurveyQuestionsConfigurator.Entities
         {
             SUCCESS,
             ERROR,
-            SQLVIOLATION,
+            SQL_VIOLATION,
             EMPTY
         }
 
@@ -21,6 +21,19 @@ namespace SurveyQuestionsConfigurator.Entities
             SMILEY = 0,
             SLIDER = 1,
             STAR = 2
+        }
+        public enum QuestionColumn
+        {
+            ID,
+            ORDER,
+            TEXT,
+            TYPE,
+            NUMBER_OF_SMILEY_FACES,
+            NUMBER_OF_STARS,
+            START_VALUE,
+            END_VALUE,
+            START_VALUE_CAPTION,
+            END_VALUE_CAPTION
         }
     }
 }
