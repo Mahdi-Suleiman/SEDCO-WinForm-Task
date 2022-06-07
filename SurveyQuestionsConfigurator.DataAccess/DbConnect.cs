@@ -599,7 +599,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        Question q = new Question((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"]);
+                        Question q = new Question((int)(int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"]);
                         questionsList.Add(q);
                     }
                     return questionsList.Count >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
@@ -647,7 +647,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        smileyQuestion = new SmileyQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"], (int)row["NumberOfSmileyFaces"]);
+                        smileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"], (int)row[$"{QuestionColumn.NUMBER_OF_SMILEY_FACES}"]);
                     }
 
                     return smileyQuestion.NumberOfSmileyFaces >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
@@ -695,8 +695,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        sliderQuestion = new SliderQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"], (int)row["StartValue"],
-                           (int)row["EndValue"], row["StartValueCaption"].ToString(), row["EndValueCaption"].ToString());
+                        sliderQuestion = new SliderQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"],
+                            (int)row[$"{QuestionColumn.START_VALUE}"], (int)row[$"{QuestionColumn.END_VALUE}"], (string)row[$"{QuestionColumn.START_VALUE_CAPTION}"], (string)row[$"{QuestionColumn.END_VALUE_CAPTION}"]);
                     }
 
                     return sliderQuestion.StartValue >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
@@ -744,7 +744,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        starQuestion = new StarQuestion((int)row["ID"], (int)row["Order"], row["Text"].ToString(), (QuestionType)row["Type"], (int)row["NumberOfStars"]);
+                        starQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.ORDER}"], (string)row[$"{QuestionColumn.TEXT}"], (QuestionType)row[$"{QuestionColumn.TYPE}"], (int)row[$"{QuestionColumn.NUMBER_OF_STARS}"]);
                     }
 
                     return starQuestion.NumberOfStars >= 0 ? Types.ErrorCode.SUCCESS : Types.ErrorCode.ERROR; // RETURN INT32
