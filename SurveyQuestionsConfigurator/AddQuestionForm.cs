@@ -136,15 +136,15 @@ namespace SurveyQuestionsConfigurator
                     {
                         if (questionTypeComboBox.SelectedIndex == 0)
                         {
-                            OperationSuccess = AddSmileyQuestion();
+                            OperationSuccess = InsertSmileyQuestion();
                         }
                         else if (questionTypeComboBox.SelectedIndex == 1)
                         {
-                            OperationSuccess = AddSliderQuestion();
+                            OperationSuccess = InsertSliderQuestion();
                         }
                         else if (questionTypeComboBox.SelectedIndex == 2)
                         {
-                            OperationSuccess = AddStarQuestion();
+                            OperationSuccess = InsertStarQuestion();
                         }
                     }
                     catch (Exception ex)
@@ -159,15 +159,15 @@ namespace SurveyQuestionsConfigurator
                     {
                         if (questionTypeComboBox.SelectedIndex == 0)
                         {
-                            OperationSuccess = EditSmileyQuestion();
+                            OperationSuccess = UpdateSmileyQuestion();
                         }
                         else if (questionTypeComboBox.SelectedIndex == 1)
                         {
-                            OperationSuccess = EditSliderQuestion();
+                            OperationSuccess = UpdateSliderQuestion();
                         }
                         else if (questionTypeComboBox.SelectedIndex == 2)
                         {
-                            OperationSuccess = EditStarQuestion();
+                            OperationSuccess = UpdateStarQuestion();
                         }
 
                     }
@@ -211,19 +211,19 @@ namespace SurveyQuestionsConfigurator
                 ErrorCode result = questionManager.GetSmileyQuestionByID(ref smileyQuestion);
                 switch (result)
                 {
-                    case Generic.ErrorCode.SUCCESS:
+                    case ErrorCode.SUCCESS:
                         questionOrderNumericUpDown.Value = Convert.ToDecimal(smileyQuestion.Order);
                         questionTextRichTextBox.Text = smileyQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(smileyQuestion.NumberOfSmileyFaces);
                         break;
-                    case Generic.ErrorCode.EMPTY:
+                    case ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
-                    case Generic.ErrorCode.SQL_VIOLATION:
+                    case ErrorCode.SQL_VIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case Generic.ErrorCode.ERROR:
+                    case ErrorCode.ERROR:
                         MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -252,7 +252,7 @@ namespace SurveyQuestionsConfigurator
                 ErrorCode result = questionManager.GetSliderQuestionByID(ref sliderQuestion);
                 switch (result)
                 {
-                    case Generic.ErrorCode.SUCCESS:
+                    case ErrorCode.SUCCESS:
                         questionOrderNumericUpDown.Value = Convert.ToDecimal(sliderQuestion.Order);
                         questionTextRichTextBox.Text = sliderQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(sliderQuestion.StartValue);
@@ -260,14 +260,14 @@ namespace SurveyQuestionsConfigurator
                         genericTextBox1.Text = sliderQuestion.StartValueCaption.ToString();
                         genericTextBox2.Text = sliderQuestion.EndValueCaption.ToString();
                         break;
-                    case Generic.ErrorCode.EMPTY:
+                    case ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
-                    case Generic.ErrorCode.SQL_VIOLATION:
+                    case ErrorCode.SQL_VIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case Generic.ErrorCode.ERROR:
+                    case ErrorCode.ERROR:
                         MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -297,18 +297,18 @@ namespace SurveyQuestionsConfigurator
                 ErrorCode result = questionManager.GetStarQuestionByID(ref starQuestion);
                 switch (result)
                 {
-                    case Generic.ErrorCode.SUCCESS:
+                    case ErrorCode.SUCCESS:
                         questionOrderNumericUpDown.Value = Convert.ToDecimal(starQuestion.Order);
                         questionTextRichTextBox.Text = starQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(starQuestion.NumberOfStars);
                         break;
-                    case Generic.ErrorCode.EMPTY:
+                    case ErrorCode.EMPTY:
                         MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case Generic.ErrorCode.SQL_VIOLATION:
+                    case ErrorCode.SQL_VIOLATION:
                         MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
-                    case Generic.ErrorCode.ERROR:
+                    case ErrorCode.ERROR:
                         MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -508,7 +508,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Add a smiley question through DbConnect Class
         /// </summary>
-        private bool AddSmileyQuestion()
+        private bool InsertSmileyQuestion()
         {
             try
             {
@@ -535,16 +535,19 @@ namespace SurveyQuestionsConfigurator
                     {
                         SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, Generic.QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.AddSmileyQuestion(smileyQuestion);
+                        result = questionManager.InsertSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
+                                orderLabel.Text = "";
                                 return true;
-                            case Generic.ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            case ErrorCode.SQL_VIOLATION:
+                                orderLabel.Text = "Question order already in use\nTry using another one";
+                                //MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning );
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
+                                orderLabel.Text = "";
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -572,7 +575,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Add a slider question through DbConnect Class
         /// </summary>
-        private bool AddSliderQuestion()
+        private bool InsertSliderQuestion()
         {
             try
             {
@@ -602,16 +605,18 @@ namespace SurveyQuestionsConfigurator
 
                         SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (QuestionType)Generic.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.AddSliderQuestion(sliderQuestion);
+                        result = questionManager.InsertSliderQuestion(sliderQuestion);
 
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
+                                orderLabel.Text = "";
                                 return true;
-                            case Generic.ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            case ErrorCode.SQL_VIOLATION:
+                                orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
+                                orderLabel.Text = "";
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
@@ -639,7 +644,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Add a star question through DbConnect Class
         /// </summary>
-        private bool AddStarQuestion()
+        private bool InsertStarQuestion()
         {
             try
             {
@@ -663,16 +668,18 @@ namespace SurveyQuestionsConfigurator
                     {
                         StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (QuestionType)Generic.QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.AddStarQuestion(starQuestion);
+                        result = questionManager.InsertStarQuestion(starQuestion);
 
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
+                                orderLabel.Text = "";
                                 return true;
-                            case Generic.ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            case ErrorCode.SQL_VIOLATION:
+                                orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
+                                orderLabel.Text = "";
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -702,7 +709,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Edit a smiley question through DbConnect Class
         /// </summary>
-        private bool EditSmileyQuestion()
+        private bool UpdateSmileyQuestion()
         {
             try
             {
@@ -724,16 +731,18 @@ namespace SurveyQuestionsConfigurator
 
                         SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, Generic.QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.EditSmileyQuestion(smileyQuestion);
+                        result = questionManager.UpdateSmileyQuestion(smileyQuestion);
 
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
+                                orderLabel.Text = "";
                                 return true;
-                            case Generic.ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            case ErrorCode.SQL_VIOLATION:
+                                orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
+                                orderLabel.Text = "";
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -761,7 +770,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Edit a slider question through DbConnect Class
         /// </summary>
-        private bool EditSliderQuestion()
+        private bool UpdateSliderQuestion()
         {
             try
             {
@@ -786,16 +795,18 @@ namespace SurveyQuestionsConfigurator
 
                         SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (QuestionType)Generic.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.EditSliderQuestion(sliderQuestion);
+                        result = questionManager.UpdateSliderQuestion(sliderQuestion);
 
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
+                                orderLabel.Text = "";
                                 return true;
-                            case Generic.ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            case ErrorCode.SQL_VIOLATION:
+                                orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
+                                orderLabel.Text = "";
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -823,7 +834,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Edit a star question through DbConnect Class
         /// </summary>
-        private bool EditStarQuestion()
+        private bool UpdateStarQuestion()
         {
             try
             {
@@ -845,16 +856,18 @@ namespace SurveyQuestionsConfigurator
 
                         StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (QuestionType)Generic.QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.EditStarQuestion(starQuestion);
+                        result = questionManager.UpdateStarQuestion(starQuestion);
 
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
+                                orderLabel.Text = "";
                                 return true;
-                            case Generic.ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("This Question order is already in use\nTry using another one", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            case ErrorCode.SQL_VIOLATION:
+                                orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
+                                orderLabel.Text = "";
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }

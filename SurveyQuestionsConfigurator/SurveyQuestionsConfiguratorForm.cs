@@ -78,7 +78,7 @@ namespace SurveyQuestionsConfigurator
                 ErrorCode result = questionManager.GetAllQuestions(ref questionsList);
                 switch (result)
                 {
-                    case Generic.ErrorCode.SUCCESS:
+                    case ErrorCode.SUCCESS:
                         {
                             if (!addQuestionButton.Enabled)
                             {
@@ -103,7 +103,7 @@ namespace SurveyQuestionsConfigurator
                             }
                         }
                         break;
-                    case Generic.ErrorCode.SQL_VIOLATION:
+                    case ErrorCode.SQL_VIOLATION:
                         if (addQuestionButton.Enabled)
                         {
                             addQuestionButton.Enabled = false;
@@ -116,7 +116,7 @@ namespace SurveyQuestionsConfigurator
                         }
                         break;
 
-                    case Generic.ErrorCode.ERROR:
+                    case ErrorCode.ERROR:
                         break;
                 }
             }
@@ -261,13 +261,13 @@ namespace SurveyQuestionsConfigurator
                         createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
                         switch (result)
                         {
-                            case Generic.ErrorCode.SUCCESS:
+                            case ErrorCode.SUCCESS:
                                 BuildListView();
                                 break;
-                            case Generic.ErrorCode.SQL_VIOLATION:
+                            case ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
-                            case Generic.ErrorCode.ERROR:
+                            case ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }

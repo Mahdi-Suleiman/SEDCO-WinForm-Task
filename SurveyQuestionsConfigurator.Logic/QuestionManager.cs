@@ -19,7 +19,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         GenericRepository repository = new GenericRepository();
 
         #region Add Question Functions
-        public ErrorCode AddSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode InsertSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode AddSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode InsertSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode AddStarQuestion(StarQuestion starQuestion)
+        public ErrorCode InsertStarQuestion(StarQuestion starQuestion)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Edit Question Functions
-        public ErrorCode EditSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode UpdateSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode EditSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode UpdateSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode EditStarQuestion(StarQuestion starQuestion)
+        public ErrorCode UpdateStarQuestion(StarQuestion starQuestion)
         {
             try
             {
