@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [SurveyQuestionsConfigurator]    Script Date: 06/06/2022 10:10:47 ******/
+/****** Object:  Database [SurveyQuestionsConfigurator]    Script Date: 08/06/2022 19:28:03 ******/
 CREATE DATABASE [SurveyQuestionsConfigurator]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [SurveyQuestionsConfigurator] SET QUERY_STORE = OFF
 GO
 USE [SurveyQuestionsConfigurator]
 GO
-/****** Object:  Table [dbo].[Questions]    Script Date: 06/06/2022 10:10:47 ******/
+/****** Object:  Table [dbo].[Questions]    Script Date: 08/06/2022 19:28:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,20 +90,19 @@ GO
 CREATE TABLE [dbo].[Questions](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Order] [int] NOT NULL,
-	[Text] [varchar](8000) NOT NULL,
+	[Text] [nvarchar](4000) NOT NULL,
 	[Type] [int] NOT NULL,
  CONSTRAINT [PK_Questions_1] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [IX_Questions] UNIQUE NONCLUSTERED 
+ CONSTRAINT [UniqueOrder_Questions] UNIQUE NONCLUSTERED 
 (
-	[Order] ASC,
-	[Type] ASC
+	[Order] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Slider_Questions]    Script Date: 06/06/2022 10:10:47 ******/
+/****** Object:  Table [dbo].[Slider_Questions]    Script Date: 08/06/2022 19:28:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -112,15 +111,15 @@ CREATE TABLE [dbo].[Slider_Questions](
 	[ID] [int] NOT NULL,
 	[StartValue] [int] NOT NULL,
 	[EndValue] [int] NOT NULL,
-	[StartValueCaption] [varchar](100) NOT NULL,
-	[EndValueCaption] [varchar](100) NOT NULL,
+	[StartValueCaption] [nvarchar](100) NOT NULL,
+	[EndValueCaption] [nvarchar](100) NOT NULL,
  CONSTRAINT [IX_Slider_Questions] UNIQUE NONCLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Smiley_Questions]    Script Date: 06/06/2022 10:10:47 ******/
+/****** Object:  Table [dbo].[Smiley_Questions]    Script Date: 08/06/2022 19:28:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +133,7 @@ CREATE TABLE [dbo].[Smiley_Questions](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Star_Questions]    Script Date: 06/06/2022 10:10:47 ******/
+/****** Object:  Table [dbo].[Star_Questions]    Script Date: 08/06/2022 19:28:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -169,11 +168,11 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Star_Questions] CHECK CONSTRAINT [FK_Star_Questions_Questions]
 GO
-ALTER TABLE [dbo].[Questions]  WITH CHECK ADD  CONSTRAINT [CK_Questions] CHECK  ((datalength([Text])<=(8000) AND ([Type]=(0) OR [Type]=(1) OR [Type]=(2))))
+ALTER TABLE [dbo].[Questions]  WITH CHECK ADD  CONSTRAINT [CK_Questions] CHECK  ((len([Text])<=(8000) AND ([Type]=(0) OR [Type]=(1) OR [Type]=(2))))
 GO
 ALTER TABLE [dbo].[Questions] CHECK CONSTRAINT [CK_Questions]
 GO
-ALTER TABLE [dbo].[Slider_Questions]  WITH CHECK ADD  CONSTRAINT [CK_Slider_Questions] CHECK  (([StartValue]>=(1) AND [EndValue]<=(100) AND [StartValue]<[EndValue] AND datalength([StartValueCaption])<=(100) AND datalength([EndValueCaption])<=(100)))
+ALTER TABLE [dbo].[Slider_Questions]  WITH CHECK ADD  CONSTRAINT [CK_Slider_Questions] CHECK  (([StartValue]>=(1) AND [EndValue]<=(100) AND [StartValue]<[EndValue] AND len([StartValueCaption])<=(100) AND len([EndValueCaption])<=(100)))
 GO
 ALTER TABLE [dbo].[Slider_Questions] CHECK CONSTRAINT [CK_Slider_Questions]
 GO
@@ -184,6 +183,77 @@ GO
 ALTER TABLE [dbo].[Star_Questions]  WITH CHECK ADD  CONSTRAINT [CK_Star_Questions] CHECK  (([NumberOfStars]>=(1) AND [NumberOfStars]<=(10)))
 GO
 ALTER TABLE [dbo].[Star_Questions] CHECK CONSTRAINT [CK_Star_Questions]
+GO
+/****** Object:  StoredProcedure [dbo].[INSERT_QUESTION]    Script Date: 08/06/2022 19:28:03 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[INSERT_QUESTION]
+@ORDER INT,
+@TEXT NVARCHAR(4000),
+@TYPE INT
+AS
+SET NOCOUNT ON
+BEGIN TRY
+IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @ORDER) = 0)
+BEGIN
+    INSERT INTO Questions 
+    ([Order], [Text], [Type])
+    VALUES 
+    (@ORDER, @TEXT, @TYPE)
+	RETURN 1
+END
+ELSE
+BEGIN
+	RETURN 2
+END
+END TRY
+BEGIN CATCH
+		RETURN 3
+END CATCH
+GO
+/****** Object:  StoredProcedure [dbo].[UPDATE_QUESTION]    Script Date: 08/06/2022 19:28:03 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[UPDATE_QUESTION]
+@ID INT,
+@ORDER INT,
+@TEXT NVARCHAR(4000)
+
+AS
+SET NOCOUNT ON
+
+DECLARE @@MyOrder as INT
+SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
+
+BEGIN TRY
+	IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @ORDER) = 0)
+		BEGIN
+			UPDATE Questions
+					SET [Order] = @ORDER, [Text] = @TEXT
+					WHERE [ID] = @ID
+			RETURN 1
+		END
+	ELSE
+		BEGIN
+			IF (@@MyOrder = @ORDER)
+				BEGIN
+					UPDATE Questions
+					SET [Text] = @TEXT
+					WHERE [ID] = @ID
+					RETURN 1
+				END
+		END
+
+		RETURN 2 --ORDER ALREADY TAKEN
+
+END TRY
+BEGIN CATCH
+		RETURN 3 --ERROR
+END CATCH
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Check if start value is at least 1
 end value is at max 100
