@@ -512,7 +512,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
-
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
@@ -547,7 +546,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
-
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
@@ -585,7 +583,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
-
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
@@ -631,7 +628,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
-
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"

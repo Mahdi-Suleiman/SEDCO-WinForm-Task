@@ -110,7 +110,7 @@
             this.deleteQuestionButton.Name = "deleteQuestionButton";
             this.deleteQuestionButton.Size = new System.Drawing.Size(75, 23);
             this.deleteQuestionButton.TabIndex = 4;
-            this.deleteQuestionButton.Text = "Delete";
+            this.deleteQuestionButton.Text = "&Delete";
             this.deleteQuestionButton.UseVisualStyleBackColor = true;
             this.deleteQuestionButton.Click += new System.EventHandler(this.deleteQuestionButton_Click);
             // 
@@ -120,7 +120,7 @@
             this.editQuestionButton.Name = "editQuestionButton";
             this.editQuestionButton.Size = new System.Drawing.Size(75, 23);
             this.editQuestionButton.TabIndex = 3;
-            this.editQuestionButton.Text = "Edit";
+            this.editQuestionButton.Text = "&Edit";
             this.editQuestionButton.UseVisualStyleBackColor = true;
             this.editQuestionButton.Click += new System.EventHandler(this.editQuestionButton_Click);
             // 
@@ -130,7 +130,7 @@
             this.addQuestionButton.Name = "addQuestionButton";
             this.addQuestionButton.Size = new System.Drawing.Size(75, 23);
             this.addQuestionButton.TabIndex = 2;
-            this.addQuestionButton.Text = "Add";
+            this.addQuestionButton.Text = "&Add";
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
