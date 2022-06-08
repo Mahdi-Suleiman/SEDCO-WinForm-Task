@@ -72,3 +72,17 @@ What is accomplished today:
 
 What is remaining to be done:
 -Documentation
+
+********************************************************
+Date : 08/06/2022
+What is accomplished today:
+-Apply CVM Team naming convention
+-Use DB Transaction scopes
+-Show less buuttons(clicks) to the user
+-Add comments
+
+What is remaining to be done:
+-Documentation
+
+What is remaining to be done:
+-Documentation
