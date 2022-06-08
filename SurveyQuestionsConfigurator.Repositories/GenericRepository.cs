@@ -14,14 +14,7 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class GenericRepository
     {
-        ///<>
-        /// Add
-        /// Update
-        /// Get
-        /// GetAll
-        /// Find
-        ///</>
-        ///
+
         protected DbConnect mDbConnect = new DbConnect();
 
         public ErrorCode Delete(int pID)

@@ -15,10 +15,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
-        private ConnectionStringSettings sqlConnectionectionSetting = ConfigurationManager.ConnectionStrings[0]; //get sqlConnectionection string information from App.config
+        ///get sqlConnectionection string information from App.config
+        private ConnectionStringSettings mSqlConnectionectionSetting = ConfigurationManager.ConnectionStrings[0];
 
         #region INSERT Methods
-
+        /// <summary>
+        /// General question insert method that calls a stored proceedure
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         private ErrorCode InsertQuestion(TransactionScope transactionScope, SqlConnection sqlConnection, Question question)
         {
             try
@@ -48,6 +56,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         }
 
+        /// <summary>
+        /// General question update method that calls a stored proceedure
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         private ErrorCode UpdateQuestion(TransactionScope transactionScope, SqlConnection sqlConnection, Question question)
         {
             try
@@ -79,15 +95,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
 
         /// <summary>
-        /// 
+        /// 1) Open transaction
+        /// 2) Perform insert stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
         /// </summary>
-        /// <param name="questionOrder"></param>
-        /// <param name="NumberOfSmilyFaces"></param>
-        /// <param name="questionText"></param>
         /// <returns>
-        /// 1 -> Success
-        /// 2 -> Unique key violation
-        /// -1 -> ErrorCode
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
         /// </returns>
         public ErrorCode InsertSmileyQuestion(SmileyQuestion smileyQuestion)
         {
@@ -103,7 +119,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
                         returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, smileyQuestion);
@@ -145,23 +161,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } //end func.
+        } /// Function end
 
         /// <summary>
-        ///
-        /// Try to insert a new question into "Slider_Questions" table
-        ///
+        /// 1) Open transaction
+        /// 2) Perform insert stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
         /// </summary>
-        /// <param name="questionOrder"></param>
-        /// <param name="questionText"></param>
-        /// <param name="questionStartValue"></param>
-        /// <param name="questionEndValue"></param>
-        /// <param name="questionStartValueCaption"></param>
-        /// <param name="questionEndValueCaption"></param>
         /// <returns>
-        /// 1 -> Success
-        /// 2 -> Unique key violation
-        /// -1 -> ErrorCode
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
         /// </returns>
         public ErrorCode InsertSliderQuestion(SliderQuestion sliderQuestion)
         {
@@ -175,7 +186,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
                         returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, sliderQuestion);
@@ -221,15 +232,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
         } // end of function
 
         /// <summary>
-        /// Try to insert a new question into "Star_Questions" table
+        /// 1) Open transaction
+        /// 2) Perform insert stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
         /// </summary>
-        /// <param name="questionOrder"></param>
-        /// <param name="questionText"></param>
-        /// <param name="numberOfStars"></param>
         /// <returns>
-        /// 1 -> Success
-        /// 2 -> Unique key violation
-        /// -1 -> ErrorCode
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
         /// </returns>
         public ErrorCode InsertStarQuestion(StarQuestion starQuestion)
         {
@@ -242,7 +253,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
                         returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, starQuestion);
@@ -291,16 +302,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
         #region UPDATE Methods
 
         /// <summary>
-        /// 
+        /// 1) Open transaction
+        /// 2) Perform update stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
         /// </summary>
-        /// <param name="questionId"></param>
-        /// <param name="questionOrder"></param>
-        /// <param name="QuestionText"></param>
-        /// <param name="NumberOfSmilyFaces"></param>
         /// <returns>
-        /// 1 -> Success
-        /// 2 -> Unique key violation
-        /// -1 -> ErrorCode
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
         /// </returns>
         public ErrorCode UpdateSmileyQuestion(SmileyQuestion smileyQuestion)
         {
@@ -316,7 +326,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
                         returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, smileyQuestion);
@@ -363,19 +373,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
         }//end of function
 
         /// <summary>
-        /// 
+        /// 1) Open transaction
+        /// 2) Perform update stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
         /// </summary>
-        /// <param name="questionId"></param>
-        /// <param name="questionOrder"></param>
-        /// <param name="questionText"></param>
-        /// <param name="questionStartValue"></param>
-        /// <param name="questionEndValue"></param>
-        /// <param name="questionStartValueCaption"></param>
-        /// <param name="questionEndValueCaption"></param>
         /// <returns>
-        /// 1 -> Success
-        /// 2 -> Unique key violation
-        /// -1 -> ErrorCode
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
         /// </returns>
         public ErrorCode UpdateSliderQuestion(SliderQuestion sliderQuestion)
         {
@@ -388,7 +394,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
                         returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, sliderQuestion);
@@ -433,19 +439,18 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } //end func.
+        } /// Function end
 
         /// <summary>
-        /// 
+        /// 1) Open transaction
+        /// 2) Perform update stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
         /// </summary>
-        /// <param name="questionId"></param>
-        /// <param name="questionOrder"></param>
-        /// <param name="questionText"></param>
-        /// <param name="numberOfStars"></param>
         /// <returns>
-        /// 1 -> Success
-        /// 2 -> Unique key violation
-        /// -1 -> ErrorCode
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
         /// </returns>
         public ErrorCode UpdateStarQuestion(StarQuestion starQuestion)
         {
@@ -458,7 +463,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
                         returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, starQuestion);
@@ -499,17 +504,27 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } //end func.
+        } /// Function end
 
         #endregion
 
         #region DELETE Methods
 
+        /// <summary>
+        /// 1) Open transaction
+        /// 2) Perform update stored procedure -> get the result
+        /// 3) uery a second insert and get rows affected number
+        /// 4) return error code based on the results
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode DeleteQuestion(int questionId)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -533,17 +548,21 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 return Generic.ErrorCode.ERROR;
             }
 
-        } //end func.
+        } /// Function end
 
         #endregion
 
         #region GET Methods
 
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode GetAllQuestions(ref List<Question> questionsList)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -574,13 +593,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } //end func.
+        } /// Function end
 
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -620,13 +643,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } // end func.
+        } /// Function end
 
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -668,13 +695,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } // end func.
+        } /// Function end
 
+          /// <returns>
+          /// ErrorCode.SUCCESS
+          /// ErrorCode.ERROR
+          /// </returns>
         public ErrorCode GetStarQuestionByID(ref StarQuestion starQuestion)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
                 {
                     sqlConnection.Open();
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -716,122 +747,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 return Generic.ErrorCode.ERROR;
             }
 
-        } // end func.
+        } /// Function end
 
         #endregion
 
-        //        public   int CheckIfTablesExist()
-        //        {
-        //            try
-        //            {
-        //                sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString);
-        //                SqlCommand cmd = null;
-
-
-        //                ///
-        //                /// Create Tables if they do NOT exist
-        //                ///
-        //                cmd = new SqlCommand($@"
-        //USE [{sqlConnectionectionSetting.Name}]
-        //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
-        //BEGIN
-        //CREATE TABLE [dbo].[Smiley_Questions](
-        //	[QuestionID] [int] ID(1,1) NOT NULL,
-        //	[QuestionOrder] [int] NOT NULL,
-        //	[QuestionText] [text] NOT NULL,
-        //	[NumberOfSmileyFaces] [int] NOT NULL,
-        // CONSTRAINT [PK_Smiley_Faces] PRIMARY KEY CLUSTERED 
-        //(
-        //	[QuestionID] ASC
-        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-        //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-        //END
-        //", sqlConnection);
-        //                sqlConnection.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-        //                sqlConnection.Close();
-
-
-        //                cmd = new SqlCommand($@"
-        //USE [{sqlConnectionectionSetting.Name}]
-        //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Slider_Questions]') AND type in (N'U'))
-        //BEGIN
-        //CREATE TABLE [dbo].[Slider_Questions](
-        //	[QuestionID] [int] ID(1,1) NOT NULL,
-        //	[QuestionOrder] [int] NOT NULL,
-        //	[QuestionText] [text] NOT NULL,
-        //	[QuestionStartValue] [int] NOT NULL,
-        //	[QuestionEndValue] [int] NOT NULL,
-        //	[StartValueCaption] [varchar](100) NOT NULL,
-        //	[QuestionEndValueCaption] [varchar](100) NOT NULL,
-        // CONSTRAINT [PK_Slider_Questions] PRIMARY KEY CLUSTERED 
-        //(
-        //	[QuestionID] ASC
-        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-        // CONSTRAINT [IX_Slider_Questions] UNIQUE NONCLUSTERED 
-        //(
-        //	[QuestionOrder] ASC
-        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-        //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-        //END
-        //", sqlConnection);
-        //                sqlConnection.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-        //                sqlConnection.Close();
-
-
-        //                cmd = new SqlCommand($@"
-        //USE [{sqlConnectionectionSetting.Name}]
-        //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Star_Questions]') AND type in (N'U'))
-        //BEGIN
-        //CREATE TABLE [dbo].[Star_Questions](
-        //	[QuestionID] [int] ID(1,1) NOT NULL,
-        //	[QuestionOrder] [int] NOT NULL,
-        //	[QuestionText] [text] NOT NULL,
-        //	[NumberOfStars] [int] NOT NULL,
-        // CONSTRAINT [PK_Stars_Questions] PRIMARY KEY CLUSTERED 
-        //(
-        //	[QuestionID] ASC
-        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-        // CONSTRAINT [IX_Stars_Questions] UNIQUE NONCLUSTERED 
-        //(
-        //	[QuestionOrder] ASC
-        //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-        //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-        //END
-        //", sqlConnection);
-        //                sqlConnection.Open();
-        //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-        //                sqlConnection.Close();
-
-        //                return  CommonEnums.ErrorState.SUCCESS;
-        //            }
-        //            catch (SqlException ex)
-        //            {
-        //                //2627 -> unique key violation
-        //                // ex.Number
-        //                if (ex.Number == 2627)
-        //                {
-        //                    //MessageBox.Show("This Question order is already in use\nTry using another one", "ErrorCode", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                    return  CommonEnums.ErrorState.SQL_VIOLATION;
-        //                }
-        //                else
-        //                {
-        //                    //MessageBox.Show("SQL ErrorCode:\n" + ex.Message);
-        //                    Logger.LogError(ex); //write error to log file
-        //                    return  CommonEnums.ErrorState.ERROR;
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                //MessageBox.Show("Something went wrong:\n" + ex.Message);
-        //                Logger.LogError(ex); //write error to log file
-        //                return  CommonEnums.ErrorState.ERROR;
-        //            }
-        //            finally
-        //            {
-        //                sqlConnection.Close();
-        //            }
-        //        } //end func.
     }
 }

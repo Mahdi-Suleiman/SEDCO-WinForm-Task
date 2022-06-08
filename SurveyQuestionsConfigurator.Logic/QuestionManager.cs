@@ -19,6 +19,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         GenericRepository mRepository = new GenericRepository();
 
         #region Add Question Functions
+        /// <summary>
+        /// Check values and pass it to repository layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode InsertSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
             try
@@ -38,6 +46,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Check values and pass it to repository layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode InsertSliderQuestion(SliderQuestion pSliderQuestion)
         {
             try
@@ -57,6 +74,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Check values and pass it to repository layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode InsertStarQuestion(StarQuestion pStarQuestion)
         {
             try
@@ -80,6 +106,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Edit Question Functions
+
+        /// <summary>
+        /// Check values and pass it to repository layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode UpdateSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
             try
@@ -99,6 +134,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Check values and pass it to repository layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode UpdateSliderQuestion(SliderQuestion pSliderQuestion)
         {
             try
@@ -118,6 +162,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Check values and pass it to repository layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode UpdateStarQuestion(StarQuestion pStarQuestion)
         {
             try
@@ -141,6 +194,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Get Question Functions
+
+        /// <summary>
+        /// Get a question from DB and check it values
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion pSmileyQuestion)
         {
             try
@@ -160,6 +222,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Get a question from DB and check it values
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode GetSliderQuestionByID(ref SliderQuestion pSliderQuestion)
         {
             try
@@ -179,6 +250,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Get a question from DB and check it values
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode GetStarQuestionByID(ref StarQuestion pStarQuestion)
         {
             try
@@ -198,6 +278,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Get all questions from DB and check it values
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         public ErrorCode GetAllQuestions(ref List<Question> questionsList)
         {
             try
@@ -214,14 +303,23 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Delete Question Functions
-        public ErrorCode DeleteQuestionByID(int questionId)
+
+        /// <summary>
+        /// Pass ID to the question of which to be deleted
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
+        public ErrorCode DeleteQuestionByID(int pQuestionId)
         {
             try
             {
-                Question question = new Question(questionId);
-                if (questionId > 0)
+                Question question = new Question(pQuestionId);
+                if (pQuestionId > 0)
                 {
-                    return mRepository.Delete(questionId);
+                    return mRepository.Delete(pQuestionId);
                 }
                 else
                 {
@@ -240,6 +338,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
         #region Validation Functions
 
+        /// <summary>
+        /// Check question values and validate them
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode CheckSmileyQuestionValues(SmileyQuestion pSmileyQuestion)
         {
             try
@@ -255,8 +360,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        } // end func.
+        } /// Function end
 
+        /// <summary>
+        /// Check question values and validate them
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode CheckSliderQuestionValues(SliderQuestion pSliderQuestion)
         {
             try
@@ -274,8 +386,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        } // end func.
+        } /// Function end
 
+
+        /// <summary>
+        /// Check question values and validate them
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode CheckStarQuestionValues(StarQuestion pStarQuestion)
         {
             try
@@ -291,7 +411,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        } // end func.
+        } /// Function end
 
         #endregion
     }
