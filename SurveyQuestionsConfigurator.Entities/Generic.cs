@@ -10,10 +10,10 @@ namespace SurveyQuestionsConfigurator.Entities
     {
         public enum ErrorCode
         {
-            SUCCESS,
-            ERROR,
-            SQL_VIOLATION,
-            EMPTY
+            ERROR = -1,
+            SUCCESS = 1,
+            SQL_VIOLATION = 2,
+            EMPTY = 3
         }
 
         public enum QuestionType
@@ -25,15 +25,19 @@ namespace SurveyQuestionsConfigurator.Entities
         public enum QuestionColumn
         {
             ID,
-            ORDER,
-            TEXT,
-            TYPE,
-            NUMBER_OF_SMILEY_FACES,
-            NUMBER_OF_STARS,
-            START_VALUE,
-            END_VALUE,
-            START_VALUE_CAPTION,
-            END_VALUE_CAPTION
+            Order,
+            Text,
+            Type,
+            NumberOfSmileyFaces,
+            NumberOfStars,
+            StartValue,
+            EndValue,
+            StartValueCaption,
+            EndValueCaption
         }
     }
 }
+
+/*
+ * 
+ */

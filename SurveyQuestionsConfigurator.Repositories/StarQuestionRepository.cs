@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return dbConnect.AddStarQuestion(starQuestion);
+                return dbConnect.InsertStarQuestion(starQuestion);
             }
             catch (Exception ex)
             {

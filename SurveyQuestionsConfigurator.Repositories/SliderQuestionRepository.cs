@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return dbConnect.AddSliderQuestion(sliderQuestion);
+                return dbConnect.InsertSliderQuestion(sliderQuestion);
             }
             catch (Exception ex)
             {

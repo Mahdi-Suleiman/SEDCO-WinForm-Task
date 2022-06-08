@@ -262,6 +262,7 @@ namespace SurveyQuestionsConfigurator
                         switch (result)
                         {
                             case Generic.ErrorCode.SUCCESS:
+                                BuildListView();
                                 break;
                             case Generic.ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

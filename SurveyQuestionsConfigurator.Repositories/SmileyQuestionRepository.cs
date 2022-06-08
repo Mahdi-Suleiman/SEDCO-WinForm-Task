@@ -22,7 +22,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return dbConnect.AddSmileyQuestion(smileyQuestion);
+                return dbConnect.InsertSmileyQuestion(smileyQuestion);
             }
             catch (Exception ex)
             {
