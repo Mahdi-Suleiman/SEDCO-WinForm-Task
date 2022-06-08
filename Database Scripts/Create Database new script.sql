@@ -18,70 +18,74 @@ IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
 EXEC [SurveyQuestionsConfigurator].[dbo].[sp_fulltext_database] @action = 'enable'
 end
-GO
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'SurveyQuestionsConfigurator')
+BEGIN
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_NULL_DEFAULT OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_NULLS OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_PADDING OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_WARNINGS OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ARITHABORT OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_CLOSE OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_SHRINK OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_UPDATE_STATISTICS ON 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET CURSOR_CLOSE_ON_COMMIT OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET CURSOR_DEFAULT  GLOBAL 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET CONCAT_NULL_YIELDS_NULL OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET NUMERIC_ROUNDABORT OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET QUOTED_IDENTIFIER OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET RECURSIVE_TRIGGERS OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET  DISABLE_BROKER 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET DATE_CORRELATION_OPTIMIZATION OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET TRUSTWORTHY OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ALLOW_SNAPSHOT_ISOLATION OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET PARAMETERIZATION SIMPLE 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET READ_COMMITTED_SNAPSHOT OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET HONOR_BROKER_PRIORITY OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET RECOVERY FULL 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET  MULTI_USER 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET PAGE_VERIFY CHECKSUM  
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET DB_CHAINING OFF 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET TARGET_RECOVERY_TIME = 60 SECONDS 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET DELAYED_DURABILITY = DISABLED 
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET ACCELERATED_DATABASE_RECOVERY = OFF  
-GO
+--GO
 EXEC sys.sp_db_vardecimal_storage_format N'SurveyQuestionsConfigurator', N'ON'
-GO
+--GO
 ALTER DATABASE [SurveyQuestionsConfigurator] SET QUERY_STORE = OFF
+--GO
+END
 GO
 USE [SurveyQuestionsConfigurator]
 GO
