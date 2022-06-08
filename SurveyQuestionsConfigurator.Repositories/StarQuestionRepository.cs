@@ -12,42 +12,42 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class StarQuestionRepository : GenericRepository
     {
-        public ErrorCode Add(StarQuestion starQuestion)
+        public ErrorCode Add(StarQuestion pStarQuestion)
         {
             try
             {
-                return dbConnect.InsertStarQuestion(starQuestion);
+                return mDbConnect.InsertStarQuestion(pStarQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode Get(ref StarQuestion starQuestion)
+        public ErrorCode Get(ref StarQuestion pStarQuestion)
         {
             try
             {
-                return dbConnect.GetStarQuestionByID(ref starQuestion);
+                return mDbConnect.GetStarQuestionByID(ref pStarQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode Update(StarQuestion starQuestion)
+        public ErrorCode Update(StarQuestion pStarQuestion)
         {
             try
             {
-                return dbConnect.UpdateStarQuestion(starQuestion);
+                return mDbConnect.UpdateStarQuestion(pStarQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
     }

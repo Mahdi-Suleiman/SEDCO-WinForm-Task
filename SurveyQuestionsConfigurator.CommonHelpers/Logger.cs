@@ -10,7 +10,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
 {
     public class Logger
     {
-        public static void LogError(Exception ex)
+        public static void LogError(Exception pEx)
         {
             try
             {
@@ -20,11 +20,11 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
                     sw.WriteLine($@"
  -------------- ({DateTime.Now}) --------------
 
--Exception Type: {ex.GetType()}
--Exception Call Site: {ex.TargetSite}
--Exception Short Message: {ex.Message}
--Exception Long Message: {ex}
--Exception Stack Trace: {ex.StackTrace}
+-Exception Type: {pEx.GetType()}
+-Exception Call Site: {pEx.TargetSite}
+-Exception Short Message: {pEx.Message}
+-Exception Long Message: {pEx}
+-Exception Stack Trace: {pEx.StackTrace}
 ");
                 }
             }
@@ -35,7 +35,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
         }
 
         //Log error in case main "LogError" faced an exception
-        public static void BackUpLogger(Exception ex)
+        public static void BackUpLogger(Exception pEx)
         {
             try
             {
@@ -45,11 +45,11 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
                     sw.WriteLine($@"
  -------------- ({DateTime.Now}) --------------
 
--Exception Type: {ex.GetType()}
--Exception Call Site: {ex.TargetSite}
--Exception Short Message: {ex.Message}
--Exception Long Message: {ex}
--Exception Stack Trace: {ex.StackTrace}
+-Exception Type: {pEx.GetType()}
+-Exception Call Site: {pEx.TargetSite}
+-Exception Short Message: {pEx.Message}
+-Exception Long Message: {pEx}
+-Exception Stack Trace: {pEx.StackTrace}
 ");
                 }
             }

@@ -23,7 +23,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Used for sorting listview columns on click
         /// </summary>
-        private ListViewColumnSorter lvwColumnSorter;
+        private ListViewColumnSorter mListViewColumnSorter;
 
         #endregion
 
@@ -37,42 +37,38 @@ namespace SurveyQuestionsConfigurator
             /// Create an instance of a ListView column sorter and assign it
             /// to the ListView control.
             /// </summary>
-            lvwColumnSorter = new ListViewColumnSorter();
-            this.createdQuestions_ListView.ListViewItemSorter = lvwColumnSorter;
+            mListViewColumnSorter = new ListViewColumnSorter();
+            this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
+
         }
 
         #endregion
 
-        #region Functions
+        #region Methods
 
         public void ClearViewList()
         {
+            /// Remove each row
             foreach (ListViewItem item in createdQuestions_ListView.Items)
             {
                 item.Remove();
             }
         }
 
-
-        /// <summary>
-        /// Build List View When Needed (On ADD, EDIT, ...etc)
-        /// </summary>
+        /// Build list view when needed (on ADD, EDIT, ...etc)
         public void BuildListView()
         {
-            /// <summary>
-            /// Connect to Quesion table
-            /// And Fill the List View
-            /// </summary>
+            /// Connect to quesion table and fill the list view
             try
             {
                 ListViewItem listviewitem;// Used for creating listview items.
                 List<Question> questionsList = new List<Question>();
                 QuestionManager questionManager = new QuestionManager();
 
-                ///Hide ID Column
+                ///Hide ID column
                 createdQuestions_ListView.Columns[0].Width = 0;
 
-                ///size Text column header to fit the column header text.
+                ///Size text column header to fit the text.
                 this.createdQuestions_ListView.Columns[3].Width = -2;
 
                 ErrorCode result = questionManager.GetAllQuestions(ref questionsList);
@@ -80,6 +76,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     case ErrorCode.SUCCESS:
                         {
+                            ///If connectin to DB is SUCCESS -> Enable buttons and list view
                             if (!addQuestionButton.Enabled)
                             {
                                 createdQuestions_ListView.Enabled = true;
@@ -92,18 +89,19 @@ namespace SurveyQuestionsConfigurator
 
                             ClearViewList();
 
+                            ///Fill the list view
                             foreach (Question q in questionsList)
                             {
-                                //listviewitem = new ListViewItem($"{Question.Question.SMILEY}");
                                 listviewitem = new ListViewItem($"{q.ID}");
                                 listviewitem.SubItems.Add($"{q.Order}");
-                                listviewitem.SubItems.Add($"{(Generic.QuestionType)q.Type}");
+                                listviewitem.SubItems.Add($"{(QuestionType)q.Type}");
                                 listviewitem.SubItems.Add($"{q.Text}");
                                 this.createdQuestions_ListView.Items.Add(listviewitem);
                             }
                         }
                         break;
                     case ErrorCode.SQL_VIOLATION:
+                        ///If connectin to DB is ERROR -> Disable buttons and list view
                         if (addQuestionButton.Enabled)
                         {
                             addQuestionButton.Enabled = false;
@@ -122,9 +120,9 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); ///write error to log file
             }
-        } //end func.
+        } ///End Function.
 
         #endregion
 
@@ -133,9 +131,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                ///
                 /// Build List View on load
-                ///
                 BuildListView();
             }
             catch (Exception ex)
@@ -143,13 +139,12 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
         /// <summary>
-        /// Refresh When Add Question Form Is Closed
+        /// Refresh when add question form is closed
+        /// Or when this form is activated
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SurveyQuestionsConfiguratorForm_Activated(object sender, EventArgs e)
         {
             try
@@ -161,44 +156,36 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
         /// <summary>
-        /// Sort List For Each Column
+        /// Sort list for each column
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void createdQuestions_ListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             try
             {
                 /// Determine if clicked column is already the column that is being sorted.
-                if (e.Column == lvwColumnSorter.SortColumn)
+                if (e.Column == mListViewColumnSorter.SortColumn)
                 {
-                    // Reverse the current sort direction for this column.
-                    ///
-                    /// before : SortOrder 
-                    /// after  : System.Windows.Forms.SortOrder
-                    /// Slove error :
-                    /// ErrorCode CS0104	'SortOrder' is an ambiguous reference between 'System.Windows.Forms.SortOrder' and 'System.Data.SqlClient.SortOrder'
-                    ///
-                    if (lvwColumnSorter.Order == System.Windows.Forms.SortOrder.Ascending)
+                    /// Reverse the current sort direction for this column.
+                    if (mListViewColumnSorter.Order == System.Windows.Forms.SortOrder.Ascending)
                     {
-                        lvwColumnSorter.Order = System.Windows.Forms.SortOrder.Descending;
+                        mListViewColumnSorter.Order = System.Windows.Forms.SortOrder.Descending;
                     }
                     else
                     {
-                        lvwColumnSorter.Order = System.Windows.Forms.SortOrder.Ascending;
+                        mListViewColumnSorter.Order = System.Windows.Forms.SortOrder.Ascending;
                     }
                 }
                 else
                 {
-                    // Set the column number that is to be sorted; default to ascending.
-                    lvwColumnSorter.SortColumn = e.Column;
-                    lvwColumnSorter.Order = System.Windows.Forms.SortOrder.Ascending;
+                    /// Set the column number that is to be sorted; default to ascending.
+                    mListViewColumnSorter.SortColumn = e.Column;
+                    mListViewColumnSorter.Order = System.Windows.Forms.SortOrder.Ascending;
                 }
 
-                // Perform the sort with these new sort options.
+                /// Perform the sort with these new sort options.
                 this.createdQuestions_ListView.Sort();
             }
             catch (Exception ex)
@@ -206,8 +193,11 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
+        /// <summary>
+        /// Handle add question button click
+        /// </summary>
         private void addQuestionButton_Click(object sender, EventArgs e)
         {
             try
@@ -220,8 +210,11 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
+        /// <summary>
+        /// Handle exit click
+        /// </summary>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -233,32 +226,35 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
+        /// <summary>
+        /// Handle delete question click
+        /// </summary>
         private void deleteQuestionButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (createdQuestions_ListView.SelectedItems.Count > 0) //If at least one question is selected
+                ///If at least one question is selected
+                if (createdQuestions_ListView.SelectedItems.Count > 0)
                 {
-                    var selectedItem = createdQuestions_ListView.SelectedItems[0]; // save selected item before it is unchecked by dialog box
-                    ///
+                    /// Save selected item before it is unchecked by dialog box (prevent error)
+                    var selectedItem = createdQuestions_ListView.SelectedItems[0];
+
                     ///Display confirmation dilaog first
-                    ///
                     var confirmResult = MessageBox.Show("Are you sure to delete this item ??", "Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (confirmResult == DialogResult.Yes)
                     {
-                        int questionId; // question to be deleted
+                        int tQuestionId; /// question to be deleted
                         ErrorCode result;
-                        ///
-                        /// Check the type of the question to be deleted
-                        /// Choose appropriate table to query
-                        ///
-                        questionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
-                        QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.DeleteQuestionByID(questionId);
 
-                        createdQuestions_ListView.SelectedIndices.Clear(); /// unselect item -> avoid errors
+                        /// Get ID from hidden ID column
+                        tQuestionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
+                        QuestionManager questionManager = new QuestionManager();
+                        result = questionManager.DeleteQuestionByID(tQuestionId);
+
+                        /// unselect item -> avoid errors
+                        createdQuestions_ListView.SelectedIndices.Clear();
                         switch (result)
                         {
                             case ErrorCode.SUCCESS:
@@ -283,15 +279,16 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
+        /// <summary>
+        /// Handle reresh button click
+        /// </summary>
         private void refreshDataButton_Click(object sender, EventArgs e)
         {
             try
             {
-                ///
                 /// Rebuild List View when refresh button is pressed
-                ///
                 BuildListView();
             }
             catch (Exception ex)
@@ -299,30 +296,33 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
+        /// <summary>
+        /// Handle edit question button click
+        /// </summary>
         private void editQuestionButton_Click(object sender, EventArgs e)
         {
             try
             {
-                AddQuestionForm addQuestionForm = null;
+                AddQuestionForm tAddQuestionForm = null; /// Accept question ID & question type
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
-                    int questionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
-                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == Generic.QuestionType.SMILEY.ToString())
+                    int tQuestionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
+                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == QuestionType.SMILEY.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, Generic.QuestionType.SMILEY);
-                        addQuestionForm.ShowDialog();
+                        tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.SMILEY);
+                        tAddQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Generic.QuestionType.SLIDER.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == QuestionType.SLIDER.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, Generic.QuestionType.SLIDER);
-                        addQuestionForm.ShowDialog();
+                        tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.SLIDER);
+                        tAddQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == Generic.QuestionType.STAR.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == QuestionType.STAR.ToString())
                     {
-                        addQuestionForm = new AddQuestionForm(questionId, Generic.QuestionType.STAR);
-                        addQuestionForm.ShowDialog();
+                        tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.STAR);
+                        tAddQuestionForm.ShowDialog();
                     }
                 }
                 else
@@ -335,8 +335,11 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
+        /// <summary>
+        /// Handle close button click
+        /// </summary>
         private void closeApplicationButton_Click(object sender, EventArgs e)
         {
             try
@@ -348,7 +351,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//end event 
+        }//End event 
 
         #endregion
     }

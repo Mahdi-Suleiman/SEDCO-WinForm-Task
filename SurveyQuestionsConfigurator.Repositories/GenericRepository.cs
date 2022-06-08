@@ -22,31 +22,31 @@ namespace SurveyQuestionsConfigurator.Repositories
         /// Find
         ///</>
         ///
-        protected DbConnect dbConnect = new DbConnect();
+        protected DbConnect mDbConnect = new DbConnect();
 
-        public ErrorCode Delete(int id)
+        public ErrorCode Delete(int pID)
         {
             try
             {
-                return dbConnect.DeleteQuestion(id);
+                return mDbConnect.DeleteQuestion(pID);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode GetAll(ref List<Question> questionsList)
+        public ErrorCode GetAll(ref List<Question> pQuestionsList)
         {
             try
             {
-                return dbConnect.GetAllQuestions(ref questionsList);
+                return mDbConnect.GetAllQuestions(ref pQuestionsList);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
     }

@@ -13,19 +13,19 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class QuestionManager
     {
-        SmileyQuestionRepository smileyQuestionRepository = new SmileyQuestionRepository();
-        SliderQuestionRepository sliderQuestionRepository = new SliderQuestionRepository();
-        StarQuestionRepository starQuestionRepository = new StarQuestionRepository();
-        GenericRepository repository = new GenericRepository();
+        SmileyQuestionRepository mSmileyQuestionRepository = new SmileyQuestionRepository();
+        SliderQuestionRepository mSliderQuestionRepository = new SliderQuestionRepository();
+        StarQuestionRepository mStarQuestionRepository = new StarQuestionRepository();
+        GenericRepository mRepository = new GenericRepository();
 
         #region Add Question Functions
-        public ErrorCode InsertSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode InsertSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                if (CheckSmileyQuestionValues(smileyQuestion) == ErrorCode.SUCCESS)
+                if (CheckSmileyQuestionValues(pSmileyQuestion) == ErrorCode.SUCCESS)
                 {
-                    return smileyQuestionRepository.Add(smileyQuestion);
+                    return mSmileyQuestionRepository.Add(pSmileyQuestion);
                 }
                 else
                 {
@@ -38,13 +38,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode InsertSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode InsertSliderQuestion(SliderQuestion pSliderQuestion)
         {
             try
             {
-                if (CheckSliderQuestionValues(sliderQuestion) == ErrorCode.SUCCESS)
+                if (CheckSliderQuestionValues(pSliderQuestion) == ErrorCode.SUCCESS)
                 {
-                    return sliderQuestionRepository.Add(sliderQuestion);
+                    return mSliderQuestionRepository.Add(pSliderQuestion);
                 }
                 else
                 {
@@ -57,13 +57,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode InsertStarQuestion(StarQuestion starQuestion)
+        public ErrorCode InsertStarQuestion(StarQuestion pStarQuestion)
         {
             try
             {
-                if (CheckStarQuestionValues(starQuestion) == ErrorCode.SUCCESS)
+                if (CheckStarQuestionValues(pStarQuestion) == ErrorCode.SUCCESS)
                 {
-                    return starQuestionRepository.Add(starQuestion);
+                    return mStarQuestionRepository.Add(pStarQuestion);
                 }
                 else
                 {
@@ -80,13 +80,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Edit Question Functions
-        public ErrorCode UpdateSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode UpdateSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                if (CheckSmileyQuestionValues(smileyQuestion) == ErrorCode.SUCCESS)
+                if (CheckSmileyQuestionValues(pSmileyQuestion) == ErrorCode.SUCCESS)
                 {
-                    return smileyQuestionRepository.Update(smileyQuestion);
+                    return mSmileyQuestionRepository.Update(pSmileyQuestion);
                 }
                 else
                 {
@@ -99,13 +99,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode UpdateSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode UpdateSliderQuestion(SliderQuestion pSliderQuestion)
         {
             try
             {
-                if (CheckSliderQuestionValues(sliderQuestion) == ErrorCode.SUCCESS)
+                if (CheckSliderQuestionValues(pSliderQuestion) == ErrorCode.SUCCESS)
                 {
-                    return sliderQuestionRepository.Update(sliderQuestion);
+                    return mSliderQuestionRepository.Update(pSliderQuestion);
                 }
                 else
                 {
@@ -118,13 +118,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode UpdateStarQuestion(StarQuestion starQuestion)
+        public ErrorCode UpdateStarQuestion(StarQuestion pStarQuestion)
         {
             try
             {
-                if (CheckStarQuestionValues(starQuestion) == ErrorCode.SUCCESS)
+                if (CheckStarQuestionValues(pStarQuestion) == ErrorCode.SUCCESS)
                 {
-                    return starQuestionRepository.Update(starQuestion);
+                    return mStarQuestionRepository.Update(pStarQuestion);
                 }
                 else
                 {
@@ -141,13 +141,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Get Question Functions
-        public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
+        public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                if (smileyQuestion.ID > 0)
+                if (pSmileyQuestion.ID > 0)
                 {
-                    return smileyQuestionRepository.Get(ref smileyQuestion);
+                    return mSmileyQuestionRepository.Get(ref pSmileyQuestion);
                 }
                 else
                 {
@@ -160,13 +160,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
+        public ErrorCode GetSliderQuestionByID(ref SliderQuestion pSliderQuestion)
         {
             try
             {
-                if (sliderQuestion.ID > 0)
+                if (pSliderQuestion.ID > 0)
                 {
-                    return sliderQuestionRepository.Get(ref sliderQuestion);
+                    return mSliderQuestionRepository.Get(ref pSliderQuestion);
                 }
                 else
                 {
@@ -179,13 +179,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return Generic.ErrorCode.ERROR;
             }
         }
-        public ErrorCode GetStarQuestionByID(ref StarQuestion starQuestion)
+        public ErrorCode GetStarQuestionByID(ref StarQuestion pStarQuestion)
         {
             try
             {
-                if (starQuestion.ID > 0)
+                if (pStarQuestion.ID > 0)
                 {
-                    return starQuestionRepository.Get(ref starQuestion);
+                    return mStarQuestionRepository.Get(ref pStarQuestion);
                 }
                 else
                 {
@@ -202,7 +202,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                return repository.GetAll(ref questionsList);
+                return mRepository.GetAll(ref questionsList);
             }
             catch (Exception ex)
             {
@@ -221,7 +221,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 Question question = new Question(questionId);
                 if (questionId > 0)
                 {
-                    return repository.Delete(questionId);
+                    return mRepository.Delete(questionId);
                 }
                 else
                 {
@@ -240,12 +240,12 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
         #region Validation Functions
 
-        public ErrorCode CheckSmileyQuestionValues(SmileyQuestion smileyQuestion)
+        public ErrorCode CheckSmileyQuestionValues(SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(smileyQuestion.Text) && smileyQuestion.Text.Length < 4000) //if Question text is not null or empty 
-                    if (smileyQuestion.NumberOfSmileyFaces >= 2 && smileyQuestion.NumberOfSmileyFaces <= 5)
+                if (!String.IsNullOrWhiteSpace(pSmileyQuestion.Text) && pSmileyQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                    if (pSmileyQuestion.NumberOfSmileyFaces >= 2 && pSmileyQuestion.NumberOfSmileyFaces <= 5)
                         return ErrorCode.SUCCESS;
 
                 return ErrorCode.ERROR;
@@ -257,14 +257,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         } // end func.
 
-        public ErrorCode CheckSliderQuestionValues(SliderQuestion sliderQuestion)
+        public ErrorCode CheckSliderQuestionValues(SliderQuestion pSliderQuestion)
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(sliderQuestion.Text) && sliderQuestion.Text.Length < 4000) //if Question text is not null or empty 
-                    if (!String.IsNullOrWhiteSpace(sliderQuestion.StartValueCaption) && sliderQuestion.StartValueCaption.Length < 100)
-                        if (!String.IsNullOrWhiteSpace(sliderQuestion.EndValueCaption) && sliderQuestion.EndValueCaption.Length < 100)
-                            if (sliderQuestion.StartValue < sliderQuestion.EndValue)
+                if (!String.IsNullOrWhiteSpace(pSliderQuestion.Text) && pSliderQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                    if (!String.IsNullOrWhiteSpace(pSliderQuestion.StartValueCaption) && pSliderQuestion.StartValueCaption.Length < 100)
+                        if (!String.IsNullOrWhiteSpace(pSliderQuestion.EndValueCaption) && pSliderQuestion.EndValueCaption.Length < 100)
+                            if (pSliderQuestion.StartValue < pSliderQuestion.EndValue)
                                 return ErrorCode.SUCCESS;
 
                 return ErrorCode.ERROR;
@@ -276,12 +276,12 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         } // end func.
 
-        public ErrorCode CheckStarQuestionValues(StarQuestion starQuestion)
+        public ErrorCode CheckStarQuestionValues(StarQuestion pStarQuestion)
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(starQuestion.Text) && starQuestion.Text.Length < 4000) //if Question text is not null or empty 
-                    if (starQuestion.NumberOfStars >= 1 && starQuestion.NumberOfStars <= 10)
+                if (!String.IsNullOrWhiteSpace(pStarQuestion.Text) && pStarQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                    if (pStarQuestion.NumberOfStars >= 1 && pStarQuestion.NumberOfStars <= 10)
                         return ErrorCode.SUCCESS;
 
                 return ErrorCode.ERROR;

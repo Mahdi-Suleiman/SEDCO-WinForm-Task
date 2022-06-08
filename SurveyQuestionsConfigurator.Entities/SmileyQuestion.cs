@@ -12,12 +12,12 @@ namespace SurveyQuestionsConfigurator.Entities
     {
         public int NumberOfSmileyFaces { get; set; }
 
-        public SmileyQuestion(int id, int order, string text, QuestionType type, int numberOfSmileyFaces) :
-            base(id, order, text, type)
+        public SmileyQuestion(int pID, int pOrder, string pText, QuestionType pType, int pNumberOfSmileyFaces) :
+            base(pID, pOrder, pText, pType)
         {
             try
             {
-                NumberOfSmileyFaces = numberOfSmileyFaces;
+                NumberOfSmileyFaces = pNumberOfSmileyFaces;
             }
             catch (Exception ex)
             {
@@ -26,9 +26,9 @@ namespace SurveyQuestionsConfigurator.Entities
 
         }
 
-        public SmileyQuestion(int id) :
+        public SmileyQuestion(int pID) :
 
-            base(id)
+            base(pID)
         { }
 
         public SmileyQuestion(SmileyQuestion smileyQuestion) :

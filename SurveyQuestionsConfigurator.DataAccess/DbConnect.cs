@@ -549,7 +549,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
-                            SELECT [ID], [Order], [Text], [Type] FROM Questions";
+                            SELECT [ID], [Order], [Text], [Type] FROM Questions ORDER BY [ORDER] ASC;";
 
                         DataTable dataTable = new DataTable();
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -590,7 +590,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             from Questions AS Q
                             inner join Smiley_Questions AS SmQ
                             on Q.ID = SmQ.ID
-                            where Q.ID = @{QuestionColumn.ID}";
+                            where Q.ID = @{QuestionColumn.ID}
+                            ORDER BY [ORDER] ASC";
                         SqlParameter[] parameters = new SqlParameter[] {
                             new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
                         };
@@ -635,7 +636,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             from Questions AS Q
                             inner join Slider_Questions AS SQ
                             on Q.ID = SQ.ID
-                            where Q.ID = @{QuestionColumn.ID}";
+                            where Q.ID = @{QuestionColumn.ID}
+                            ORDER BY [ORDER] ASC";
 
                         SqlParameter[] parameters = new SqlParameter[] {
                             new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
@@ -682,7 +684,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             from Questions AS Q
                             inner join Star_Questions AS StQ
                             on Q.ID = StQ.ID
-                            where Q.ID = @{QuestionColumn.ID}";
+                            where Q.ID = @{QuestionColumn.ID}
+                            ORDER BY [ORDER] ASC";
 
                         SqlParameter[] parameters = new SqlParameter[] {
                             new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),

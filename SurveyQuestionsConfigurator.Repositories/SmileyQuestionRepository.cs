@@ -12,48 +12,48 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class SmileyQuestionRepository : GenericRepository
     {
-        //private SmileyQuestion smileyQuestion = null;
-        //public SmileyQuestionRepository(SmileyQuestion smileyQuestion)
+        //private SmileyQuestion pSmileyQuestion = null;
+        //public SmileyQuestionRepository(SmileyQuestion pSmileyQuestion)
         //{
-        //    this.smileyQuestion = new SmileyQuestion(smileyQuestion);
+        //    this.pSmileyQuestion = new SmileyQuestion(pSmileyQuestion);
         //}
 
-        public ErrorCode Add(SmileyQuestion smileyQuestion)
+        public ErrorCode Add(SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                return dbConnect.InsertSmileyQuestion(smileyQuestion);
+                return mDbConnect.InsertSmileyQuestion(pSmileyQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode Get(ref SmileyQuestion smileyQuestion)
+        public ErrorCode Get(ref SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                return dbConnect.GetSmileyQuestionByID(ref smileyQuestion);
+                return mDbConnect.GetSmileyQuestionByID(ref pSmileyQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode Update(SmileyQuestion smileyQuestion)
+        public ErrorCode Update(SmileyQuestion pSmileyQuestion)
         {
             try
             {
-                return dbConnect.UpdateSmileyQuestion(smileyQuestion);
+                return mDbConnect.UpdateSmileyQuestion(pSmileyQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
     }

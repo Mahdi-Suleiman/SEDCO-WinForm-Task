@@ -44,7 +44,7 @@
             this.genericLabel2 = new System.Windows.Forms.Label();
             this.typeOfQuestionGroupBox = new System.Windows.Forms.GroupBox();
             this.questionTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.addQuestionButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.orderLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -258,15 +258,15 @@
             this.questionTypeComboBox.TabIndex = 0;
             this.questionTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.questionTypeComboBox_SelectedIndexChanged);
             // 
-            // addQuestionButton
+            // okButton
             // 
-            this.addQuestionButton.Location = new System.Drawing.Point(218, 403);
-            this.addQuestionButton.Name = "addQuestionButton";
-            this.addQuestionButton.Size = new System.Drawing.Size(75, 23);
-            this.addQuestionButton.TabIndex = 7;
-            this.addQuestionButton.Text = "OK";
-            this.addQuestionButton.UseVisualStyleBackColor = true;
-            this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
+            this.okButton.Location = new System.Drawing.Point(218, 403);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 7;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
             // cancelButton
             // 
@@ -297,7 +297,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(383, 432);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.addQuestionButton);
+            this.Controls.Add(this.okButton);
             this.Controls.Add(this.smilyQuestionDetailsGroupBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.typeOfQuestionGroupBox);
@@ -336,7 +336,7 @@
         private System.Windows.Forms.GroupBox typeOfQuestionGroupBox;
         private System.Windows.Forms.ComboBox questionTypeComboBox;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button addQuestionButton;
+        private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Label orderLabel;
     }
 }

@@ -15,11 +15,11 @@ namespace SurveyQuestionsConfigurator.Entities
         public string Text { get; set; }
         public QuestionType Type { get; set; }
 
-        public Question(int id)
+        public Question(int pID)
         {
             try
             {
-                ID = id;
+                ID = pID;
             }
             catch (Exception ex)
             {
@@ -27,14 +27,14 @@ namespace SurveyQuestionsConfigurator.Entities
             }
         }
 
-        public Question(int id, int order, string text, QuestionType type)
+        public Question(int pID, int pOrder, string pText, QuestionType pType)
         {
             try
             {
-                ID = id;
-                Order = order;
-                Text = text;
-                Type = type;
+                ID = pID;
+                Order = pOrder;
+                Text = pText;
+                Type = pType;
             }
             catch (Exception ex)
             {
@@ -42,8 +42,8 @@ namespace SurveyQuestionsConfigurator.Entities
             }
         }
 
-        public Question(Question question) :
-            this(question.ID, question.Order, question.Text, question.Type)
+        public Question(Question pQuestion) :
+            this(pQuestion.ID, pQuestion.Order, pQuestion.Text, pQuestion.Type)
         { }
 
     }

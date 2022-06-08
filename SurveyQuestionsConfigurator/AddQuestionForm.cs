@@ -15,13 +15,9 @@ namespace SurveyQuestionsConfigurator
     public partial class AddQuestionForm : Form
     {
         #region Properties
-        /// 
-        /// Global Variables
-        /// Access them anywhere
-        ///
-        public int QuestionId { get; set; } /// create global Question ID property
-        private FormStateType StateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
-        private QuestionType SelectedQuestionType { get; set; }
+        public int mQuestionId { get; set; } /// create global Question ID property
+        private FormStateType cStateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
+        private QuestionType cSelectedQuestionType { get; set; }
 
         public enum FormStateType
         {
@@ -41,7 +37,7 @@ namespace SurveyQuestionsConfigurator
             {
                 InitializeComponent();
                 this.Text = "Add A Question";
-                StateForm = FormStateType.ADD;
+                cStateForm = FormStateType.ADD;
             }
             catch (Exception ex)
             {
@@ -53,32 +49,32 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Form constructor for "Editing A Question"
         /// </summary>
-        public AddQuestionForm(int questionId, QuestionType questionType)
+        public AddQuestionForm(int questionId, QuestionType pQuestionType)
         {
             try
             {
                 InitializeComponent();
                 this.Text = "Edit A Question";
 
-                StateForm = FormStateType.EDIT;
+                cStateForm = FormStateType.EDIT;
 
-                QuestionId = questionId; //set QuestionId to access it globally
-                                         //Question = questionType;
+                mQuestionId = questionId;
+
                 questionTypeComboBox.Enabled = false;
 
-                if (questionType == Generic.QuestionType.SMILEY)
+                if (pQuestionType == QuestionType.SMILEY)
                 {
-                    SelectedQuestionType = Generic.QuestionType.SMILEY; // 0 
+                    cSelectedQuestionType = QuestionType.SMILEY; // 0 
                     InitializeEditingSmileyQuestion(questionId);
                 }
-                else if (questionType == Generic.QuestionType.SLIDER)
+                else if (pQuestionType == QuestionType.SLIDER)
                 {
-                    SelectedQuestionType = Generic.QuestionType.SLIDER; // 1
+                    cSelectedQuestionType = QuestionType.SLIDER; // 1
                     InitializeEditingSliderQuestion(questionId);
                 }
-                else if (questionType == Generic.QuestionType.STAR)
+                else if (pQuestionType == QuestionType.STAR)
                 {
-                    SelectedQuestionType = Generic.QuestionType.STAR; // 2
+                    cSelectedQuestionType = QuestionType.STAR; // 2
                     InitializeEditingStarQuestion(questionId);
                 }
             }
@@ -87,19 +83,18 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-
         }
         #endregion
 
         #region Event Handlers
         /// <summary>
-        /// Selecting correct combo box item
+        /// Handle form's load and load correct question type based what question type is passed to the constructor
         /// </summary>
         private void AddQuestionForm_Load(object sender, EventArgs e)
         {
             try
             {
-                questionTypeComboBox.SelectedIndex = (int)SelectedQuestionType;
+                questionTypeComboBox.SelectedIndex = (int)cSelectedQuestionType;
             }
             catch (Exception ex)
             {
@@ -110,7 +105,7 @@ namespace SurveyQuestionsConfigurator
         } // event end
 
         /// <summary>
-        /// Closing the form
+        /// Handle close click
         /// </summary>
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -125,12 +120,16 @@ namespace SurveyQuestionsConfigurator
             }
         } // event end
 
+        /// <summary>
+        /// Handle OK button click
+        /// Based on what type of form is loaded (Add or Edit)
+        /// </summary>
         private void addQuestionButton_Click(object sender, EventArgs e)
         {
             try
             {
                 bool OperationSuccess = false;
-                if (StateForm == FormStateType.ADD)
+                if (cStateForm == FormStateType.ADD)
                 {
                     try
                     {
@@ -153,7 +152,7 @@ namespace SurveyQuestionsConfigurator
                         Logger.LogError(ex);
                     }
                 }
-                else if (StateForm == FormStateType.EDIT)
+                else if (cStateForm == FormStateType.EDIT)
                 {
                     try
                     {
@@ -204,7 +203,7 @@ namespace SurveyQuestionsConfigurator
             ///
             try
             {
-                QuestionId = questionId;
+                mQuestionId = questionId;
                 QuestionManager questionManager = new QuestionManager();
                 SmileyQuestion smileyQuestion = new SmileyQuestion(questionId);
 
@@ -233,7 +232,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex); //write error to log file
             }
-        } //end function
+        } //End Functiontion
 
         /// <summary>
         /// Initialize editing slider question on combobox change
@@ -245,7 +244,7 @@ namespace SurveyQuestionsConfigurator
             ///
             try
             {
-                QuestionId = questionId;
+                mQuestionId = questionId;
                 QuestionManager questionManager = new QuestionManager();
                 SliderQuestion sliderQuestion = new SliderQuestion(questionId);
 
@@ -277,7 +276,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex); //write error to log file
             }
-        } //end function
+        } //End Functiontion
 
         /// <summary>
         /// Initialize editing star question on combobox change
@@ -289,7 +288,7 @@ namespace SurveyQuestionsConfigurator
             ///
             try
             {
-                QuestionId = questionId;
+                mQuestionId = questionId;
                 DataTable dataTable = new DataTable();
                 QuestionManager questionManager = new QuestionManager();
                 StarQuestion starQuestion = new StarQuestion(questionId);
@@ -318,7 +317,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex); //write error to log file
             }
-        }//end function
+        }//End Functiontion
         #endregion
 
         #region Validation Methods
@@ -403,15 +402,15 @@ namespace SurveyQuestionsConfigurator
             {
                 if (questionTypeComboBox.SelectedIndex == 0)
                 {
-                    InitializeLoadingASmileyQuestion();
+                    InitializeSmileyQuestion();
                 }
                 else if (questionTypeComboBox.SelectedIndex == 1)
                 {
-                    InitializeLoadingASliderQuestion();
+                    InitializeSliderQuestion();
                 }
                 else if (questionTypeComboBox.SelectedIndex == 2)
                 {
-                    InitializeLoadingAStarQuestion();
+                    InitializeStarQuestion();
                 }
             }
             catch (Exception ex)
@@ -420,7 +419,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }// event end
-        private void InitializeLoadingASmileyQuestion()
+        private void InitializeSmileyQuestion()
         {
             try
             {
@@ -445,7 +444,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         } // func. end
-        private void InitializeLoadingASliderQuestion()
+        private void InitializeSliderQuestion()
         {
             try
             {
@@ -476,7 +475,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         } //func. end
-        private void InitializeLoadingAStarQuestion()
+        private void InitializeStarQuestion()
         {
             try
             {
@@ -533,7 +532,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, Generic.QuestionType.SMILEY, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(-1, questionOrder, questionText, QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.InsertSmileyQuestion(smileyQuestion);
 
@@ -603,7 +602,7 @@ namespace SurveyQuestionsConfigurator
                         questionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
 
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, (QuestionType)Generic.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        SliderQuestion sliderQuestion = new SliderQuestion(-1, questionOrder, questionText, QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.InsertSliderQuestion(sliderQuestion);
 
@@ -666,7 +665,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, (QuestionType)Generic.QuestionType.STAR, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(-1, questionOrder, questionText, QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.InsertStarQuestion(starQuestion);
 
@@ -724,12 +723,12 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        questionId = QuestionId;
+                        questionId = mQuestionId;
                         questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                         questionText = questionTextRichTextBox.Text;
                         numberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, Generic.QuestionType.SMILEY, numberOfSmilyFaces);
+                        SmileyQuestion smileyQuestion = new SmileyQuestion(questionId, questionOrder, questionText, QuestionType.SMILEY, numberOfSmilyFaces);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.UpdateSmileyQuestion(smileyQuestion);
 
@@ -739,7 +738,7 @@ namespace SurveyQuestionsConfigurator
                                 orderLabel.Text = "";
                                 return true;
                             case ErrorCode.SQL_VIOLATION:
-                                orderLabel.Text = "Question order already in use\nTry using another one";
+                                orderLabel.Text = "Order already in use\nTry using another one";
                                 break;
                             case ErrorCode.ERROR:
                                 orderLabel.Text = "";
@@ -785,7 +784,7 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        questionId = QuestionId;
+                        questionId = mQuestionId;
                         questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                         questionText = (string)questionTextRichTextBox.Text;
                         questionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
@@ -793,7 +792,7 @@ namespace SurveyQuestionsConfigurator
                         questionStartValueCaption = (string)genericTextBox1.Text;
                         questionEndValueCaption = (string)genericTextBox2.Text;
 
-                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, (QuestionType)Generic.QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
+                        SliderQuestion sliderQuestion = new SliderQuestion(questionId, questionOrder, questionText, QuestionType.SLIDER, questionStartValue, questionEndValue, questionStartValueCaption, questionEndValueCaption);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.UpdateSliderQuestion(sliderQuestion);
 
@@ -849,12 +848,12 @@ namespace SurveyQuestionsConfigurator
                     ///
                     try
                     {
-                        questionId = QuestionId;
+                        questionId = mQuestionId;
                         questionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                         questionText = questionTextRichTextBox.Text;
                         numberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
 
-                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, (QuestionType)Generic.QuestionType.STAR, numberOfStars);
+                        StarQuestion starQuestion = new StarQuestion(questionId, questionOrder, questionText, QuestionType.STAR, numberOfStars);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.UpdateStarQuestion(starQuestion);
 

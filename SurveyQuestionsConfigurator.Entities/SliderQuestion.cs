@@ -17,15 +17,15 @@ namespace SurveyQuestionsConfigurator.Entities
         public string EndValueCaption { get; set; }
         #endregion
 
-        public SliderQuestion(int id, int order, string text, QuestionType type, int startValue, int endValue, string startValueCaption, string endValueCaption) :
-      base(id, order, text, type)
+        public SliderQuestion(int pID, int pOrder, string pText, QuestionType pType, int pStartValue, int pEndValue, string pStartValueCaption, string pEndValueCaption) :
+      base(pID, pOrder, pText, pType)
         {
             try
             {
-                StartValue = startValue;
-                EndValue = endValue;
-                StartValueCaption = startValueCaption;
-                EndValueCaption = endValueCaption;
+                StartValue = pStartValue;
+                EndValue = pEndValue;
+                StartValueCaption = pStartValueCaption;
+                EndValueCaption = pEndValueCaption;
             }
             catch (Exception ex)
             {

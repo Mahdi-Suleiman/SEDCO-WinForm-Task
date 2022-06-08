@@ -12,42 +12,42 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class SliderQuestionRepository : GenericRepository
     {
-        public ErrorCode Add(SliderQuestion sliderQuestion)
+        public ErrorCode Add(SliderQuestion pSliderQuestion)
         {
             try
             {
-                return dbConnect.InsertSliderQuestion(sliderQuestion);
+                return mDbConnect.InsertSliderQuestion(pSliderQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode Get(ref SliderQuestion sliderQuestion)
+        public ErrorCode Get(ref SliderQuestion pSliderQuestion)
         {
             try
             {
-                return dbConnect.GetSliderQuestionByID(ref sliderQuestion);
+                return mDbConnect.GetSliderQuestionByID(ref pSliderQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
 
-        public ErrorCode Update(SliderQuestion sliderQuestion)
+        public ErrorCode Update(SliderQuestion pSliderQuestion)
         {
             try
             {
-                return dbConnect.UpdateSliderQuestion(sliderQuestion);
+                return mDbConnect.UpdateSliderQuestion(pSliderQuestion);
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }
     }

@@ -12,12 +12,12 @@ namespace SurveyQuestionsConfigurator.Entities
     {
         public int NumberOfStars { get; set; }
 
-        public StarQuestion(int id, int order, string text, QuestionType type, int numberOfStars) :
-            base(id, order, text, type)
+        public StarQuestion(int pID, int pOrder, string pText, QuestionType pType, int pNumberOfStars) :
+            base(pID, pOrder, pText, pType)
         {
             try
             {
-                NumberOfStars = numberOfStars;
+                NumberOfStars = pNumberOfStars;
             }
             catch (Exception ex)
             {
@@ -25,9 +25,9 @@ namespace SurveyQuestionsConfigurator.Entities
             }
         }
 
-        public StarQuestion(int id) :
+        public StarQuestion(int pID) :
 
-            base(id)
+            base(pID)
         { }
 
         public StarQuestion(StarQuestion starQuestion) :
