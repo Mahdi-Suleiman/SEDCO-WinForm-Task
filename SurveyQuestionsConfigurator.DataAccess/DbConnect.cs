@@ -15,9 +15,68 @@ namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
-        private ConnectionStringSettings connectionSetting = ConfigurationManager.ConnectionStrings[0]; //get connection string information from App.config
+        private ConnectionStringSettings sqlConnectionectionSetting = ConfigurationManager.ConnectionStrings[0]; //get sqlConnectionection string information from App.config
 
         #region INSERT Methods
+
+        private ErrorCode InsertQuestion(TransactionScope transactionScope, SqlConnection sqlConnection, Question question)
+        {
+            try
+            {
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                using (SqlCommand cmd = sqlConnection.CreateCommand())
+                {
+                    cmd.CommandText = $@"
+                            DECLARE @RESULT INT
+                            EXECUTE @RESULT = INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
+                            SELECT @RESULT";
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.Order}", question.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", question.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", question.Type)};
+                    cmd.Parameters.AddRange(parameters);
+
+                    returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                    return returnedErrorCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); //write error to log file
+                return ErrorCode.ERROR;
+            }
+        }
+
+        private ErrorCode UpdateQuestion(TransactionScope transactionScope, SqlConnection sqlConnection, Question question)
+        {
+            try
+            {
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                using (SqlCommand cmd = sqlConnection.CreateCommand())
+                {
+                    cmd.CommandText = $@"
+                            DECLARE @RESULT INT
+                            EXECUTE @RESULT = UPDATE_QUESTION @ID = @{QuestionColumn.ID}, @ORDER =  @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}
+                            SELECT @RESULT";
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.Order}", question.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", question.Text),
+                                new SqlParameter($"{QuestionColumn.ID}", question.ID)};
+                    cmd.Parameters.AddRange(parameters);
+
+                    returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                    return returnedErrorCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); //write error to log file
+                return ErrorCode.ERROR;
+            }
+        }
+
 
         /// <summary>
         /// 
@@ -37,41 +96,28 @@ namespace SurveyQuestionsConfigurator.DataAccess
             ///
             try
             {
-                ErrorCode errorCode = ErrorCode.ERROR;
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
                 int rowsAffected = 0;
-                using (TransactionScope scope = new TransactionScope())
+
+                using (TransactionScope transactionScope = new TransactionScope())
                 {
-                    using (SqlConnection conn = new SqlConnection())
+                    using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        conn.ConnectionString = connectionSetting.ConnectionString;
-                        conn.Open();
+                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.Open();
 
-                        using (SqlCommand cmd = conn.CreateCommand())
-                        {
-                            cmd.CommandText = $@"
-                            DECLARE @RESULT INT
-                            EXECUTE @RESULT = INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
-                            SELECT @RESULT";
+                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, smileyQuestion);
 
-                            SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.Order}", smileyQuestion.Order),
-                                new SqlParameter($"{QuestionColumn.Text}", smileyQuestion.Text),
-                                new SqlParameter($"{QuestionColumn.Type}", smileyQuestion.Type)};
-                            cmd.Parameters.AddRange(parameters);
-
-                            errorCode = (ErrorCode)cmd.ExecuteScalar();
-                        }
-
-                        if (errorCode == ErrorCode.SQL_VIOLATION)
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
                         {
                             return ErrorCode.SQL_VIOLATION;
                         }
-                        else if (errorCode == ErrorCode.ERROR)
+                        else if (returnedErrorCode == ErrorCode.ERROR)
                         {
                             return ErrorCode.ERROR;
                         }
 
-                        using (SqlCommand cmd = conn.CreateCommand())
+                        using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
                             cmd.CommandText = $@"
                             INSERT INTO Smiley_Questions(ID, NumberOfSmileyFaces )
@@ -81,66 +127,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", smileyQuestion.NumberOfSmileyFaces)};
                             cmd.Parameters.AddRange(parameters);
 
-                            rowsAffected = (int)cmd.ExecuteNonQuery();
+                            rowsAffected = cmd.ExecuteNonQuery();
                         }
 
-                        if (errorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
                         {
-                            scope.Complete();
+                            transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
 
                         return ErrorCode.ERROR;
-
-                        //                        SqlCommand cmd = new SqlCommand($@"
-                        //                    BEGIN TRY  
-                        //                        IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.Order}) = 0)
-                        //                            BEGIN
-                        //                                BEGIN TRANSACTION
-                        //                                EXECUTE INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
-                        //                            END
-                        //                        IF (@@IDENTITY IS NOT NULL)
-                        //                            BEGIN
-                        //                                 INSERT INTO Smiley_Questions(ID, NumberOfSmileyFaces )
-                        //                                 OUTPUT @@IDENTITY
-                        //                                 VALUES (@@IDENTITY, @{QuestionColumn.NumberOfSmileyFaces})
-                        //                            END
-                        //                    END TRY
-                        //                    BEGIN CATCH  
-                        //    	                IF @@TRANCOUNT > 0  
-                        //                        ROLLBACK TRANSACTION; 
-                        //                    END CATCH;  
-
-                        //	                IF @@TRANCOUNT > 0  
-                        //                        COMMIT TRANSACTION; 
-                        //", conn);
-
-                        //                        SqlParameter[] parameters = new SqlParameter[] {
-                        //                new SqlParameter($"{QuestionColumn.Order}", smileyQuestion.Order),
-                        //                new SqlParameter($"{QuestionColumn.Text}", smileyQuestion.Text),
-                        //                new SqlParameter($"{QuestionColumn.Type}", smileyQuestion.Type),
-                        //                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", smileyQuestion.NumberOfSmileyFaces)
-                        //                };
-                        //                        cmd.Parameters.AddRange(parameters);
-                        //                        conn.Open();
-                        //                        var result = cmd.ExecuteScalar();
-
-
-
-                        //if (result != null)
-                        //{
-                        //    return Generic.ErrorCode.SUCCESS;
-                        //}
-                        //else if (result == null)
-                        //{
-                        //    return Generic.ErrorCode.SQL_VIOLATION;
-                        //}
-                        //else
-                        //{
-                        //    return Generic.ErrorCode.ERROR;
-                        //}
                     }
-
                 }
             }
             catch (Exception ex)
@@ -151,7 +148,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
         } //end func.
 
         /// <summary>
-        /// 
+        ///
+        /// Try to insert a new question into "Slider_Questions" table
+        ///
         /// </summary>
         /// <param name="questionOrder"></param>
         /// <param name="questionText"></param>
@@ -166,60 +165,51 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </returns>
         public ErrorCode InsertSliderQuestion(SliderQuestion sliderQuestion)
         {
-            ///
-            /// Try to insert a new question into "Slider_Questions" table
-            ///
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                int rowsAffected = 0;
+
+                using (TransactionScope transactionScope = new TransactionScope())
                 {
-                    SqlCommand cmd = new SqlCommand($@"
-                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.Order}) = 0)
+                    using (SqlConnection sqlConnection = new SqlConnection())
+                    {
+                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.Open();
 
-                    BEGIN TRANSACTION
+                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, sliderQuestion);
 
-                        BEGIN
-                            INSERT INTO Questions 
-                            ([Order], [Text], [Type])
-                            VALUES 
-                            (@{QuestionColumn.Order}, @{QuestionColumn.Text}, @{QuestionColumn.Type})
-                        END
-                    IF (@@IDENTITY IS NOT NULL)
-                        BEGIN
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
+                        {
+                            return returnedErrorCode;
+                        }
+
+                        using (SqlCommand cmd = sqlConnection.CreateCommand())
+                        {
+                            cmd.CommandText = $@"
                             INSERT INTO Slider_Questions
                             (ID, StartValue, EndValue, StartValueCaption, EndValueCaption)
-                            OUTPUT @@IDENTITY
-                            VALUES (@@IDENTITY, @{QuestionColumn.StartValue}, @{QuestionColumn.EndValue}, @{QuestionColumn.StartValueCaption}, @{QuestionColumn.EndValueCaption})
-                        END
+                            VALUES (@@IDENTITY, @{QuestionColumn.StartValue}, @{QuestionColumn.EndValue},
+                                    @{QuestionColumn.StartValueCaption}, @{QuestionColumn.EndValueCaption})";
 
-                    COMMIT TRANSACTION
-", conn);
+                            SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.StartValue}", sliderQuestion.StartValue),
+                                new SqlParameter($"{QuestionColumn.EndValue}", sliderQuestion.EndValue),
+                                new SqlParameter($"{QuestionColumn.StartValueCaption}", sliderQuestion.StartValueCaption),
+                                new SqlParameter($"{QuestionColumn.EndValueCaption}", sliderQuestion.EndValueCaption)};
+                            cmd.Parameters.AddRange(parameters);
 
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.Order}", sliderQuestion.Order),
-                new SqlParameter($"{QuestionColumn.Text}", sliderQuestion.Text),
-                new SqlParameter($"{QuestionColumn.Type}",sliderQuestion.Type),
-                new SqlParameter($"{QuestionColumn.StartValue}", sliderQuestion.StartValue),
-                new SqlParameter($"{QuestionColumn.EndValue}", sliderQuestion.EndValue),
-                new SqlParameter($"{QuestionColumn.StartValueCaption}", sliderQuestion.StartValueCaption),
-                new SqlParameter($"{QuestionColumn.EndValueCaption}", sliderQuestion.EndValueCaption),
-                };
-                    cmd.Parameters.AddRange(parameters);
+                            rowsAffected = cmd.ExecuteNonQuery();
+                        }
 
-                    conn.Open();
-                    var result = cmd.ExecuteScalar();
+                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        {
+                            transactionScope.Complete();
+                            return ErrorCode.SUCCESS;
+                        }
 
-                    if (result != null)
-                    {
-                        return Generic.ErrorCode.SUCCESS;
-                    }
-                    else if (result == null)
-                    {
-                        return Generic.ErrorCode.SQL_VIOLATION;
-                    }
-                    else
-                    {
-                        return Generic.ErrorCode.ERROR;
+                        return ErrorCode.ERROR;
                     }
                 }
             }
@@ -228,11 +218,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-
         } // end of function
 
         /// <summary>
-        /// 
+        /// Try to insert a new question into "Star_Questions" table
         /// </summary>
         /// <param name="questionOrder"></param>
         /// <param name="questionText"></param>
@@ -244,55 +233,46 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </returns>
         public ErrorCode InsertStarQuestion(StarQuestion starQuestion)
         {
-            ///
-            // Try to insert a new question into "Star_Questions" table
-            //
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                int rowsAffected = 0;
+
+                using (TransactionScope transactionScope = new TransactionScope())
                 {
-                    SqlCommand cmd = new SqlCommand($@"
+                    using (SqlConnection sqlConnection = new SqlConnection())
+                    {
+                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.Open();
 
-                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.Order}) = 0)
+                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, starQuestion);
 
-                    BEGIN TRANSACTION
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
+                        {
+                            return returnedErrorCode;
+                        }
 
-                        BEGIN
-                        INSERT INTO Questions 
-                            ([Order], [Text], [Type])
-                            VALUES 
-                            (@{QuestionColumn.Order}, @{QuestionColumn.Text}, @{QuestionColumn.Type})
-                        END
-                    IF (@@IDENTITY IS NOT NULL)
-                        BEGIN
+                        using (SqlCommand cmd = sqlConnection.CreateCommand())
+                        {
+                            cmd.CommandText = $@"
                             INSERT INTO Star_Questions(ID,  NumberOfStars)
-                            OUTPUT @@IDENTITY
-                            VALUES (@@IDENTITY, @{QuestionColumn.NumberOfStars})
-                        END
+                            VALUES (@@IDENTITY, @{QuestionColumn.NumberOfStars})";
 
-                    COMMIT TRANSACTION
-", conn);
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.Order}", starQuestion.Order),
-                new SqlParameter($"{QuestionColumn.Text}", starQuestion.Text),
-                new SqlParameter($"{QuestionColumn.Type}",starQuestion.Type),
-                new SqlParameter($"{QuestionColumn.NumberOfStars}", starQuestion.NumberOfStars)
-                };
-                    cmd.Parameters.AddRange(parameters);
-                    conn.Open();
-                    var result = cmd.ExecuteScalar();
+                            SqlParameter[] parameters = new SqlParameter[] {
+                                 new SqlParameter($"{QuestionColumn.NumberOfStars}", starQuestion.NumberOfStars)
+                            };
+                            cmd.Parameters.AddRange(parameters);
 
-                    if (result != null)
-                    {
-                        return Generic.ErrorCode.SUCCESS;
-                    }
-                    else if (result == null)
-                    {
-                        return Generic.ErrorCode.SQL_VIOLATION;
-                    }
-                    else
-                    {
-                        return Generic.ErrorCode.ERROR;
+                            rowsAffected = cmd.ExecuteNonQuery();
+                        }
+
+                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        {
+                            transactionScope.Complete();
+                            return ErrorCode.SUCCESS;
+                        }
+
+                        return ErrorCode.ERROR;
                     }
                 }
             }
@@ -301,6 +281,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
+
+
 
         }// end of function
 
@@ -320,84 +302,55 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public ErrorCode EditSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode UpdateSmileyQuestion(SmileyQuestion smileyQuestion)
         {
             ///
             /// Try to Update a new question into "Smiley_Questions" table
             ///
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                int rowsAffected = 0;
+
+                using (TransactionScope transactionScope = new TransactionScope())
                 {
-                    SqlCommand cmd = new SqlCommand($@"
+                    using (SqlConnection sqlConnection = new SqlConnection())
+                    {
+                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.Open();
 
-                    DECLARE @@MyOrder as INT
-                    SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @{QuestionColumn.ID})
+                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, smileyQuestion);
 
-                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.Order}) = 0)
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
+                        {
+                            return returnedErrorCode;
+                        }
 
-                    BEGIN TRANSACTION
-
-                        BEGIN
-	                        UPDATE Questions
-	                        SET [Order] = @{QuestionColumn.Order}, [Text] = @{QuestionColumn.Text}
-	                        WHERE ID = @{QuestionColumn.ID}
-                        END
-
-                    IF @@ROWCOUNT <> 0
-                        BEGIN
+                        using (SqlCommand cmd = sqlConnection.CreateCommand())
+                        {
+                            cmd.CommandText = $@"
 	                        UPDATE Smiley_Questions
 	                        SET NumberOfSmileyFaces = @{QuestionColumn.NumberOfSmileyFaces}
-	                        WHERE ID = @{QuestionColumn.ID}
-	                        select @@ROWCOUNT
-                        END
+	                        WHERE ID = @{QuestionColumn.ID}";
 
-                    ELSE
-                        BEGIN
-		                    IF (@@MyOrder = @{QuestionColumn.Order})
-		                        BEGIN
-	                                UPDATE Questions
-	                                SET [Text] = @{QuestionColumn.Text}
-	                                WHERE ID = @{QuestionColumn.ID}
-                                END
+                            SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", smileyQuestion.NumberOfSmileyFaces)
+                            };
+                            cmd.Parameters.AddRange(parameters);
 
-                            IF @@ROWCOUNT <> 0
-                                BEGIN
-	                                UPDATE Smiley_Questions
-	                                SET NumberOfSmileyFaces = @{QuestionColumn.NumberOfSmileyFaces}
-	                                WHERE ID = @{QuestionColumn.ID}
-	                                select @@ROWCOUNT
-                                END
-                         END
+                            rowsAffected = cmd.ExecuteNonQuery();
+                        }
 
-                    COMMIT TRANSACTION
-", conn);
+                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        {
+                            transactionScope.Complete();
+                            return ErrorCode.SUCCESS;
+                        }
 
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.Order}", smileyQuestion.Order),
-                new SqlParameter($"{QuestionColumn.Text}", smileyQuestion.Text),
-                new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
-                new SqlParameter($"{QuestionColumn.Type}", smileyQuestion.Type),
-                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", smileyQuestion.NumberOfSmileyFaces)
-                };
-                    cmd.Parameters.AddRange(parameters);
+                        return ErrorCode.ERROR;
 
-                    conn.Open();
-                    var result = cmd.ExecuteScalar();
-
-                    if (result != null)
-                    {
-                        return Generic.ErrorCode.SUCCESS;
                     }
-                    else if (result == null)
-                    {
-                        return Generic.ErrorCode.SQL_VIOLATION;
-                    }
-                    else
-                    {
-                        return Generic.ErrorCode.ERROR;
-                    }
-                    //return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
                 }
             }
             catch (Exception ex)
@@ -424,87 +377,59 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public ErrorCode EditSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode UpdateSliderQuestion(SliderQuestion sliderQuestion)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                int rowsAffected = 0;
+
+                using (TransactionScope transactionScope = new TransactionScope())
                 {
-                    SqlCommand cmd = new SqlCommand($@"
+                    using (SqlConnection sqlConnection = new SqlConnection())
+                    {
+                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.Open();
 
-                    DECLARE @@MyOrder as INT
-                    SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @{QuestionColumn.ID})
+                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, sliderQuestion);
 
-                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.Order}) = 0)
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
+                        {
+                            return returnedErrorCode;
+                        }
 
-                    BEGIN TRANSACTION
-
-                        BEGIN
-                            UPDATE Questions
-                            SET [Order] = @{QuestionColumn.Order}, [Text] = @{QuestionColumn.Text}
-                            WHERE ID = @{QuestionColumn.ID}
-                        END
-                    IF @@ROWCOUNT <> 0
-                        BEGIN
+                        using (SqlCommand cmd = sqlConnection.CreateCommand())
+                        {
+                            cmd.CommandText = $@"
                             UPDATE Slider_Questions
                             SET StartValue = @{QuestionColumn.StartValue}, EndValue = @{QuestionColumn.EndValue}, StartValueCaption = @{QuestionColumn.StartValueCaption}, EndValueCaption = @{QuestionColumn.EndValueCaption}
-                            WHERE ID = @{QuestionColumn.ID}
-	                        select @@ROWCOUNT
-                        END
+                            WHERE ID = @{QuestionColumn.ID}";
 
-                    ELSE
-                        BEGIN
-		                    IF (@@MyOrder = @{QuestionColumn.Order})
-		                        BEGIN
-                                    UPDATE Questions
-                                    SET [Order] = @{QuestionColumn.Order}, [Text] = @{QuestionColumn.Text}
-                                    WHERE ID = @{QuestionColumn.ID}
-                                END
-                            IF @@ROWCOUNT <> 0
-                                BEGIN
-                                    UPDATE Slider_Questions
-                                    SET StartValue = @{QuestionColumn.StartValue}, EndValue = @{QuestionColumn.EndValue}, StartValueCaption = @{QuestionColumn.StartValueCaption}, EndValueCaption = @{QuestionColumn.EndValueCaption}
-                                    WHERE ID = @{QuestionColumn.ID}
-	                                select @@ROWCOUNT
-                                END
-                         END
+                            SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.StartValue}", sliderQuestion.StartValue),
+                                new SqlParameter($"{QuestionColumn.EndValue}", sliderQuestion.EndValue),
+                                new SqlParameter($"{QuestionColumn.StartValueCaption}", sliderQuestion.StartValueCaption),
+                                new SqlParameter($"{QuestionColumn.EndValueCaption}", sliderQuestion.EndValueCaption),
+                            };
+                            cmd.Parameters.AddRange(parameters);
 
-                    COMMIT TRANSACTION
-", conn);
+                            rowsAffected = cmd.ExecuteNonQuery();
+                        }
 
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
-                new SqlParameter($"{QuestionColumn.Order}", sliderQuestion.Order),
-                new SqlParameter($"{QuestionColumn.Text}", sliderQuestion.Text),
-                new SqlParameter($"{QuestionColumn.Type}", sliderQuestion.Type),
-                new SqlParameter($"{QuestionColumn.StartValue}", sliderQuestion.StartValue),
-                new SqlParameter($"{QuestionColumn.EndValue}", sliderQuestion.EndValue),
-                new SqlParameter($"{QuestionColumn.StartValueCaption}", sliderQuestion.StartValueCaption),
-                new SqlParameter($"{QuestionColumn.EndValueCaption}", sliderQuestion.EndValueCaption),
-                };
-                    cmd.Parameters.AddRange(parameters);
+                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        {
+                            transactionScope.Complete();
+                            return ErrorCode.SUCCESS;
+                        }
 
-                    conn.Open();
-                    var result = cmd.ExecuteScalar();
-
-                    if (result != null)
-                    {
-                        return Generic.ErrorCode.SUCCESS;
+                        return ErrorCode.ERROR;
                     }
-                    else if (result == null)
-                    {
-                        return Generic.ErrorCode.SQL_VIOLATION;
-                    }
-                    else
-                    {
-                        return Generic.ErrorCode.ERROR;
-                    }
-                    //return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-                    //MessageBox.Show("Question updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
+                //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
@@ -522,77 +447,50 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// 2 -> Unique key violation
         /// -1 -> ErrorCode
         /// </returns>
-        public ErrorCode EditStarQuestion(StarQuestion starQuestion)
+        public ErrorCode UpdateStarQuestion(StarQuestion starQuestion)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                int rowsAffected = 0;
+
+                using (TransactionScope transactionScope = new TransactionScope())
                 {
-                    SqlCommand cmd = new SqlCommand($@"
+                    using (SqlConnection sqlConnection = new SqlConnection())
+                    {
+                        sqlConnection.ConnectionString = sqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.Open();
 
-                    DECLARE @@MyOrder as INT
-                    SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @{QuestionColumn.ID})
+                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, starQuestion);
 
-                    IF ((SELECT COUNT(ID) FROM Questions WHERE [Order] = @{QuestionColumn.Order}) = 0)
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
+                        {
+                            return returnedErrorCode;
+                        }
 
-                    BEGIN TRANSACTION
-
-                        BEGIN
-	                        UPDATE Questions
-	                        SET [Order] = @{QuestionColumn.Order}, [Text] = @{QuestionColumn.Text}
-	                        WHERE ID = @{QuestionColumn.ID}
-                        END
-
-                    IF @@ROWCOUNT <> 0
-                            BEGIN
+                        using (SqlCommand cmd = sqlConnection.CreateCommand())
+                        {
+                            cmd.CommandText = $@"
                                 UPDATE Star_Questions
                                 SET NumberOfStars = @{QuestionColumn.NumberOfStars}
-                                WHERE ID = @{QuestionColumn.ID}
-	                            select @@ROWCOUNT
-                            END
+                                WHERE ID = @{QuestionColumn.ID}";
 
-                    ELSE
-                        BEGIN
-		                    IF (@@MyOrder = @{QuestionColumn.Order})
-		                        BEGIN
-	                                UPDATE Questions
-	                                SET [Text] = @{QuestionColumn.Text}
-	                                WHERE ID = @{QuestionColumn.ID}
-                                END
+                            SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.NumberOfStars}", starQuestion.NumberOfStars)
+                            };
+                            cmd.Parameters.AddRange(parameters);
 
-                            IF @@ROWCOUNT <> 0
-                                BEGIN
-                                    UPDATE Star_Questions
-                                    SET NumberOfStars = @{QuestionColumn.NumberOfStars}
-                                    WHERE ID = @{QuestionColumn.ID}
-	                                select @@ROWCOUNT
-                                END
-                         END
+                            rowsAffected = cmd.ExecuteNonQuery();
+                        }
 
-                    COMMIT TRANSACTION
-", conn);
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),
-                new SqlParameter($"{QuestionColumn.Order}", starQuestion.Order),
-                new SqlParameter($"{QuestionColumn.Text}", starQuestion.Text),
-                new SqlParameter($"{QuestionColumn.Type}", starQuestion.Type),
-                new SqlParameter($"{QuestionColumn.NumberOfStars}", starQuestion.NumberOfStars)
-                };
-                    cmd.Parameters.AddRange(parameters);
-                    conn.Open();
-                    var result = cmd.ExecuteScalar();
+                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        {
+                            transactionScope.Complete();
+                            return ErrorCode.SUCCESS;
+                        }
 
-                    if (result != null)
-                    {
-                        return Generic.ErrorCode.SUCCESS;
-                    }
-                    else if (result == null)
-                    {
-                        return Generic.ErrorCode.SQL_VIOLATION;
-                    }
-                    else
-                    {
-                        return Generic.ErrorCode.ERROR;
+                        return ErrorCode.ERROR;
                     }
                 }
             }
@@ -611,23 +509,23 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
-                    SqlCommand cmd = new SqlCommand($@"
-                    BEGIN TRANSACTION
+                    sqlConnection.Open();
 
-                    delete from Questions where ID = @{QuestionColumn.ID}
+                    using (SqlCommand cmd = sqlConnection.CreateCommand())
+                    {
+                        cmd.CommandText = $@"
+                            delete from Questions where ID = @{QuestionColumn.ID}";
 
-                    COMMIT TRANSACTION
-", conn);
+                        SqlParameter[] parameters = new SqlParameter[] {
+                            new SqlParameter($"{QuestionColumn.ID}", questionId),
+                        };
+                        cmd.Parameters.AddRange(parameters);
 
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.ID}", questionId),
-                };
-                    cmd.Parameters.AddRange(parameters);
+                        return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR;
 
-                    conn.Open();
-                    return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR;
+                    }
                 }
             }
             catch (Exception ex)
@@ -646,26 +544,26 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
-                    SqlDataAdapter adapter = null;
-                    DataTable dataTable = new DataTable();
-                    SqlCommand cmd = null;
+                    sqlConnection.Open();
 
-                    cmd = new SqlCommand($@"
-
-                    SELECT [ID], [Order], [Text], [Type] FROM Questions
-", conn);
-                    conn.Open();
-                    adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dataTable);
-
-                    foreach (DataRow row in dataTable.Rows)
+                    using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
-                        Question q = new Question((int)(int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"]);
-                        questionsList.Add(q);
+                        cmd.CommandText = $@"
+                            SELECT [ID], [Order], [Text], [Type] FROM Questions";
+
+                        DataTable dataTable = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dataTable);
+
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            Question q = new Question((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"]);
+                            questionsList.Add(q);
+                        }
+                        return questionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                     }
-                    return questionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                 }
             }
             catch (SqlException ex)
@@ -684,36 +582,34 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
-                    SqlDataAdapter adapter = null;
-                    DataTable dataTable = new DataTable();
-                    SqlCommand cmd = null;
+                    sqlConnection.Open();
 
-                    cmd = new SqlCommand($@"
-
-                    select Q.[ID], Q.[Order], Q.[Text], Q.[Type], SmQ.NumberOfSmileyFaces
-                    from Questions AS Q
-                    inner join Smiley_Questions AS SmQ
-                    on Q.ID = SmQ.ID
-                    where Q.ID = @{QuestionColumn.ID}
-", conn);
-
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
-                };
-                    cmd.Parameters.AddRange(parameters);
-
-                    conn.Open();
-                    adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dataTable);
-
-                    foreach (DataRow row in dataTable.Rows)
+                    using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
-                        smileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfSmileyFaces}"]);
-                    }
+                        cmd.CommandText = $@"
+                            select Q.[ID], Q.[Order], Q.[Text], Q.[Type], SmQ.NumberOfSmileyFaces
+                            from Questions AS Q
+                            inner join Smiley_Questions AS SmQ
+                            on Q.ID = SmQ.ID
+                            where Q.ID = @{QuestionColumn.ID}";
+                        SqlParameter[] parameters = new SqlParameter[] {
+                            new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
+                        };
+                        cmd.Parameters.AddRange(parameters);
 
-                    return smileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        DataTable dataTable = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dataTable);
+
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            smileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfSmileyFaces}"]);
+                        }
+
+                        return smileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                    }
                 }
             }
             catch (SqlException ex)
@@ -732,37 +628,36 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
-                    SqlDataAdapter adapter = null;
-                    DataTable dataTable = new DataTable();
-                    SqlCommand cmd = null;
+                    sqlConnection.Open();
 
-                    cmd = new SqlCommand($@"
-
-                    select Q.[ID], Q.[Order], Q.[Text], Q.[Type], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
-                    from Questions AS Q
-                    inner join Slider_Questions AS SQ
-                    on Q.ID = SQ.ID
-                    where Q.ID = @{QuestionColumn.ID}
-", conn);
-
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
-                };
-                    cmd.Parameters.AddRange(parameters);
-
-                    conn.Open();
-                    adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dataTable);
-
-                    foreach (DataRow row in dataTable.Rows)
+                    using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
-                        sliderQuestion = new SliderQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"],
-                            (int)row[$"{QuestionColumn.StartValue}"], (int)row[$"{QuestionColumn.EndValue}"], (string)row[$"{QuestionColumn.StartValueCaption}"], (string)row[$"{QuestionColumn.EndValueCaption}"]);
-                    }
+                        cmd.CommandText = $@"
+                            select Q.[ID], Q.[Order], Q.[Text], Q.[Type], SQ.StartValue, SQ.EndValue, SQ.StartValueCaption, SQ.EndValueCaption
+                            from Questions AS Q
+                            inner join Slider_Questions AS SQ
+                            on Q.ID = SQ.ID
+                            where Q.ID = @{QuestionColumn.ID}";
 
-                    return sliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        SqlParameter[] parameters = new SqlParameter[] {
+                            new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
+                        };
+                        cmd.Parameters.AddRange(parameters);
+
+                        DataTable dataTable = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dataTable);
+
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            sliderQuestion = new SliderQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"],
+                                (int)row[$"{QuestionColumn.StartValue}"], (int)row[$"{QuestionColumn.EndValue}"], (string)row[$"{QuestionColumn.StartValueCaption}"], (string)row[$"{QuestionColumn.EndValueCaption}"]);
+                        }
+
+                        return sliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                    }
                 }
             }
             catch (SqlException ex)
@@ -781,36 +676,34 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString))
                 {
-                    SqlDataAdapter adapter = null;
-                    DataTable dataTable = new DataTable();
-                    SqlCommand cmd = null;
-
-                    cmd = new SqlCommand($@"
-
-                    select Q.[ID], Q.[Order], Q.[Text], Q.[Type], StQ.NumberOfStars
-                    from Questions AS Q
-                    inner join Star_Questions AS StQ
-                    on Q.ID = StQ.ID
-                    where Q.ID = @{QuestionColumn.ID}
-", conn);
-
-                    SqlParameter[] parameters = new SqlParameter[] {
-                new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),
-                };
-                    cmd.Parameters.AddRange(parameters);
-
-                    conn.Open();
-                    adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dataTable);
-
-                    foreach (DataRow row in dataTable.Rows)
+                    sqlConnection.Open();
+                    using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
-                        starQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfStars}"]);
-                    }
+                        cmd.CommandText = $@"
+                            select Q.[ID], Q.[Order], Q.[Text], Q.[Type], StQ.NumberOfStars
+                            from Questions AS Q
+                            inner join Star_Questions AS StQ
+                            on Q.ID = StQ.ID
+                            where Q.ID = @{QuestionColumn.ID}";
 
-                    return starQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        SqlParameter[] parameters = new SqlParameter[] {
+                            new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),
+                        };
+                        cmd.Parameters.AddRange(parameters);
+
+                        DataTable dataTable = new DataTable();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dataTable);
+
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            starQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfStars}"]);
+                        }
+
+                        return starQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                    }
                 }
             }
             catch (SqlException ex)
@@ -832,7 +725,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //        {
         //            try
         //            {
-        //                conn = new SqlConnection(connectionSetting.ConnectionString);
+        //                sqlConnection = new SqlConnection(sqlConnectionectionSetting.ConnectionString);
         //                SqlCommand cmd = null;
 
 
@@ -840,7 +733,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //                /// Create Tables if they do NOT exist
         //                ///
         //                cmd = new SqlCommand($@"
-        //USE [{connectionSetting.Name}]
+        //USE [{sqlConnectionectionSetting.Name}]
         //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Smiley_Questions]') AND type in (N'U'))
         //BEGIN
         //CREATE TABLE [dbo].[Smiley_Questions](
@@ -854,14 +747,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
         //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
         //END
-        //", conn);
-        //                conn.Open();
+        //", sqlConnection);
+        //                sqlConnection.Open();
         //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-        //                conn.Close();
+        //                sqlConnection.Close();
 
 
         //                cmd = new SqlCommand($@"
-        //USE [{connectionSetting.Name}]
+        //USE [{sqlConnectionectionSetting.Name}]
         //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Slider_Questions]') AND type in (N'U'))
         //BEGIN
         //CREATE TABLE [dbo].[Slider_Questions](
@@ -882,14 +775,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
         //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
         //END
-        //", conn);
-        //                conn.Open();
+        //", sqlConnection);
+        //                sqlConnection.Open();
         //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-        //                conn.Close();
+        //                sqlConnection.Close();
 
 
         //                cmd = new SqlCommand($@"
-        //USE [{connectionSetting.Name}]
+        //USE [{sqlConnectionectionSetting.Name}]
         //IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Star_Questions]') AND type in (N'U'))
         //BEGIN
         //CREATE TABLE [dbo].[Star_Questions](
@@ -907,10 +800,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
         //) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
         //END
-        //", conn);
-        //                conn.Open();
+        //", sqlConnection);
+        //                sqlConnection.Open();
         //                return cmd.ExecuteNonQuery() > 0 ?  CommonEnums.ErrorCode.SUCCESS :  CommonEnums.ErrorCode.ERROR;
-        //                conn.Close();
+        //                sqlConnection.Close();
 
         //                return  CommonEnums.ErrorState.SUCCESS;
         //            }
@@ -938,7 +831,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         //            }
         //            finally
         //            {
-        //                conn.Close();
+        //                sqlConnection.Close();
         //            }
         //        } //end func.
     }

@@ -48,7 +48,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return dbConnect.EditSmileyQuestion(smileyQuestion);
+                return dbConnect.UpdateSmileyQuestion(smileyQuestion);
             }
             catch (Exception ex)
             {

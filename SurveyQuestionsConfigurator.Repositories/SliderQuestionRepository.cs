@@ -42,7 +42,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return dbConnect.EditSliderQuestion(sliderQuestion);
+                return dbConnect.UpdateSliderQuestion(sliderQuestion);
             }
             catch (Exception ex)
             {

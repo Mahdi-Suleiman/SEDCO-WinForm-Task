@@ -42,7 +42,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return dbConnect.EditStarQuestion(starQuestion);
+                return dbConnect.UpdateStarQuestion(starQuestion);
             }
             catch (Exception ex)
             {
