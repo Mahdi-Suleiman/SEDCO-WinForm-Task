@@ -514,7 +514,7 @@ namespace SurveyQuestionsConfigurator
             {
                 ///
                 /// Declare variables
-                ///Question.Question.Question.
+                ///
                 int questionOrder, numberOfSmilyFaces;
                 string questionText;
                 ErrorCode result;
