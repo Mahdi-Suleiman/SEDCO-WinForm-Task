@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SurveyQuestionsConfigurator.Entities.Generic;
@@ -62,7 +63,7 @@ namespace SurveyQuestionsConfigurator
             /// Connect to quesion table and fill the list view
             try
             {
-                ListViewItem listviewitem;// Used for creating listview items.
+                ListViewItem listviewitem;/// Used for creating listview items.
                 List<Question> questionsList = new List<Question>();
 
                 ///Size text column header to fit the text.
@@ -98,8 +99,9 @@ namespace SurveyQuestionsConfigurator
                             }
                         }
                         break;
+
                     default:
-                        ///If connectin to DB is ERROR -> Disable buttons and list view
+                        ///If connectin to DB is not SUCCESS -> Disable buttons and list view
                         if (addQuestionButton.Enabled)
                         {
                             addQuestionButton.Enabled = false;
@@ -134,7 +136,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Refresh when add question form is closed
@@ -144,6 +146,8 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                //Thread thr = new Thread(new ThreadStart(BuildListView));
+                //thr.Start();
                 BuildListView();
             }
             catch (Exception ex)
@@ -151,7 +155,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Sort list for each column
@@ -188,7 +192,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n");
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Handle add question button click
@@ -205,7 +209,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Handle exit click
@@ -221,7 +225,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Handle delete question click
@@ -273,7 +277,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Handle reresh button click
@@ -290,7 +294,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Handle edit question button click
@@ -299,23 +303,30 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                AddQuestionForm tAddQuestionForm = null; /// Accept question ID & question type
+                AddQuestionForm tAddQuestionForm = null; /// Accept Qustion object
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
                     int tQuestionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].Tag);
+                    Question tQuestion = null;
                     if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text == QuestionType.SMILEY.ToString())
                     {
-                        tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.SMILEY);
+                        tQuestion = new Question(tQuestionId, QuestionType.SMILEY);
+
+                        tAddQuestionForm = new AddQuestionForm(tQuestion);
                         tAddQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text.ToString() == QuestionType.SLIDER.ToString())
                     {
-                        tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.SLIDER);
+                        tQuestion = new Question(tQuestionId, QuestionType.SLIDER);
+
+                        tAddQuestionForm = new AddQuestionForm(tQuestion);
                         tAddQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text.ToString() == QuestionType.STAR.ToString())
                     {
-                        tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.STAR);
+                        tQuestion = new Question(tQuestionId, QuestionType.STAR);
+
+                        tAddQuestionForm = new AddQuestionForm(tQuestion);
                         tAddQuestionForm.ShowDialog();
                     }
                 }
@@ -329,7 +340,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         /// <summary>
         /// Handle close button click
@@ -345,7 +356,7 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
-        }//End event 
+        }///End event 
 
         #endregion
     }

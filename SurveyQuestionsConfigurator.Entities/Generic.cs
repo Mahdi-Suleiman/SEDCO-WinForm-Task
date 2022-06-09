@@ -37,7 +37,3 @@ namespace SurveyQuestionsConfigurator.Entities
         }
     }
 }
-
-/*
- * 
- */

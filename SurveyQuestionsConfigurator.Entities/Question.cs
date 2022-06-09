@@ -27,6 +27,19 @@ namespace SurveyQuestionsConfigurator.Entities
             }
         }
 
+        public Question(int pID, QuestionType pType)
+        {
+            try
+            {
+                ID = pID;
+                Type = pType;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+        }
+
         public Question(int pID, int pOrder, string pText, QuestionType pType)
         {
             try

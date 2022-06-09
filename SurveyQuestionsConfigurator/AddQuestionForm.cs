@@ -15,7 +15,7 @@ namespace SurveyQuestionsConfigurator
     public partial class AddQuestionForm : Form
     {
         #region Properties
-        public int mQuestionId { get; set; } /// create global Question ID property
+        public Question mGenericQuestion { get; set; } /// create global Question ID property
 
         private QuestionManager mGeneralQuestionManager = new QuestionManager();
 
@@ -52,7 +52,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Form constructor for "Editing A Question"
         /// </summary>
-        public AddQuestionForm(int questionId, QuestionType pQuestionType)
+        public AddQuestionForm(Question pQuestion)
         {
             try
             {
@@ -61,24 +61,24 @@ namespace SurveyQuestionsConfigurator
 
                 cStateForm = FormStateType.EDIT;
 
-                mQuestionId = questionId;
+                mGenericQuestion = pQuestion;
 
                 questionTypeComboBox.Enabled = false;
 
-                if (pQuestionType == QuestionType.SMILEY)
+                if (pQuestion.Type == QuestionType.SMILEY)
                 {
                     cSelectedQuestionType = QuestionType.SMILEY; // 0 
-                    InitializeEditingSmileyQuestion(questionId);
+                    InitializeEditingSmileyQuestion(pQuestion);
                 }
-                else if (pQuestionType == QuestionType.SLIDER)
+                else if (pQuestion.Type == QuestionType.SLIDER)
                 {
                     cSelectedQuestionType = QuestionType.SLIDER; // 1
-                    InitializeEditingSliderQuestion(questionId);
+                    InitializeEditingSliderQuestion(pQuestion);
                 }
-                else if (pQuestionType == QuestionType.STAR)
+                else if (pQuestion.Type == QuestionType.STAR)
                 {
                     cSelectedQuestionType = QuestionType.STAR; // 2
-                    InitializeEditingStarQuestion(questionId);
+                    InitializeEditingStarQuestion(pQuestion);
                 }
             }
             catch (Exception ex)
@@ -201,13 +201,13 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Initialize editing smiley question on combobox index change event
         /// </summary>
-        private void InitializeEditingSmileyQuestion(int pQuestionId)
+        private void InitializeEditingSmileyQuestion(Question pQuestion)
         {
             /// Get selected question from DB and fill input fields with its data
             try
             {
-                mQuestionId = pQuestionId;
-                SmileyQuestion tSmileyQuestion = new SmileyQuestion(pQuestionId);
+                mGenericQuestion = pQuestion;
+                SmileyQuestion tSmileyQuestion = new SmileyQuestion(pQuestion.ID);
 
                 ErrorCode tResult = mGeneralQuestionManager.GetSmileyQuestionByID(ref tSmileyQuestion);
                 switch (tResult)
@@ -241,15 +241,15 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Initialize editing slider question on combobox index change event
         /// </summary>
-        private void InitializeEditingSliderQuestion(int pQuestionId)
+        private void InitializeEditingSliderQuestion(Question pQuestion)
         {
             ///
             /// Get selected question from DB and fill input fields  with its data
             ///
             try
             {
-                mQuestionId = pQuestionId;
-                SliderQuestion tSliderQuestion = new SliderQuestion(pQuestionId);
+                mGenericQuestion = pQuestion;
+                SliderQuestion tSliderQuestion = new SliderQuestion(pQuestion.ID);
 
                 ErrorCode result = mGeneralQuestionManager.GetSliderQuestionByID(ref tSliderQuestion);
                 switch (result)
@@ -286,15 +286,15 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Initialize editing star question on combobox change
         /// </summary>
-        private void InitializeEditingStarQuestion(int pQuestionId)
+        private void InitializeEditingStarQuestion(Question pQuestion)
         {
             ///
             /// Select wanted question from DB and fill input fields  with its data
             ///
             try
             {
-                mQuestionId = pQuestionId;
-                StarQuestion tStarQuestion = new StarQuestion(pQuestionId);
+                mGenericQuestion = pQuestion;
+                StarQuestion tStarQuestion = new StarQuestion(pQuestion.ID);
 
                 ErrorCode result = mGeneralQuestionManager.GetStarQuestionByID(ref tStarQuestion);
                 switch (result)
@@ -497,7 +497,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        }
+        }/// Function end
 
         /// <summary>
         /// Handle adding a question
@@ -620,7 +620,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                tQuestionId = mQuestionId;
+                tQuestionId = mGenericQuestion.ID;
                 tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                 tQuestionText = questionTextRichTextBox.Text;
                 tNumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
@@ -672,7 +672,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText, tQuestionStartValueCaption, tQuestionEndValueCaption;
                 ErrorCode tResult;
 
-                tQuestionId = mQuestionId;
+                tQuestionId = mGenericQuestion.ID;
                 tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                 tQuestionText = (string)questionTextRichTextBox.Text;
                 tQuestionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
@@ -735,7 +735,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode result;
 
-                tQuestionId = mQuestionId;
+                tQuestionId = mGenericQuestion.ID;
                 tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                 tQuestionText = questionTextRichTextBox.Text;
                 tNumberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
@@ -793,7 +793,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        }
+        }/// Function end
 
         /// <summary>
         /// Check slider question input fields
@@ -810,7 +810,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        }
+        }/// Function end
 
         /// <summary>
         /// Check star question input fields
@@ -827,7 +827,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
-        }
+        }/// Function end
         #endregion
     }
 }

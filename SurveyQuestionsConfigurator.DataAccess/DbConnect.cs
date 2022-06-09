@@ -27,19 +27,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        private ErrorCode InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion)
+        private ErrorCode InsertQuestion(SqlConnection pSqlConnection, Question pQuestion)
         {
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
                 using (SqlCommand cmd = pSqlConnection.CreateCommand())
                 {
-                    cmd.CommandText = $@"
-                            DECLARE @RESULT INT
-                            EXECUTE @RESULT = INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
-                            SELECT @RESULT";
-                    //cmd.CommandText = "INSERT_QUESTION";
-                    //cmd.CommandType = CommandType.StoredProcedure;
+                    //cmd.CommandText = $@"
+                    //        DECLARE @RESULT INT
+                    //        EXECUTE @RESULT = INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
+                    //        SELECT @RESULT";
+                    cmd.CommandText = "INSERT_QUESTION";
+                    cmd.CommandType = CommandType.StoredProcedure;
 
                     SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.Order}", pQuestion.Order),
@@ -53,7 +53,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return ErrorCode.ERROR;
             }
         }
@@ -66,7 +66,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        private ErrorCode UpdateQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion)
+        private ErrorCode UpdateQuestion(SqlConnection pSqlConnection, Question pQuestion)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return ErrorCode.ERROR;
             }
         }
@@ -124,7 +124,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, pSmileyQuestion);
+                        returnedErrorCode = InsertQuestion(sqlConnection, pSmileyQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
                         {
@@ -160,7 +160,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -191,7 +191,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, pSliderQuestion);
+                        returnedErrorCode = InsertQuestion(sqlConnection, pSliderQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -228,7 +228,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -258,7 +258,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, pStarQuestion);
+                        returnedErrorCode = InsertQuestion(sqlConnection, pStarQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -291,7 +291,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
 
@@ -331,7 +331,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, pSmileyQuestion);
+                        returnedErrorCode = UpdateQuestion(sqlConnection, pSmileyQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -368,7 +368,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
 
@@ -399,7 +399,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, pSliderQuestion);
+                        returnedErrorCode = UpdateQuestion(sqlConnection, pSliderQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -438,7 +438,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 //MessageBox.Show("Something went wrong:\n" + ex.Message);
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -468,7 +468,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, pStarQuestion);
+                        returnedErrorCode = UpdateQuestion(sqlConnection, pStarQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -503,7 +503,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -546,7 +546,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
 
@@ -576,23 +576,31 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         adapter.Fill(dataTable);
 
+                        int tID, tOrder;
+                        string tText;
+                        QuestionType tType;
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            Question q = new Question((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"]);
+                            tID = (int)row[$"{QuestionColumn.ID}"];
+                            tOrder = (int)row[$"{QuestionColumn.Order}"];
+                            tText = (string)row[$"{QuestionColumn.Text}"];
+                            tType = (QuestionType)row[$"{QuestionColumn.Type}"];
+
+                            Question q = new Question(tID, tOrder, tText, tType);
                             pQuestionsList.Add(q);
                         }
-                        return pQuestionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pQuestionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -626,23 +634,31 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         adapter.Fill(dataTable);
 
+                        int tID, tOrder, tNumberOfSmileyFaces;
+                        string tText;
+                        QuestionType tType;
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            pSmileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfSmileyFaces}"]);
+                            tID = (int)row[$"{QuestionColumn.ID}"];
+                            tOrder = (int)row[$"{QuestionColumn.Order}"];
+                            tText = (string)row[$"{QuestionColumn.Text}"];
+                            tType = (QuestionType)row[$"{QuestionColumn.Type}"];
+                            tNumberOfSmileyFaces = (int)row[$"{QuestionColumn.NumberOfSmileyFaces}"];
+                            pSmileyQuestion = new SmileyQuestion(tID, tOrder, tText, tType, tNumberOfSmileyFaces);
                         }
 
-                        return pSmileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pSmileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -677,24 +693,37 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         adapter.Fill(dataTable);
 
+
+                        int tID, tOrder, tNumberOfSmileyFaces, tStartValue, tEndValue;
+                        string tText, tStartValueCaption, tEndValueCaption;
+                        QuestionType tType;
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            pSliderQuestion = new SliderQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"],
-                                (int)row[$"{QuestionColumn.StartValue}"], (int)row[$"{QuestionColumn.EndValue}"], (string)row[$"{QuestionColumn.StartValueCaption}"], (string)row[$"{QuestionColumn.EndValueCaption}"]);
+                            tID = (int)row[$"{QuestionColumn.ID}"];
+                            tOrder = (int)row[$"{QuestionColumn.Order}"];
+                            tText = (string)row[$"{QuestionColumn.Text}"];
+                            tType = (QuestionType)row[$"{QuestionColumn.Type}"];
+                            tStartValue = (int)row[$"{QuestionColumn.StartValue}"];
+                            tEndValue = (int)row[$"{QuestionColumn.EndValue}"];
+                            tStartValueCaption = (string)row[$"{QuestionColumn.StartValueCaption}"];
+                            tEndValueCaption = (string)row[$"{QuestionColumn.EndValueCaption}"];
+
+                            pSliderQuestion = new SliderQuestion(tID, tOrder, tText, tType,
+                                tStartValue, tEndValue, tStartValueCaption, tEndValueCaption);
                         }
 
-                        return pSliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pSliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
         } /// Function end
@@ -729,23 +758,33 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         adapter.Fill(dataTable);
 
+                        int tID, tOrder, tNumberOfStars;
+                        string tText;
+                        QuestionType tType;
+
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            pStarQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfStars}"]);
+                            tID = (int)row[$"{QuestionColumn.ID}"];
+                            tOrder = (int)row[$"{QuestionColumn.Order}"];
+                            tText = (string)row[$"{QuestionColumn.Text}"];
+                            tType = (QuestionType)row[$"{QuestionColumn.Type}"];
+                            tNumberOfStars = (int)row[$"{QuestionColumn.NumberOfStars}"];
+
+                            pStarQuestion = new StarQuestion(tID, tOrder, tText, tType, tNumberOfStars);
                         }
 
-                        return pStarQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pStarQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex); //write error to log file
+                Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
 

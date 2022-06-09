@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.refreshDataButton = new System.Windows.Forms.Button();
+            this.refreshListButton = new System.Windows.Forms.Button();
             this.createdQuestions_ListView = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -37,29 +37,24 @@
             this.deleteQuestionButton = new System.Windows.Forms.Button();
             this.editQuestionButton = new System.Windows.Forms.Button();
             this.addQuestionButton = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.closeApplicationButton = new System.Windows.Forms.Button();
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.createdQuestionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // refreshDataButton
+            // refreshListButton
             // 
-            this.refreshDataButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.refresh_icon;
-            this.refreshDataButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.refreshDataButton.Location = new System.Drawing.Point(6, 309);
-            this.refreshDataButton.Name = "refreshDataButton";
-            this.refreshDataButton.Padding = new System.Windows.Forms.Padding(15);
-            this.refreshDataButton.Size = new System.Drawing.Size(23, 23);
-            this.refreshDataButton.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.refreshDataButton, "Refresh List");
-            this.refreshDataButton.UseVisualStyleBackColor = true;
-            this.refreshDataButton.Click += new System.EventHandler(this.refreshDataButton_Click);
+            this.refreshListButton.Location = new System.Drawing.Point(6, 309);
+            this.refreshListButton.Name = "refreshListButton";
+            this.refreshListButton.Size = new System.Drawing.Size(75, 23);
+            this.refreshListButton.TabIndex = 8;
+            this.refreshListButton.Text = "Refresh";
+            this.toolTip1.SetToolTip(this.refreshListButton, "Refresh List");
+            this.refreshListButton.UseVisualStyleBackColor = true;
+            this.refreshListButton.Click += new System.EventHandler(this.refreshDataButton_Click);
             // 
             // createdQuestions_ListView
             // 
@@ -95,7 +90,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Text";
-            this.columnHeader4.Width = 250;
+            this.columnHeader4.Width = 440;
             // 
             // deleteQuestionButton
             // 
@@ -127,31 +122,6 @@
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(621, 24);
-            this.menuStrip1.TabIndex = 7;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "&Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // closeApplicationButton
             // 
             this.closeApplicationButton.Location = new System.Drawing.Point(537, 381);
@@ -166,10 +136,11 @@
             // 
             this.createdQuestionsGroupBox.Controls.Add(this.errorLabel);
             this.createdQuestionsGroupBox.Controls.Add(this.createdQuestions_ListView);
-            this.createdQuestionsGroupBox.Controls.Add(this.refreshDataButton);
+            this.createdQuestionsGroupBox.Controls.Add(this.refreshListButton);
             this.createdQuestionsGroupBox.Controls.Add(this.addQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
+            this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
             this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 36);
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
             this.createdQuestionsGroupBox.Size = new System.Drawing.Size(606, 339);
@@ -182,12 +153,20 @@
             this.errorLabel.AutoSize = true;
             this.errorLabel.BackColor = System.Drawing.Color.Transparent;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(35, 314);
+            this.errorLabel.Location = new System.Drawing.Point(87, 314);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(58, 13);
             this.errorLabel.TabIndex = 11;
             this.errorLabel.Text = "Error Label";
             this.errorLabel.Visible = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(600, 24);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // SurveyQuestionsConfiguratorForm
             // 
@@ -197,8 +176,6 @@
             this.ClientSize = new System.Drawing.Size(621, 410);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(637, 449);
             this.MinimumSize = new System.Drawing.Size(637, 449);
@@ -207,12 +184,9 @@
             this.Text = "Survey Questions Configurator";
             this.Activated += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Activated);
             this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.createdQuestionsGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -221,10 +195,7 @@
         private System.Windows.Forms.Button deleteQuestionButton;
         private System.Windows.Forms.Button editQuestionButton;
         private System.Windows.Forms.Button addQuestionButton;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Button refreshDataButton;
+        private System.Windows.Forms.Button refreshListButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button closeApplicationButton;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -232,6 +203,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.GroupBox createdQuestionsGroupBox;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 
