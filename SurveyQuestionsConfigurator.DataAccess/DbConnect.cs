@@ -20,19 +20,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
         #region INSERT Methods
         /// <summary>
-        /// General question insert method that calls a stored proceedure
+        /// General pQuestion insert method that calls a stored proceedure
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        private ErrorCode InsertQuestion(TransactionScope transactionScope, SqlConnection sqlConnection, Question question)
+        private ErrorCode InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion)
         {
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                using (SqlCommand cmd = sqlConnection.CreateCommand())
+                using (SqlCommand cmd = pSqlConnection.CreateCommand())
                 {
                     cmd.CommandText = $@"
                             DECLARE @RESULT INT
@@ -40,9 +40,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             SELECT @RESULT";
 
                     SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.Order}", question.Order),
-                                new SqlParameter($"{QuestionColumn.Text}", question.Text),
-                                new SqlParameter($"{QuestionColumn.Type}", question.Type)};
+                                new SqlParameter($"{QuestionColumn.Order}", pQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", pQuestion.Type)};
                     cmd.Parameters.AddRange(parameters);
 
                     returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
@@ -57,19 +57,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
         }
 
         /// <summary>
-        /// General question update method that calls a stored proceedure
+        /// General pQuestion update method that calls a stored proceedure
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        private ErrorCode UpdateQuestion(TransactionScope transactionScope, SqlConnection sqlConnection, Question question)
+        private ErrorCode UpdateQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion)
         {
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                using (SqlCommand cmd = sqlConnection.CreateCommand())
+                using (SqlCommand cmd = pSqlConnection.CreateCommand())
                 {
                     cmd.CommandText = $@"
                             DECLARE @RESULT INT
@@ -77,9 +77,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             SELECT @RESULT";
 
                     SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.Order}", question.Order),
-                                new SqlParameter($"{QuestionColumn.Text}", question.Text),
-                                new SqlParameter($"{QuestionColumn.ID}", question.ID)};
+                                new SqlParameter($"{QuestionColumn.Order}", pQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.ID}", pQuestion.ID)};
                     cmd.Parameters.AddRange(parameters);
 
                     returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
@@ -105,10 +105,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode InsertSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode InsertSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
             ///
-            /// Try to insert a new question into "Smiley_Questions" table
+            /// Try to insert a new pQuestion into "Smiley_Questions" table
             ///
             try
             {
@@ -122,7 +122,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, smileyQuestion);
+                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, pSmileyQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
                         {
@@ -140,7 +140,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             VALUES (@@IDENTITY, @{QuestionColumn.NumberOfSmileyFaces})";
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", smileyQuestion.NumberOfSmileyFaces)};
+                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)};
                             cmd.Parameters.AddRange(parameters);
 
                             rowsAffected = cmd.ExecuteNonQuery();
@@ -174,7 +174,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode InsertSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode InsertSliderQuestion(SliderQuestion pSliderQuestion)
         {
 
             try
@@ -189,7 +189,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, sliderQuestion);
+                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, pSliderQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -205,10 +205,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                     @{QuestionColumn.StartValueCaption}, @{QuestionColumn.EndValueCaption})";
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.StartValue}", sliderQuestion.StartValue),
-                                new SqlParameter($"{QuestionColumn.EndValue}", sliderQuestion.EndValue),
-                                new SqlParameter($"{QuestionColumn.StartValueCaption}", sliderQuestion.StartValueCaption),
-                                new SqlParameter($"{QuestionColumn.EndValueCaption}", sliderQuestion.EndValueCaption)};
+                                new SqlParameter($"{QuestionColumn.StartValue}", pSliderQuestion.StartValue),
+                                new SqlParameter($"{QuestionColumn.EndValue}", pSliderQuestion.EndValue),
+                                new SqlParameter($"{QuestionColumn.StartValueCaption}", pSliderQuestion.StartValueCaption),
+                                new SqlParameter($"{QuestionColumn.EndValueCaption}", pSliderQuestion.EndValueCaption)};
                             cmd.Parameters.AddRange(parameters);
 
                             rowsAffected = cmd.ExecuteNonQuery();
@@ -242,7 +242,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode InsertStarQuestion(StarQuestion starQuestion)
+        public ErrorCode InsertStarQuestion(StarQuestion pStarQuestion)
         {
             try
             {
@@ -256,7 +256,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, starQuestion);
+                        returnedErrorCode = InsertQuestion(transactionScope, sqlConnection, pStarQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -270,7 +270,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             VALUES (@@IDENTITY, @{QuestionColumn.NumberOfStars})";
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                 new SqlParameter($"{QuestionColumn.NumberOfStars}", starQuestion.NumberOfStars)
+                                 new SqlParameter($"{QuestionColumn.NumberOfStars}", pStarQuestion.NumberOfStars)
                             };
                             cmd.Parameters.AddRange(parameters);
 
@@ -312,10 +312,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode UpdateSmileyQuestion(SmileyQuestion smileyQuestion)
+        public ErrorCode UpdateSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
             ///
-            /// Try to Update a new question into "Smiley_Questions" table
+            /// Try to Update a new pQuestion into "Smiley_Questions" table
             ///
             try
             {
@@ -329,7 +329,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, smileyQuestion);
+                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, pSmileyQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -344,8 +344,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 	                        WHERE ID = @{QuestionColumn.ID}";
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
-                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", smileyQuestion.NumberOfSmileyFaces)
+                                new SqlParameter($"{QuestionColumn.ID}", pSmileyQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)
                             };
                             cmd.Parameters.AddRange(parameters);
 
@@ -383,7 +383,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode UpdateSliderQuestion(SliderQuestion sliderQuestion)
+        public ErrorCode UpdateSliderQuestion(SliderQuestion pSliderQuestion)
         {
             try
             {
@@ -397,7 +397,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, sliderQuestion);
+                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, pSliderQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -412,11 +412,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             WHERE ID = @{QuestionColumn.ID}";
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
-                                new SqlParameter($"{QuestionColumn.StartValue}", sliderQuestion.StartValue),
-                                new SqlParameter($"{QuestionColumn.EndValue}", sliderQuestion.EndValue),
-                                new SqlParameter($"{QuestionColumn.StartValueCaption}", sliderQuestion.StartValueCaption),
-                                new SqlParameter($"{QuestionColumn.EndValueCaption}", sliderQuestion.EndValueCaption),
+                                new SqlParameter($"{QuestionColumn.ID}", pSliderQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.StartValue}", pSliderQuestion.StartValue),
+                                new SqlParameter($"{QuestionColumn.EndValue}", pSliderQuestion.EndValue),
+                                new SqlParameter($"{QuestionColumn.StartValueCaption}", pSliderQuestion.StartValueCaption),
+                                new SqlParameter($"{QuestionColumn.EndValueCaption}", pSliderQuestion.EndValueCaption),
                             };
                             cmd.Parameters.AddRange(parameters);
 
@@ -452,7 +452,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode UpdateStarQuestion(StarQuestion starQuestion)
+        public ErrorCode UpdateStarQuestion(StarQuestion pStarQuestion)
         {
             try
             {
@@ -466,7 +466,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, starQuestion);
+                        returnedErrorCode = UpdateQuestion(transactionScope, sqlConnection, pStarQuestion);
 
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
                         {
@@ -481,8 +481,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 WHERE ID = @{QuestionColumn.ID}";
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),
-                                new SqlParameter($"{QuestionColumn.NumberOfStars}", starQuestion.NumberOfStars)
+                                new SqlParameter($"{QuestionColumn.ID}", pStarQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.NumberOfStars}", pStarQuestion.NumberOfStars)
                             };
                             cmd.Parameters.AddRange(parameters);
 
@@ -520,7 +520,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// </returns>
-        public ErrorCode DeleteQuestion(int questionId)
+        public ErrorCode DeleteQuestion(int pQuestionId)
         {
             try
             {
@@ -533,7 +533,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             delete from Questions where ID = @{QuestionColumn.ID}";
 
                         SqlParameter[] parameters = new SqlParameter[] {
-                            new SqlParameter($"{QuestionColumn.ID}", questionId),
+                            new SqlParameter($"{QuestionColumn.ID}", pQuestionId),
                         };
                         cmd.Parameters.AddRange(parameters);
 
@@ -558,7 +558,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// </returns>
-        public ErrorCode GetAllQuestions(ref List<Question> questionsList)
+        public ErrorCode GetAllQuestions(ref List<Question> pQuestionsList)
         {
             try
             {
@@ -577,9 +577,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         foreach (DataRow row in dataTable.Rows)
                         {
                             Question q = new Question((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"]);
-                            questionsList.Add(q);
+                            pQuestionsList.Add(q);
                         }
-                        return questionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pQuestionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                     }
                 }
             }
@@ -599,7 +599,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// </returns>
-        public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion smileyQuestion)
+        public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion pSmileyQuestion)
         {
             try
             {
@@ -616,7 +616,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             where Q.ID = @{QuestionColumn.ID}
                             ORDER BY [ORDER] ASC";
                         SqlParameter[] parameters = new SqlParameter[] {
-                            new SqlParameter($"{QuestionColumn.ID}", smileyQuestion.ID),
+                            new SqlParameter($"{QuestionColumn.ID}", pSmileyQuestion.ID),
                         };
                         cmd.Parameters.AddRange(parameters);
 
@@ -626,10 +626,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            smileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfSmileyFaces}"]);
+                            pSmileyQuestion = new SmileyQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfSmileyFaces}"]);
                         }
 
-                        return smileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pSmileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                     }
                 }
             }
@@ -649,7 +649,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// </returns>
-        public ErrorCode GetSliderQuestionByID(ref SliderQuestion sliderQuestion)
+        public ErrorCode GetSliderQuestionByID(ref SliderQuestion pSliderQuestion)
         {
             try
             {
@@ -667,7 +667,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             ORDER BY [ORDER] ASC";
 
                         SqlParameter[] parameters = new SqlParameter[] {
-                            new SqlParameter($"{QuestionColumn.ID}", sliderQuestion.ID),
+                            new SqlParameter($"{QuestionColumn.ID}", pSliderQuestion.ID),
                         };
                         cmd.Parameters.AddRange(parameters);
 
@@ -677,11 +677,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            sliderQuestion = new SliderQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"],
+                            pSliderQuestion = new SliderQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"],
                                 (int)row[$"{QuestionColumn.StartValue}"], (int)row[$"{QuestionColumn.EndValue}"], (string)row[$"{QuestionColumn.StartValueCaption}"], (string)row[$"{QuestionColumn.EndValueCaption}"]);
                         }
 
-                        return sliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pSliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                     }
                 }
             }
@@ -701,7 +701,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
           /// ErrorCode.SUCCESS
           /// ErrorCode.ERROR
           /// </returns>
-        public ErrorCode GetStarQuestionByID(ref StarQuestion starQuestion)
+        public ErrorCode GetStarQuestionByID(ref StarQuestion pStarQuestion)
         {
             try
             {
@@ -719,7 +719,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             ORDER BY [ORDER] ASC";
 
                         SqlParameter[] parameters = new SqlParameter[] {
-                            new SqlParameter($"{QuestionColumn.ID}", starQuestion.ID),
+                            new SqlParameter($"{QuestionColumn.ID}", pStarQuestion.ID),
                         };
                         cmd.Parameters.AddRange(parameters);
 
@@ -729,10 +729,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            starQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfStars}"]);
+                            pStarQuestion = new StarQuestion((int)row[$"{QuestionColumn.ID}"], (int)row[$"{QuestionColumn.Order}"], (string)row[$"{QuestionColumn.Text}"], (QuestionType)row[$"{QuestionColumn.Type}"], (int)row[$"{QuestionColumn.NumberOfStars}"]);
                         }
 
-                        return starQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
+                        return pStarQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; // RETURN INT32
                     }
                 }
             }

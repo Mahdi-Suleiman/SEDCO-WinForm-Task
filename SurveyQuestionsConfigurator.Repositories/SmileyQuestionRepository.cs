@@ -12,12 +12,6 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class SmileyQuestionRepository : GenericRepository
     {
-        //private SmileyQuestion pSmileyQuestion = null;
-        //public SmileyQuestionRepository(SmileyQuestion pSmileyQuestion)
-        //{
-        //    this.pSmileyQuestion = new SmileyQuestion(pSmileyQuestion);
-        //}
-
         public ErrorCode Add(SmileyQuestion pSmileyQuestion)
         {
             try
