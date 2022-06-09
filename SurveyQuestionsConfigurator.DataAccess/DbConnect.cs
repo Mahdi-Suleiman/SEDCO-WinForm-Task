@@ -229,7 +229,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); //write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-        } // end of function
+        } /// Function end
 
         /// <summary>
         /// 1) Open transaction
@@ -295,7 +295,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
 
 
-        }// end of function
+        }/// Function end
 
         #endregion
 
@@ -370,7 +370,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 return Generic.ErrorCode.ERROR;
             }
 
-        }//end of function
+        }/// Function end
 
         /// <summary>
         /// 1) Open transaction

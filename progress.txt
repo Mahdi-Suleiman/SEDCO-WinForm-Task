@@ -1,7 +1,5 @@
 ********************************************************
 Date : 22/05/2022
-
-
 What is accomplished today: 
 -UI
 
@@ -12,11 +10,8 @@ What is remaining to be done:
 -Documentation
 -App.config
 
-
 ********************************************************
 Date : 23/05/2022
-
-
 What is accomplished today: 
 -DataBase Schema
 -DataBase ADO.NET Connection string & logic
@@ -29,8 +24,6 @@ What is remaining to be done:
 
 ********************************************************
 Date : 24/05/2022
-
-
 What is accomplished today: 
 -UI Enhancement
 -Error Logging to a file
@@ -74,15 +67,79 @@ What is remaining to be done:
 -Documentation
 
 ********************************************************
+Date : 31/05/2022
+What is accomplished today:
+-Improve UI
+-Clean up code
+-Add comments
+
+What is remaining to be done:
+-Applying 3 tier architicture and repo design
+
+********************************************************
+Date : 1/06/2022
+What is accomplished today:
+-Applying 3 tier architicture and repo design
+
+What is remaining to be done:
+-Create DLLs
+
+********************************************************
+Date : 2/06/2022
+What is accomplished today:
+-Restructure files
+-Create DLLs
+-Improve namings
+
+What is remaining to be done:
+-Modify SQL commands
+
+********************************************************
+Date : 5/06/2022
+What is accomplished today:
+-Modify SQL commands
+-Seperate classes and entities
+
+What is remaining to be done:
+-Documentation
+
+********************************************************
+Date : 6/06/2022
+What is accomplished today:
+-Reflect new comments
+-Use DB Transaction
+-Edit error on app startup "No questions were added error"
+-Apply common ErrorCode enum convention
+-Unique question order only with order + type
+-Make application keep working without database
+-Remove ID from listview
+-In data access layer -> remove any "select *" statment
+-Check namespace namings
+-Stop creating new object instance everytime witout any specail need
+
+What is remaining to be done:
+-Use less parsings
+-Use CONSTANTS instead of writing strings manually
+
+********************************************************
+Date : 7/06/2022
+What is accomplished today:
+-Read about DB Transaction best practices
+-Read about DB stored procedure best practices
+-Read about DB error handling
+-Make and call C# functions and DB stored procedures instead of writing long queries
+-Validate queries before inserting data and stop depending on the returned result (stop query if the insert will knowingly fail)
+
+What is remaining to be done:
+-DB Script
+
+********************************************************
 Date : 08/06/2022
 What is accomplished today:
 -Apply CVM Team naming convention
 -Use DB Transaction scopes
 -Show less buuttons(clicks) to the user
 -Add comments
-
-What is remaining to be done:
--Documentation
 
 What is remaining to be done:
 -Documentation
