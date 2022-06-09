@@ -98,7 +98,7 @@ namespace SurveyQuestionsConfigurator
                             }
                         }
                         break;
-                    case ErrorCode.SQL_VIOLATION:
+                    default:
                         ///If connectin to DB is ERROR -> Disable buttons and list view
                         if (addQuestionButton.Enabled)
                         {
@@ -110,9 +110,6 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "You're Offilne, Please Try Againt Later";
                             createdQuestions_ListView.Enabled = false;
                         }
-                        break;
-
-                    case ErrorCode.ERROR:
                         break;
                 }
             }
