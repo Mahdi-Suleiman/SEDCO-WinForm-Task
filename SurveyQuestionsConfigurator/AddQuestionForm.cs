@@ -16,6 +16,9 @@ namespace SurveyQuestionsConfigurator
     {
         #region Properties
         public int mQuestionId { get; set; } /// create global Question ID property
+
+        private QuestionManager mGeneralQuestionManager = new QuestionManager();
+
         private FormStateType cStateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
         private QuestionType cSelectedQuestionType { get; set; }
 
@@ -204,10 +207,9 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 mQuestionId = pQuestionId;
-                QuestionManager tQuestionManager = new QuestionManager();
                 SmileyQuestion tSmileyQuestion = new SmileyQuestion(pQuestionId);
 
-                ErrorCode tResult = tQuestionManager.GetSmileyQuestionByID(ref tSmileyQuestion);
+                ErrorCode tResult = mGeneralQuestionManager.GetSmileyQuestionByID(ref tSmileyQuestion);
                 switch (tResult)
                 {
                     case ErrorCode.SUCCESS:
@@ -247,10 +249,9 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 mQuestionId = pQuestionId;
-                QuestionManager tQuestionManager = new QuestionManager();
                 SliderQuestion tSliderQuestion = new SliderQuestion(pQuestionId);
 
-                ErrorCode result = tQuestionManager.GetSliderQuestionByID(ref tSliderQuestion);
+                ErrorCode result = mGeneralQuestionManager.GetSliderQuestionByID(ref tSliderQuestion);
                 switch (result)
                 {
                     case ErrorCode.SUCCESS:
@@ -293,10 +294,9 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 mQuestionId = pQuestionId;
-                QuestionManager tQuestionManager = new QuestionManager();
                 StarQuestion tStarQuestion = new StarQuestion(pQuestionId);
 
-                ErrorCode result = tQuestionManager.GetStarQuestionByID(ref tStarQuestion);
+                ErrorCode result = mGeneralQuestionManager.GetStarQuestionByID(ref tStarQuestion);
                 switch (result)
                 {
                     case ErrorCode.SUCCESS:
@@ -326,82 +326,6 @@ namespace SurveyQuestionsConfigurator
         }/// End function
         #endregion
 
-        #region Validation Methods
-        ///<summary>
-        /// Check common question input fields for all tyes of questions
-        ///</summary>
-        private ErrorCode CheckQuestionInputFields()
-        {
-            if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 4000) //if Question text is not null or empty 
-                return ErrorCode.SUCCESS;
-
-            return ErrorCode.ERROR;
-        }
-
-        /// <summary>
-        /// Check smiley question input fields
-        /// </summary>
-        private ErrorCode CheckSmileyQuestionInputFields()
-        {
-            try
-            {
-                if (CheckQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
-                    if (genericNumericUpDown1.Value >= 2 && genericNumericUpDown1.Value <= 5)
-                        return ErrorCode.SUCCESS;
-
-                return ErrorCode.ERROR;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-                return ErrorCode.ERROR;
-            }
-        }
-
-        /// <summary>
-        /// Check slider question input fields
-        /// </summary>
-        private ErrorCode CheckSliderQuestionInputFields()
-        {
-            try
-            {
-                if (CheckQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
-                    if (!String.IsNullOrWhiteSpace(genericTextBox1.Text) && genericTextBox1.TextLength < 100)
-                        if (!String.IsNullOrWhiteSpace(genericTextBox2.Text) && genericTextBox2.TextLength < 100)
-                            if (genericNumericUpDown1.Value < genericNumericUpDown2.Value)
-                                return ErrorCode.SUCCESS;
-                return ErrorCode.ERROR;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-                return ErrorCode.ERROR;
-            }
-        }
-
-        /// <summary>
-        /// Check star question input fields
-        /// </summary>
-        private ErrorCode CheckStarQuestionInputFields()
-        {
-            try
-            {
-                if (CheckQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
-                    if (genericNumericUpDown1.Value >= 1 && genericNumericUpDown1.Value <= 10)
-                        return ErrorCode.SUCCESS;
-
-                return ErrorCode.ERROR;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-                return ErrorCode.ERROR;
-            }
-        }
-        #endregion
 
         #region ComboBox Selected Index Change Methods
         /// <summary>
@@ -525,7 +449,7 @@ namespace SurveyQuestionsConfigurator
         #region Add Question Methods
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
+        /// Create a question object and pass to h5h (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertSmileyQuestion()
         {
@@ -535,18 +459,17 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                if (CheckSmileyQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
+
+                tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                tQuestionText = questionTextRichTextBox.Text;
+                tNumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+                /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
+                SmileyQuestion tSmileyQuestion = new SmileyQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.SMILEY, tNumberOfSmilyFaces);
+
+                /// Try to insert a new question into "Questions" and "Smiley_Questions" tables in DB
+                if (CheckSmileyQuestionInputFields(tSmileyQuestion) == ErrorCode.SUCCESS) //if Question text is not null or empty 
                 {
-                    tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    tQuestionText = questionTextRichTextBox.Text;
-                    tNumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
-
-                    /// Try to insert a new question into "Questions" and "Smiley_Questions" tables in DB
-
-                    /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
-                    SmileyQuestion tSmileyQuestion = new SmileyQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.SMILEY, tNumberOfSmilyFaces);
-                    QuestionManager tQuestionManager = new QuestionManager();
-                    tResult = tQuestionManager.InsertSmileyQuestion(tSmileyQuestion);
+                    tResult = mGeneralQuestionManager.InsertSmileyQuestion(tSmileyQuestion);
 
                     switch (tResult)
                     {
@@ -578,7 +501,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
+        /// Create a question object and pass to h5h (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertSliderQuestion()
         {
@@ -587,20 +510,20 @@ namespace SurveyQuestionsConfigurator
                 int tQuestionOrder, tQuestionStartValue, tQuestionEndValue;
                 string tQuestionText, tQuestionStartValueCaption, tQuestionEndValueCaption;
                 ErrorCode tResult;
-                if (CheckSliderQuestionInputFields() == ErrorCode.SUCCESS)
+                tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                tQuestionText = (string)questionTextRichTextBox.Text;
+                tQuestionStartValueCaption = (string)genericTextBox1.Text;
+                tQuestionEndValueCaption = (string)genericTextBox2.Text;
+                tQuestionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                tQuestionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+
+                /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
+                SliderQuestion tSliderQuestion = new SliderQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.SLIDER, tQuestionStartValue, tQuestionEndValue, tQuestionStartValueCaption, tQuestionEndValueCaption);
+
+                if (CheckSliderQuestionInputFields(tSliderQuestion) == ErrorCode.SUCCESS)
                 {
                     /// Try to insert a new question into "Questions" and "Slider_Questions" tables in DB
-                    tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    tQuestionText = (string)questionTextRichTextBox.Text;
-                    tQuestionStartValueCaption = (string)genericTextBox1.Text;
-                    tQuestionEndValueCaption = (string)genericTextBox2.Text;
-                    tQuestionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                    tQuestionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-
-                    /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
-                    SliderQuestion tSliderQuestion = new SliderQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.SLIDER, tQuestionStartValue, tQuestionEndValue, tQuestionStartValueCaption, tQuestionEndValueCaption);
-                    QuestionManager tQuestionManager = new QuestionManager();
-                    tResult = tQuestionManager.InsertSliderQuestion(tSliderQuestion);
+                    tResult = mGeneralQuestionManager.InsertSliderQuestion(tSliderQuestion);
 
                     switch (tResult)
                     {
@@ -632,7 +555,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
+        /// Create a question object and pass to h5h (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertStarQuestion()
         {
@@ -642,18 +565,18 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                if (CheckStarQuestionInputFields() == ErrorCode.SUCCESS) /// If question input fields are not null or empty 
+                tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                tQuestionText = questionTextRichTextBox.Text;
+                tNumberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+
+
+                /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
+                StarQuestion tStarQuestion = new StarQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.STAR, tNumberOfStars);
+
+                /// Try to insert a new question into "Questions" and "Star_Questions" tables in DB
+                if (CheckStarQuestionInputFields(tStarQuestion) == ErrorCode.SUCCESS) /// If question input fields are not null or empty 
                 {
-                    tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    tQuestionText = questionTextRichTextBox.Text;
-                    tNumberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
-
-                    /// Try to insert a new question into "Questions" and "Star_Questions" tables in DB
-
-                    /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
-                    StarQuestion tStarQuestion = new StarQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.STAR, tNumberOfStars);
-                    QuestionManager tQuestionManager = new QuestionManager();
-                    tResult = tQuestionManager.InsertStarQuestion(tStarQuestion);
+                    tResult = mGeneralQuestionManager.InsertStarQuestion(tStarQuestion);
 
                     switch (tResult)
                     {
@@ -687,7 +610,7 @@ namespace SurveyQuestionsConfigurator
         #region Edit Question Methods
         /// <summary>
         /// Handle editing a question
-        /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
+        /// Create a question object and pass to h5h (Busineess Logic Layer)
         /// </summary>
         private ErrorCode UpdateSmileyQuestion()
         {
@@ -697,17 +620,17 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                if (CheckSmileyQuestionInputFields() == ErrorCode.SUCCESS)
+                tQuestionId = mQuestionId;
+                tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                tQuestionText = questionTextRichTextBox.Text;
+                tNumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                SmileyQuestion tSmileyQuestion = new SmileyQuestion(tQuestionId, tQuestionOrder, tQuestionText, QuestionType.SMILEY, tNumberOfSmilyFaces);
+
+                if (CheckSmileyQuestionInputFields(tSmileyQuestion) == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Smiley_Questions" tables in DB
-                    tQuestionId = mQuestionId;
-                    tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                    tQuestionText = questionTextRichTextBox.Text;
-                    tNumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
-
-                    SmileyQuestion tSmileyQuestion = new SmileyQuestion(tQuestionId, tQuestionOrder, tQuestionText, QuestionType.SMILEY, tNumberOfSmilyFaces);
-                    QuestionManager tQuestionManager = new QuestionManager();
-                    tResult = tQuestionManager.UpdateSmileyQuestion(tSmileyQuestion);
+                    tResult = mGeneralQuestionManager.UpdateSmileyQuestion(tSmileyQuestion);
 
                     switch (tResult)
                     {
@@ -739,7 +662,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle editing a question
-        /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
+        /// Create a question object and pass to h5h (Busineess Logic Layer)
         /// </summary>
         private ErrorCode UpdateSliderQuestion()
         {
@@ -749,22 +672,22 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText, tQuestionStartValueCaption, tQuestionEndValueCaption;
                 ErrorCode tResult;
 
-                if (CheckSliderQuestionInputFields() == ErrorCode.SUCCESS)
+                tQuestionId = mQuestionId;
+                tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                tQuestionText = (string)questionTextRichTextBox.Text;
+                tQuestionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
+                tQuestionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
+                tQuestionStartValueCaption = (string)genericTextBox1.Text;
+                tQuestionEndValueCaption = (string)genericTextBox2.Text;
+
+                SliderQuestion tSliderQuestion = new SliderQuestion(tQuestionId, tQuestionOrder, tQuestionText, QuestionType.SLIDER, tQuestionStartValue, tQuestionEndValue, tQuestionStartValueCaption, tQuestionEndValueCaption);
+
+                if (CheckSliderQuestionInputFields(tSliderQuestion) == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Slider_Questions" tables in DB
                     try
                     {
-                        tQuestionId = mQuestionId;
-                        tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                        tQuestionText = (string)questionTextRichTextBox.Text;
-                        tQuestionStartValue = Convert.ToInt32(genericNumericUpDown1.Value);
-                        tQuestionEndValue = Convert.ToInt32(genericNumericUpDown2.Value);
-                        tQuestionStartValueCaption = (string)genericTextBox1.Text;
-                        tQuestionEndValueCaption = (string)genericTextBox2.Text;
-
-                        SliderQuestion tSliderQuestion = new SliderQuestion(tQuestionId, tQuestionOrder, tQuestionText, QuestionType.SLIDER, tQuestionStartValue, tQuestionEndValue, tQuestionStartValueCaption, tQuestionEndValueCaption);
-                        QuestionManager tQuestionManager = new QuestionManager();
-                        tResult = tQuestionManager.UpdateSliderQuestion(tSliderQuestion);
+                        tResult = mGeneralQuestionManager.UpdateSliderQuestion(tSliderQuestion);
 
                         switch (tResult)
                         {
@@ -802,7 +725,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle editing a question
-        /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
+        /// Create a question object and pass to h5h (Busineess Logic Layer)
         /// </summary>
         private ErrorCode UpdateStarQuestion()
         {
@@ -812,38 +735,30 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode result;
 
-                if (CheckStarQuestionInputFields() == ErrorCode.SUCCESS)
+                tQuestionId = mQuestionId;
+                tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
+                tQuestionText = questionTextRichTextBox.Text;
+                tNumberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+
+                StarQuestion tStarQuestion = new StarQuestion(tQuestionId, tQuestionOrder, tQuestionText, QuestionType.STAR, tNumberOfStars);
+
+                if (CheckStarQuestionInputFields(tStarQuestion) == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Star_Questions" tables in DB
-                    try
-                    {
-                        tQuestionId = mQuestionId;
-                        tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
-                        tQuestionText = questionTextRichTextBox.Text;
-                        tNumberOfStars = Convert.ToInt32(genericNumericUpDown1.Value);
+                    result = mGeneralQuestionManager.UpdateStarQuestion(tStarQuestion);
 
-                        StarQuestion tStarQuestion = new StarQuestion(tQuestionId, tQuestionOrder, tQuestionText, QuestionType.STAR, tNumberOfStars);
-                        QuestionManager tQuestionManager = new QuestionManager();
-                        result = tQuestionManager.UpdateStarQuestion(tStarQuestion);
-
-                        switch (result)
-                        {
-                            case ErrorCode.SUCCESS:
-                                orderLabel.Text = "";
-                                return ErrorCode.SUCCESS;
-                            case ErrorCode.SQL_VIOLATION:
-                                orderLabel.Text = "Question order already in use\nTry using another one";
-                                break;
-                            case ErrorCode.ERROR:
-                                orderLabel.Text = "";
-                                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                                break;
-                        }
-                    }
-                    catch (Exception ex)
+                    switch (result)
                     {
-                        MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        Logger.LogError(ex); //write error to log file
+                        case ErrorCode.SUCCESS:
+                            orderLabel.Text = "";
+                            return ErrorCode.SUCCESS;
+                        case ErrorCode.SQL_VIOLATION:
+                            orderLabel.Text = "Question order already in use\nTry using another one";
+                            break;
+                        case ErrorCode.ERROR:
+                            orderLabel.Text = "";
+                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            break;
                     }
                 }
                 else
@@ -859,6 +774,60 @@ namespace SurveyQuestionsConfigurator
                 return ErrorCode.ERROR;
             }
         } /// Function end
+        #endregion
+
+        #region Validation Methods
+
+        /// <summary>
+        /// Check smiley question input fields
+        /// </summary>
+        private ErrorCode CheckSmileyQuestionInputFields(SmileyQuestion pSmileyQuestion)
+        {
+            try
+            {
+                return mGeneralQuestionManager.CheckSmileyQuestionValues(pSmileyQuestion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+                return ErrorCode.ERROR;
+            }
+        }
+
+        /// <summary>
+        /// Check slider question input fields
+        /// </summary>
+        private ErrorCode CheckSliderQuestionInputFields(SliderQuestion pSliderQuestion)
+        {
+            try
+            {
+                return mGeneralQuestionManager.CheckSliderQuestionValues(pSliderQuestion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+                return ErrorCode.ERROR;
+            }
+        }
+
+        /// <summary>
+        /// Check star question input fields
+        /// </summary>
+        private ErrorCode CheckStarQuestionInputFields(StarQuestion pStarQuestion)
+        {
+            try
+            {
+                return mGeneralQuestionManager.CheckStarQuestionValues(pStarQuestion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+                return ErrorCode.ERROR;
+            }
+        }
         #endregion
     }
 }

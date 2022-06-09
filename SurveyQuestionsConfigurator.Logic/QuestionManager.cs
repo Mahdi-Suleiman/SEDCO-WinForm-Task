@@ -339,7 +339,30 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #region Validation Functions
 
         /// <summary>
-        /// Check question values and validate them
+        /// Check coommon question values and validate them
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
+        private ErrorCode CheckCommonQuestionInputFields(Question pQuestion)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(pQuestion.Text) && pQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                    return ErrorCode.SUCCESS;
+
+                return ErrorCode.ERROR;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                return ErrorCode.ERROR;
+            }
+        }
+
+        /// <summary>
+        /// Check smiley question values and validate them
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -349,7 +372,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(pSmileyQuestion.Text) && pSmileyQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                if (CheckCommonQuestionInputFields(pSmileyQuestion) == ErrorCode.SUCCESS)
                     if (pSmileyQuestion.NumberOfSmileyFaces >= 2 && pSmileyQuestion.NumberOfSmileyFaces <= 5)
                         return ErrorCode.SUCCESS;
 
@@ -363,7 +386,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         } /// Function end
 
         /// <summary>
-        /// Check question values and validate them
+        /// Check slider question values and validate them
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -373,7 +396,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(pSliderQuestion.Text) && pSliderQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                if (CheckCommonQuestionInputFields(pSliderQuestion) == ErrorCode.SUCCESS)
                     if (!String.IsNullOrWhiteSpace(pSliderQuestion.StartValueCaption) && pSliderQuestion.StartValueCaption.Length < 100)
                         if (!String.IsNullOrWhiteSpace(pSliderQuestion.EndValueCaption) && pSliderQuestion.EndValueCaption.Length < 100)
                             if (pSliderQuestion.StartValue < pSliderQuestion.EndValue)
@@ -388,9 +411,8 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         } /// Function end
 
-
         /// <summary>
-        /// Check question values and validate them
+        /// Check star question values and validate them
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -400,7 +422,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(pStarQuestion.Text) && pStarQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                if (CheckCommonQuestionInputFields(pStarQuestion) == ErrorCode.SUCCESS)
                     if (pStarQuestion.NumberOfStars >= 1 && pStarQuestion.NumberOfStars <= 10)
                         return ErrorCode.SUCCESS;
 

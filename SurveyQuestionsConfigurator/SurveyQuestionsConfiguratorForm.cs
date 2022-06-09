@@ -24,6 +24,7 @@ namespace SurveyQuestionsConfigurator
         /// Used for sorting listview columns on click
         /// </summary>
         private ListViewColumnSorter mListViewColumnSorter;
+        private QuestionManager mGeneralQuestionManager = new QuestionManager();
 
         #endregion
 
@@ -63,12 +64,11 @@ namespace SurveyQuestionsConfigurator
             {
                 ListViewItem listviewitem;// Used for creating listview items.
                 List<Question> questionsList = new List<Question>();
-                QuestionManager questionManager = new QuestionManager();
 
                 ///Size text column header to fit the text.
                 this.createdQuestions_ListView.Columns[2].Width = -2;
 
-                ErrorCode result = questionManager.GetAllQuestions(ref questionsList);
+                ErrorCode result = mGeneralQuestionManager.GetAllQuestions(ref questionsList);
                 switch (result)
                 {
                     case ErrorCode.SUCCESS:
@@ -248,8 +248,7 @@ namespace SurveyQuestionsConfigurator
 
                         /// Get ID from hidden ID column
                         tQuestionId = Convert.ToInt32(selectedItem.Tag);
-                        QuestionManager questionManager = new QuestionManager();
-                        result = questionManager.DeleteQuestionByID(tQuestionId);
+                        result = mGeneralQuestionManager.DeleteQuestionByID(tQuestionId);
 
                         /// unselect item -> avoid errors
                         createdQuestions_ListView.SelectedIndices.Clear();
