@@ -65,11 +65,8 @@ namespace SurveyQuestionsConfigurator
                 List<Question> questionsList = new List<Question>();
                 QuestionManager questionManager = new QuestionManager();
 
-                ///Hide ID column
-                createdQuestions_ListView.Columns[0].Width = 0;
-
                 ///Size text column header to fit the text.
-                this.createdQuestions_ListView.Columns[3].Width = -2;
+                this.createdQuestions_ListView.Columns[2].Width = -2;
 
                 ErrorCode result = questionManager.GetAllQuestions(ref questionsList);
                 switch (result)
@@ -92,8 +89,9 @@ namespace SurveyQuestionsConfigurator
                             ///Fill the list view
                             foreach (Question q in questionsList)
                             {
-                                listviewitem = new ListViewItem($"{q.ID}");
-                                listviewitem.SubItems.Add($"{q.Order}");
+                                /// Add id as a tag to Order column -> use it while it's hidden
+                                listviewitem = new ListViewItem($"{q.Order}");
+                                listviewitem.Tag = q.ID;
                                 listviewitem.SubItems.Add($"{(QuestionType)q.Type}");
                                 listviewitem.SubItems.Add($"{q.Text}");
                                 this.createdQuestions_ListView.Items.Add(listviewitem);
@@ -249,7 +247,7 @@ namespace SurveyQuestionsConfigurator
                         ErrorCode result;
 
                         /// Get ID from hidden ID column
-                        tQuestionId = Convert.ToInt32(selectedItem.SubItems[0].Text);
+                        tQuestionId = Convert.ToInt32(selectedItem.Tag);
                         QuestionManager questionManager = new QuestionManager();
                         result = questionManager.DeleteQuestionByID(tQuestionId);
 
@@ -308,18 +306,18 @@ namespace SurveyQuestionsConfigurator
                 AddQuestionForm tAddQuestionForm = null; /// Accept question ID & question type
                 if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
                 {
-                    int tQuestionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].SubItems[0].Text);
-                    if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text == QuestionType.SMILEY.ToString())
+                    int tQuestionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].Tag);
+                    if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text == QuestionType.SMILEY.ToString())
                     {
                         tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.SMILEY);
                         tAddQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == QuestionType.SLIDER.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text.ToString() == QuestionType.SLIDER.ToString())
                     {
                         tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.SLIDER);
                         tAddQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[2].Text.ToString() == QuestionType.STAR.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text.ToString() == QuestionType.STAR.ToString())
                     {
                         tAddQuestionForm = new AddQuestionForm(tQuestionId, QuestionType.STAR);
                         tAddQuestionForm.ShowDialog();

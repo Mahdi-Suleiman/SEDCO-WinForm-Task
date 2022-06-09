@@ -4426,3 +4426,53 @@ Error Number:2,State:0,Class:20
    at System.Data.SqlClient.SqlConnection.Open()
    at SurveyQuestionsConfigurator.DataAccess.DbConnect.GetAllQuestions(List`1& questionsList) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 567
 
+
+ -------------- (09/06/2022 11:22:33) --------------
+
+-Exception Type: System.NullReferenceException
+-Exception Call Site: ErrorCode InsertQuestion(System.Transactions.TransactionScope, System.Data.SqlClient.SqlConnection, SurveyQuestionsConfigurator.Entities.Question)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+
+
+ -------------- (09/06/2022 11:22:51) --------------
+
+-Exception Type: System.NullReferenceException
+-Exception Call Site: ErrorCode InsertQuestion(System.Transactions.TransactionScope, System.Data.SqlClient.SqlConnection, SurveyQuestionsConfigurator.Entities.Question)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+
+
+ -------------- (09/06/2022 11:51:20) --------------
+
+-Exception Type: System.NullReferenceException
+-Exception Call Site: ErrorCode InsertQuestion(System.Transactions.TransactionScope, System.Data.SqlClient.SqlConnection, SurveyQuestionsConfigurator.Entities.Question)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+
+
+ -------------- (09/06/2022 11:51:26) --------------
+
+-Exception Type: System.NullReferenceException
+-Exception Call Site: ErrorCode InsertQuestion(System.Transactions.TransactionScope, System.Data.SqlClient.SqlConnection, SurveyQuestionsConfigurator.Entities.Question)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+
+
+ -------------- (09/06/2022 11:51:42) --------------
+
+-Exception Type: System.NullReferenceException
+-Exception Call Site: ErrorCode InsertQuestion(System.Transactions.TransactionScope, System.Data.SqlClient.SqlConnection, SurveyQuestionsConfigurator.Entities.Question)
+-Exception Short Message: Object reference not set to an instance of an object.
+-Exception Long Message: System.NullReferenceException: Object reference not set to an instance of an object.
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+-Exception Stack Trace:    at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 50
+

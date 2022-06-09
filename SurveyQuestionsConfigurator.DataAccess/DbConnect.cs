@@ -38,6 +38,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             DECLARE @RESULT INT
                             EXECUTE @RESULT = INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
                             SELECT @RESULT";
+                    //cmd.CommandText = "INSERT_QUESTION";
+                    //cmd.CommandType = CommandType.StoredProcedure;
 
                     SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.Order}", pQuestion.Order),

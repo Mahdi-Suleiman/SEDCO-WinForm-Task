@@ -129,7 +129,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 /// Close form if operation was successful
-                bool OperationSuccess = false;
+                ErrorCode OperationSuccess = ErrorCode.ERROR;
                 if (cStateForm == FormStateType.ADD)
                 {
                     try
@@ -178,7 +178,7 @@ namespace SurveyQuestionsConfigurator
                     }
                 }
 
-                if (OperationSuccess)
+                if (OperationSuccess == ErrorCode.SUCCESS)
                 {
                     this.Close();
                 }
@@ -330,76 +330,75 @@ namespace SurveyQuestionsConfigurator
         ///<summary>
         /// Check common question input fields for all tyes of questions
         ///</summary>
-        private bool CheckQuestionInputFields()
+        private ErrorCode CheckQuestionInputFields()
         {
             if (!String.IsNullOrWhiteSpace(questionTextRichTextBox.Text) && questionTextRichTextBox.TextLength < 4000) //if Question text is not null or empty 
-                return true;
+                return ErrorCode.SUCCESS;
 
-            return false;
+            return ErrorCode.ERROR;
         }
-
 
         /// <summary>
         /// Check smiley question input fields
         /// </summary>
-        private bool CheckSmileyQuestionInputFields()
+        private ErrorCode CheckSmileyQuestionInputFields()
         {
             try
             {
-                if (CheckQuestionInputFields()) //if Question text is not null or empty 
+                if (CheckQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
                     if (genericNumericUpDown1.Value >= 2 && genericNumericUpDown1.Value <= 5)
-                        return true;
+                        return ErrorCode.SUCCESS;
 
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         }
 
         /// <summary>
         /// Check slider question input fields
         /// </summary>
-        private bool CheckSliderQuestionInputFields()
+        private ErrorCode CheckSliderQuestionInputFields()
         {
             try
             {
-                if (CheckQuestionInputFields()) //if Question text is not null or empty 
+                if (CheckQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
                     if (!String.IsNullOrWhiteSpace(genericTextBox1.Text) && genericTextBox1.TextLength < 100)
                         if (!String.IsNullOrWhiteSpace(genericTextBox2.Text) && genericTextBox2.TextLength < 100)
                             if (genericNumericUpDown1.Value < genericNumericUpDown2.Value)
-                                return true;
-                return false;
+                                return ErrorCode.SUCCESS;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         }
 
         /// <summary>
         /// Check star question input fields
         /// </summary>
-        private bool CheckStarQuestionInputFields()
+        private ErrorCode CheckStarQuestionInputFields()
         {
             try
             {
-                if (CheckQuestionInputFields()) //if Question text is not null or empty 
+                if (CheckQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
                     if (genericNumericUpDown1.Value >= 1 && genericNumericUpDown1.Value <= 10)
-                        return true;
+                        return ErrorCode.SUCCESS;
 
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         }
         #endregion
@@ -528,7 +527,7 @@ namespace SurveyQuestionsConfigurator
         /// Handle adding a question
         /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
         /// </summary>
-        private bool InsertSmileyQuestion()
+        private ErrorCode InsertSmileyQuestion()
         {
             try
             {
@@ -536,7 +535,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                if (CheckSmileyQuestionInputFields()) //if Question text is not null or empty 
+                if (CheckSmileyQuestionInputFields() == ErrorCode.SUCCESS) //if Question text is not null or empty 
                 {
                     tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                     tQuestionText = questionTextRichTextBox.Text;
@@ -553,7 +552,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         case ErrorCode.SUCCESS:
                             orderLabel.Text = "";
-                            return true;
+                            return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
                             orderLabel.Text = "Question order already in use\nTry using another one";
                             break;
@@ -567,13 +566,13 @@ namespace SurveyQuestionsConfigurator
                 {
                     MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         }
 
@@ -581,14 +580,14 @@ namespace SurveyQuestionsConfigurator
         /// Handle adding a question
         /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
         /// </summary>
-        private bool InsertSliderQuestion()
+        private ErrorCode InsertSliderQuestion()
         {
             try
             {
                 int tQuestionOrder, tQuestionStartValue, tQuestionEndValue;
                 string tQuestionText, tQuestionStartValueCaption, tQuestionEndValueCaption;
                 ErrorCode tResult;
-                if (CheckSliderQuestionInputFields())
+                if (CheckSliderQuestionInputFields() == ErrorCode.SUCCESS)
                 {
                     /// Try to insert a new question into "Questions" and "Slider_Questions" tables in DB
                     tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
@@ -607,7 +606,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         case ErrorCode.SUCCESS:
                             orderLabel.Text = "";
-                            return true;
+                            return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
                             orderLabel.Text = "Question order already in use\nTry using another one";
                             break;
@@ -621,13 +620,13 @@ namespace SurveyQuestionsConfigurator
                 {
                     MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         } /// End function
 
@@ -635,7 +634,7 @@ namespace SurveyQuestionsConfigurator
         /// Handle adding a question
         /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
         /// </summary>
-        private bool InsertStarQuestion()
+        private ErrorCode InsertStarQuestion()
         {
             try
             {
@@ -643,7 +642,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                if (CheckStarQuestionInputFields()) /// If question input fields are not null or empty 
+                if (CheckStarQuestionInputFields() == ErrorCode.SUCCESS) /// If question input fields are not null or empty 
                 {
                     tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                     tQuestionText = questionTextRichTextBox.Text;
@@ -660,7 +659,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         case ErrorCode.SUCCESS:
                             orderLabel.Text = "";
-                            return true;
+                            return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
                             orderLabel.Text = "Question order already in use\nTry using another one";
                             break;
@@ -674,13 +673,13 @@ namespace SurveyQuestionsConfigurator
                 {
                     MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         }/// End function
         #endregion
@@ -690,7 +689,7 @@ namespace SurveyQuestionsConfigurator
         /// Handle editing a question
         /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
         /// </summary>
-        private bool UpdateSmileyQuestion()
+        private ErrorCode UpdateSmileyQuestion()
         {
             try
             {
@@ -698,7 +697,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode tResult;
 
-                if (CheckSmileyQuestionInputFields())
+                if (CheckSmileyQuestionInputFields() == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Smiley_Questions" tables in DB
                     tQuestionId = mQuestionId;
@@ -714,7 +713,7 @@ namespace SurveyQuestionsConfigurator
                     {
                         case ErrorCode.SUCCESS:
                             orderLabel.Text = "";
-                            return true;
+                            return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
                             orderLabel.Text = "Order already in use\nTry using another one";
                             break;
@@ -728,13 +727,13 @@ namespace SurveyQuestionsConfigurator
                 {
                     MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         }/// Function end
 
@@ -742,7 +741,7 @@ namespace SurveyQuestionsConfigurator
         /// Handle editing a question
         /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
         /// </summary>
-        private bool UpdateSliderQuestion()
+        private ErrorCode UpdateSliderQuestion()
         {
             try
             {
@@ -750,7 +749,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText, tQuestionStartValueCaption, tQuestionEndValueCaption;
                 ErrorCode tResult;
 
-                if (CheckSliderQuestionInputFields())
+                if (CheckSliderQuestionInputFields() == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Slider_Questions" tables in DB
                     try
@@ -771,7 +770,7 @@ namespace SurveyQuestionsConfigurator
                         {
                             case ErrorCode.SUCCESS:
                                 orderLabel.Text = "";
-                                return true;
+                                return ErrorCode.SUCCESS;
                             case ErrorCode.SQL_VIOLATION:
                                 orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
@@ -791,13 +790,13 @@ namespace SurveyQuestionsConfigurator
                 {
                     MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -805,7 +804,7 @@ namespace SurveyQuestionsConfigurator
         /// Handle editing a question
         /// Create a question object and pass to QuestionManager (Busineess Logic Layer)
         /// </summary>
-        private bool UpdateStarQuestion()
+        private ErrorCode UpdateStarQuestion()
         {
             try
             {
@@ -813,7 +812,7 @@ namespace SurveyQuestionsConfigurator
                 string tQuestionText;
                 ErrorCode result;
 
-                if (CheckStarQuestionInputFields())
+                if (CheckStarQuestionInputFields() == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Star_Questions" tables in DB
                     try
@@ -831,7 +830,7 @@ namespace SurveyQuestionsConfigurator
                         {
                             case ErrorCode.SUCCESS:
                                 orderLabel.Text = "";
-                                return true;
+                                return ErrorCode.SUCCESS;
                             case ErrorCode.SQL_VIOLATION:
                                 orderLabel.Text = "Question order already in use\nTry using another one";
                                 break;
@@ -851,13 +850,13 @@ namespace SurveyQuestionsConfigurator
                 {
                     MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                return false;
+                return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 Logger.LogError(ex);
-                return false;
+                return ErrorCode.ERROR;
             }
         } /// Function end
         #endregion
