@@ -723,10 +723,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } /// Function end
 
-          /// <returns>
-          /// ErrorCode.SUCCESS
-          /// ErrorCode.ERROR
-          /// </returns>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode GetStarQuestionByID(ref StarQuestion pStarQuestion)
         {
             try
