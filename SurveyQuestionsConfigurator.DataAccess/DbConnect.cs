@@ -15,10 +15,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
-        ///get sqlConnectionection string information from App.config
+        ///get sqlConnection string information from App.config
         private ConnectionStringSettings mSqlConnectionectionSetting = ConfigurationManager.ConnectionStrings[0];
 
         #region Common Methods
+        /// <summary>
+        /// Return SUCCESS if order is not already in use
+        /// </summary>
+        /// <param name="pSqlConnection"></param>
+        /// <param name="pOrder"></param>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.SQL_VIOLATION
+        /// </returns>
         private ErrorCode CheckIfOrderExist(SqlConnection pSqlConnection, int pOrder)
         {
             try
@@ -41,6 +50,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         }
 
+        /// <summary>
+        /// Return the ID of question based on it's order
+        /// </summary>
+        /// <param name="pSqlConnection"></param>
+        /// <param name="pOrder"></param>
+        /// <returns>
+        /// ID if found
+        /// 0 if no row is found
+        /// </returns>
         private int GetIDFromOrder(SqlConnection pSqlConnection, int pOrder)
         {
             using (SqlCommand cmd = pSqlConnection.CreateCommand())
@@ -54,6 +72,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 return (int)cmd.ExecuteScalar();
             }
         }
+
         #endregion
 
         #region INSERT Methods
@@ -71,11 +90,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </returns>
         public ErrorCode InsertSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
-            ///
-            /// Try to insert a new pQuestion into "Smiley_Questions" table
-            ///
+            /// Try to insert a new smiley question into "Smiley_Questions" table
             try
             {
+                /// ErrorCode to be returned
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
@@ -85,7 +103,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        //Check if order is already in use
+                        /// Check if order is already in use
                         returnedErrorCode = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
                         /// return if order already exist
@@ -103,7 +121,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 new SqlParameter($"{QuestionColumn.Text}", pSmileyQuestion.Text),
                                 new SqlParameter($"{QuestionColumn.Type}", pSmileyQuestion.Type),
                                 new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)
-
                             };
                             cmd.Parameters.AddRange(parameters);
                             returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
@@ -111,6 +128,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
+                            /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
@@ -142,6 +160,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
             try
             {
+                /// ErrorCode to be returned
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
@@ -154,9 +173,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         /// Check if order is already in use
                         returnedErrorCode = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
+                        /// return if order already exist
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
                             return ErrorCode.SQL_VIOLATION;
 
+                        /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
                             cmd.CommandText = $@"INSERT_SLIDER_QUESTION";
@@ -178,6 +199,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
+                            /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
@@ -208,6 +230,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
+                /// ErrorCode to be returned
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
@@ -244,6 +267,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
+                            /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
@@ -319,6 +343,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
+                            /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
@@ -392,6 +417,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
+                            /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
@@ -462,6 +488,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
+                            /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }

@@ -48,7 +48,7 @@ namespace SurveyQuestionsConfigurator
 
         #region Methods
 
-        public void ClearViewList()
+        public void ClearListView()
         {
             /// Remove each row
             foreach (ListViewItem item in createdQuestions_ListView.Items)
@@ -85,7 +85,7 @@ namespace SurveyQuestionsConfigurator
                                 errorLabel.Visible = false;
                             }
 
-                            ClearViewList();
+                            ClearListView();
 
                             ///Fill the list view
                             foreach (Question q in questionsList)
