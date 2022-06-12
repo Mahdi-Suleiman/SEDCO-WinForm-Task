@@ -161,4 +161,6 @@ What is accomplished today:
 -Add comments
 
 What is remaining to be done:
+-Settings tab to change connection settings
+-Multithreading to handel multi instance of the program
 -Documentation
