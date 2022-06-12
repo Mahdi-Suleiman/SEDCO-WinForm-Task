@@ -18,83 +18,45 @@ namespace SurveyQuestionsConfigurator.DataAccess
         ///get sqlConnectionection string information from App.config
         private ConnectionStringSettings mSqlConnectionectionSetting = ConfigurationManager.ConnectionStrings[0];
 
+        #region Common Methods
+        private ErrorCode CheckIfOrderExist(SqlConnection pSqlConnection, int pOrder)
+        {
+            try
+            {
+                using (SqlCommand cmd = pSqlConnection.CreateCommand())
+                {
+                    cmd.CommandText = $@"SELECT dbo.CheckIfOrderExist(@{QuestionColumn.Order})";
+
+                    SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.Order}", pOrder),
+                            };
+                    cmd.Parameters.AddRange(parameters);
+                    return (ErrorCode)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+                return ErrorCode.ERROR;
+            }
+        }
+
+        private int GetIDFromOrder(SqlConnection pSqlConnection, int pOrder)
+        {
+            using (SqlCommand cmd = pSqlConnection.CreateCommand())
+            {
+                cmd.CommandText = $@"SELECT dbo.GetIDFromOrder(@{QuestionColumn.Order})";
+
+                SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.Order}", pOrder),
+                            };
+                cmd.Parameters.AddRange(parameters);
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+        #endregion
+
         #region INSERT Methods
-        /// <summary>
-        /// General pQuestion insert method that calls a stored proceedure
-        /// </summary>
-        /// <returns>
-        /// ErrorCode.SUCCESS
-        /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
-        /// </returns>
-        private ErrorCode InsertQuestion(SqlConnection pSqlConnection, Question pQuestion)
-        {
-            try
-            {
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                using (SqlCommand cmd = pSqlConnection.CreateCommand())
-                {
-                    //cmd.CommandText = $@"
-                    //        DECLARE @RESULT INT
-                    //        EXECUTE @RESULT = INSERT_QUESTION @Order = @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}, @Type = @{QuestionColumn.Type}
-                    //        SELECT @RESULT";
-                    cmd.CommandText = "INSERT_QUESTION";
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.Order}", pQuestion.Order),
-                                new SqlParameter($"{QuestionColumn.Text}", pQuestion.Text),
-                                new SqlParameter($"{QuestionColumn.Type}", pQuestion.Type)};
-                    cmd.Parameters.AddRange(parameters);
-
-                    returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
-                    return returnedErrorCode;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex); /// write error to log file
-                return ErrorCode.ERROR;
-            }
-        }
-
-        /// <summary>
-        /// General pQuestion update method that calls a stored proceedure
-        /// </summary>
-        /// <returns>
-        /// ErrorCode.SUCCESS
-        /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
-        /// </returns>
-        private ErrorCode UpdateQuestion(SqlConnection pSqlConnection, Question pQuestion)
-        {
-            try
-            {
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                using (SqlCommand cmd = pSqlConnection.CreateCommand())
-                {
-                    cmd.CommandText = $@"
-                            DECLARE @RESULT INT
-                            EXECUTE @RESULT = UPDATE_QUESTION @ID = @{QuestionColumn.ID}, @ORDER =  @{QuestionColumn.Order}, @Text = @{QuestionColumn.Text}
-                            SELECT @RESULT";
-
-                    SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.Order}", pQuestion.Order),
-                                new SqlParameter($"{QuestionColumn.Text}", pQuestion.Text),
-                                new SqlParameter($"{QuestionColumn.ID}", pQuestion.ID)};
-                    cmd.Parameters.AddRange(parameters);
-
-                    returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
-                    return returnedErrorCode;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex); /// write error to log file
-                return ErrorCode.ERROR;
-            }
-        }
-
 
         /// <summary>
         /// 1) Open transaction
@@ -115,7 +77,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int rowsAffected = 0;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -124,31 +85,31 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(sqlConnection, pSmileyQuestion);
+                        //Check if order is already in use
+                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
+                        /// return if order already exist
                         if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
-                        {
                             return ErrorCode.SQL_VIOLATION;
-                        }
-                        else if (returnedErrorCode == ErrorCode.ERROR)
-                        {
-                            return ErrorCode.ERROR;
-                        }
 
+                        /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"
-                            INSERT INTO Smiley_Questions(ID, NumberOfSmileyFaces )
-                            VALUES (@@IDENTITY, @{QuestionColumn.NumberOfSmileyFaces})";
+                            cmd.CommandText = "INSERT_SMILEY_QUESTION";
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)};
-                            cmd.Parameters.AddRange(parameters);
+                                new SqlParameter($"{QuestionColumn.Order}", pSmileyQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pSmileyQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", pSmileyQuestion.Type),
+                                new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)
 
-                            rowsAffected = cmd.ExecuteNonQuery();
+                            };
+                            cmd.Parameters.AddRange(parameters);
+                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
@@ -182,7 +143,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int rowsAffected = 0;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -191,32 +151,32 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(sqlConnection, pSliderQuestion);
+                        /// Check if order is already in use
+                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
-                        {
-                            return returnedErrorCode;
-                        }
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
+                            return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"
-                            INSERT INTO Slider_Questions
-                            (ID, StartValue, EndValue, StartValueCaption, EndValueCaption)
-                            VALUES (@@IDENTITY, @{QuestionColumn.StartValue}, @{QuestionColumn.EndValue},
-                                    @{QuestionColumn.StartValueCaption}, @{QuestionColumn.EndValueCaption})";
+                            cmd.CommandText = $@"INSERT_SLIDER_QUESTION";
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.Text}", pSliderQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Order}", pSliderQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Type}", pSliderQuestion.Type),
                                 new SqlParameter($"{QuestionColumn.StartValue}", pSliderQuestion.StartValue),
                                 new SqlParameter($"{QuestionColumn.EndValue}", pSliderQuestion.EndValue),
                                 new SqlParameter($"{QuestionColumn.StartValueCaption}", pSliderQuestion.StartValueCaption),
-                                new SqlParameter($"{QuestionColumn.EndValueCaption}", pSliderQuestion.EndValueCaption)};
+                                new SqlParameter($"{QuestionColumn.EndValueCaption}", pSliderQuestion.EndValueCaption)
+                            };
                             cmd.Parameters.AddRange(parameters);
 
-                            rowsAffected = cmd.ExecuteNonQuery();
+                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
@@ -249,7 +209,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int rowsAffected = 0;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -258,28 +217,32 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = InsertQuestion(sqlConnection, pStarQuestion);
+                        /// Check if order is already in use
+                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
 
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
-                        {
-                            return returnedErrorCode;
-                        }
+                        /// return if order already exist
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
+                            return ErrorCode.SQL_VIOLATION;
 
+
+                        /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"
-                            INSERT INTO Star_Questions(ID,  NumberOfStars)
-                            VALUES (@@IDENTITY, @{QuestionColumn.NumberOfStars})";
+                            cmd.CommandText = "INSERT_STAR_QUESTION";
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
-                                 new SqlParameter($"{QuestionColumn.NumberOfStars}", pStarQuestion.NumberOfStars)
+                                new SqlParameter($"{QuestionColumn.Order}", pStarQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pStarQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", pStarQuestion.Type),
+                                new SqlParameter($"{QuestionColumn.NumberOfStars}", pStarQuestion.NumberOfStars)
+
                             };
                             cmd.Parameters.AddRange(parameters);
-
-                            rowsAffected = cmd.ExecuteNonQuery();
+                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
@@ -294,9 +257,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
-
-
-
         }/// Function end
 
         #endregion
@@ -316,13 +276,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </returns>
         public ErrorCode UpdateSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
-            ///
             /// Try to Update a new pQuestion into "Smiley_Questions" table
-            ///
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int rowsAffected = 0;
+                int tReturnedID = 0;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -331,43 +289,45 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(sqlConnection, pSmileyQuestion);
+                        /// Check if order is already in use
+                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
-                        {
-                            return returnedErrorCode;
-                        }
+                        /// get question ID form it's unique order
+                        tReturnedID = GetIDFromOrder(sqlConnection, pSmileyQuestion.Order);
+
+
+                        /// return if order already exist && the order is taken by another questionID
+                        /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION && tReturnedID != pSmileyQuestion.ID)
+                            return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"
-	                        UPDATE Smiley_Questions
-	                        SET NumberOfSmileyFaces = @{QuestionColumn.NumberOfSmileyFaces}
-	                        WHERE ID = @{QuestionColumn.ID}";
+                            cmd.CommandText = "UPDATE_SMILEY_QUESTION";
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.ID}", pSmileyQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.Order}", pSmileyQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pSmileyQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", pSmileyQuestion.Type),
                                 new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)
                             };
                             cmd.Parameters.AddRange(parameters);
-
-                            rowsAffected = cmd.ExecuteNonQuery();
+                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
-
                         return ErrorCode.ERROR;
-
                     }
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
@@ -390,7 +350,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int rowsAffected = 0;
+                int tReturnedID = 0;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -399,45 +359,48 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(sqlConnection, pSliderQuestion);
+                        /// Check if order is already in use
+                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
-                        {
-                            return returnedErrorCode;
-                        }
+                        /// get question ID form it's unique order
+                        tReturnedID = GetIDFromOrder(sqlConnection, pSliderQuestion.Order);
+
+
+                        /// return if order already exist && the order is taken by another questionID
+                        /// when ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION && tReturnedID != pSliderQuestion.ID)
+                            return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"
-                            UPDATE Slider_Questions
-                            SET StartValue = @{QuestionColumn.StartValue}, EndValue = @{QuestionColumn.EndValue}, StartValueCaption = @{QuestionColumn.StartValueCaption}, EndValueCaption = @{QuestionColumn.EndValueCaption}
-                            WHERE ID = @{QuestionColumn.ID}";
+                            cmd.CommandText = "UPDATE_SLIDER_QUESTION";
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.ID}", pSliderQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.Order}", pSliderQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pSliderQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", pSliderQuestion.Type),
                                 new SqlParameter($"{QuestionColumn.StartValue}", pSliderQuestion.StartValue),
                                 new SqlParameter($"{QuestionColumn.EndValue}", pSliderQuestion.EndValue),
                                 new SqlParameter($"{QuestionColumn.StartValueCaption}", pSliderQuestion.StartValueCaption),
                                 new SqlParameter($"{QuestionColumn.EndValueCaption}", pSliderQuestion.EndValueCaption),
                             };
                             cmd.Parameters.AddRange(parameters);
-
-                            rowsAffected = cmd.ExecuteNonQuery();
+                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
-
                         return ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Something went wrong:\n" + ex.Message);
                 Logger.LogError(ex); /// write error to log file
                 return Generic.ErrorCode.ERROR;
             }
@@ -459,7 +422,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int rowsAffected = 0;
+                int tReturnedID = 0;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -468,35 +431,40 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
                         sqlConnection.Open();
 
-                        returnedErrorCode = UpdateQuestion(sqlConnection, pStarQuestion);
 
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION || returnedErrorCode == ErrorCode.ERROR)
-                        {
-                            return returnedErrorCode;
-                        }
+                        /// Check if order is already in use
+                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
+
+                        /// get question ID form it's unique order
+                        tReturnedID = GetIDFromOrder(sqlConnection, pStarQuestion.Order);
+
+
+                        /// return if order already exist && the order is taken by another questionID
+                        /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
+                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION && tReturnedID != pStarQuestion.ID)
+                            return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"
-                                UPDATE Star_Questions
-                                SET NumberOfStars = @{QuestionColumn.NumberOfStars}
-                                WHERE ID = @{QuestionColumn.ID}";
+                            cmd.CommandText = "UPDATE_STAR_QUESTION";
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.ID}", pStarQuestion.ID),
+                                new SqlParameter($"{QuestionColumn.Order}", pStarQuestion.Order),
+                                new SqlParameter($"{QuestionColumn.Text}", pStarQuestion.Text),
+                                new SqlParameter($"{QuestionColumn.Type}", pStarQuestion.Type),
                                 new SqlParameter($"{QuestionColumn.NumberOfStars}", pStarQuestion.NumberOfStars)
                             };
                             cmd.Parameters.AddRange(parameters);
-
-                            rowsAffected = cmd.ExecuteNonQuery();
+                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS && rowsAffected != 0)
+                        if (returnedErrorCode == ErrorCode.SUCCESS)
                         {
                             transactionScope.Complete();
                             return ErrorCode.SUCCESS;
                         }
-
                         return ErrorCode.ERROR;
                     }
                 }
@@ -694,7 +662,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         adapter.Fill(dataTable);
 
 
-                        int tID, tOrder, tNumberOfSmileyFaces, tStartValue, tEndValue;
+                        int tID, tOrder, tStartValue, tEndValue;
                         string tText, tStartValueCaption, tEndValueCaption;
                         QuestionType tType;
                         foreach (DataRow row in dataTable.Rows)

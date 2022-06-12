@@ -1,14 +1,11 @@
-CREATE PROCEDURE UPDATE_SMILEY_QUESTION
+CREATE PROCEDURE UPDATE_STAR_QUESTION
 @ID INT,
 @Order INT,
 @Text NVARCHAR(4000),
 @Type INT,
-@NumberOfSmileyFaces INT
+@NumberOfStars INT
 AS
 SET NOCOUNT ON
-
---DECLARE @@MyOrder as INT
---SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
 BEGIN TRY
 	DECLARE @SUCCESS INT, @ERROR INT
@@ -19,8 +16,8 @@ BEGIN TRY
 	SET [Order] = @Order, [Text] = @Text
 	WHERE [ID] = @ID
 
-	UPDATE Smiley_Questions
-	SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+	UPDATE Star_Questions
+	SET NumberOfStars = @NumberOfStars
 	WHERE ID = @ID
 
 	SELECT @SUCCESS AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage

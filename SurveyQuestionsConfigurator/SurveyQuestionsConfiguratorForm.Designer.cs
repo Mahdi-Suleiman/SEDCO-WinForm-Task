@@ -124,7 +124,7 @@
             // 
             // closeApplicationButton
             // 
-            this.closeApplicationButton.Location = new System.Drawing.Point(537, 381);
+            this.closeApplicationButton.Location = new System.Drawing.Point(537, 357);
             this.closeApplicationButton.Name = "closeApplicationButton";
             this.closeApplicationButton.Size = new System.Drawing.Size(75, 23);
             this.closeApplicationButton.TabIndex = 9;
@@ -141,7 +141,7 @@
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
-            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 36);
+            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 12);
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
             this.createdQuestionsGroupBox.Size = new System.Drawing.Size(606, 339);
             this.createdQuestionsGroupBox.TabIndex = 10;
@@ -173,12 +173,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(621, 410);
+            this.ClientSize = new System.Drawing.Size(621, 392);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(637, 449);
-            this.MinimumSize = new System.Drawing.Size(637, 449);
+            this.MaximumSize = new System.Drawing.Size(637, 431);
+            this.MinimumSize = new System.Drawing.Size(637, 431);
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Survey Questions Configurator";

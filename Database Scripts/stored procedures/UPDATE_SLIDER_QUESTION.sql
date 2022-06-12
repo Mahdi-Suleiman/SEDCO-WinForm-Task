@@ -1,9 +1,13 @@
-CREATE PROCEDURE UPDATE_SMILEY_QUESTION
+CREATE PROCEDURE UPDATE_SLIDER_QUESTION
 @ID INT,
 @Order INT,
 @Text NVARCHAR(4000),
 @Type INT,
-@NumberOfSmileyFaces INT
+@StartValue INT,
+@EndValue INT,
+@StartValueCaption nvarchar(100),
+@EndValueCaption nvarchar(100)
+
 AS
 SET NOCOUNT ON
 
@@ -19,8 +23,8 @@ BEGIN TRY
 	SET [Order] = @Order, [Text] = @Text
 	WHERE [ID] = @ID
 
-	UPDATE Smiley_Questions
-	SET NumberOfSmileyFaces = @NumberOfSmileyFaces
+	UPDATE Slider_Questions
+    SET StartValue = @StartValue, EndValue = @EndValue, StartValueCaption = @StartValueCaption, EndValueCaption = @EndValueCaption
 	WHERE ID = @ID
 
 	SELECT @SUCCESS AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage

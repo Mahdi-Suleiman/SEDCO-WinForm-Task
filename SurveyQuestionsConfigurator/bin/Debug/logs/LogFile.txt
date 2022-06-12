@@ -4964,3 +4964,143 @@ Error Number:2812,State:62,Class:16
    at System.Data.SqlClient.SqlParameterCollection.get_Item(String parameterName)
    at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertQuestion(TransactionScope pTransactionScope, SqlConnection pSqlConnection, Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 52
 
+
+ -------------- (12/06/2022 10:01:57) --------------
+
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Procedure or function 'INSERT_SLIDER_QUESTION' expects parameter '@ORDER', which was not supplied.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'INSERT_SLIDER_QUESTION' expects parameter '@ORDER', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 232
+ClientConnectionId:a5ed00c3-4d09-4de9-94f4-ad5d3d878208
+Error Number:201,State:4,Class:16
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 232
+
+
+ -------------- (12/06/2022 10:07:48) --------------
+
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Procedure or function 'INSERT_SLIDER_QUESTION' expects parameter '@Order', which was not supplied.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'INSERT_SLIDER_QUESTION' expects parameter '@Order', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 232
+ClientConnectionId:b4f66a14-46d6-4f68-890a-3fb5b7df4d36
+Error Number:201,State:4,Class:16
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 232
+
+
+ -------------- (12/06/2022 10:10:49) --------------
+
+-Exception Type: System.Data.SqlClient.SqlException
+-Exception Call Site: Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+-Exception Short Message: Procedure or function 'INSERT_SLIDER_QUESTION' expects parameter '@NumberOfSmileyFaces', which was not supplied.
+-Exception Long Message: System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'INSERT_SLIDER_QUESTION' expects parameter '@NumberOfSmileyFaces', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 233
+ClientConnectionId:a27026cd-a3e7-4576-b9cc-d912ce958980
+Error Number:201,State:4,Class:16
+-Exception Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 233
+
+
+ -------------- (12/06/2022 10:11:02) --------------
+
+-Exception Type: System.Transactions.TransactionAbortedException
+-Exception Call Site: Void CreateAbortingClone(System.Transactions.InternalTransaction)
+-Exception Short Message: The transaction has aborted.
+-Exception Long Message: System.Transactions.TransactionAbortedException: The transaction has aborted.
+   at System.Transactions.TransactionStateAborted.CreateAbortingClone(InternalTransaction tx)
+   at System.Transactions.DependentTransaction..ctor(IsolationLevel isoLevel, InternalTransaction internalTransaction, Boolean blocking)
+   at System.Transactions.Transaction.DependentClone(DependentCloneOption cloneOption)
+   at System.Transactions.TransactionScope.SetCurrent(Transaction newCurrent)
+   at System.Transactions.TransactionScope.PushScope()
+   at System.Transactions.TransactionScope..ctor(TransactionScopeOption scopeOption, TransactionScopeAsyncFlowOption asyncFlowOption)
+   at System.Transactions.TransactionScope..ctor()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 195
+-Exception Stack Trace:    at System.Transactions.TransactionStateAborted.CreateAbortingClone(InternalTransaction tx)
+   at System.Transactions.DependentTransaction..ctor(IsolationLevel isoLevel, InternalTransaction internalTransaction, Boolean blocking)
+   at System.Transactions.Transaction.DependentClone(DependentCloneOption cloneOption)
+   at System.Transactions.TransactionScope.SetCurrent(Transaction newCurrent)
+   at System.Transactions.TransactionScope.PushScope()
+   at System.Transactions.TransactionScope..ctor(TransactionScopeOption scopeOption, TransactionScopeAsyncFlowOption asyncFlowOption)
+   at System.Transactions.TransactionScope..ctor()
+   at SurveyQuestionsConfigurator.DataAccess.DbConnect.InsertSliderQuestion(SliderQuestion pSliderQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 195
+
+
+ -------------- (12/06/2022 10:46:55) --------------
+
+-Exception Type: System.ArgumentOutOfRangeException
+-Exception Call Site: Void set_Value(System.Decimal)
+-Exception Short Message: Value of '0' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+-Exception Long Message: System.ArgumentOutOfRangeException: Value of '0' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'.
+Parameter name: Value
+   at System.Windows.Forms.NumericUpDown.set_Value(Decimal value)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingSmileyQuestion(Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 216
+-Exception Stack Trace:    at System.Windows.Forms.NumericUpDown.set_Value(Decimal value)
+   at SurveyQuestionsConfigurator.AddQuestionForm.InitializeEditingSmileyQuestion(Question pQuestion) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\AddQuestionForm.cs:line 216
+
