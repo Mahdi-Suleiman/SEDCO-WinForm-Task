@@ -113,7 +113,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = "INSERT_SMILEY_QUESTION";
+                            cmd.CommandText = "dbo.INSERT_SMILEY_QUESTION";
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
@@ -180,7 +180,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = $@"INSERT_SLIDER_QUESTION";
+                            cmd.CommandText = $@"dbo.INSERT_SLIDER_QUESTION";
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
@@ -251,7 +251,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = "INSERT_STAR_QUESTION";
+                            cmd.CommandText = "dbo.INSERT_STAR_QUESTION";
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
@@ -327,7 +327,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = "UPDATE_SMILEY_QUESTION";
+                            cmd.CommandText = "dbo.UPDATE_SMILEY_QUESTION";
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
@@ -398,7 +398,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = "UPDATE_SLIDER_QUESTION";
+                            cmd.CommandText = "dbo.UPDATE_SLIDER_QUESTION";
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
@@ -472,7 +472,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
-                            cmd.CommandText = "UPDATE_STAR_QUESTION";
+                            cmd.CommandText = "dbo.UPDATE_STAR_QUESTION";
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter[] parameters = new SqlParameter[] {
