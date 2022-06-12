@@ -16,7 +16,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
     public class DbConnect
     {
         ///get sqlConnection string information from App.config
-        private ConnectionStringSettings mSqlConnectionectionSetting = ConfigurationManager.ConnectionStrings[0];
+        private ConnectionStringSettings mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
 
         #region Common Methods
         /// <summary>
@@ -78,10 +78,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         #region INSERT Methods
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform insert stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open a transaction
+        /// 2) Check if desired order is already in use before inserting (SQL Function)
+        /// 3) Perform insert stored procedure -> get the result as ErrorCode
+        /// 4) return return from function with the corresponding ErrorCode
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -100,7 +100,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
                         /// Check if order is already in use
@@ -145,10 +145,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         } /// Function end
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform insert stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open a transaction
+        /// 2) Check if desired order is already in use before inserting (SQL Function)
+        /// 3) Perform insert stored procedure -> get the result as ErrorCode
+        /// 4) return return from function with the corresponding ErrorCode
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -167,7 +167,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
                         /// Check if order is already in use
@@ -216,10 +216,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
         } /// Function end
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform insert stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open a transaction
+        /// 2) Check if desired order is already in use before inserting (SQL Function)
+        /// 3) Perform insert stored procedure -> get the result as ErrorCode
+        /// 4) return return from function with the corresponding ErrorCode
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -237,7 +237,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
                         /// Check if order is already in use
@@ -288,10 +288,12 @@ namespace SurveyQuestionsConfigurator.DataAccess
         #region UPDATE Methods
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform update stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open a transaction
+        /// 2) Check if desired order is already in use before inserting (SQL Function)
+        /// 3) Get ID of the desired order you want to insert
+        /// 4) if order already in use and the ID of that order is not the same ID the question that I am already updating
+        /// 5) -> Perform update stored procedure -> get the result as ErrorCode
+        /// 6) return from function with the corresponding ErrorCode
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -310,7 +312,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
                         /// Check if order is already in use
@@ -360,10 +362,12 @@ namespace SurveyQuestionsConfigurator.DataAccess
         }/// Function end
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform update stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open a transaction
+        /// 2) Check if desired order is already in use before inserting (SQL Function)
+        /// 3) Get ID of the desired order you want to insert
+        /// 4) if order already in use and the ID of that order is not the same ID the question that I am already updating
+        /// 5) -> Perform update stored procedure -> get the result as ErrorCode
+        /// 6) return from function with the corresponding ErrorCode
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -381,7 +385,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
                         /// Check if order is already in use
@@ -433,10 +437,12 @@ namespace SurveyQuestionsConfigurator.DataAccess
         } /// Function end
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform update stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open a transaction
+        /// 2) Check if desired order is already in use before inserting (SQL Function)
+        /// 3) Get ID of the desired order you want to insert
+        /// 4) if order already in use and the ID of that order is not the same ID the question that I am already updating
+        /// 5) -> Perform update stored procedure -> get the result as ErrorCode
+        /// 6) return from function with the corresponding ErrorCode
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
@@ -454,7 +460,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 {
                     using (SqlConnection sqlConnection = new SqlConnection())
                     {
-                        sqlConnection.ConnectionString = mSqlConnectionectionSetting.ConnectionString;
+                        sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
 
@@ -508,20 +514,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
         #region DELETE Methods
 
         /// <summary>
-        /// 1) Open transaction
-        /// 2) Perform update stored procedure -> get the result
-        /// 3) uery a second insert and get rows affected number
-        /// 4) return error code based on the results
+        /// 1) Open an SQL connection
+        /// 2) Perform a delete query based on passed ID
+        /// 3) return error code based on affected rows number
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
         /// </returns>
-        public ErrorCode DeleteQuestion(int pQuestionId)
+        public ErrorCode DeleteQuestionByID(int pQuestionId)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionSettings.ConnectionString))
                 {
                     sqlConnection.Open();
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -535,7 +540,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         cmd.Parameters.AddRange(parameters);
 
                         return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR;
-
                     }
                 }
             }
@@ -551,6 +555,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
         #region GET Methods
 
+        /// <summary>
+        /// 1) Open an SQL connection
+        /// 2) Get all questions from DB
+        /// 3) Create corresponding question objects and fill the passed question list with them
+        /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
@@ -559,9 +568,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection())
                 {
+                    sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
+
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
@@ -600,6 +611,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } /// Function end
 
+        /// <summary>
+        /// 1) Open an SQL connection
+        /// 2) Get corresponding question details from DB
+        /// 3) Fill the passed question object properties
+        /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
@@ -608,9 +624,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection())
                 {
+                    sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
+
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
@@ -658,6 +676,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } /// Function end
 
+        /// <summary>
+        /// 1) Open an SQL connection
+        /// 2) Get corresponding question details from DB
+        /// 3) Fill the passed question object properties
+        /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
@@ -666,9 +689,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection())
                 {
+                    sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
+
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"
@@ -723,6 +748,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         } /// Function end
 
+        /// <summary>
+        /// 1) Open an SQL connection
+        /// 2) Get corresponding question details from DB
+        /// 3) Fill the passed question object properties
+        /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
@@ -731,9 +761,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(mSqlConnectionectionSetting.ConnectionString))
+                using (SqlConnection sqlConnection = new SqlConnection())
                 {
+                    sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
+
                     using (SqlCommand cmd = sqlConnection.CreateCommand())
                     {
                         cmd.CommandText = $@"

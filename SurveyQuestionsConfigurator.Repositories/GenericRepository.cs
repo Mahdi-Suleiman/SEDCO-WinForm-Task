@@ -21,7 +21,7 @@ namespace SurveyQuestionsConfigurator.Repositories
         {
             try
             {
-                return mDbConnect.DeleteQuestion(pID);
+                return mDbConnect.DeleteQuestionByID(pID);
             }
             catch (Exception ex)
             {
