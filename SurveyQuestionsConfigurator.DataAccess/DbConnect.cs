@@ -61,15 +61,44 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </returns>
         private int GetIDFromOrder(SqlConnection pSqlConnection, int pOrder)
         {
-            using (SqlCommand cmd = pSqlConnection.CreateCommand())
+            try
             {
-                cmd.CommandText = $@"SELECT dbo.GetIDFromOrder(@{QuestionColumn.Order})";
+                using (SqlCommand cmd = pSqlConnection.CreateCommand())
+                {
+                    cmd.CommandText = $@"SELECT dbo.GetIDFromOrder(@{QuestionColumn.Order})";
 
-                SqlParameter[] parameters = new SqlParameter[] {
+                    SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.Order}", pOrder),
                             };
-                cmd.Parameters.AddRange(parameters);
-                return (int)cmd.ExecuteScalar();
+                    cmd.Parameters.AddRange(parameters);
+                    return (int)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+                return 0;
+            }
+        }
+
+        public ErrorCode CheckConnectivity(SqlConnectionStringBuilder pBuilder)
+        {
+            SqlConnection sqlConnection = new SqlConnection();
+            return ErrorCode.ERROR;
+        }
+
+        public SqlConnectionStringBuilder GetConnectionString()
+        {
+            try
+            {
+                SqlConnectionStringBuilder tbuilder = new SqlConnectionStringBuilder();
+                tbuilder.ConnectionString = mSqlConnectionSettings.ConnectionString;
+                return tbuilder;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+                return ErrorCode.ERROR;
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using SurveyQuestionsConfigurator.CommonHelpers;
 using SurveyQuestionsConfigurator.Entities;
+using SurveyQuestionsConfigurator.Forms;
 using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
 using System.Collections.Generic;
@@ -375,5 +376,10 @@ namespace SurveyQuestionsConfigurator
         }
         #endregion
 
+        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
+            connectionSettingsForm.ShowDialog();
+        }
     }
 }

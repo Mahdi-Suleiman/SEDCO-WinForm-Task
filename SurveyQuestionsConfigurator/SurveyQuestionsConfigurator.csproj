@@ -69,30 +69,39 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddQuestionForm.cs">
+    <Compile Include="Forms\AddQuestionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddQuestionForm.Designer.cs">
+    <Compile Include="Forms\AddQuestionForm.Designer.cs">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConnectionSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConnectionSettingsForm.Designer.cs">
+      <DependentUpon>ConnectionSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SurveyQuestionsConfiguratorDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SurveyQuestionsConfiguratorDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SurveyQuestionsConfiguratorForm.cs">
+    <Compile Include="Forms\SurveyQuestionsConfiguratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SurveyQuestionsConfiguratorForm.Designer.cs">
+    <Compile Include="Forms\SurveyQuestionsConfiguratorForm.Designer.cs">
       <DependentUpon>SurveyQuestionsConfiguratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddQuestionForm.resx">
+    <EmbeddedResource Include="Forms\AddQuestionForm.resx">
       <DependentUpon>AddQuestionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SurveyQuestionsConfiguratorForm.resx">
+    <EmbeddedResource Include="Forms\ConnectionSettingsForm.resx">
+      <DependentUpon>ConnectionSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SurveyQuestionsConfiguratorForm.resx">
       <DependentUpon>SurveyQuestionsConfiguratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

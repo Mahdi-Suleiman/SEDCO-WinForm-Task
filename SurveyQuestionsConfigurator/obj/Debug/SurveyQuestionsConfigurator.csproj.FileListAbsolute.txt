@@ -29,3 +29,4 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.CopyComplete
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.exe
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.pdb
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.Forms.ConnectionSettingsForm.resources
