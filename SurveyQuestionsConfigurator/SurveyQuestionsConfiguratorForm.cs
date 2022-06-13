@@ -358,6 +358,22 @@ namespace SurveyQuestionsConfigurator
             }
         }///End event 
 
+         /// <summary>
+         /// Handle close button click
+         /// </summary>
+        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
+        }
         #endregion
+
     }
 }

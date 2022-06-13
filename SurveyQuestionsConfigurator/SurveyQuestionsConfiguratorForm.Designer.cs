@@ -42,7 +42,13 @@
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
             this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createdQuestionsGroupBox.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // refreshListButton
@@ -124,7 +130,7 @@
             // 
             // closeApplicationButton
             // 
-            this.closeApplicationButton.Location = new System.Drawing.Point(537, 357);
+            this.closeApplicationButton.Location = new System.Drawing.Point(537, 372);
             this.closeApplicationButton.Name = "closeApplicationButton";
             this.closeApplicationButton.Size = new System.Drawing.Size(75, 23);
             this.closeApplicationButton.TabIndex = 9;
@@ -141,7 +147,7 @@
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
-            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 12);
+            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 27);
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
             this.createdQuestionsGroupBox.Size = new System.Drawing.Size(606, 339);
             this.createdQuestionsGroupBox.TabIndex = 10;
@@ -168,17 +174,58 @@
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.settingsToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(621, 24);
+            this.menuStrip2.TabIndex = 11;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectionToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "&Settings";
+            // 
+            // connectionToolStripMenuItem
+            // 
+            this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.connectionToolStripMenuItem.Text = "&Connection";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
+            // 
             // SurveyQuestionsConfiguratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(621, 392);
+            this.ClientSize = new System.Drawing.Size(621, 407);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
+            this.Controls.Add(this.menuStrip2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(637, 431);
-            this.MinimumSize = new System.Drawing.Size(637, 431);
+            this.MaximumSize = new System.Drawing.Size(637, 446);
+            this.MinimumSize = new System.Drawing.Size(637, 446);
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Survey Questions Configurator";
@@ -186,7 +233,10 @@
             this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.createdQuestionsGroupBox.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -204,6 +254,11 @@
         private System.Windows.Forms.GroupBox createdQuestionsGroupBox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
     }
 }
 
