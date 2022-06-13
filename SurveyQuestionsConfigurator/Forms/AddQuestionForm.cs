@@ -15,9 +15,9 @@ namespace SurveyQuestionsConfigurator
     public partial class AddQuestionForm : Form
     {
         #region Properties
-        public Question mGenericQuestion { get; set; } /// create global Question ID property
+        private Question mGenericQuestion { get; set; } /// create global Question ID property
 
-        private QuestionManager mGeneralQuestionManager = new QuestionManager();
+        private readonly QuestionManager mGeneralQuestionManager;
 
         private FormStateType cStateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
         private QuestionType cSelectedQuestionType { get; set; }
@@ -39,6 +39,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 InitializeComponent();
+                mGeneralQuestionManager = new QuestionManager();
                 this.Text = "Add A Question";
                 cStateForm = FormStateType.ADD;
             }
@@ -57,6 +58,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 InitializeComponent();
+                mGeneralQuestionManager = new QuestionManager();
                 this.Text = "Edit A Question";
 
                 cStateForm = FormStateType.EDIT;

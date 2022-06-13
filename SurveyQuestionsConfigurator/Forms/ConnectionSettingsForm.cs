@@ -16,8 +16,13 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class ConnectionSettingsForm : Form
     {
-        SqlConnectionStringBuilder mBuilder;
-        SettingsManager mSettingsManager;
+        #region Properties
+
+        private SqlConnectionStringBuilder mBuilder;
+        private readonly SettingsManager mSettingsManager;
+        #endregion
+
+        #region Constructor
         public ConnectionSettingsForm()
         {
 
@@ -33,7 +38,9 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }
+        #endregion
 
+        #region Event Handlers
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
             try
@@ -101,20 +108,6 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private ErrorCode CheckConnectionStringInputFields(SqlConnectionStringBuilder pBuilder)
-        {
-            try
-            {
-                return mSettingsManager.CheckConnectionStringInputFields(pBuilder);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-                return ErrorCode.ERROR;
-            }
-        }
-
         private void saveButton_Click(object sender, EventArgs e)
         {
             try
@@ -147,5 +140,22 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }
+        #endregion
+
+        #region Validation methods
+        private ErrorCode CheckConnectionStringInputFields(SqlConnectionStringBuilder pBuilder)
+        {
+            try
+            {
+                return mSettingsManager.CheckConnectionStringInputFields(pBuilder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+                return ErrorCode.ERROR;
+            }
+        }
+        #endregion
     }
 }

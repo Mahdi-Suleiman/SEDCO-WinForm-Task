@@ -24,8 +24,8 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Used for sorting listview columns on click
         /// </summary>
-        private ListViewColumnSorter mListViewColumnSorter;
-        private QuestionManager mGeneralQuestionManager = new QuestionManager();
+        private readonly ListViewColumnSorter mListViewColumnSorter;
+        private readonly QuestionManager mGeneralQuestionManager;
 
         #endregion
 
@@ -34,11 +34,9 @@ namespace SurveyQuestionsConfigurator
         {
             InitializeComponent();
 
+            mGeneralQuestionManager = new QuestionManager();
 
-            /// <summary>
-            /// Create an instance of a ListView column sorter and assign it
-            /// to the ListView control.
-            /// </summary>
+            /// Create an instance of a ListView column sorter and assign itto the ListView control.
             mListViewColumnSorter = new ListViewColumnSorter();
             this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
 
