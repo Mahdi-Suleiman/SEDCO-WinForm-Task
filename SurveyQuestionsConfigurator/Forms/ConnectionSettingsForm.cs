@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SurveyQuestionsConfigurator.Entities.Generic;
 
-namespace SurveyQuestionsConfigurator.Forms
+namespace SurveyQuestionsConfigurator
 {
     public partial class ConnectionSettingsForm : Form
     {

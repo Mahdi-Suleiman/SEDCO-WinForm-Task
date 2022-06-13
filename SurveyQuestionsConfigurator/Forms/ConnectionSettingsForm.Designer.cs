@@ -1,4 +1,4 @@
-﻿namespace SurveyQuestionsConfigurator.Forms
+﻿namespace SurveyQuestionsConfigurator
 {
     partial class ConnectionSettingsForm
     {

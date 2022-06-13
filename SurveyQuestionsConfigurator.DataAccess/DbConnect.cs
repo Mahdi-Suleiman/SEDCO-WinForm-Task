@@ -98,7 +98,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return ErrorCode.ERROR;
+                return null;
             }
         }
 

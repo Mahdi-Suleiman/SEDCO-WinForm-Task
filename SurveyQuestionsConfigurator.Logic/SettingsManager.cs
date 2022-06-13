@@ -10,6 +10,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class SettingsManager
     {
+
+
+
         public ErrorCode CheckConnectionStringInputFields(SqlConnectionStringBuilder pBuilder)
         {
             if (!String.IsNullOrWhiteSpace(pBuilder.DataSource.ToString()) && pBuilder.DataSource.Length <= 128)
