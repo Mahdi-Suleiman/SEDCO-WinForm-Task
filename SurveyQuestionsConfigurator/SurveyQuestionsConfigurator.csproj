@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>sedco_logo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\sedco_logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -161,7 +161,7 @@
     <None Include="Resources\sedco_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sedco_logo.ico" />
+    <Content Include="Resources\sedco_logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
