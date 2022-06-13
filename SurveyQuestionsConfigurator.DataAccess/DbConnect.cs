@@ -16,8 +16,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
     public class DbConnect
     {
         ///get sqlConnection string information from App.config
-        private ConnectionStringSettings mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
-
+        private ConnectionStringSettings mSqlConnectionSettings;
+        public DbConnect()
+        {
+            mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
+        }
         #region Common Methods
         /// <summary>
         /// Return SUCCESS if order is not already in use
@@ -83,10 +86,40 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
         public ErrorCode CheckConnectivity(SqlConnectionStringBuilder pBuilder)
         {
-            SqlConnection sqlConnection = new SqlConnection();
-            return ErrorCode.ERROR;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection())
+                {
+                    sqlConnection.ConnectionString = pBuilder.ConnectionString;
+                    sqlConnection.Open();
+                    if (sqlConnection.State == ConnectionState.Open)
+                    {
+                        return ErrorCode.SUCCESS;
+                    }
+                    return ErrorCode.ERROR;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+                return ErrorCode.ERROR;
+            }
         }
-
+        public ErrorCode SaveConnectionString(SqlConnectionStringBuilder pBuilder)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.ConnectionStrings.ConnectionStrings[0].ConnectionString = pBuilder.ConnectionString;
+                config.Save(ConfigurationSaveMode.Minimal);
+                return ErrorCode.SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+                return ErrorCode.ERROR;
+            }
+        }
         public SqlConnectionStringBuilder GetConnectionString()
         {
             try

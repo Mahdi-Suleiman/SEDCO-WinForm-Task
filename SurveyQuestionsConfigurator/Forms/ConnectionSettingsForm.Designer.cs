@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.dataSourceTextBox = new System.Windows.Forms.TextBox();
-            this.databaseTextBox = new System.Windows.Forms.TextBox();
+            this.initialCatalogTextBox = new System.Windows.Forms.TextBox();
             this.userIDTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,15 +48,17 @@
             this.dataSourceTextBox.MaxLength = 128;
             this.dataSourceTextBox.Name = "dataSourceTextBox";
             this.dataSourceTextBox.Size = new System.Drawing.Size(263, 20);
-            this.dataSourceTextBox.TabIndex = 0;
+            this.dataSourceTextBox.TabIndex = 1;
+            this.dataSourceTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
-            // databaseTextBox
+            // initialCatalogTextBox
             // 
-            this.databaseTextBox.Location = new System.Drawing.Point(88, 41);
-            this.databaseTextBox.MaxLength = 128;
-            this.databaseTextBox.Name = "databaseTextBox";
-            this.databaseTextBox.Size = new System.Drawing.Size(263, 20);
-            this.databaseTextBox.TabIndex = 1;
+            this.initialCatalogTextBox.Location = new System.Drawing.Point(88, 41);
+            this.initialCatalogTextBox.MaxLength = 128;
+            this.initialCatalogTextBox.Name = "initialCatalogTextBox";
+            this.initialCatalogTextBox.Size = new System.Drawing.Size(263, 20);
+            this.initialCatalogTextBox.TabIndex = 12;
+            this.initialCatalogTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // userIDTextBox
             // 
@@ -64,7 +66,8 @@
             this.userIDTextBox.MaxLength = 128;
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(263, 20);
-            this.userIDTextBox.TabIndex = 2;
+            this.userIDTextBox.TabIndex = 3;
+            this.userIDTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // passwordTextBox
             // 
@@ -73,7 +76,8 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(263, 20);
-            this.passwordTextBox.TabIndex = 3;
+            this.passwordTextBox.TabIndex = 4;
+            this.passwordTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // label1
             // 
@@ -89,9 +93,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 44);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Database:";
+            this.label2.Text = "Initial Catalog:";
             // 
             // label3
             // 
@@ -113,19 +117,21 @@
             // 
             // saveButton
             // 
+            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(195, 168);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 9;
+            this.saveButton.TabIndex = 5;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Location = new System.Drawing.Point(276, 168);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 10;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -136,7 +142,7 @@
             this.testConnectionButton.Location = new System.Drawing.Point(235, 119);
             this.testConnectionButton.Name = "testConnectionButton";
             this.testConnectionButton.Size = new System.Drawing.Size(116, 23);
-            this.testConnectionButton.TabIndex = 11;
+            this.testConnectionButton.TabIndex = 0;
             this.testConnectionButton.Text = "Test Connection";
             this.testConnectionButton.UseVisualStyleBackColor = true;
             this.testConnectionButton.Click += new System.EventHandler(this.testConnectionButton_Click);
@@ -164,12 +170,13 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.userIDTextBox);
-            this.Controls.Add(this.databaseTextBox);
+            this.Controls.Add(this.initialCatalogTextBox);
             this.Controls.Add(this.dataSourceTextBox);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(381, 244);
             this.MinimumSize = new System.Drawing.Size(381, 244);
             this.Name = "ConnectionSettingsForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Connection Settings";
             this.Load += new System.EventHandler(this.ConnectionSettingsForm_Load);
             this.ResumeLayout(false);
@@ -180,7 +187,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox dataSourceTextBox;
-        private System.Windows.Forms.TextBox databaseTextBox;
+        private System.Windows.Forms.TextBox initialCatalogTextBox;
         private System.Windows.Forms.TextBox userIDTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label label1;

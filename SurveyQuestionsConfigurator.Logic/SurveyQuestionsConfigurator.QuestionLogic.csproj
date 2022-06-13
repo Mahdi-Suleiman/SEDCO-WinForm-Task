@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,10 @@
     <ProjectReference Include="..\SurveyQuestionsConfigurator.CommonHelpers\SurveyQuestionsConfigurator.CommonHelpers.csproj">
       <Project>{aa2a8fd2-4a84-4f1e-866d-9f15ed24fb71}</Project>
       <Name>SurveyQuestionsConfigurator.CommonHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SurveyQuestionsConfigurator.DataAccess\SurveyQuestionsConfigurator.DataAccess.csproj">
+      <Project>{ACCED7EF-2354-4B3A-A2BF-9F9312661C7E}</Project>
+      <Name>SurveyQuestionsConfigurator.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\SurveyQuestionsConfigurator.Entities\SurveyQuestionsConfigurator.Entities.csproj">
       <Project>{91df31af-24d9-4b8e-bb66-d89c6fe1a6ef}</Project>
