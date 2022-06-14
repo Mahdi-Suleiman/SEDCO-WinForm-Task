@@ -32,14 +32,20 @@ namespace SurveyQuestionsConfigurator
         #region Constructor
         public SurveyQuestionsConfiguratorForm()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            mGeneralQuestionManager = new QuestionManager();
+                mGeneralQuestionManager = new QuestionManager();
 
-            /// Create an instance of a ListView column sorter and assign itto the ListView control.
-            mListViewColumnSorter = new ListViewColumnSorter();
-            this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
-
+                /// Create an instance of a ListView column sorter and assign itto the ListView control.
+                mListViewColumnSorter = new ListViewColumnSorter();
+                this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); ///write error to log file
+            }
         }
 
         #endregion
@@ -48,15 +54,22 @@ namespace SurveyQuestionsConfigurator
 
         public void ClearListView()
         {
-            /// Remove each row
-            foreach (ListViewItem item in createdQuestions_ListView.Items)
+            try
             {
-                item.Remove();
+                /// Remove each row
+                foreach (ListViewItem item in createdQuestions_ListView.Items)
+                {
+                    item.Remove();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); ///write error to log file
             }
         }
 
         /// Build list view when needed (on ADD, EDIT, ...etc)
-        public void BuildListView()
+        public void BuildListView(Object stateInfo = null)
         {
             /// Connect to quesion table and fill the list view
             try
@@ -65,7 +78,7 @@ namespace SurveyQuestionsConfigurator
                 List<Question> questionsList = new List<Question>();
 
                 ///Size text column header to fit the text.
-                this.createdQuestions_ListView.Columns[2].Width = -2;
+                //this.createdQuestions_ListView.Columns[2].Width = -2;
 
                 ErrorCode result = mGeneralQuestionManager.GetAllQuestions(ref questionsList);
                 switch (result)
@@ -83,6 +96,7 @@ namespace SurveyQuestionsConfigurator
                                 errorLabel.Visible = false;
                             }
 
+                            /// Remove each row
                             ClearListView();
 
                             ///Fill the list view
@@ -102,6 +116,8 @@ namespace SurveyQuestionsConfigurator
                         ///If connectin to DB is not SUCCESS -> Disable buttons and list view
                         if (addQuestionButton.Enabled)
                         {
+                            ClearListView();
+
                             addQuestionButton.Enabled = false;
                             editQuestionButton.Enabled = false;
                             deleteQuestionButton.Enabled = false;
@@ -127,11 +143,13 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 /// Build List View on load
-                BuildListView();
+                //BuildListView();
+                //ThreadPool.QueueUserWorkItem(BuildListView);
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -146,11 +164,13 @@ namespace SurveyQuestionsConfigurator
             {
                 //Thread thr = new Thread(new ThreadStart(BuildListView));
                 //thr.Start();
+                //ThreadPool.QueueUserWorkItem(BuildListView);
                 BuildListView();
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -204,7 +224,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -220,7 +240,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -255,6 +275,7 @@ namespace SurveyQuestionsConfigurator
                         {
                             case ErrorCode.SUCCESS:
                                 BuildListView();
+                                //ThreadPool.QueueUserWorkItem(BuildListView);
                                 break;
                             case ErrorCode.SQL_VIOLATION:
                                 MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -272,7 +293,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -286,10 +307,14 @@ namespace SurveyQuestionsConfigurator
             {
                 /// Rebuild List View when refresh button is pressed
                 BuildListView();
+                //ThreadPool.QueueUserWorkItem(BuildListView);
+                //Thread t = new Thread(BuildListView);
+                //t.IsBackground = true;
+                //t.Start();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -335,7 +360,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -351,7 +376,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -367,7 +392,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -375,8 +400,30 @@ namespace SurveyQuestionsConfigurator
 
         private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
-            connectionSettingsForm.ShowDialog();
+            try
+            {
+                ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
+                connectionSettingsForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
+                connectionSettingsForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
         }
     }
 }

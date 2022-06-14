@@ -15,13 +15,23 @@ namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
-        ///get sqlConnection string information from App.config
+        ///get tSqlConnection string information from App.config
         private ConnectionStringSettings mSqlConnectionSettings;
         public DbConnect()
         {
-            mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
+            try
+            {
+                mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+            }
         }
+
+
         #region Common Methods
+
         /// <summary>
         /// Return SUCCESS if order is not already in use
         /// </summary>
@@ -80,19 +90,26 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return 0;
+                return -1;
             }
         }
 
+        /// <summary>
+        /// Test connecting string
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode CheckConnectivity(SqlConnectionStringBuilder pBuilder)
         {
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection())
+                using (SqlConnection tSqlConnection = new SqlConnection())
                 {
-                    sqlConnection.ConnectionString = pBuilder.ConnectionString;
-                    sqlConnection.Open();
-                    if (sqlConnection.State == ConnectionState.Open)
+                    tSqlConnection.ConnectionString = pBuilder.ConnectionString;
+                    tSqlConnection.Open();
+                    if (tSqlConnection.State == ConnectionState.Open)
                     {
                         return ErrorCode.SUCCESS;
                     }
@@ -105,13 +122,28 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 return ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Save new conncection string to config file
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public ErrorCode SaveConnectionString(SqlConnectionStringBuilder pBuilder)
         {
             try
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.ConnectionStrings.ConnectionStrings[0].ConnectionString = pBuilder.ConnectionString;
-                config.Save(ConfigurationSaveMode.Minimal);
+                string tProviderName = "System.Data.SqlClient";
+
+                Configuration tConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                tConfig.ConnectionStrings.ConnectionStrings[0].ConnectionString = pBuilder.ConnectionString;
+                tConfig.ConnectionStrings.ConnectionStrings[0].ProviderName = tProviderName;
+                tConfig.Save(ConfigurationSaveMode.Minimal);
+
+                //mSqlConnectionSettings = tConfig.ConnectionStrings.ConnectionStrings[0];
+                ConfigurationManager.RefreshSection("connectionStrings");
+                SetConnectionSettings();
                 return ErrorCode.SUCCESS;
             }
             catch (Exception ex)
@@ -120,6 +152,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 return ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Get used connection string from config file
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         public SqlConnectionStringBuilder GetConnectionString()
         {
             try
@@ -132,6 +172,21 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 Logger.LogError(ex); /// write error to log file
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Sets mSqlConnectionSettings to newest data
+        /// </summary>
+        private void SetConnectionSettings()
+        {
+            try
+            {
+                mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
             }
         }
 
@@ -632,6 +687,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 using (SqlConnection sqlConnection = new SqlConnection())
                 {
+                    SetConnectionSettings();
                     sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
 

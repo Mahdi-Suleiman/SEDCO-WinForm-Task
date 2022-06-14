@@ -43,13 +43,8 @@
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
             this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsButton = new System.Windows.Forms.Button();
             this.createdQuestionsGroupBox.SuspendLayout();
-            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // refreshListButton
@@ -97,7 +92,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Text";
-            this.columnHeader4.Width = 440;
+            this.columnHeader4.Width = 441;
             // 
             // deleteQuestionButton
             // 
@@ -175,46 +170,19 @@
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // menuStrip2
+            // settingsButton
             // 
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.settingsToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(621, 24);
-            this.menuStrip2.TabIndex = 11;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "&Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectionToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "&Settings";
-            // 
-            // connectionToolStripMenuItem
-            // 
-            this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
-            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.connectionToolStripMenuItem.Text = "&Connection";
-            this.connectionToolStripMenuItem.Click += new System.EventHandler(this.connectionToolStripMenuItem_Click);
+            this.settingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.gear;
+            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settingsButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.settingsButton.ForeColor = System.Drawing.Color.Transparent;
+            this.settingsButton.Location = new System.Drawing.Point(6, 3);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(23, 21);
+            this.settingsButton.TabIndex = 12;
+            this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // SurveyQuestionsConfiguratorForm
             // 
@@ -222,9 +190,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(621, 407);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
-            this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(637, 446);
@@ -233,13 +201,9 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Survey Questions Configurator";
             this.Activated += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Activated);
-            this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.createdQuestionsGroupBox.PerformLayout();
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -257,11 +221,7 @@
         private System.Windows.Forms.GroupBox createdQuestionsGroupBox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 

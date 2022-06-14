@@ -34,7 +34,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -54,7 +54,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -67,7 +67,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -86,13 +86,11 @@ namespace SurveyQuestionsConfigurator
                 {
                     if (mSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS)
                     {
-                        MessageBox.Show("Test connection succeeded.\nYou can save settings now", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        saveButton.Enabled = true;
+                        MessageBox.Show("Test connection succeeded.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         MessageBox.Show("Test connection failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        saveButton.Enabled = false;
                     }
                 }
                 else
@@ -103,7 +101,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -112,34 +110,23 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                if (mSettingsManager.SaveConnectionString(mBuilder) == ErrorCode.SUCCESS)
+                ErrorCode isSaved = mSettingsManager.SaveConnectionString(mBuilder);
+                if (isSaved == ErrorCode.SUCCESS)
                 {
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Couldn't save settings, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    MessageBox.Show("Couldn't save settings, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
 
-        private void dataSourceTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                saveButton.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-            }
-        }
         #endregion
 
         #region Validation methods
@@ -151,7 +138,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }

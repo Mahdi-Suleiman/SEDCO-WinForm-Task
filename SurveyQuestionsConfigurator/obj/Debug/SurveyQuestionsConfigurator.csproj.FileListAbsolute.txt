@@ -22,6 +22,7 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.AssemblyReference.cache
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.SuggestedBindingRedirects.cache
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.AddQuestionForm.resources
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.ConnectionSettingsForm.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.Properties.Resources.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.GenerateResource.cache
@@ -29,4 +30,3 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.csproj.CopyComplete
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.exe
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.pdb
-C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.ConnectionSettingsForm.resources

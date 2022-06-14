@@ -49,7 +49,6 @@
             this.dataSourceTextBox.Name = "dataSourceTextBox";
             this.dataSourceTextBox.Size = new System.Drawing.Size(263, 20);
             this.dataSourceTextBox.TabIndex = 1;
-            this.dataSourceTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // initialCatalogTextBox
             // 
@@ -58,7 +57,6 @@
             this.initialCatalogTextBox.Name = "initialCatalogTextBox";
             this.initialCatalogTextBox.Size = new System.Drawing.Size(263, 20);
             this.initialCatalogTextBox.TabIndex = 12;
-            this.initialCatalogTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // userIDTextBox
             // 
@@ -67,7 +65,6 @@
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(263, 20);
             this.userIDTextBox.TabIndex = 3;
-            this.userIDTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // passwordTextBox
             // 
@@ -77,7 +74,6 @@
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(263, 20);
             this.passwordTextBox.TabIndex = 4;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.dataSourceTextBox_TextChanged);
             // 
             // label1
             // 
@@ -117,7 +113,6 @@
             // 
             // saveButton
             // 
-            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(195, 168);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);

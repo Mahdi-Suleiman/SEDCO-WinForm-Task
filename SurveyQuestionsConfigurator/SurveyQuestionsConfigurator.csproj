@@ -161,6 +161,7 @@
     <None Include="Resources\sedco_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\gear.png" />
     <Content Include="Resources\sedco_logo.ico" />
   </ItemGroup>
   <ItemGroup>
