@@ -76,7 +76,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ID if found
         /// 0 if no row is found
         /// </returns>
-        private int GetIDFromOrder(SqlConnection pSqlConnection, int pOrder)
+        private ErrorCode GetIDFromOrder(SqlConnection pSqlConnection, int pOrder, ref int pQuestionID)
         {
             try
             {
@@ -92,13 +92,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     cmd.Parameters.AddRange(parameters);
 
                     cmd.ExecuteNonQuery();
-                    return (int)parameters[0].Value;
+
+                    pQuestionID = (int)parameters[0].Value;
+
+                    if (pQuestionID == -1)
+                        return ErrorCode.ERROR;
+
+                    return ErrorCode.SUCCESS;
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return -1;
+                return ErrorCode.ERROR;
             }
         }
 
@@ -431,8 +437,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
             /// Try to Update a new pQuestion into "Smiley_Questions" table
             try
             {
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int tReturnedID = 0;
+                ErrorCode tIsOrderTaken = ErrorCode.ERROR;
+                ErrorCode tIsIDTaken = ErrorCode.ERROR;
+                int tReturnedID = -1;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -442,15 +449,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.Open();
 
                         /// Check if order is already in use
-                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
+                        tIsOrderTaken = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
                         /// get question ID form it's unique order
-                        tReturnedID = GetIDFromOrder(sqlConnection, pSmileyQuestion.Order);
-
+                        tIsIDTaken = GetIDFromOrder(sqlConnection, pSmileyQuestion.Order, ref tReturnedID);
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION && tReturnedID != pSmileyQuestion.ID)
+                        if (tIsOrderTaken == ErrorCode.SQL_VIOLATION && tIsIDTaken == ErrorCode.SUCCESS)
                             return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -466,10 +472,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)
                             };
                             cmd.Parameters.AddRange(parameters);
-                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                            tIsOrderTaken = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS)
+                        if (tIsOrderTaken == ErrorCode.SUCCESS)
                         {
                             /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
@@ -504,8 +510,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int tReturnedID = 0;
+                ErrorCode tIsOrderTaken = ErrorCode.ERROR;
+                ErrorCode tIsIDTaken = ErrorCode.ERROR;
+                int tReturnedID = -1;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -515,15 +522,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.Open();
 
                         /// Check if order is already in use
-                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
+                        tIsOrderTaken = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
                         /// get question ID form it's unique order
-                        tReturnedID = GetIDFromOrder(sqlConnection, pSliderQuestion.Order);
-
+                        tIsIDTaken = GetIDFromOrder(sqlConnection, pSliderQuestion.Order, ref tReturnedID);
 
                         /// return if order already exist && the order is taken by another questionID
-                        /// when ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION && tReturnedID != pSliderQuestion.ID)
+                        /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
+                        if (tIsOrderTaken == ErrorCode.SQL_VIOLATION && tIsIDTaken == ErrorCode.SUCCESS)
                             return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -542,10 +548,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 new SqlParameter($"{QuestionColumn.EndValueCaption}", pSliderQuestion.EndValueCaption),
                             };
                             cmd.Parameters.AddRange(parameters);
-                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                            tIsOrderTaken = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS)
+                        if (tIsOrderTaken == ErrorCode.SUCCESS)
                         {
                             /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
@@ -579,8 +585,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
         {
             try
             {
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
-                int tReturnedID = 0;
+                ErrorCode tIsOrderTaken = ErrorCode.ERROR;
+                ErrorCode tIsIDTaken = ErrorCode.ERROR;
+                int tReturnedID = -1;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -589,17 +596,15 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                         sqlConnection.Open();
 
-
                         /// Check if order is already in use
-                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
+                        tIsOrderTaken = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
 
                         /// get question ID form it's unique order
-                        tReturnedID = GetIDFromOrder(sqlConnection, pStarQuestion.Order);
-
+                        tIsIDTaken = GetIDFromOrder(sqlConnection, pStarQuestion.Order, ref tReturnedID);
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION && tReturnedID != pStarQuestion.ID)
+                        if (tIsOrderTaken == ErrorCode.SQL_VIOLATION && tIsIDTaken == ErrorCode.SUCCESS)
                             return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -615,10 +620,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 new SqlParameter($"{QuestionColumn.NumberOfStars}", pStarQuestion.NumberOfStars)
                             };
                             cmd.Parameters.AddRange(parameters);
-                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                            tIsOrderTaken = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS)
+                        if (tIsOrderTaken == ErrorCode.SUCCESS)
                         {
                             /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
