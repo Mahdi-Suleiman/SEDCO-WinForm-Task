@@ -135,6 +135,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 string tProviderName = "System.Data.SqlClient";
+                string tSectionName = "connectionStrings";
 
                 Configuration tConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 tConfig.ConnectionStrings.ConnectionStrings[0].ConnectionString = pBuilder.ConnectionString;
@@ -142,7 +143,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 tConfig.Save(ConfigurationSaveMode.Minimal);
 
                 //mSqlConnectionSettings = tConfig.ConnectionStrings.ConnectionStrings[0];
-                ConfigurationManager.RefreshSection("connectionStrings");
+                ConfigurationManager.RefreshSection(tSectionName);
                 SetConnectionSettings();
                 return ErrorCode.SUCCESS;
             }
