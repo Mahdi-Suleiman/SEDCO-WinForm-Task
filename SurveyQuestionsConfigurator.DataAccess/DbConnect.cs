@@ -226,7 +226,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 /// ErrorCode to be returned
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                ErrorCode tIsOrderTaken = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -236,10 +236,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.Open();
 
                         /// Check if order is already in use
-                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
+                        tIsOrderTaken = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
                         /// return if order already exist
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
+                        if (tIsOrderTaken == ErrorCode.SQL_VIOLATION)
                             return ErrorCode.SQL_VIOLATION;
 
                         /// if order is not in use -> insert a question with the same order 
@@ -255,10 +255,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 new SqlParameter($"{QuestionColumn.NumberOfSmileyFaces}", pSmileyQuestion.NumberOfSmileyFaces)
                             };
                             cmd.Parameters.AddRange(parameters);
-                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                            tIsOrderTaken = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS)
+                        if (tIsOrderTaken == ErrorCode.SUCCESS)
                         {
                             /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
@@ -293,7 +293,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 /// ErrorCode to be returned
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                ErrorCode tIsOrderTaken = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -303,10 +303,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.Open();
 
                         /// Check if order is already in use
-                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
+                        tIsOrderTaken = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
                         /// return if order already exist
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
+                        if (tIsOrderTaken == ErrorCode.SQL_VIOLATION)
                             return ErrorCode.SQL_VIOLATION;
 
                         /// if order is not in use -> insert a question with the same order 
@@ -326,10 +326,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             };
                             cmd.Parameters.AddRange(parameters);
 
-                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                            tIsOrderTaken = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS)
+                        if (tIsOrderTaken == ErrorCode.SUCCESS)
                         {
                             /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();
@@ -363,7 +363,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 /// ErrorCode to be returned
-                ErrorCode returnedErrorCode = ErrorCode.ERROR;
+                ErrorCode tIsOrderTaken = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -373,10 +373,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         sqlConnection.Open();
 
                         /// Check if order is already in use
-                        returnedErrorCode = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
+                        tIsOrderTaken = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
 
                         /// return if order already exist
-                        if (returnedErrorCode == ErrorCode.SQL_VIOLATION)
+                        if (tIsOrderTaken == ErrorCode.SQL_VIOLATION)
                             return ErrorCode.SQL_VIOLATION;
 
 
@@ -394,10 +394,10 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                             };
                             cmd.Parameters.AddRange(parameters);
-                            returnedErrorCode = (ErrorCode)cmd.ExecuteScalar();
+                            tIsOrderTaken = (ErrorCode)cmd.ExecuteScalar();
                         }
 
-                        if (returnedErrorCode == ErrorCode.SUCCESS)
+                        if (tIsOrderTaken == ErrorCode.SUCCESS)
                         {
                             /// If everything is okay -> COMMIT Transaction
                             transactionScope.Complete();

@@ -44,7 +44,7 @@
             // 
             // dataSourceTextBox
             // 
-            this.dataSourceTextBox.Location = new System.Drawing.Point(88, 15);
+            this.dataSourceTextBox.Location = new System.Drawing.Point(103, 15);
             this.dataSourceTextBox.MaxLength = 128;
             this.dataSourceTextBox.Name = "dataSourceTextBox";
             this.dataSourceTextBox.Size = new System.Drawing.Size(263, 20);
@@ -52,7 +52,7 @@
             // 
             // initialCatalogTextBox
             // 
-            this.initialCatalogTextBox.Location = new System.Drawing.Point(88, 41);
+            this.initialCatalogTextBox.Location = new System.Drawing.Point(103, 41);
             this.initialCatalogTextBox.MaxLength = 128;
             this.initialCatalogTextBox.Name = "initialCatalogTextBox";
             this.initialCatalogTextBox.Size = new System.Drawing.Size(263, 20);
@@ -60,7 +60,7 @@
             // 
             // userIDTextBox
             // 
-            this.userIDTextBox.Location = new System.Drawing.Point(88, 67);
+            this.userIDTextBox.Location = new System.Drawing.Point(103, 67);
             this.userIDTextBox.MaxLength = 128;
             this.userIDTextBox.Name = "userIDTextBox";
             this.userIDTextBox.Size = new System.Drawing.Size(263, 20);
@@ -68,7 +68,7 @@
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(88, 93);
+            this.passwordTextBox.Location = new System.Drawing.Point(103, 93);
             this.passwordTextBox.MaxLength = 128;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
@@ -78,34 +78,34 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.Location = new System.Drawing.Point(10, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Data Source:";
+            this.label1.Text = "Server Name:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 44);
+            this.label2.Location = new System.Drawing.Point(10, 44);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Initial Catalog:";
+            this.label2.Text = "Database Name:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 70);
+            this.label3.Location = new System.Drawing.Point(10, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "User Id:";
+            this.label3.Text = "User ID:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 96);
+            this.label4.Location = new System.Drawing.Point(10, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 8;
@@ -113,7 +113,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(195, 168);
+            this.saveButton.Location = new System.Drawing.Point(210, 170);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 5;
@@ -123,7 +123,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(276, 168);
+            this.cancelButton.Location = new System.Drawing.Point(291, 170);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -134,7 +134,7 @@
             // testConnectionButton
             // 
             this.testConnectionButton.AutoEllipsis = true;
-            this.testConnectionButton.Location = new System.Drawing.Point(235, 119);
+            this.testConnectionButton.Location = new System.Drawing.Point(250, 119);
             this.testConnectionButton.Name = "testConnectionButton";
             this.testConnectionButton.Size = new System.Drawing.Size(116, 23);
             this.testConnectionButton.TabIndex = 0;
@@ -145,16 +145,16 @@
             // label5
             // 
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label5.Location = new System.Drawing.Point(15, 154);
+            this.label5.Location = new System.Drawing.Point(13, 154);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(336, 2);
+            this.label5.Size = new System.Drawing.Size(353, 2);
             this.label5.TabIndex = 12;
             // 
             // ConnectionSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 205);
+            this.ClientSize = new System.Drawing.Size(376, 205);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.testConnectionButton);
             this.Controls.Add(this.cancelButton);
@@ -168,8 +168,6 @@
             this.Controls.Add(this.initialCatalogTextBox);
             this.Controls.Add(this.dataSourceTextBox);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(381, 244);
-            this.MinimumSize = new System.Drawing.Size(381, 244);
             this.Name = "ConnectionSettingsForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Connection Settings";
