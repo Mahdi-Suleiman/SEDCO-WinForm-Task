@@ -13802,3 +13802,179 @@ Error Number:207,State:1,Class:16
    at SurveyQuestionsConfigurator.DataAccess.DbConnect.GetIDFromOrder(SqlConnection pSqlConnection, Int32 pOrder) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 88
 -Exception Stack Trace:    at SurveyQuestionsConfigurator.DataAccess.DbConnect.GetIDFromOrder(SqlConnection pSqlConnection, Int32 pOrder) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator.DataAccess\DbConnect.cs:line 88
 
+
+ -------------- (14/06/2022 15:03:45) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.DisplayIndexToID(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.get_Item(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.CopyTo(Array dest, Int32 index)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.GetEnumerator()
+   at System.Windows.Forms.ListView.ListViewItemCollection.GetEnumerator()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.ClearListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 60
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.DisplayIndexToID(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.get_Item(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.CopyTo(Array dest, Int32 index)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.GetEnumerator()
+   at System.Windows.Forms.ListView.ListViewItemCollection.GetEnumerator()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.ClearListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 60
+
+
+ -------------- (14/06/2022 15:03:45) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+
+
+ -------------- (14/06/2022 15:15:20) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.DisplayIndexToID(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.get_Item(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.CopyTo(Array dest, Int32 index)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.GetEnumerator()
+   at System.Windows.Forms.ListView.ListViewItemCollection.GetEnumerator()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.ClearListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 60
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.DisplayIndexToID(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.get_Item(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.CopyTo(Array dest, Int32 index)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.GetEnumerator()
+   at System.Windows.Forms.ListView.ListViewItemCollection.GetEnumerator()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.ClearListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 60
+
+
+ -------------- (14/06/2022 15:15:20) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+
+
+ -------------- (14/06/2022 15:27:12) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+
+
+ -------------- (14/06/2022 15:28:36) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+
+
+ -------------- (14/06/2022 15:28:45) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.DisplayIndexToID(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.get_Item(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.CopyTo(Array dest, Int32 index)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.GetEnumerator()
+   at System.Windows.Forms.ListView.ListViewItemCollection.GetEnumerator()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.ClearListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 60
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.DisplayIndexToID(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.get_Item(Int32 displayIndex)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.CopyTo(Array dest, Int32 index)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.GetEnumerator()
+   at System.Windows.Forms.ListView.ListViewItemCollection.GetEnumerator()
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.ClearListView() in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 60
+
+
+ -------------- (14/06/2022 15:28:46) --------------
+
+-Exception Type: System.InvalidOperationException
+-Exception Call Site: IntPtr get_Handle()
+-Exception Short Message: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+-Exception Long Message: System.InvalidOperationException: Cross-thread operation not valid: Control 'createdQuestions_ListView' accessed from a thread other than the thread it was created on.
+   at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+-Exception Stack Trace:    at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.ListView.InsertItemsNative(Int32 index, ListViewItem[] items)
+   at System.Windows.Forms.ListView.InsertItems(Int32 displayIndex, ListViewItem[] items, Boolean checkHosting)
+   at System.Windows.Forms.ListView.ListViewNativeItemCollection.Add(ListViewItem value)
+   at System.Windows.Forms.ListView.ListViewItemCollection.Add(ListViewItem value)
+   at SurveyQuestionsConfigurator.SurveyQuestionsConfiguratorForm.BuildListView(Object stateInfo) in C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\Forms\SurveyQuestionsConfiguratorForm.cs:line 110
+

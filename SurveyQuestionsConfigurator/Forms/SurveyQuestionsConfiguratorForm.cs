@@ -165,8 +165,7 @@ namespace SurveyQuestionsConfigurator
                 //Thread thr = new Thread(new ThreadStart(BuildListView));
                 //thr.Start();
                 //ThreadPool.QueueUserWorkItem(BuildListView);
-                BuildListView();
-
+                //BuildListView();
             }
             catch (Exception ex)
             {
@@ -306,10 +305,12 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 /// Rebuild List View when refresh button is pressed
-                BuildListView();
-                //ThreadPool.QueueUserWorkItem(BuildListView);
-                //Thread t = new Thread(BuildListView);
-                //t.IsBackground = true;
+                //BuildListView();
+                ThreadPool.QueueUserWorkItem(BuildListView);
+                //Thread t = new Thread(BuildListView)
+                //{
+                //    IsBackground = true
+                //};
                 //t.Start();
             }
             catch (Exception ex)

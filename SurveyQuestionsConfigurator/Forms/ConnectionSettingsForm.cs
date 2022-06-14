@@ -25,7 +25,6 @@ namespace SurveyQuestionsConfigurator
         #region Constructor
         public ConnectionSettingsForm()
         {
-
             try
             {
                 InitializeComponent();
@@ -38,6 +37,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }
+
         #endregion
 
         #region Event Handlers
@@ -130,6 +130,14 @@ namespace SurveyQuestionsConfigurator
         #endregion
 
         #region Validation methods
+
+        /// <summary>
+        /// Check connection string fields
+        /// </summary>
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
         private ErrorCode CheckConnectionStringInputFields(SqlConnectionStringBuilder pBuilder)
         {
             try
@@ -143,6 +151,7 @@ namespace SurveyQuestionsConfigurator
                 return ErrorCode.ERROR;
             }
         }
+
         #endregion
     }
 }

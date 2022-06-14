@@ -44,6 +44,7 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.createdQuestionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,7 +127,7 @@
             // 
             // closeApplicationButton
             // 
-            this.closeApplicationButton.Location = new System.Drawing.Point(537, 372);
+            this.closeApplicationButton.Location = new System.Drawing.Point(537, 382);
             this.closeApplicationButton.Name = "closeApplicationButton";
             this.closeApplicationButton.Size = new System.Drawing.Size(75, 23);
             this.closeApplicationButton.TabIndex = 9;
@@ -143,7 +144,7 @@
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
-            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 27);
+            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 37);
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
             this.createdQuestionsGroupBox.Size = new System.Drawing.Size(606, 339);
             this.createdQuestionsGroupBox.TabIndex = 10;
@@ -184,18 +185,29 @@
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label5.Location = new System.Drawing.Point(-5, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(637, 7);
+            this.label5.TabIndex = 13;
+            // 
             // SurveyQuestionsConfiguratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(621, 407);
+            this.ClientSize = new System.Drawing.Size(621, 441);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(637, 446);
             this.MinimumSize = new System.Drawing.Size(637, 446);
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -222,6 +234,7 @@
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.Label label5;
     }
 }
 

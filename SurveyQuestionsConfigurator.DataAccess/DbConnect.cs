@@ -193,15 +193,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <summary>
         /// Sets mSqlConnectionSettings to newest data
         /// </summary>
-        private void SetConnectionSettings()
+        private ErrorCode SetConnectionSettings()
         {
             try
             {
                 mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
+                return ErrorCode.SUCCESS;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
+                return ErrorCode.ERROR;
             }
         }
 
