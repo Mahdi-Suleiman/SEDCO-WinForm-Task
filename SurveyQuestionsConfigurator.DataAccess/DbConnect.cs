@@ -47,13 +47,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 using (SqlCommand cmd = pSqlConnection.CreateCommand())
                 {
-                    cmd.CommandText = $@"SELECT dbo.CheckIfOrderExist(@{QuestionColumn.Order})";
-
+                    cmd.CommandText = "dbo.CheckIfOrderExist";
+                    cmd.CommandType = CommandType.StoredProcedure;
                     SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.ReturnValue}", SqlDbType.Int),
                                 new SqlParameter($"{QuestionColumn.Order}", pOrder),
                             };
+                    parameters[0].Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.AddRange(parameters);
-                    return (ErrorCode)cmd.ExecuteScalar();
+
+                    cmd.ExecuteNonQuery();
+                    return (ErrorCode)parameters[0].Value;
                 }
             }
             catch (Exception ex)
@@ -78,13 +82,17 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 using (SqlCommand cmd = pSqlConnection.CreateCommand())
                 {
-                    cmd.CommandText = $@"SELECT dbo.GetIDFromOrder(@{QuestionColumn.Order})";
-
+                    cmd.CommandText = "dbo.GetIDFromOrder";
+                    cmd.CommandType = CommandType.StoredProcedure;
                     SqlParameter[] parameters = new SqlParameter[] {
+                                new SqlParameter($"{QuestionColumn.ReturnValue}", SqlDbType.Int),
                                 new SqlParameter($"{QuestionColumn.Order}", pOrder),
                             };
+                    parameters[0].Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.AddRange(parameters);
-                    return (int)cmd.ExecuteScalar();
+
+                    cmd.ExecuteNonQuery();
+                    return (int)parameters[0].Value;
                 }
             }
             catch (Exception ex)

@@ -33,7 +33,9 @@ namespace SurveyQuestionsConfigurator.Entities
             StartValue,
             EndValue,
             StartValueCaption,
-            EndValueCaption
+            EndValueCaption,
+            ReturnValue
+
         }
     }
 }
