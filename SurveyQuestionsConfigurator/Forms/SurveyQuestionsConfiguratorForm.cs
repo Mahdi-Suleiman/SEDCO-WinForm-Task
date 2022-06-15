@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,6 +41,14 @@ namespace SurveyQuestionsConfigurator
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
                 this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
+
+                //          MessageBox.Show(
+                //              //System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location).ToString()
+                //              //Application.ExecutablePath
+                //              //Application.StartupPath.ToString()
+                //              System.IO.Path.GetDirectoryName(
+                //System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
+                //              );
             }
             catch (Exception ex)
             {
@@ -104,15 +113,23 @@ namespace SurveyQuestionsConfigurator
 
                             ///Fill the list view
                             FillListView(tQuestionsList);
+                            break;
                         }
-                        break;
 
                     ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
                     default:
-                        string tOfflineMessage = "You're offilne, please try againt later\nOr contact your system adminstrator";
-                        errorLabel.Top = 309; /// Lift label up so text wont hide under group box control
-                        EnterOfflineMode(tOfflineMessage);
-                        break;
+                        {
+                            string tOfflineMessage = "You're offilne, please try againt later\nOr contact your system adminstrator";
+                            if (errorLabel.InvokeRequired)
+                            {
+                                errorLabel.Invoke(new Action(() =>
+                                {
+                                    errorLabel.Top = 309; /// Lift label up so text wont hide under group box control
+                                }));
+                            }
+                            EnterOfflineMode(tOfflineMessage);
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -159,14 +176,20 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                errorLabel.Text = pOfflineMeesage;
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        errorLabel.Text = pOfflineMeesage;
 
-                addQuestionButton.Enabled = false;
-                editQuestionButton.Enabled = false;
-                deleteQuestionButton.Enabled = false;
+                        addQuestionButton.Enabled = false;
+                        editQuestionButton.Enabled = false;
+                        deleteQuestionButton.Enabled = false;
 
-                ClearListView();
-                createdQuestions_ListView.Enabled = false;
+                        ClearListView();
+                        createdQuestions_ListView.Enabled = false;
+                    }));
+                }
             }
             catch (Exception ex)
             {
@@ -179,12 +202,19 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                errorLabel.Text = "";
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                        {
+                            errorLabel.Text = "";
 
-                createdQuestions_ListView.Enabled = true;
-                addQuestionButton.Enabled = true;
-                editQuestionButton.Enabled = true;
-                deleteQuestionButton.Enabled = true;
+                            createdQuestions_ListView.Enabled = true;
+                            addQuestionButton.Enabled = true;
+                            editQuestionButton.Enabled = true;
+                            deleteQuestionButton.Enabled = true;
+                        }));
+                }
+
             }
             catch (Exception ex)
             {

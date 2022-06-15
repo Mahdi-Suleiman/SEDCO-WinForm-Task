@@ -10,14 +10,22 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
 {
     public class Logger
     {
+        private static string mExeFolder = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        private static object mBalanceLock = new object();
+        private static object mBalanceLock2 = null;
+        public Logger()
+        {
+        }
         public static void LogError(Exception pEx)
         {
             try
             {
-                string exeFolder = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                using (StreamWriter sw = new StreamWriter($"{exeFolder}/logs/LogFile.txt", append: true))
+                /// lock file writing to prevent exception System.IO.IOException : The process cannot access the file 'LogFile.txt' because it is being used by another process
+                lock (mBalanceLock)
                 {
-                    sw.WriteLine($@"
+                    using (StreamWriter sw = new StreamWriter($"{mExeFolder}/logs/LogFile.txt", append: true))
+                    {
+                        sw.WriteLine($@"
  -------------- ({DateTime.Now}) --------------
 
 -Exception Type: {pEx.GetType()}
@@ -26,6 +34,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
 -Exception Long Message: {pEx}
 -Exception Stack Trace: {pEx.StackTrace}
 ");
+                    }
                 }
             }
             catch (Exception ex2)
@@ -39,10 +48,12 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
         {
             try
             {
-                string exeFolder = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                using (StreamWriter sw = new StreamWriter($"{exeFolder}/logs/LogFile.txt", append: true))
+                mBalanceLock2 = new object();
+                lock (mBalanceLock2)
                 {
-                    sw.WriteLine($@"
+                    using (StreamWriter sw = new StreamWriter($"{mExeFolder}/logs/LogFile.txt", append: true))
+                    {
+                        sw.WriteLine($@"
  -------------- ({DateTime.Now}) --------------
 
 -Exception Type: {pEx.GetType()}
@@ -51,6 +62,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
 -Exception Long Message: {pEx}
 -Exception Stack Trace: {pEx.StackTrace}
 ");
+                    }
                 }
             }
             catch
