@@ -35,7 +35,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 InitializeComponent();
-                EnterOfflineMode("");
+                EnterOfflineMode("Connecting...");
 
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
@@ -53,9 +53,10 @@ namespace SurveyQuestionsConfigurator
 
         public void ClearListView()
         {
+            /// Remove each row
             try
             {
-                /// Remove each row
+                /// Prevent Cross-thread operation exception
                 if (createdQuestions_ListView.InvokeRequired)
                 {
                     Action safeWrite = delegate { ClearListView(); };
@@ -81,19 +82,19 @@ namespace SurveyQuestionsConfigurator
             /// Connect to quesion table and fill the list view
             try
             {
-                ListViewItem listviewitem;/// Used for creating listview items.
-                List<Question> questionsList = new List<Question>();
+                List<Question> tQuestionsList = new List<Question>();
 
                 ///Size text column header to fit the text.
                 //this.createdQuestions_ListView.Columns[2].Width = -2;
 
-                ErrorCode result = mGeneralQuestionManager.GetAllQuestions(ref questionsList);
+                ErrorCode result = mGeneralQuestionManager.GetAllQuestions(ref tQuestionsList);
                 switch (result)
                 {
+                    ///If connectin to DB is SUCCESS -> Enable buttons and list view
                     case ErrorCode.SUCCESS:
                         {
-                            ///If connectin to DB is SUCCESS -> Enable buttons and list view
-                            if (!addQuestionButton.Enabled)
+                            /// Prevent EnterOnlineMode() everytime unless DB connection is down
+                            if (addQuestionButton.Enabled == false)
                             {
                                 EnterOnlineMode();
                             }
@@ -102,34 +103,15 @@ namespace SurveyQuestionsConfigurator
                             ClearListView();
 
                             ///Fill the list view
-                            foreach (Question q in questionsList)
-                            {
-                                /// Add id as a tag to Order column -> use it while it's hidden
-                                listviewitem = new ListViewItem($"{q.Order}");
-                                listviewitem.Tag = q.ID;
-                                listviewitem.SubItems.Add($"{(QuestionType)q.Type}");
-                                listviewitem.SubItems.Add($"{q.Text}");
-
-                                if (this.createdQuestions_ListView.InvokeRequired)
-                                {
-                                    Action safeWrite = delegate { BuildListView(); };
-                                    this.createdQuestions_ListView.Invoke(safeWrite);
-                                }
-                                else
-                                {
-                                    this.createdQuestions_ListView.Items.Add(listviewitem);
-                                }
-                            }
+                            FillListView(tQuestionsList);
                         }
                         break;
 
+                    ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
                     default:
-                        ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
-                        if (addQuestionButton.Enabled)
-                        {
-                            string tOfflineMessage = "You're offilne, please try againt later\nOr contact your system adminstrator";
-                            EnterOfflineMode(tOfflineMessage);
-                        }
+                        string tOfflineMessage = "You're offilne, please try againt later\nOr contact your system adminstrator";
+                        errorLabel.Top = 309; /// Lift label up so text wont hide under group box control
+                        EnterOfflineMode(tOfflineMessage);
                         break;
                 }
             }
@@ -139,27 +121,76 @@ namespace SurveyQuestionsConfigurator
             }
         } ///End Function.
 
+        private void FillListView(List<Question> pQuestionsList)
+        {
+            try
+            {
+                ListViewItem tListviewitem;/// Used for creating listview items.
+
+                foreach (Question q in pQuestionsList)
+                {
+                    /// Add id as a tag to Order column -> use it while it's hidden
+                    tListviewitem = new ListViewItem($"{q.Order}");
+                    tListviewitem.Tag = q.ID;
+                    tListviewitem.SubItems.Add($"{(QuestionType)q.Type}");
+                    tListviewitem.SubItems.Add($"{q.Text}");
+
+                    /// Prevent Cross-thread operation exception
+                    if (this.createdQuestions_ListView.InvokeRequired)
+                    {
+                        Action safeWrite = delegate { BuildListView(); };
+                        this.createdQuestions_ListView.Invoke(safeWrite);
+                    }
+                    else
+                    {
+                        this.createdQuestions_ListView.Items.Add(tListviewitem);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
+        }
+
         private void EnterOfflineMode(string pOfflineMeesage)
         {
-            errorLabel.Text = pOfflineMeesage;
+            try
+            {
+                errorLabel.Text = pOfflineMeesage;
 
-            addQuestionButton.Enabled = false;
-            editQuestionButton.Enabled = false;
-            deleteQuestionButton.Enabled = false;
+                addQuestionButton.Enabled = false;
+                editQuestionButton.Enabled = false;
+                deleteQuestionButton.Enabled = false;
 
-            ClearListView();
-            createdQuestions_ListView.Enabled = false;
+                ClearListView();
+                createdQuestions_ListView.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
         } ///End Function.
 
         private void EnterOnlineMode()
         {
-            errorLabel.Text = "";
+            try
+            {
+                errorLabel.Text = "";
 
-            createdQuestions_ListView.Enabled = true;
-            addQuestionButton.Enabled = true;
-            editQuestionButton.Enabled = true;
-            deleteQuestionButton.Enabled = true;
-
+                createdQuestions_ListView.Enabled = true;
+                addQuestionButton.Enabled = true;
+                editQuestionButton.Enabled = true;
+                deleteQuestionButton.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
         } ///End Function.
 
         #endregion

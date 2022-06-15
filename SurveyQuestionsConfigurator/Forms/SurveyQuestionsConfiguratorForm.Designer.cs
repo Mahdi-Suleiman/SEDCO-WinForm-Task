@@ -156,11 +156,12 @@
             this.errorLabel.AutoSize = true;
             this.errorLabel.BackColor = System.Drawing.Color.Transparent;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(87, 309);
+            this.errorLabel.Location = new System.Drawing.Point(87, 314);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(58, 13);
             this.errorLabel.TabIndex = 11;
             this.errorLabel.Text = "Error Label";
+            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuStrip1
             // 
