@@ -173,3 +173,24 @@ What is remaining to be done:
 
 -Multithreading to handel multi instance of the program
 -Documentation
+********************************************************
+Date : 14/06/2022
+What is accomplished today:
+-Fix UI bugs
+-Fix Change connection string reload issue
+-Read about threading
+
+What is remaining to be done:
+
+-Multithreading to handel multi instance of the program
+-Documentation
+********************************************************
+Date : 15/06/2022
+What is accomplished today:
+-Fix save connection string settings bug
+-Apply threading and fix bugs
+-Use "Lock" when writing on log file
+
+What is remaining to be done:
+
+-Documentation

@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [SurveyQuestionsConfigurator]    Script Date: 12/06/2022 12:20:36 ******/
+/****** Object:  Database [SurveyQuestionsConfigurator]    Script Date: 15/06/2022 20:28:01 ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'SurveyQuestionsConfigurator')
 BEGIN
 CREATE DATABASE [SurveyQuestionsConfigurator]
@@ -85,7 +85,7 @@ ALTER DATABASE [SurveyQuestionsConfigurator] SET QUERY_STORE = OFF
 GO
 USE [SurveyQuestionsConfigurator]
 GO
-/****** Object:  UserDefinedFunction [dbo].[CheckIfOrderExist]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  UserDefinedFunction [dbo].[CheckIfOrderExist]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +109,7 @@ END;
 ' 
 END
 GO
-/****** Object:  UserDefinedFunction [dbo].[GetIDFromOrder]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  UserDefinedFunction [dbo].[GetIDFromOrder]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -125,12 +125,12 @@ BEGIN
 	IF(@ID IS NOT NULL)
 		RETURN @ID
 
-	RETURN 0
+	RETURN -1
 END;
 ' 
 END
 GO
-/****** Object:  Table [dbo].[Questions]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  Table [dbo].[Questions]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -153,7 +153,7 @@ CREATE TABLE [dbo].[Questions](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Slider_Questions]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  Table [dbo].[Slider_Questions]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -173,7 +173,7 @@ CREATE TABLE [dbo].[Slider_Questions](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Smiley_Questions]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  Table [dbo].[Smiley_Questions]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -190,7 +190,7 @@ CREATE TABLE [dbo].[Smiley_Questions](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Star_Questions]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  Table [dbo].[Star_Questions]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -258,7 +258,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Star_Questions]') AND parent_object_id = OBJECT_ID(N'[dbo].[Star_Questions]'))
 ALTER TABLE [dbo].[Star_Questions] CHECK CONSTRAINT [CK_Star_Questions]
 GO
-/****** Object:  StoredProcedure [dbo].[INSERT_SLIDER_QUESTION]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  StoredProcedure [dbo].[INSERT_SLIDER_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -302,7 +302,7 @@ BEGIN CATCH
 	RETURN @ERROR
 END CATCH
 GO
-/****** Object:  StoredProcedure [dbo].[INSERT_SMILEY_QUESTION]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  StoredProcedure [dbo].[INSERT_SMILEY_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -344,7 +344,7 @@ BEGIN CATCH
 	RETURN @ERROR
 END CATCH
 GO
-/****** Object:  StoredProcedure [dbo].[INSERT_STAR_QUESTION]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  StoredProcedure [dbo].[INSERT_STAR_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -383,7 +383,7 @@ BEGIN CATCH
 	RETURN @ERROR
 END CATCH
 GO
-/****** Object:  StoredProcedure [dbo].[UPDATE_SLIDER_QUESTION]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  StoredProcedure [dbo].[UPDATE_SLIDER_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -431,7 +431,7 @@ BEGIN CATCH
 	RETURN @ERROR
 END CATCH
 GO
-/****** Object:  StoredProcedure [dbo].[UPDATE_SMILEY_QUESTION]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  StoredProcedure [dbo].[UPDATE_SMILEY_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -449,9 +449,6 @@ ALTER PROCEDURE [dbo].[UPDATE_SMILEY_QUESTION]
 @NumberOfSmileyFaces INT
 AS
 SET NOCOUNT ON
-
---DECLARE @@MyOrder as INT
---SET @@MyOrder = (SELECT [Order] FROM Questions WHERE ID = @ID)
 
 BEGIN TRY
 	DECLARE @SUCCESS INT, @ERROR INT
@@ -475,7 +472,7 @@ BEGIN CATCH
 	RETURN @ERROR
 END CATCH
 GO
-/****** Object:  StoredProcedure [dbo].[UPDATE_STAR_QUESTION]    Script Date: 12/06/2022 12:20:37 ******/
+/****** Object:  StoredProcedure [dbo].[UPDATE_STAR_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
