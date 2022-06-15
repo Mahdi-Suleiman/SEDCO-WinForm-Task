@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionSettingsForm));
             this.dataSourceTextBox = new System.Windows.Forms.TextBox();
             this.initialCatalogTextBox = new System.Windows.Forms.TextBox();
             this.userIDTextBox = new System.Windows.Forms.TextBox();
@@ -167,8 +168,11 @@
             this.Controls.Add(this.userIDTextBox);
             this.Controls.Add(this.initialCatalogTextBox);
             this.Controls.Add(this.dataSourceTextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ConnectionSettingsForm";
+            this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Connection Settings";
             this.Load += new System.EventHandler(this.ConnectionSettingsForm_Load);

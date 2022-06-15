@@ -214,6 +214,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Survey Questions Configurator";
             this.Activated += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Activated);
+            this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.createdQuestionsGroupBox.PerformLayout();
             this.ResumeLayout(false);

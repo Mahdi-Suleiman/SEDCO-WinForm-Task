@@ -41,16 +41,21 @@ namespace SurveyQuestionsConfigurator
         #endregion
 
         #region Event Handlers
+
+        /// <summary>
+        /// Get current connecion string details and fill the form with it
+        /// </summary>
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
             try
             {
                 mBuilder = mSettingsManager.GetConnectionString();
 
-                dataSourceTextBox.Text = mBuilder.DataSource;
-                initialCatalogTextBox.Text = mBuilder.InitialCatalog;
-                userIDTextBox.Text = mBuilder.UserID;
-                passwordTextBox.Text = mBuilder.Password;
+                //dataSourceTextBox.Text = mBuilder.DataSource;
+                //initialCatalogTextBox.Text = mBuilder.InitialCatalog;
+                //userIDTextBox.Text = mBuilder.UserID;
+                //passwordTextBox.Text = mBuilder.Password;
+                FillFormWithConnectionStringBuilderData();
             }
             catch (Exception ex)
             {
@@ -59,6 +64,10 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Close the form
+        /// </summary>
+        /// <param name="sender"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
             try
@@ -77,10 +86,12 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 mBuilder.Clear();
-                mBuilder.DataSource = dataSourceTextBox.Text.ToString();
-                mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
-                mBuilder.UserID = userIDTextBox.Text.ToString();
-                mBuilder.Password = passwordTextBox.Text.ToString();
+
+                //mBuilder.DataSource = dataSourceTextBox.Text.ToString();
+                //mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
+                //mBuilder.UserID = userIDTextBox.Text.ToString();
+                //mBuilder.Password = passwordTextBox.Text.ToString();
+                FillConnectionStringBuilderFields();
 
                 if (CheckConnectionStringInputFields(mBuilder) == ErrorCode.SUCCESS)
                 {
@@ -110,10 +121,11 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                mBuilder.DataSource = dataSourceTextBox.Text.ToString();
-                mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
-                mBuilder.UserID = userIDTextBox.Text.ToString();
-                mBuilder.Password = passwordTextBox.Text.ToString();
+                //mBuilder.DataSource = dataSourceTextBox.Text.ToString();
+                //mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
+                //mBuilder.UserID = userIDTextBox.Text.ToString();
+                //mBuilder.Password = passwordTextBox.Text.ToString();
+                FillConnectionStringBuilderFields();
 
                 ErrorCode isSaved = mSettingsManager.SaveConnectionString(mBuilder);
                 if (isSaved == ErrorCode.SUCCESS)
@@ -154,6 +166,42 @@ namespace SurveyQuestionsConfigurator
                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
+            }
+        }
+
+        #endregion
+
+        #region General Methods
+
+        public void FillConnectionStringBuilderFields()
+        {
+            try
+            {
+                mBuilder.DataSource = dataSourceTextBox.Text.ToString();
+                mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
+                mBuilder.UserID = userIDTextBox.Text.ToString();
+                mBuilder.Password = passwordTextBox.Text.ToString();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        public void FillFormWithConnectionStringBuilderData()
+        {
+            try
+            {
+                dataSourceTextBox.Text = mBuilder.DataSource;
+                initialCatalogTextBox.Text = mBuilder.InitialCatalog;
+                userIDTextBox.Text = mBuilder.UserID;
+                passwordTextBox.Text = mBuilder.Password;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
             }
         }
 

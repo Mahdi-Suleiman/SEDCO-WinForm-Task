@@ -22,12 +22,8 @@ namespace SurveyQuestionsConfigurator
     {
         #region Properties & Attributes
 
-        /// <summary>
-        /// Used for sorting listview columns on click
-        /// </summary>
-        private readonly ListViewColumnSorter mListViewColumnSorter;
+        private readonly ListViewColumnSorter mListViewColumnSorter; /// Used for sorting listview columns on click
         private readonly QuestionManager mGeneralQuestionManager;
-
         #endregion
 
         #region Constructor
@@ -41,14 +37,6 @@ namespace SurveyQuestionsConfigurator
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
                 this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
-
-                //          MessageBox.Show(
-                //              //System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location).ToString()
-                //              //Application.ExecutablePath
-                //              //Application.StartupPath.ToString()
-                //              System.IO.Path.GetDirectoryName(
-                //System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
-                //              );
             }
             catch (Exception ex)
             {
@@ -60,6 +48,9 @@ namespace SurveyQuestionsConfigurator
 
         #region Methods
 
+        /// <summary>
+        /// Clear list view by deleting all of it's rows
+        /// </summary>
         public void ClearListView()
         {
             /// Remove each row
@@ -85,7 +76,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        /// Build list view when needed (on ADD, EDIT, ...etc)
+        /// <summary>
+        /// Refill list view with data when needed (on Add, Edit, Refresh, ...etc)
+        /// </summary>
+        /// <param name="stateInfo">
+        /// Essential for allowing threads to call this function
+        /// </param>
         public void BuildListView(Object stateInfo = null)
         {
             /// Connect to quesion table and fill the list view
@@ -138,6 +134,9 @@ namespace SurveyQuestionsConfigurator
             }
         } ///End Function.
 
+        ///<summary>
+        /// Fill list view with passed data
+        /// </summary>
         private void FillListView(List<Question> pQuestionsList)
         {
             try
@@ -172,6 +171,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Set the form into offline mode where user can't do any action that can interact with DB except changing the connection settings
+        /// </summary>
+        /// <param name="pOfflineMeesage">
+        /// Pass message to be displayed to error label
+        /// </param>
         private void EnterOfflineMode(string pOfflineMeesage)
         {
             try
@@ -190,14 +195,28 @@ namespace SurveyQuestionsConfigurator
                         createdQuestions_ListView.Enabled = false;
                     }));
                 }
+                else
+                {
+                    errorLabel.Text = pOfflineMeesage;
+
+                    addQuestionButton.Enabled = false;
+                    editQuestionButton.Enabled = false;
+                    deleteQuestionButton.Enabled = false;
+
+                    ClearListView();
+                    createdQuestions_ListView.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
+                throw; /// Throw error to show it on a higher level function
             }
         } ///End Function.
 
+        ///<summary>
+        /// Reset Form to online mode where the user can interact with it normally
+        /// </summary>
         private void EnterOnlineMode()
         {
             try
@@ -205,21 +224,30 @@ namespace SurveyQuestionsConfigurator
                 if (this.InvokeRequired)
                 {
                     this.Invoke(new Action(() =>
-                        {
-                            errorLabel.Text = "";
+                    {
+                        errorLabel.Text = "";
 
-                            createdQuestions_ListView.Enabled = true;
-                            addQuestionButton.Enabled = true;
-                            editQuestionButton.Enabled = true;
-                            deleteQuestionButton.Enabled = true;
-                        }));
+                        createdQuestions_ListView.Enabled = true;
+                        addQuestionButton.Enabled = true;
+                        editQuestionButton.Enabled = true;
+                        deleteQuestionButton.Enabled = true;
+                    }));
+                }
+                else
+                {
+                    errorLabel.Text = "";
+
+                    createdQuestions_ListView.Enabled = true;
+                    addQuestionButton.Enabled = true;
+                    editQuestionButton.Enabled = true;
+                    deleteQuestionButton.Enabled = true;
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
+                throw; /// Throw error to show it on a higher level function
             }
         } ///End Function.
 
@@ -233,7 +261,6 @@ namespace SurveyQuestionsConfigurator
                 /// Build List View on load
                 //BuildListView();
                 //ThreadPool.QueueUserWorkItem(BuildListView);
-
             }
             catch (Exception ex)
             {
@@ -457,6 +484,25 @@ namespace SurveyQuestionsConfigurator
         }///End event 
 
         /// <summary>
+        /// Show change connection string settings form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
+                connectionSettingsForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError(ex);
+            }
+        }
+
+        /// <summary>
         /// Handle close button click
         /// </summary>
         private void closeApplicationButton_Click(object sender, EventArgs e)
@@ -471,50 +517,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }///End event 
-
-         /// <summary>
-         /// Handle close button click
-         /// </summary>
-        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-            }
-        }
         #endregion
 
-        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
-                connectionSettingsForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-            }
-        }
-
-        private void settingsButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
-                connectionSettingsForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.LogError(ex);
-            }
-        }
     }
 }

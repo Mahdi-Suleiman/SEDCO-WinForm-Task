@@ -303,9 +303,12 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.typeOfQuestionGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(399, 471);
             this.MinimumSize = new System.Drawing.Size(399, 471);
             this.Name = "AddQuestionForm";
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Add a question";
             this.Load += new System.EventHandler(this.AddQuestionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
