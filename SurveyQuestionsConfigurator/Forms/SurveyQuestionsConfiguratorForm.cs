@@ -35,11 +35,10 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 InitializeComponent();
+                EnterOfflineMode("");
 
                 mGeneralQuestionManager = new QuestionManager();
-
-                /// Create an instance of a ListView column sorter and assign itto the ListView control.
-                mListViewColumnSorter = new ListViewColumnSorter();
+                mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
                 this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
             }
             catch (Exception ex)
@@ -57,9 +56,17 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 /// Remove each row
-                foreach (ListViewItem item in createdQuestions_ListView.Items)
+                if (createdQuestions_ListView.InvokeRequired)
                 {
-                    item.Remove();
+                    Action safeWrite = delegate { ClearListView(); };
+                    createdQuestions_ListView.Invoke(safeWrite);
+                }
+                else
+                {
+                    foreach (ListViewItem item in createdQuestions_ListView.Items)
+                    {
+                        item.Remove();
+                    }
                 }
             }
             catch (Exception ex)
@@ -88,12 +95,7 @@ namespace SurveyQuestionsConfigurator
                             ///If connectin to DB is SUCCESS -> Enable buttons and list view
                             if (!addQuestionButton.Enabled)
                             {
-                                createdQuestions_ListView.Enabled = true;
-                                addQuestionButton.Enabled = true;
-                                editQuestionButton.Enabled = true;
-                                deleteQuestionButton.Enabled = true;
-
-                                errorLabel.Visible = false;
+                                EnterOnlineMode();
                             }
 
                             /// Remove each row
@@ -107,24 +109,26 @@ namespace SurveyQuestionsConfigurator
                                 listviewitem.Tag = q.ID;
                                 listviewitem.SubItems.Add($"{(QuestionType)q.Type}");
                                 listviewitem.SubItems.Add($"{q.Text}");
-                                this.createdQuestions_ListView.Items.Add(listviewitem);
+
+                                if (this.createdQuestions_ListView.InvokeRequired)
+                                {
+                                    Action safeWrite = delegate { BuildListView(); };
+                                    this.createdQuestions_ListView.Invoke(safeWrite);
+                                }
+                                else
+                                {
+                                    this.createdQuestions_ListView.Items.Add(listviewitem);
+                                }
                             }
                         }
                         break;
 
                     default:
-                        ///If connectin to DB is not SUCCESS -> Disable buttons and list view
+                        ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
                         if (addQuestionButton.Enabled)
                         {
-                            ClearListView();
-
-                            addQuestionButton.Enabled = false;
-                            editQuestionButton.Enabled = false;
-                            deleteQuestionButton.Enabled = false;
-
-                            errorLabel.Visible = true;
-                            errorLabel.Text = "You're Offilne, Please Try Againt Later";
-                            createdQuestions_ListView.Enabled = false;
+                            string tOfflineMessage = "You're offilne, please try againt later\nOr contact your system adminstrator";
+                            EnterOfflineMode(tOfflineMessage);
                         }
                         break;
                 }
@@ -133,6 +137,29 @@ namespace SurveyQuestionsConfigurator
             {
                 Logger.LogError(ex); ///write error to log file
             }
+        } ///End Function.
+
+        private void EnterOfflineMode(string pOfflineMeesage)
+        {
+            errorLabel.Text = pOfflineMeesage;
+
+            addQuestionButton.Enabled = false;
+            editQuestionButton.Enabled = false;
+            deleteQuestionButton.Enabled = false;
+
+            ClearListView();
+            createdQuestions_ListView.Enabled = false;
+        } ///End Function.
+
+        private void EnterOnlineMode()
+        {
+            errorLabel.Text = "";
+
+            createdQuestions_ListView.Enabled = true;
+            addQuestionButton.Enabled = true;
+            editQuestionButton.Enabled = true;
+            deleteQuestionButton.Enabled = true;
+
         } ///End Function.
 
         #endregion
@@ -164,8 +191,8 @@ namespace SurveyQuestionsConfigurator
             {
                 //Thread thr = new Thread(new ThreadStart(BuildListView));
                 //thr.Start();
-                //ThreadPool.QueueUserWorkItem(BuildListView);
                 //BuildListView();
+                ThreadPool.QueueUserWorkItem(BuildListView);
             }
             catch (Exception ex)
             {
@@ -273,14 +300,16 @@ namespace SurveyQuestionsConfigurator
                         switch (result)
                         {
                             case ErrorCode.SUCCESS:
-                                BuildListView();
-                                //ThreadPool.QueueUserWorkItem(BuildListView);
+                                //BuildListView();
+                                ThreadPool.QueueUserWorkItem(BuildListView);
                                 break;
-                            case ErrorCode.SQL_VIOLATION:
-                                MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
+
                             case ErrorCode.ERROR:
                                 MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+
+                            default:
+                                MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
                     }

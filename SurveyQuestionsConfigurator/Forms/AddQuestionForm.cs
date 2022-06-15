@@ -42,6 +42,7 @@ namespace SurveyQuestionsConfigurator
                 mGeneralQuestionManager = new QuestionManager();
                 this.Text = "Add A Question";
                 cStateForm = FormStateType.ADD;
+                errorLabel.Text = "";
             }
             catch (Exception ex)
             {
@@ -60,11 +61,9 @@ namespace SurveyQuestionsConfigurator
                 InitializeComponent();
                 mGeneralQuestionManager = new QuestionManager();
                 this.Text = "Edit A Question";
-
                 cStateForm = FormStateType.EDIT;
-
+                errorLabel.Text = "";
                 mGenericQuestion = pQuestion;
-
                 questionTypeComboBox.Enabled = false;
 
                 if (pQuestion.Type == QuestionType.SMILEY)
@@ -476,13 +475,13 @@ namespace SurveyQuestionsConfigurator
                     switch (tResult)
                     {
                         case ErrorCode.SUCCESS:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            orderLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = "Question order already in use\nTry using another one";
                             break;
                         case ErrorCode.ERROR:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
@@ -530,13 +529,13 @@ namespace SurveyQuestionsConfigurator
                     switch (tResult)
                     {
                         case ErrorCode.SUCCESS:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            orderLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = "Question order already in use\nTry using another one";
                             break;
                         case ErrorCode.ERROR:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
@@ -583,13 +582,13 @@ namespace SurveyQuestionsConfigurator
                     switch (tResult)
                     {
                         case ErrorCode.SUCCESS:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            orderLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = "Question order already in use\nTry using another one";
                             break;
                         case ErrorCode.ERROR:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                             break;
                     }
@@ -637,13 +636,13 @@ namespace SurveyQuestionsConfigurator
                     switch (tResult)
                     {
                         case ErrorCode.SUCCESS:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            orderLabel.Text = "Order already in use\nTry using another one";
+                            errorLabel.Text = "Order already in use\nTry using another one";
                             break;
                         case ErrorCode.ERROR:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                             break;
                     }
@@ -694,13 +693,13 @@ namespace SurveyQuestionsConfigurator
                         switch (tResult)
                         {
                             case ErrorCode.SUCCESS:
-                                orderLabel.Text = "";
+                                errorLabel.Text = "";
                                 return ErrorCode.SUCCESS;
                             case ErrorCode.SQL_VIOLATION:
-                                orderLabel.Text = "Question order already in use\nTry using another one";
+                                errorLabel.Text = "Question order already in use\nTry using another one";
                                 break;
                             case ErrorCode.ERROR:
-                                orderLabel.Text = "";
+                                errorLabel.Text = "";
                                 MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                                 break;
                         }
@@ -752,13 +751,13 @@ namespace SurveyQuestionsConfigurator
                     switch (result)
                     {
                         case ErrorCode.SUCCESS:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            orderLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = "Question order already in use\nTry using another one";
                             break;
                         case ErrorCode.ERROR:
-                            orderLabel.Text = "";
+                            errorLabel.Text = "";
                             MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                             break;
                     }

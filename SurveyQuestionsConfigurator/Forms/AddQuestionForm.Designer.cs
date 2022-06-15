@@ -30,6 +30,7 @@
         {
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.smilyQuestionDetailsGroupBox = new System.Windows.Forms.GroupBox();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.questionTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.questionOrderLabel = new System.Windows.Forms.Label();
             this.questionTextLabel = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.questionTypeComboBox = new System.Windows.Forms.ComboBox();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.orderLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.smilyQuestionDetailsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.questionOrderNumericUpDown)).BeginInit();
@@ -68,7 +68,7 @@
             // 
             // smilyQuestionDetailsGroupBox
             // 
-            this.smilyQuestionDetailsGroupBox.Controls.Add(this.orderLabel);
+            this.smilyQuestionDetailsGroupBox.Controls.Add(this.errorLabel);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionTextRichTextBox);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionOrderLabel);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionTextLabel);
@@ -87,6 +87,18 @@
             this.smilyQuestionDetailsGroupBox.TabIndex = 7;
             this.smilyQuestionDetailsGroupBox.TabStop = false;
             this.smilyQuestionDetailsGroupBox.Text = "Question Details";
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(137, 39);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(53, 13);
+            this.errorLabel.TabIndex = 20;
+            this.errorLabel.Text = "error label";
             // 
             // questionTextRichTextBox
             // 
@@ -279,17 +291,6 @@
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // orderLabel
-            // 
-            this.orderLabel.AutoSize = true;
-            this.orderLabel.BackColor = System.Drawing.Color.Transparent;
-            this.orderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.orderLabel.ForeColor = System.Drawing.Color.Red;
-            this.orderLabel.Location = new System.Drawing.Point(137, 39);
-            this.orderLabel.Name = "orderLabel";
-            this.orderLabel.Size = new System.Drawing.Size(0, 13);
-            this.orderLabel.TabIndex = 20;
-            // 
             // AddQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,6 +338,6 @@
         private System.Windows.Forms.ComboBox questionTypeComboBox;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Label orderLabel;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
