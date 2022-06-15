@@ -158,7 +158,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                 //mSqlConnectionSettings = tConfig.ConnectionStrings.ConnectionStrings[0];
                 ConfigurationManager.RefreshSection(tSectionName);
-                SetConnectionSettings();
+                UpdateConnectionSettings();
                 return ErrorCode.SUCCESS;
             }
             catch (Exception ex)
@@ -193,7 +193,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <summary>
         /// Sets mSqlConnectionSettings to newest data
         /// </summary>
-        private ErrorCode SetConnectionSettings()
+        private ErrorCode UpdateConnectionSettings()
         {
             try
             {
@@ -703,7 +703,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 using (SqlConnection sqlConnection = new SqlConnection())
                 {
-                    SetConnectionSettings();
+                    UpdateConnectionSettings();
                     sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
 

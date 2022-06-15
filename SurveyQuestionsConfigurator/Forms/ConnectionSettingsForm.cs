@@ -110,6 +110,11 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mBuilder.DataSource = dataSourceTextBox.Text.ToString();
+                mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
+                mBuilder.UserID = userIDTextBox.Text.ToString();
+                mBuilder.Password = passwordTextBox.Text.ToString();
+
                 ErrorCode isSaved = mSettingsManager.SaveConnectionString(mBuilder);
                 if (isSaved == ErrorCode.SUCCESS)
                 {
