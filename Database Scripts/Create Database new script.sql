@@ -5,84 +5,9 @@ IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'SurveyQuestionsConf
 BEGIN
 CREATE DATABASE [SurveyQuestionsConfigurator]
  CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'SurveyQuestionsConfigurator', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\SurveyQuestionsConfigurator.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'SurveyQuestionsConfigurator_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\SurveyQuestionsConfigurator_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT
 END
 GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET COMPATIBILITY_LEVEL = 150
-GO
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [SurveyQuestionsConfigurator].[dbo].[sp_fulltext_database] @action = 'enable'
-end
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_NULL_DEFAULT OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_NULLS OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_PADDING OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ANSI_WARNINGS OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ARITHABORT OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_CLOSE OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_SHRINK OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_UPDATE_STATISTICS ON 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET CURSOR_CLOSE_ON_COMMIT OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET CURSOR_DEFAULT  GLOBAL 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET CONCAT_NULL_YIELDS_NULL OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET NUMERIC_ROUNDABORT OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET QUOTED_IDENTIFIER OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET RECURSIVE_TRIGGERS OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET  ENABLE_BROKER 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET DATE_CORRELATION_OPTIMIZATION OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET TRUSTWORTHY OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ALLOW_SNAPSHOT_ISOLATION OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET PARAMETERIZATION SIMPLE 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET READ_COMMITTED_SNAPSHOT OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET HONOR_BROKER_PRIORITY OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET RECOVERY FULL 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET  MULTI_USER 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET PAGE_VERIFY CHECKSUM  
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET DB_CHAINING OFF 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET TARGET_RECOVERY_TIME = 60 SECONDS 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET DELAYED_DURABILITY = DISABLED 
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET ACCELERATED_DATABASE_RECOVERY = OFF  
-GO
-EXEC sys.sp_db_vardecimal_storage_format N'SurveyQuestionsConfigurator', N'ON'
-GO
-ALTER DATABASE [SurveyQuestionsConfigurator] SET QUERY_STORE = OFF
-GO
+
 USE [SurveyQuestionsConfigurator]
 GO
 /****** Object:  UserDefinedFunction [dbo].[CheckIfOrderExist]    Script Date: 15/06/2022 20:28:01 ******/
@@ -90,9 +15,10 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CheckIfOrderExist]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 BEGIN
-execute dbo.sp_executesql @statement = N'CREATE FUNCTION [dbo].[CheckIfOrderExist] (@ORDER INT)
+CREATE FUNCTION [dbo].[CheckIfOrderExist] (@ORDER INT)
 RETURNS INT
 AS
 BEGIN
@@ -106,7 +32,6 @@ BEGIN
 
 	RETURN @SQL_VIOLATION
 END;
-' 
 END
 GO
 /****** Object:  UserDefinedFunction [dbo].[GetIDFromOrder]    Script Date: 15/06/2022 20:28:01 ******/
@@ -116,7 +41,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetIDFromOrder]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 BEGIN
-execute dbo.sp_executesql @statement = N'CREATE FUNCTION [dbo].[GetIDFromOrder] (@ORDER INT)
+CREATE FUNCTION [dbo].[GetIDFromOrder] (@ORDER INT)
 RETURNS INT
 AS
 BEGIN
@@ -126,8 +51,7 @@ BEGIN
 		RETURN @ID
 
 	RETURN -1
-END;
-' 
+END
 END
 GO
 /****** Object:  Table [dbo].[Questions]    Script Date: 15/06/2022 20:28:01 ******/
@@ -135,6 +59,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Questions]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Questions](
@@ -145,14 +70,15 @@ CREATE TABLE [dbo].[Questions](
  CONSTRAINT [PK_Questions_1] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+),
  CONSTRAINT [UniqueOrder_Questions] UNIQUE NONCLUSTERED 
 (
 	[Order] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)
 ) ON [PRIMARY]
 END
 GO
+
 /****** Object:  Table [dbo].[Slider_Questions]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -169,7 +95,7 @@ CREATE TABLE [dbo].[Slider_Questions](
  CONSTRAINT [IX_Slider_Questions] UNIQUE NONCLUSTERED 
 (
 	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)
 ) ON [PRIMARY]
 END
 GO
@@ -186,10 +112,11 @@ CREATE TABLE [dbo].[Smiley_Questions](
  CONSTRAINT [IX_Smiley_Questions] UNIQUE NONCLUSTERED 
 (
 	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)
 ) ON [PRIMARY]
 END
 GO
+
 /****** Object:  Table [dbo].[Star_Questions]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -203,7 +130,7 @@ CREATE TABLE [dbo].[Star_Questions](
  CONSTRAINT [IX_Star_Questions] UNIQUE NONCLUSTERED 
 (
 	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH 
 ) ON [PRIMARY]
 END
 GO
@@ -258,6 +185,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Star_Questions]') AND parent_object_id = OBJECT_ID(N'[dbo].[Star_Questions]'))
 ALTER TABLE [dbo].[Star_Questions] CHECK CONSTRAINT [CK_Star_Questions]
 GO
+
 /****** Object:  StoredProcedure [dbo].[INSERT_SLIDER_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -265,9 +193,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[INSERT_SLIDER_QUESTION]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[INSERT_SLIDER_QUESTION] AS' 
-END
-GO
 ALTER PROCEDURE [dbo].[INSERT_SLIDER_QUESTION]
 @Order INT,
 @Text NVARCHAR(4000),
@@ -301,7 +226,9 @@ BEGIN CATCH
 	SELECT @ERROR AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage
 	RETURN @ERROR
 END CATCH
+END
 GO
+
 /****** Object:  StoredProcedure [dbo].[INSERT_SMILEY_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -309,9 +236,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[INSERT_SMILEY_QUESTION]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[INSERT_SMILEY_QUESTION] AS' 
-END
-GO
+
 ALTER PROCEDURE [dbo].[INSERT_SMILEY_QUESTION]
 @ORDER INT,
 @TEXT NVARCHAR(4000),
@@ -343,7 +268,9 @@ BEGIN CATCH
 	SELECT @ERROR AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage
 	RETURN @ERROR
 END CATCH
+END
 GO
+
 /****** Object:  StoredProcedure [dbo].[INSERT_STAR_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -351,9 +278,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[INSERT_STAR_QUESTION]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[INSERT_STAR_QUESTION] AS' 
-END
-GO
 ALTER PROCEDURE [dbo].[INSERT_STAR_QUESTION]
 @ORDER INT,
 @TEXT NVARCHAR(4000),
@@ -382,7 +306,9 @@ BEGIN CATCH
 	SELECT @ERROR AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage
 	RETURN @ERROR
 END CATCH
+END
 GO
+
 /****** Object:  StoredProcedure [dbo].[UPDATE_SLIDER_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -390,9 +316,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UPDATE_SLIDER_QUESTION]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UPDATE_SLIDER_QUESTION] AS' 
-END
-GO
 ALTER PROCEDURE [dbo].[UPDATE_SLIDER_QUESTION]
 @ID INT,
 @Order INT,
@@ -430,7 +353,9 @@ BEGIN CATCH
 	SELECT @ERROR AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage
 	RETURN @ERROR
 END CATCH
+END
 GO
+
 /****** Object:  StoredProcedure [dbo].[UPDATE_SMILEY_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
 GO
@@ -438,9 +363,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UPDATE_SMILEY_QUESTION]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UPDATE_SMILEY_QUESTION] AS' 
-END
-GO
 ALTER PROCEDURE [dbo].[UPDATE_SMILEY_QUESTION]
 @ID INT,
 @Order INT,
@@ -471,6 +393,8 @@ BEGIN CATCH
 	SELECT @ERROR AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage
 	RETURN @ERROR
 END CATCH
+END
+
 GO
 /****** Object:  StoredProcedure [dbo].[UPDATE_STAR_QUESTION]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON
@@ -479,9 +403,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UPDATE_STAR_QUESTION]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UPDATE_STAR_QUESTION] AS' 
-END
-GO
 ALTER PROCEDURE [dbo].[UPDATE_STAR_QUESTION]
 @ID INT,
 @Order INT,
@@ -512,6 +433,7 @@ BEGIN CATCH
 	SELECT @ERROR AS ErrorCode, ERROR_MESSAGE() AS ErrorMessage
 	RETURN @ERROR
 END CATCH
+END
 GO
 IF NOT EXISTS (SELECT * FROM sys.fn_listextendedproperty(N'MS_Description' , N'SCHEMA',N'dbo', N'TABLE',N'Slider_Questions', N'CONSTRAINT',N'CK_Slider_Questions'))
 	EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Check if start value is at least 1

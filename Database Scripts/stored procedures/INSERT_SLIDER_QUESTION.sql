@@ -2,10 +2,7 @@ ALTER PROCEDURE INSERT_SLIDER_QUESTION
 @Order INT,
 @Text NVARCHAR(4000),
 @Type INT,
-@StartValue INT,
-@EndValue INT,
-@StartValueCaption nvarchar(100),
-@EndValueCaption nvarchar(100)
+
 AS
 SET NOCOUNT ON
 
