@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.Entities;
+using SurveyQuestionsConfigurator.QuestionLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -17,6 +19,10 @@ namespace SurveyQuestionsConfigurator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Form form = new SurveyQuestionsConfiguratorForm();
+            //QuestionMonitor qm = new QuestionMonitor();
+            //qm.Subscribe((IObserver<Question>)form);
+
             Application.Run(new SurveyQuestionsConfiguratorForm());
         }
     }

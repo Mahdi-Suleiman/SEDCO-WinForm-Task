@@ -11,14 +11,52 @@ using static SurveyQuestionsConfigurator.Entities.Generic;
 
 namespace SurveyQuestionsConfigurator.QuestionLogic
 {
-    public class QuestionManager
+    public class QuestionManager : IObservable<Question>
     {
+
+        #region Observable
+
+        List<IObserver<Question>> mObservers;
+
+        private class Unsubscriber : IDisposable
+        {
+            private List<IObserver<Question>> tObservers;
+            private IObserver<Question> tObserver;
+
+            public Unsubscriber(List<IObserver<Question>> pObservers, IObserver<Question> pObserver)
+            {
+                this.tObservers = pObservers;
+                this.tObserver = pObserver;
+            }
+
+            public void Dispose()
+            {
+                if (!(tObserver == null)) tObservers.Remove(tObserver);
+            }
+        }
+        public IDisposable Subscribe(IObserver<Question> pObserver)
+        {
+            if (!mObservers.Contains(pObserver))
+                mObservers.Add(pObserver);
+
+            return new Unsubscriber(mObservers, pObserver);
+        }
+
+        public void Refresh(List<Question> pQuestionList, List<Question> pChachedList)
+        {
+            foreach (var tObserver in mObservers)
+            {
+                tObserver.OnNext(new Question(-1));
+            }
+        }
+        #endregion
+
         private SmileyQuestionRepository mSmileyQuestionRepository;
         private SliderQuestionRepository mSliderQuestionRepository;
         private StarQuestionRepository mStarQuestionRepository;
         private GenericRepository mRepository;
-        private static QuestionMonitor mQuestionMonitor;
-        private List<Question> mCachedList;
+        //private static QuestionMonitor mQuestionMonitor;
+        private static List<Question> mCachedList;
 
 
         public QuestionManager()
@@ -29,8 +67,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 mSliderQuestionRepository = new SliderQuestionRepository();
                 mStarQuestionRepository = new StarQuestionRepository();
                 mRepository = new GenericRepository();
-                mQuestionMonitor = new QuestionMonitor();
+                //mQuestionMonitor = new QuestionMonitor();
                 mCachedList = new List<Question>();
+                mObservers = new List<IObserver<Question>>();
             }
             catch (Exception ex)
             {
@@ -312,14 +351,17 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             try
             {
                 var returnValue = mRepository.GetAll(ref pQuestionsList);
-                if (!pQuestionsList.SequenceEqual(mCachedList))
+                lock (mCachedList)
                 {
-                    mQuestionMonitor.Refresh(pQuestionsList);
-                    mCachedList.Clear();
-                    mCachedList.AddRange(pQuestionsList);
+                    //if (!pQuestionsList.SequenceEqual(mCachedList))
+                    if (pQuestionsList.Count != mCachedList.Count)
+                    {
+                        mCachedList.Clear();
+                        mCachedList.AddRange(pQuestionsList);
+                        Refresh(pQuestionsList, mCachedList);
+                    }
+                    return returnValue;
                 }
-
-                return returnValue;
                 //return mRepository.GetAll(ref pQuestionsList);
             }
             catch (Exception ex)

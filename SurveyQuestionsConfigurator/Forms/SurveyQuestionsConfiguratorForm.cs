@@ -46,7 +46,8 @@ namespace SurveyQuestionsConfigurator
 
         public virtual void OnNext(Question value)
         {
-            ThreadPool.QueueUserWorkItem(BuildListView);
+            //ThreadPool.QueueUserWorkItem(BuildListView);
+            BuildListView();
 
             //Console.WriteLine("The temperature is {0}°C at {1:g}", value.Degrees, value.Date);
             //if (first)
@@ -69,7 +70,7 @@ namespace SurveyQuestionsConfigurator
         private readonly ListViewColumnSorter mListViewColumnSorter; /// Used for sorting listview columns on click
         private readonly QuestionManager mGeneralQuestionManager;
 
-        private readonly QuestionMonitor mGeneralQuestionMonitor; /// Provider object
+        //private readonly QuestionMonitor mGeneralQuestionMonitor; /// Provider object
         #endregion
 
         #region Constructor
@@ -80,10 +81,11 @@ namespace SurveyQuestionsConfigurator
                 InitializeComponent();
                 EnterOfflineMode("Connecting...");
 
-                mGeneralQuestionMonitor = new QuestionMonitor();
-                mGeneralQuestionMonitor.Subscribe(this);
+                //mGeneralQuestionMonitor.Subscribe(this);
 
                 mGeneralQuestionManager = new QuestionManager();
+                mGeneralQuestionManager.Subscribe(this);
+
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
                 this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
             }
@@ -203,7 +205,7 @@ namespace SurveyQuestionsConfigurator
                     /// Prevent Cross-thread operation exception
                     if (this.createdQuestions_ListView.InvokeRequired)
                     {
-                        Action safeWrite = delegate { BuildListView(); };
+                        Action safeWrite = delegate { FillListView(pQuestionsList); };
                         this.createdQuestions_ListView.Invoke(safeWrite);
                     }
                     else
@@ -329,7 +331,7 @@ namespace SurveyQuestionsConfigurator
                 //Thread thr = new Thread(new ThreadStart(BuildListView));
                 //thr.Start();
                 //BuildListView();
-                ThreadPool.QueueUserWorkItem(BuildListView);
+                //ThreadPool.QueueUserWorkItem(BuildListView);
             }
             catch (Exception ex)
             {
@@ -439,7 +441,7 @@ namespace SurveyQuestionsConfigurator
                         {
                             case ErrorCode.SUCCESS:
                                 //BuildListView();
-                                ThreadPool.QueueUserWorkItem(BuildListView);
+                                //ThreadPool.QueueUserWorkItem(BuildListView); comment
                                 break;
 
                             case ErrorCode.ERROR:
@@ -473,7 +475,8 @@ namespace SurveyQuestionsConfigurator
             {
                 /// Rebuild List View when refresh button is pressed
                 //BuildListView();
-                ThreadPool.QueueUserWorkItem(BuildListView);
+                //ThreadPool.QueueUserWorkItem(BuildListView);
+                OnNext(new Question(-1));
                 //Thread t = new Thread(BuildListView)
                 //{
                 //    IsBackground = true
