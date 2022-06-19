@@ -3,6 +3,8 @@ using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -57,6 +59,15 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         private GenericRepository mRepository;
         //private static QuestionMonitor mQuestionMonitor;
         private static List<Question> mCachedList;
+        //private static ObservableCollection<Question> mCachedList;
+
+        private void listChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            foreach (var tObserver in mObservers)
+            {
+                tObserver.OnNext(new Question(-1));
+            }
+        }
 
 
         public QuestionManager()
@@ -70,6 +81,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 //mQuestionMonitor = new QuestionMonitor();
                 mCachedList = new List<Question>();
                 mObservers = new List<IObserver<Question>>();
+
             }
             catch (Exception ex)
             {
@@ -92,6 +104,12 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             {
                 if (CheckSmileyQuestionValues(pSmileyQuestion) == ErrorCode.SUCCESS)
                 {
+                    var returnValue = mSmileyQuestionRepository.Add(pSmileyQuestion);
+
+                    mCachedList.Clear();
+                    mCachedList.Add(pSmileyQuestion);
+
+                    return returnValue;
                     return mSmileyQuestionRepository.Add(pSmileyQuestion);
                 }
                 else
@@ -356,8 +374,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                     //if (!pQuestionsList.SequenceEqual(mCachedList))
                     if (pQuestionsList.Count != mCachedList.Count)
                     {
-                        mCachedList.Clear();
-                        mCachedList.AddRange(pQuestionsList);
+                        //mCachedList.Clear();
+                        //mCachedList.
+                        //mCachedList.AddRange((ObservableCollection<Question>)pQuestionsList);
                         Refresh(pQuestionsList, mCachedList);
                     }
                     return returnValue;
@@ -508,5 +527,32 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
         #endregion
 
+    }
+
+    class ChachedListClass
+    {
+        private static List<Question> mChachedList;
+
+        public ChachedListClass()
+        {
+            mChachedList = new List<Question>();
+        }
+        public ChachedListClass(List<Question> pQuestionList)
+        {
+            mChachedList = new List<Question>();
+            mChachedList.AddRange(pQuestionList);
+        }
+
+        public void Add(Question pQuestion)
+        {
+            mChachedList.Add(pQuestion);
+            ThresholdReached?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void AddRange(List<Question> pSourceList)
+        {
+            mChachedList.AddRange(pSourceList);
+        }
+        public static event EventHandler ThresholdReached;
     }
 }
