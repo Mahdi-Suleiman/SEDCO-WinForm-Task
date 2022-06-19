@@ -13,10 +13,30 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class QuestionManager
     {
-        SmileyQuestionRepository mSmileyQuestionRepository = new SmileyQuestionRepository();
-        SliderQuestionRepository mSliderQuestionRepository = new SliderQuestionRepository();
-        StarQuestionRepository mStarQuestionRepository = new StarQuestionRepository();
-        GenericRepository mRepository = new GenericRepository();
+        private SmileyQuestionRepository mSmileyQuestionRepository;
+        private SliderQuestionRepository mSliderQuestionRepository;
+        private StarQuestionRepository mStarQuestionRepository;
+        private GenericRepository mRepository;
+        private static QuestionMonitor mQuestionMonitor;
+        private List<Question> mCachedList;
+
+
+        public QuestionManager()
+        {
+            try
+            {
+                mSmileyQuestionRepository = new SmileyQuestionRepository();
+                mSliderQuestionRepository = new SliderQuestionRepository();
+                mStarQuestionRepository = new StarQuestionRepository();
+                mRepository = new GenericRepository();
+                mQuestionMonitor = new QuestionMonitor();
+                mCachedList = new List<Question>();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+        }
 
         #region Add Question Functions
         /// <summary>
@@ -287,11 +307,20 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// ErrorCode.ERROR
         /// ErrorCode.SQL_VIOLATION
         /// </returns>
-        public ErrorCode GetAllQuestions(ref List<Question> questionsList)
+        public ErrorCode GetAllQuestions(ref List<Question> pQuestionsList)
         {
             try
             {
-                return mRepository.GetAll(ref questionsList);
+                var returnValue = mRepository.GetAll(ref pQuestionsList);
+                if (!pQuestionsList.SequenceEqual(mCachedList))
+                {
+                    mQuestionMonitor.Refresh(pQuestionsList);
+                    mCachedList.Clear();
+                    mCachedList.AddRange(pQuestionsList);
+                }
+
+                return returnValue;
+                //return mRepository.GetAll(ref pQuestionsList);
             }
             catch (Exception ex)
             {
@@ -436,5 +465,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         } /// Function end
 
         #endregion
+
     }
 }

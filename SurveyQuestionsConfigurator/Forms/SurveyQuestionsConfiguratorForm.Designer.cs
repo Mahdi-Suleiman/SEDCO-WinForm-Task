@@ -177,7 +177,7 @@
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.settingsButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.settingsButton.ForeColor = System.Drawing.Color.Transparent;
-            this.settingsButton.Location = new System.Drawing.Point(6, 3);
+            this.settingsButton.Location = new System.Drawing.Point(589, 3);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(23, 21);
             this.settingsButton.TabIndex = 12;

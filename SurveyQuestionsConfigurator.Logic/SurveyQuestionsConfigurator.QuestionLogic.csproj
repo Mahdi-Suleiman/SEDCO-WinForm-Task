@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="QuestionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionMonitor.cs" />
+    <Compile Include="QuestionReporter.cs" />
     <Compile Include="SettingsManager.cs" />
   </ItemGroup>
   <ItemGroup>

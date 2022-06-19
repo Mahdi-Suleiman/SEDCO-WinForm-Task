@@ -18,12 +18,58 @@ using static SurveyQuestionsConfigurator.Entities.Generic;
 
 namespace SurveyQuestionsConfigurator
 {
-    public partial class SurveyQuestionsConfiguratorForm : Form
+    public partial class SurveyQuestionsConfiguratorForm : Form, IObserver<Question>
     {
+        #region Observer properties & Methods
+
+        private IDisposable mUnsubscriber;
+
+        public virtual void Subscribe(IObservable<Question> provider)
+        {
+            mUnsubscriber = provider.Subscribe(this);
+        }
+        public virtual void Unsubscribe()
+        {
+            mUnsubscriber.Dispose();
+        }
+
+        public virtual void OnCompleted()
+        {
+            //Console.WriteLine("Additional temperature data will not be transmitted.");
+            this.Unsubscribe();
+        }
+
+        public virtual void OnError(Exception error)
+        {
+            // Do nothing.
+        }
+
+        public virtual void OnNext(Question value)
+        {
+            ThreadPool.QueueUserWorkItem(BuildListView);
+
+            //Console.WriteLine("The temperature is {0}°C at {1:g}", value.Degrees, value.Date);
+            //if (first)
+            //{
+            //    last = value;
+            //    first = false;
+            //}
+            //else
+            //{
+            //    Console.WriteLine("   Change: {0}° in {1:g}", value.Degrees - last.Degrees,
+            //                                                  value.Date.ToUniversalTime() - last.Date.ToUniversalTime());
+            //}
+        }
+
+
+        #endregion
+
         #region Properties & Attributes
 
         private readonly ListViewColumnSorter mListViewColumnSorter; /// Used for sorting listview columns on click
         private readonly QuestionManager mGeneralQuestionManager;
+
+        private readonly QuestionMonitor mGeneralQuestionMonitor; /// Provider object
         #endregion
 
         #region Constructor
@@ -33,6 +79,9 @@ namespace SurveyQuestionsConfigurator
             {
                 InitializeComponent();
                 EnterOfflineMode("Connecting...");
+
+                mGeneralQuestionMonitor = new QuestionMonitor();
+                mGeneralQuestionMonitor.Subscribe(this);
 
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
@@ -335,6 +384,7 @@ namespace SurveyQuestionsConfigurator
             {
                 AddQuestionForm addQuestionForm = new AddQuestionForm();
                 addQuestionForm.ShowDialog(this);
+
             }
             catch (Exception ex)
             {

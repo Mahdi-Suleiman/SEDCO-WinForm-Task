@@ -17,13 +17,13 @@ namespace SurveyQuestionsConfigurator.DataAccess
     {
         ///get tSqlConnection string information from App.config
         private ConnectionStringSettings mSqlConnectionSettings;
+        private static List<Question> mCachedQuestionList;
         public DbConnect()
         {
             try
             {
                 mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
-                SqlDependency.Start(mSqlConnectionSettings.ConnectionString);
-
+                mCachedQuestionList = new List<Question>();
             }
             catch (Exception ex)
             {
@@ -276,7 +276,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -347,7 +347,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -415,7 +415,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         }/// Function end
 
@@ -492,7 +492,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
 
         }/// Function end
@@ -568,7 +568,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -640,7 +640,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -674,14 +674,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         };
                         cmd.Parameters.AddRange(parameters);
 
-                        return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR;
+                        return cmd.ExecuteNonQuery() > 0 ? ErrorCode.SUCCESS : ErrorCode.ERROR;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
 
         } /// Function end
@@ -731,19 +731,26 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             Question q = new Question(tID, tOrder, tText, tType);
                             pQuestionsList.Add(q);
                         }
-                        return pQuestionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+
+                        if (pQuestionsList.Count >= 0)
+                        {
+                            mCachedQuestionList.AddRange(pQuestionsList);
+                            return ErrorCode.SUCCESS;
+                        }
+
+                        return ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
+                return ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -796,19 +803,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             pSmileyQuestion = new SmileyQuestion(tID, tOrder, tText, tType, tNumberOfSmileyFaces);
                         }
 
-                        return pSmileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+                        return pSmileyQuestion.NumberOfSmileyFaces >= 0 ? ErrorCode.SUCCESS : ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
+                return ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -868,19 +875,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 tStartValue, tEndValue, tStartValueCaption, tEndValueCaption);
                         }
 
-                        return pSliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+                        return pSliderQuestion.StartValue >= 0 ? ErrorCode.SUCCESS : ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
+                return ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
         } /// Function end
 
@@ -936,19 +943,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             pStarQuestion = new StarQuestion(tID, tOrder, tText, tType, tNumberOfStars);
                         }
 
-                        return pStarQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+                        return pStarQuestion.NumberOfStars >= 0 ? ErrorCode.SUCCESS : ErrorCode.ERROR; /// RETURN INT32
                     }
                 }
             }
             catch (SqlException ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
+                return ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return ErrorCode.ERROR;
             }
 
         } /// Function end
