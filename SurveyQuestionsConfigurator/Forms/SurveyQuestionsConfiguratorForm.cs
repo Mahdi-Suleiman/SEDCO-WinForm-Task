@@ -110,7 +110,7 @@ namespace SurveyQuestionsConfigurator
         /// <param name="stateInfo">
         /// Essential for allowing threads to call this function
         /// </param>
-        public void BuildListView(Object stateInfo)
+        public void BuildListView(Object stateInfo = null)
         {
             /// Connect to quesion table and fill the list view
             try
@@ -177,12 +177,13 @@ namespace SurveyQuestionsConfigurator
                     tListviewitem = new ListViewItem($"{q.Order}");
                     tListviewitem.Tag = q.ID;
                     tListviewitem.SubItems.Add($"{(QuestionType)q.Type}");
+                    tListviewitem.SubItems[0].Tag = q.Type;
                     tListviewitem.SubItems.Add($"{q.Text}");
 
                     /// Prevent Cross-thread operation exception
                     if (this.createdQuestions_ListView.InvokeRequired)
                     {
-                        Action safeWrite = delegate { FillListView(pQuestionsList); };
+                        Action safeWrite = delegate { BuildListView(); };
                         this.createdQuestions_ListView.Invoke(safeWrite);
                     }
                     else
