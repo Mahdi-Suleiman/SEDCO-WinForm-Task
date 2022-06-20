@@ -91,9 +91,9 @@ namespace SurveyQuestionsConfigurator {
         ///   Looks up a localized string similar to Something wrong happened
         ///Please try again or contact your system administrator.
         /// </summary>
-        internal static string contactSystemAdministrator {
+        internal static string contactSystemAdministratorError {
             get {
-                return ResourceManager.GetString("contactSystemAdministrator", resourceCulture);
+                return ResourceManager.GetString("contactSystemAdministratorError", resourceCulture);
             }
         }
         
@@ -137,9 +137,9 @@ namespace SurveyQuestionsConfigurator {
         ///   Looks up a localized string similar to Something wrong happened
         ///please try again.
         /// </summary>
-        internal static string somethingWrongHappened {
+        internal static string somethingWrongHappenedError {
             get {
-                return ResourceManager.GetString("somethingWrongHappened", resourceCulture);
+                return ResourceManager.GetString("somethingWrongHappenedError", resourceCulture);
             }
         }
         
@@ -147,9 +147,9 @@ namespace SurveyQuestionsConfigurator {
         ///   Looks up a localized string similar to You&apos;re offilne, please try againt later
         ///Or contact your system adminstrator.
         /// </summary>
-        internal static string youAreOffilne {
+        internal static string youAreOffilneError {
             get {
-                return ResourceManager.GetString("youAreOffilne", resourceCulture);
+                return ResourceManager.GetString("youAreOffilneError", resourceCulture);
             }
         }
     }

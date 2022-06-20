@@ -31,6 +31,9 @@ namespace SurveyQuestionsConfigurator
             EDIT
         }
 
+        /// <summary>
+        /// All translatable message box messages in the "AddQuestionFormStrings" resource file
+        /// </summary>
         private enum ResourceStrings
         {
             numberOfSmileyFaces,
@@ -480,7 +483,7 @@ namespace SurveyQuestionsConfigurator
         #region Add Question Methods
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to h5h (Busineess Logic Layer)
+        /// Create a question object and pass to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertSmileyQuestion()
         {
@@ -532,7 +535,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to h5h (Busineess Logic Layer)
+        /// Create a question object and pass to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertSliderQuestion()
         {
@@ -586,7 +589,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to h5h (Busineess Logic Layer)
+        /// Create a question object and pass to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertStarQuestion()
         {
@@ -641,7 +644,7 @@ namespace SurveyQuestionsConfigurator
         #region Edit Question Methods
         /// <summary>
         /// Handle editing a question
-        /// Create a question object and pass to h5h (Busineess Logic Layer)
+        /// Create a question object and pass to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode UpdateSmileyQuestion()
         {
@@ -693,7 +696,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle editing a question
-        /// Create a question object and pass to h5h (Busineess Logic Layer)
+        /// Create a question object and pass to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode UpdateSliderQuestion()
         {
@@ -748,7 +751,7 @@ namespace SurveyQuestionsConfigurator
 
         /// <summary>
         /// Handle editing a question
-        /// Create a question object and pass to h5h (Busineess Logic Layer)
+        /// Create a question object and pass to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode UpdateStarQuestion()
         {
@@ -855,6 +858,12 @@ namespace SurveyQuestionsConfigurator
 
         #region Generic Methods
 
+        ///<summary>
+        /// Custom methods to show message box dialog
+        /// </summary>
+        /// <returns>
+        /// DialogResult
+        /// </returns>
         private DialogResult ShowMessageBox(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon)
         {
             return MessageBox.Show(mLocalResourceManager.GetString(pText), mLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, mDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);

@@ -126,7 +126,7 @@
   <data name="connecting" xml:space="preserve">
     <value>Connecting...</value>
   </data>
-  <data name="contactSystemAdministrator" xml:space="preserve">
+  <data name="contactSystemAdministratorError" xml:space="preserve">
     <value>Something wrong happened
 Please try again or contact your system administrator</value>
   </data>
@@ -142,11 +142,11 @@ Please try again or contact your system administrator</value>
   <data name="pleaseSelectAnItemFirst" xml:space="preserve">
     <value>Please select an item first</value>
   </data>
-  <data name="somethingWrongHappened" xml:space="preserve">
+  <data name="somethingWrongHappenedError" xml:space="preserve">
     <value>Something wrong happened
 please try again</value>
   </data>
-  <data name="youAreOffilne" xml:space="preserve">
+  <data name="youAreOffilneError" xml:space="preserve">
     <value>You're offilne, please try againt later
 Or contact your system adminstrator</value>
   </data>

@@ -126,8 +126,9 @@
   <data name="connecting" xml:space="preserve">
     <value>جارِ الاتصال...</value>
   </data>
-  <data name="contactSystemAdministrator" xml:space="preserve">
-    <value>حدث خطأ ما\nالرجاء المحاولة مرة أخرى أو الاتصال بمسؤول النظام</value>
+  <data name="contactSystemAdministratorError" xml:space="preserve">
+    <value>حدث خطأ ما
+الرجاء المحاولة مرة أخرى أو الاتصال بمسؤول النظام</value>
   </data>
   <data name="emptyString" xml:space="preserve">
     <value />
@@ -141,11 +142,11 @@
   <data name="pleaseSelectAnItemFirst" xml:space="preserve">
     <value>الرجاء اختيار سؤال اولًا</value>
   </data>
-  <data name="somethingWrongHappened" xml:space="preserve">
+  <data name="somethingWrongHappenedError" xml:space="preserve">
     <value>حدث خطأ ما
 الرجاء المحاولة مرة أخرى</value>
   </data>
-  <data name="youAreOffilne" xml:space="preserve">
+  <data name="youAreOffilneError" xml:space="preserve">
     <value>أنت غير متصل ، الرجاء المحاولة مرة أخرى لاحقًا
 أو اتصل بمسؤول النظام</value>
   </data>
