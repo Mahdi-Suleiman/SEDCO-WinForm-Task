@@ -59,7 +59,8 @@ namespace SurveyQuestionsConfigurator
                 mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.SurvayQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
 
                 InitializeComponent();
-                EnterOfflineMode(mLocalResourceManager.GetString("connecting"));
+
+                EnterOfflineMode(mLocalResourceManager.GetString($"{ResourceStrings.connecting}"));
 
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
@@ -109,7 +110,7 @@ namespace SurveyQuestionsConfigurator
         /// <param name="stateInfo">
         /// Essential for allowing threads to call this function
         /// </param>
-        public void BuildListView(Object stateInfo = null)
+        public void BuildListView(Object stateInfo)
         {
             /// Connect to quesion table and fill the list view
             try
@@ -181,7 +182,7 @@ namespace SurveyQuestionsConfigurator
                     /// Prevent Cross-thread operation exception
                     if (this.createdQuestions_ListView.InvokeRequired)
                     {
-                        Action safeWrite = delegate { BuildListView(); };
+                        Action safeWrite = delegate { FillListView(pQuestionsList); };
                         this.createdQuestions_ListView.Invoke(safeWrite);
                     }
                     else

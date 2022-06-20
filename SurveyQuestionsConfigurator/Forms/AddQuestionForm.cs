@@ -17,7 +17,7 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class AddQuestionForm : Form
     {
-        #region Properties
+        #region Properties & Attributes
 
         private readonly QuestionManager mGeneralQuestionManager;
         private readonly ResourceManager mLocalResourceManager;
@@ -63,12 +63,13 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mGeneralQuestionManager = new QuestionManager();
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
-                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.AddQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.AddQuestionFormStrings", typeof(AddQuestionForm).Assembly);
+
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
 
                 InitializeComponent();
-                mGeneralQuestionManager = new QuestionManager();
                 this.Text = mLocalResourceManager.GetString($"{ResourceStrings.addAQuestion}");
                 cStateForm = FormStateType.ADD;
                 errorLabel.Text = "";

@@ -22,7 +22,11 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, pDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);
+                if (pDefaultCulture.ToString() == "ar-JO")
+                {
+                    return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+                }
+                return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon);
             }
             catch (Exception ex)
             {

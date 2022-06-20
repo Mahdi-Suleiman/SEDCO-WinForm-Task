@@ -70,6 +70,16 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error happened while saving settings
+        ///Please try again.
+        /// </summary>
+        internal static string errorSavingSettings {
+            get {
+                return ResourceManager.GetString("errorSavingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Something wrong happened
         ///please try again.
         /// </summary>

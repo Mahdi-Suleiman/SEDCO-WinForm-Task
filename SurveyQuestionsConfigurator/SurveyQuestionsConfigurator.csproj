@@ -164,6 +164,9 @@
     <EmbeddedResource Include="Forms\SurveyQuestionsConfiguratorForm.resx">
       <DependentUpon>SurveyQuestionsConfiguratorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LangaugeSettingsForm.ar-JO.resx">
+      <DependentUpon>LangaugeSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LangaugeSettingsForm.resx">
       <DependentUpon>LangaugeSettingsForm.cs</DependentUpon>
     </EmbeddedResource>

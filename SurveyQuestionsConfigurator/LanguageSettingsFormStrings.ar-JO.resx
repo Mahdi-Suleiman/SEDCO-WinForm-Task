@@ -120,6 +120,10 @@
   <data name="error" xml:space="preserve">
     <value>حدث خطأ</value>
   </data>
+  <data name="errorSavingSettings" xml:space="preserve">
+    <value>حدث خطأ أثناء حفظ الإعدادات
+الرجاء المحاولة مرة اخرى</value>
+  </data>
   <data name="somethingWrongHappenedError" xml:space="preserve">
     <value>حدث خطأ ما
 الرجاء المحاولة مرة أخرى أو الاتصال بمسؤول النظام</value>

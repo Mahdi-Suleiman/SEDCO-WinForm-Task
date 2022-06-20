@@ -20,13 +20,16 @@ namespace SurveyQuestionsConfigurator
 {
     public partial class ConnectionSettingsForm : Form
     {
-        #region Properties
+        #region Properties & Attributes
 
         private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
         private SqlConnectionStringBuilder mBuilder;
-        private readonly SettingsManager mSettingsManager;
+        private readonly ConnectionSettingsManager mConnectionSettingsManager;
 
+        /// <summary>
+        /// All translatable message box messages in the "ConnectionSettingsFormStrings" resource file
+        /// </summary>
         private enum ResourceStrings
         {
             somethingWrongHappenedError,
@@ -44,13 +47,14 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.ConnectinSettingsFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+                mBuilder = new SqlConnectionStringBuilder();
+                mConnectionSettingsManager = new ConnectionSettingsManager();
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.ConnectinSettingsFormStrings", typeof(ConnectionSettingsForm).Assembly);
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
 
                 InitializeComponent();
-                mBuilder = new SqlConnectionStringBuilder();
-                mSettingsManager = new SettingsManager();
             }
             catch (Exception ex)
             {
@@ -70,9 +74,9 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                mBuilder = mSettingsManager.GetConnectionString();
+                mBuilder = mConnectionSettingsManager.GetConnectionString();
 
-                FillFormWithConnectionStringBuilderData();
+                LoadCurrentConnectionStringSettings();
             }
             catch (Exception ex)
             {
@@ -106,7 +110,7 @@ namespace SurveyQuestionsConfigurator
 
                 if (CheckConnectionStringInputFields(mBuilder) == ErrorCode.SUCCESS)
                 {
-                    if (mSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS)
+                    if (mConnectionSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS)
                     {
                         ShowMessage.Box($"{ResourceStrings.testConnectionSucceeded}", $"{ResourceStrings.success}", MessageBoxButtons.OK, MessageBoxIcon.Information, mLocalResourceManager, mDefaultCulture);
                     }
@@ -134,7 +138,7 @@ namespace SurveyQuestionsConfigurator
             {
                 FillConnectionStringBuilderFields();
 
-                ErrorCode isSaved = mSettingsManager.SaveConnectionString(mBuilder);
+                ErrorCode isSaved = mConnectionSettingsManager.SaveConnectionString(mBuilder);
                 if (isSaved == ErrorCode.SUCCESS)
                 {
                     this.Close();
@@ -166,7 +170,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                return mSettingsManager.CheckConnectionStringInputFields(pBuilder);
+                return mConnectionSettingsManager.CheckConnectionStringInputFields(pBuilder);
             }
             catch (Exception ex)
             {
@@ -196,7 +200,7 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        public void FillFormWithConnectionStringBuilderData()
+        public void LoadCurrentConnectionStringSettings()
         {
             try
             {
