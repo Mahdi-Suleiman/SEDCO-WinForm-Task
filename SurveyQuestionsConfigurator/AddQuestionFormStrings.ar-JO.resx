@@ -117,36 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="areYouSureToDeleteThisItem" xml:space="preserve">
-    <value>هل انت متأكد من حذف هذا السؤال ؟؟</value>
+  <data name="addAQuestion" xml:space="preserve">
+    <value>إضافة سؤال</value>
   </data>
-  <data name="confirmDelete" xml:space="preserve">
-    <value>تأكيد الحذف</value>
+  <data name="contactSystemAdministratorError" xml:space="preserve">
+    <value>حدث خطأ ما
+الرجاء المحاولة مرة أخرى أو الاتصال بمسؤول النظام</value>
   </data>
-  <data name="connecting" xml:space="preserve">
-    <value>جارِ الاتصال...</value>
+  <data name="editAQuestion" xml:space="preserve">
+    <value>تعديل السؤال</value>
   </data>
-  <data name="contactSystemAdministrator" xml:space="preserve">
-    <value>حدث خطأ ما\nالرجاء المحاولة مرة أخرى أو الاتصال بمسؤول النظام</value>
-  </data>
-  <data name="emptyString" xml:space="preserve">
-    <value />
+  <data name="endValueCaption" xml:space="preserve">
+    <value>عنوان القيمة النهائية</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>خطأ</value>
   </data>
-  <data name="noItemSelected" xml:space="preserve">
-    <value>لم يتم تحديد اي سؤال</value>
+  <data name="genericQuestionError" xml:space="preserve">
+    <value>لا يمكن للنص ان يكون فارغًا</value>
   </data>
-  <data name="pleaseSelectAnItemFirst" xml:space="preserve">
-    <value>الرجاء اختيار سؤال اولًا</value>
+  <data name="numberOfSmileyFaces" xml:space="preserve">
+    <value>عدد الوجوه المبتسمة (2-5):</value>
   </data>
-  <data name="somethingWrongHappened" xml:space="preserve">
+  <data name="numberOfStars" xml:space="preserve">
+    <value>عدد النجوم (1-10):</value>
+  </data>
+  <data name="questionOrderAlreadyInUseError" xml:space="preserve">
+    <value>هذا الترتيب قيد الاستخدام بالفعل
+حاول استخدام ترتيب آخر</value>
+  </data>
+  <data name="questionWasNotFoundOrDeletedError" xml:space="preserve">
+    <value>لم يتم العثور على السؤال أو ثد تم حذفه
+قم بتحديث القائمة وحاول مرة أخرى</value>
+  </data>
+  <data name="sliderEndValue" xml:space="preserve">
+    <value>القيمة النهاية لشريط التمرير (2-100):</value>
+  </data>
+  <data name="sliderQuestionError" xml:space="preserve">
+    <value>نص السؤال
+عنوان القيمة البدائية
+عنوان القيمة النهائية
+لا يجوز ان يكونوا فارغيين
+
+تأكد من أن القيمة النهاية لشريط التمرير أكبر من القيمة البدائية لشريط التمرير</value>
+  </data>
+  <data name="sliderStartValue" xml:space="preserve">
+    <value>القيمة البدائية لشريط التمرير (1-99):</value>
+  </data>
+  <data name="somethingWrongHappenedError" xml:space="preserve">
     <value>حدث خطأ ما
 الرجاء المحاولة مرة أخرى</value>
   </data>
-  <data name="youAreOffilne" xml:space="preserve">
-    <value>أنت غير متصل ، الرجاء المحاولة مرة أخرى لاحقًا
-أو اتصل بمسؤول النظام</value>
+  <data name="startValueCaption" xml:space="preserve">
+    <value>عنوان القيمة البدائية</value>
   </data>
 </root>

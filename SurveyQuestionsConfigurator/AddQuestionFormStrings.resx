@@ -117,36 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="areYouSureToDeleteThisItem" xml:space="preserve">
-    <value>هل انت متأكد من حذف هذا السؤال ؟؟</value>
+  <data name="addAQuestion" xml:space="preserve">
+    <value>Add A Question</value>
   </data>
-  <data name="confirmDelete" xml:space="preserve">
-    <value>تأكيد الحذف</value>
+  <data name="contactSystemAdministratorError" xml:space="preserve">
+    <value>Something wrong happened
+Please try again or contact your system administrator</value>
   </data>
-  <data name="connecting" xml:space="preserve">
-    <value>جارِ الاتصال...</value>
+  <data name="editAQuestion" xml:space="preserve">
+    <value>Edit A Question</value>
   </data>
-  <data name="contactSystemAdministrator" xml:space="preserve">
-    <value>حدث خطأ ما\nالرجاء المحاولة مرة أخرى أو الاتصال بمسؤول النظام</value>
-  </data>
-  <data name="emptyString" xml:space="preserve">
-    <value />
+  <data name="endValueCaption" xml:space="preserve">
+    <value>End Value Caption:</value>
   </data>
   <data name="error" xml:space="preserve">
-    <value>خطأ</value>
+    <value>Error</value>
   </data>
-  <data name="noItemSelected" xml:space="preserve">
-    <value>لم يتم تحديد اي سؤال</value>
+  <data name="genericQuestionError" xml:space="preserve">
+    <value>Question text can NOT be empty</value>
   </data>
-  <data name="pleaseSelectAnItemFirst" xml:space="preserve">
-    <value>الرجاء اختيار سؤال اولًا</value>
+  <data name="numberOfSmileyFaces" xml:space="preserve">
+    <value>Number Of Smiley Faces (2 - 5):</value>
   </data>
-  <data name="somethingWrongHappened" xml:space="preserve">
-    <value>حدث خطأ ما
-الرجاء المحاولة مرة أخرى</value>
+  <data name="numberOfStars" xml:space="preserve">
+    <value>Number Of Stars (1 - 10):</value>
   </data>
-  <data name="youAreOffilne" xml:space="preserve">
-    <value>أنت غير متصل ، الرجاء المحاولة مرة أخرى لاحقًا
-أو اتصل بمسؤول النظام</value>
+  <data name="questionOrderAlreadyInUseError" xml:space="preserve">
+    <value>Question order already in use
+Try using another one</value>
+  </data>
+  <data name="questionWasNotFoundOrDeletedError" xml:space="preserve">
+    <value>Question was not found or deleted
+Refresh the list and try again</value>
+  </data>
+  <data name="sliderEndValue" xml:space="preserve">
+    <value>Slider End Value (2 - 100):</value>
+  </data>
+  <data name="sliderQuestionError" xml:space="preserve">
+    <value>Question text
+Start Value caption
+End Value caption
+Can NOT be empty
+
+Make sure that end value is larger than start value</value>
+  </data>
+  <data name="sliderStartValue" xml:space="preserve">
+    <value>Slider Start Value (1 - 99):</value>
+  </data>
+  <data name="somethingWrongHappenedError" xml:space="preserve">
+    <value>Something wrong happened
+please try again</value>
+  </data>
+  <data name="startValueCaption" xml:space="preserve">
+    <value>Start Value Caption:</value>
   </data>
 </root>

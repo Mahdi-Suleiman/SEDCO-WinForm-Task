@@ -61,15 +61,6 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add A Question.
-        /// </summary>
-        internal static string addAQuestion {
-            get {
-                return ResourceManager.GetString("addAQuestion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Are you sure to delete this item ??.
         /// </summary>
         internal static string areYouSureToDeleteThisItem {
@@ -107,29 +98,11 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit A Question.
-        /// </summary>
-        internal static string editAQuestion {
-            get {
-                return ResourceManager.GetString("editAQuestion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string emptyString {
             get {
                 return ResourceManager.GetString("emptyString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to End Value Caption:.
-        /// </summary>
-        internal static string endValueCaption {
-            get {
-                return ResourceManager.GetString("endValueCaption", resourceCulture);
             }
         }
         
@@ -152,57 +125,11 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number Of Smiley Faces (2 - 5):.
-        /// </summary>
-        internal static string numberOfSmileyFaces {
-            get {
-                return ResourceManager.GetString("numberOfSmileyFaces", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number Of Stars (1 - 10):.
-        /// </summary>
-        internal static string numberOfStars {
-            get {
-                return ResourceManager.GetString("numberOfStars", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please select an item first.
         /// </summary>
         internal static string pleaseSelectAnItemFirst {
             get {
                 return ResourceManager.GetString("pleaseSelectAnItemFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Question order already in use
-        ///Try using another one.
-        /// </summary>
-        internal static string questionOrderAlreadyInUseError {
-            get {
-                return ResourceManager.GetString("questionOrderAlreadyInUseError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Slider End Value (2 - 100):.
-        /// </summary>
-        internal static string sliderEnd_Value {
-            get {
-                return ResourceManager.GetString("sliderEnd Value", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Slider Start Value (1 - 99):.
-        /// </summary>
-        internal static string sliderStartValue {
-            get {
-                return ResourceManager.GetString("sliderStartValue", resourceCulture);
             }
         }
         
@@ -213,15 +140,6 @@ namespace SurveyQuestionsConfigurator {
         internal static string somethingWrongHappened {
             get {
                 return ResourceManager.GetString("somethingWrongHappened", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start Value Caption:.
-        /// </summary>
-        internal static string startValueCaption {
-            get {
-                return ResourceManager.GetString("startValueCaption", resourceCulture);
             }
         }
         

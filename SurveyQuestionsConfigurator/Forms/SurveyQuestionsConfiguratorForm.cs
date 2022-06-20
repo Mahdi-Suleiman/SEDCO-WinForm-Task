@@ -26,7 +26,7 @@ namespace SurveyQuestionsConfigurator
     {
         #region Properties & Attributes
 
-        private readonly ResourceManager localResourceManager;
+        private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
         private readonly ListViewColumnSorter mListViewColumnSorter; /// Used for sorting listview columns on click
         private readonly QuestionManager mGeneralQuestionManager;
@@ -39,10 +39,10 @@ namespace SurveyQuestionsConfigurator
             {
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
-                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.SurvayQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.SurvayQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
 
                 InitializeComponent();
-                EnterOfflineMode(localResourceManager.GetString("connecting"));
+                EnterOfflineMode(mLocalResourceManager.GetString("connecting"));
 
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
@@ -125,7 +125,7 @@ namespace SurveyQuestionsConfigurator
                     ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
                     default:
                         {
-                            string tOfflineMessage = localResourceManager.GetString("youAreOffilne");
+                            string tOfflineMessage = mLocalResourceManager.GetString("youAreOffilne");
                             if (errorLabel.InvokeRequired)
                             {
                                 errorLabel.Invoke(new Action(() =>
@@ -176,7 +176,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -274,7 +274,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -294,7 +294,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -331,7 +331,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -348,7 +348,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -364,7 +364,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -383,7 +383,7 @@ namespace SurveyQuestionsConfigurator
                     var selectedItem = createdQuestions_ListView.SelectedItems[0];
 
                     ///Display confirmation dilaog first
-                    var confirmResult = MessageBox.Show(localResourceManager.GetString("areYouSureToDeleteThisItem"), localResourceManager.GetString("confirmDelete"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning); ///, MessageBoxDefaultButton.Button1, mDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly
+                    var confirmResult = MessageBox.Show(mLocalResourceManager.GetString("areYouSureToDeleteThisItem"), mLocalResourceManager.GetString("confirmDelete"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning); ///, MessageBoxDefaultButton.Button1, mDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly
                     if (confirmResult == DialogResult.Yes)
                     {
                         int tQuestionId; /// question to be deleted
@@ -403,23 +403,23 @@ namespace SurveyQuestionsConfigurator
                                 break;
 
                             case ErrorCode.ERROR:
-                                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
 
                             default:
-                                MessageBox.Show(localResourceManager.GetString("contactSystemAdministrator"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(mLocalResourceManager.GetString("contactSystemAdministrator"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show(localResourceManager.GetString("pleaseSelectAnItemFirst"), localResourceManager.GetString("noItemSelected"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(mLocalResourceManager.GetString("pleaseSelectAnItemFirst"), mLocalResourceManager.GetString("noItemSelected"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -442,7 +442,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -483,12 +483,12 @@ namespace SurveyQuestionsConfigurator
                 }
                 else
                 {
-                    MessageBox.Show(localResourceManager.GetString("pleaseSelectAnItemFirst"), localResourceManager.GetString("noItemSelected"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(mLocalResourceManager.GetString("pleaseSelectAnItemFirst"), mLocalResourceManager.GetString("noItemSelected"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -507,7 +507,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -523,7 +523,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mLocalResourceManager.GetString("somethingWrongHappened"), mLocalResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 

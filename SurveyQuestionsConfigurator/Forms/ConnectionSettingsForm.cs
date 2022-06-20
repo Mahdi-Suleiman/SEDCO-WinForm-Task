@@ -22,7 +22,6 @@ namespace SurveyQuestionsConfigurator
     {
         #region Properties
 
-        private readonly ResourceManager localResourceManager;
         private readonly CultureInfo mDefaultCulture;
         private SqlConnectionStringBuilder mBuilder;
         private readonly SettingsManager mSettingsManager;
@@ -35,7 +34,6 @@ namespace SurveyQuestionsConfigurator
             {
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
-                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.WinFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
 
                 InitializeComponent();
                 mBuilder = new SqlConnectionStringBuilder();

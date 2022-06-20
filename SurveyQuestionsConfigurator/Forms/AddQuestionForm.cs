@@ -20,7 +20,7 @@ namespace SurveyQuestionsConfigurator
         #region Properties
 
         private readonly QuestionManager mGeneralQuestionManager;
-        private readonly ResourceManager localResourceManager;
+        private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
         private Question mGenericQuestion { get; set; } /// create global Question ID property
         private FormStateType cStateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
@@ -29,6 +29,25 @@ namespace SurveyQuestionsConfigurator
         {
             ADD,
             EDIT
+        }
+
+        private enum ResourceStrings
+        {
+            numberOfSmileyFaces,
+            numberOfStars,
+            questionOrderAlreadyInUseError,
+            sliderEndValue,
+            sliderStartValue,
+            somethingWrongHappenedError,
+            startValueCaption,
+            endValueCaption,
+            addAQuestion,
+            contactSystemAdministratorError,
+            editAQuestion,
+            error,
+            questionWasNotFoundOrDeletedError,
+            genericQuestionError,
+            sliderQuestionError
         }
 
         #endregion
@@ -43,17 +62,17 @@ namespace SurveyQuestionsConfigurator
             {
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
-                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.SurvayQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.AddQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
 
                 InitializeComponent();
                 mGeneralQuestionManager = new QuestionManager();
-                this.Text = localResourceManager.GetString("addAQuestion");
+                this.Text = mLocalResourceManager.GetString($"{ResourceStrings.addAQuestion}");
                 cStateForm = FormStateType.ADD;
                 errorLabel.Text = "";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -67,11 +86,11 @@ namespace SurveyQuestionsConfigurator
             {
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
-                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.WinFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.WinFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
 
                 InitializeComponent();
                 mGeneralQuestionManager = new QuestionManager();
-                this.Text = localResourceManager.GetString("editAQuestion");
+                this.Text = mLocalResourceManager.GetString($"{ResourceStrings.editAQuestion}");
                 cStateForm = FormStateType.EDIT;
                 errorLabel.Text = "";
                 mGenericQuestion = pQuestion;
@@ -95,7 +114,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -113,7 +132,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Logger.LogError(ex);
             }
@@ -130,7 +149,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         } /// End event
@@ -164,7 +183,7 @@ namespace SurveyQuestionsConfigurator
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Logger.LogError(ex);
                     }
                 }
@@ -188,7 +207,7 @@ namespace SurveyQuestionsConfigurator
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Logger.LogError(ex);
                     }
                 }
@@ -200,7 +219,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
 
@@ -230,22 +249,22 @@ namespace SurveyQuestionsConfigurator
                         genericNumericUpDown1.Value = Convert.ToDecimal(tSmileyQuestion.NumberOfSmileyFaces);
                         break;
                     case ErrorCode.EMPTY:
-                        MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.questionWasNotFoundOrDeletedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     case ErrorCode.SQL_VIOLATION:
-                        MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     case ErrorCode.ERROR:
-                        MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex); //write error to log file
             }
         } /// End function
@@ -275,22 +294,22 @@ namespace SurveyQuestionsConfigurator
                         genericTextBox2.Text = tSliderQuestion.EndValueCaption.ToString();
                         break;
                     case ErrorCode.EMPTY:
-                        MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.questionWasNotFoundOrDeletedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     case ErrorCode.SQL_VIOLATION:
-                        MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     case ErrorCode.ERROR:
-                        MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex); //write error to log file
             }
         } /// End function
@@ -317,22 +336,22 @@ namespace SurveyQuestionsConfigurator
                         genericNumericUpDown1.Value = Convert.ToDecimal(tStarQuestion.NumberOfStars);
                         break;
                     case ErrorCode.EMPTY:
-                        MessageBox.Show("Question was not found or deleted\nRefresh the list and try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.questionWasNotFoundOrDeletedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     case ErrorCode.SQL_VIOLATION:
-                        MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                     case ErrorCode.ERROR:
-                        MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         this.Close();
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex); //write error to log file
             }
         }/// End function
@@ -362,7 +381,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }/// End event
@@ -378,7 +397,7 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = false;
                 genericLabel3.Visible = false;
                 genericLabel4.Visible = false;
-                genericLabel1.Text = localResourceManager.GetString("numberOfSmileyFaces");
+                genericLabel1.Text = mLocalResourceManager.GetString($"{ResourceStrings.numberOfSmileyFaces}");
 
                 genericNumericUpDown1.Visible = true;
                 genericNumericUpDown2.Visible = false;
@@ -390,7 +409,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         } /// End function
@@ -406,10 +425,10 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = true;
                 genericLabel3.Visible = true;
                 genericLabel4.Visible = true;
-                genericLabel1.Text = localResourceManager.GetString("sliderStartValue");
-                genericLabel2.Text = localResourceManager.GetString("sliderEnd Value");
-                genericLabel3.Text = localResourceManager.GetString("startValueCaption");
-                genericLabel4.Text = localResourceManager.GetString("endValueCaption");
+                genericLabel1.Text = mLocalResourceManager.GetString($"{ResourceStrings.sliderStartValue}");
+                genericLabel2.Text = mLocalResourceManager.GetString($"{ResourceStrings.sliderEndValue}");
+                genericLabel3.Text = mLocalResourceManager.GetString($"{ResourceStrings.startValueCaption}");
+                genericLabel4.Text = mLocalResourceManager.GetString($"{ResourceStrings.endValueCaption}");
 
                 genericNumericUpDown1.Visible = true;
                 genericNumericUpDown2.Visible = true;
@@ -423,7 +442,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         } /// End function
@@ -439,7 +458,7 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = false;
                 genericLabel3.Visible = false;
                 genericLabel4.Visible = false;
-                genericLabel1.Text = localResourceManager.GetString("numberOfStars");
+                genericLabel1.Text = mLocalResourceManager.GetString($"{ResourceStrings.numberOfStars}");
 
                 genericNumericUpDown1.Visible = true;
                 genericNumericUpDown1.Enabled = true;
@@ -452,7 +471,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         } /// End function
@@ -489,23 +508,23 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
+                            errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessageBox($"{ResourceStrings.genericQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -543,23 +562,23 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
+                            errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
-                            MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessageBox($"{ResourceStrings.sliderQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -596,23 +615,23 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
+                            errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
-                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Question text cant be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessageBox($"{ResourceStrings.genericQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -650,23 +669,23 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
+                            errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
-                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessageBox($"{ResourceStrings.genericQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -697,39 +716,31 @@ namespace SurveyQuestionsConfigurator
                 if (CheckSliderQuestionInputFields(tSliderQuestion) == ErrorCode.SUCCESS)
                 {
                     /// Try to Update a new question into "Questions" and "Slider_Questions" tables in DB
-                    try
-                    {
-                        tResult = mGeneralQuestionManager.UpdateSliderQuestion(tSliderQuestion);
+                    tResult = mGeneralQuestionManager.UpdateSliderQuestion(tSliderQuestion);
 
-                        switch (tResult)
-                        {
-                            case ErrorCode.SUCCESS:
-                                errorLabel.Text = "";
-                                return ErrorCode.SUCCESS;
-                            case ErrorCode.SQL_VIOLATION:
-                                errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
-                                break;
-                            case ErrorCode.ERROR:
-                                errorLabel.Text = "";
-                                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                                break;
-                        }
-                    }
-                    catch (Exception ex)
+                    switch (tResult)
                     {
-                        MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        Logger.LogError(ex); //write error to log file
+                        case ErrorCode.SUCCESS:
+                            errorLabel.Text = "";
+                            return ErrorCode.SUCCESS;
+                        case ErrorCode.SQL_VIOLATION:
+                            errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
+                            break;
+                        case ErrorCode.ERROR:
+                            errorLabel.Text = "";
+                            ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Question text\nStart Value caption\nEnd Value caption\nCan NOT be empty\n\nMake sure that Max Value is larger than Min Value", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessageBox($"{ResourceStrings.sliderQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -765,23 +776,23 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
+                            errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
-                            MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Question Text Can NOT be empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessageBox($"{ResourceStrings.genericQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -801,7 +812,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -818,7 +829,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
@@ -835,11 +846,20 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }
         }/// Function end
+        #endregion
+
+        #region Generic Methods
+
+        private DialogResult ShowMessageBox(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon)
+        {
+            return MessageBox.Show(mLocalResourceManager.GetString(pText), mLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, mDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);
+        }
+
         #endregion
     }
 }

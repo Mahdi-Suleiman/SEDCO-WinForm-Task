@@ -37,3 +37,5 @@ C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurat
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.AddQuestionForm.ar-JO.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.SurvayQuestionFormStrings.resources
 C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.SurvayQuestionFormStrings.ar-JO.resources
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.AddQuestionFormStrings.resources
+C:\Users\mahdi\Desktop\github repos\SEDCO-WinForm-Task\SurveyQuestionsConfigurator\obj\Debug\SurveyQuestionsConfigurator.AddQuestionFormStrings.ar-JO.resources
