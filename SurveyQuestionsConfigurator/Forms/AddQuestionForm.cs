@@ -7,6 +7,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
 using static SurveyQuestionsConfigurator.Entities.Generic;
 
@@ -15,13 +18,13 @@ namespace SurveyQuestionsConfigurator
     public partial class AddQuestionForm : Form
     {
         #region Properties
-        private Question mGenericQuestion { get; set; } /// create global Question ID property
 
         private readonly QuestionManager mGeneralQuestionManager;
-
+        private readonly ResourceManager localResourceManager;
+        private readonly CultureInfo mDefaultCulture;
+        private Question mGenericQuestion { get; set; } /// create global Question ID property
         private FormStateType cStateForm { get; set; } /// Decide whether "OK" Form button is used to either ADD or EDIT a question
         private QuestionType cSelectedQuestionType { get; set; }
-
         public enum FormStateType
         {
             ADD,
@@ -38,9 +41,13 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+                Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
+                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.SurvayQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+
                 InitializeComponent();
                 mGeneralQuestionManager = new QuestionManager();
-                this.Text = "Add A Question";
+                this.Text = localResourceManager.GetString("addAQuestion");
                 cStateForm = FormStateType.ADD;
                 errorLabel.Text = "";
             }
@@ -58,9 +65,13 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+                Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
+                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.WinFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+
                 InitializeComponent();
                 mGeneralQuestionManager = new QuestionManager();
-                this.Text = "Edit A Question";
+                this.Text = localResourceManager.GetString("editAQuestion");
                 cStateForm = FormStateType.EDIT;
                 errorLabel.Text = "";
                 mGenericQuestion = pQuestion;
@@ -338,15 +349,15 @@ namespace SurveyQuestionsConfigurator
             {
                 if (questionTypeComboBox.SelectedIndex == 0)
                 {
-                    InitializeSmileyQuestion();
+                    LoadSmileyQuestionSettings();
                 }
                 else if (questionTypeComboBox.SelectedIndex == 1)
                 {
-                    InitializeSliderQuestion();
+                    LoadSliderQuestionSettings();
                 }
                 else if (questionTypeComboBox.SelectedIndex == 2)
                 {
-                    InitializeStarQuestion();
+                    LoadStarQuestionSettings();
                 }
             }
             catch (Exception ex)
@@ -359,7 +370,7 @@ namespace SurveyQuestionsConfigurator
          ///<summary>
          /// Initialize smiley question based on combo box changed value
          ///</summary>
-        private void InitializeSmileyQuestion()
+        private void LoadSmileyQuestionSettings()
         {
             try
             {
@@ -367,7 +378,7 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = false;
                 genericLabel3.Visible = false;
                 genericLabel4.Visible = false;
-                genericLabel1.Text = "Number Of Smiley Faces (2 - 5):";
+                genericLabel1.Text = localResourceManager.GetString("numberOfSmileyFaces");
 
                 genericNumericUpDown1.Visible = true;
                 genericNumericUpDown2.Visible = false;
@@ -387,7 +398,7 @@ namespace SurveyQuestionsConfigurator
         ///<summary>
         /// Initialize slider question based on combo box changed value
         ///</summary>
-        private void InitializeSliderQuestion()
+        private void LoadSliderQuestionSettings()
         {
             try
             {
@@ -395,10 +406,10 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = true;
                 genericLabel3.Visible = true;
                 genericLabel4.Visible = true;
-                genericLabel1.Text = "Slider start Value (1 - 99):";
-                genericLabel2.Text = "Slider end Value (2 - 100):";
-                genericLabel3.Text = "Start Value Caption:";
-                genericLabel4.Text = "End Value Caption:";
+                genericLabel1.Text = localResourceManager.GetString("sliderStartValue");
+                genericLabel2.Text = localResourceManager.GetString("sliderEnd Value");
+                genericLabel3.Text = localResourceManager.GetString("startValueCaption");
+                genericLabel4.Text = localResourceManager.GetString("endValueCaption");
 
                 genericNumericUpDown1.Visible = true;
                 genericNumericUpDown2.Visible = true;
@@ -420,7 +431,7 @@ namespace SurveyQuestionsConfigurator
         ///<summary>
         /// Initialize star question based on combo box changed value
         ///</summary>
-        private void InitializeStarQuestion()
+        private void LoadStarQuestionSettings()
         {
             try
             {
@@ -428,7 +439,7 @@ namespace SurveyQuestionsConfigurator
                 genericLabel2.Visible = false;
                 genericLabel3.Visible = false;
                 genericLabel4.Visible = false;
-                genericLabel1.Text = "Number Of Stars (1 - 10):";
+                genericLabel1.Text = localResourceManager.GetString("numberOfStars");
 
                 genericNumericUpDown1.Visible = true;
                 genericNumericUpDown1.Enabled = true;
@@ -478,7 +489,7 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
@@ -532,7 +543,7 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
@@ -585,7 +596,7 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
@@ -639,7 +650,7 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = "Order already in use\nTry using another one";
+                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";
@@ -696,7 +707,7 @@ namespace SurveyQuestionsConfigurator
                                 errorLabel.Text = "";
                                 return ErrorCode.SUCCESS;
                             case ErrorCode.SQL_VIOLATION:
-                                errorLabel.Text = "Question order already in use\nTry using another one";
+                                errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
                                 break;
                             case ErrorCode.ERROR:
                                 errorLabel.Text = "";
@@ -754,7 +765,7 @@ namespace SurveyQuestionsConfigurator
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
                         case ErrorCode.SQL_VIOLATION:
-                            errorLabel.Text = "Question order already in use\nTry using another one";
+                            errorLabel.Text = localResourceManager.GetString("questionOrderAlreadyInUseError");
                             break;
                         case ErrorCode.ERROR:
                             errorLabel.Text = "";

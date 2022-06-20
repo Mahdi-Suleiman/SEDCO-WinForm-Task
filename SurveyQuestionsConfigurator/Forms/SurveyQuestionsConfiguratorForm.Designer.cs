@@ -43,24 +43,22 @@
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
             this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.settingsButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.settingsButton = new System.Windows.Forms.Button();
             this.createdQuestionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // refreshListButton
             // 
-            this.refreshListButton.Location = new System.Drawing.Point(6, 309);
+            resources.ApplyResources(this.refreshListButton, "refreshListButton");
             this.refreshListButton.Name = "refreshListButton";
-            this.refreshListButton.Size = new System.Drawing.Size(75, 23);
-            this.refreshListButton.TabIndex = 8;
-            this.refreshListButton.Text = "Refresh";
-            this.toolTip1.SetToolTip(this.refreshListButton, "Refresh List");
+            this.toolTip1.SetToolTip(this.refreshListButton, resources.GetString("refreshListButton.ToolTip"));
             this.refreshListButton.UseVisualStyleBackColor = true;
             this.refreshListButton.Click += new System.EventHandler(this.refreshDataButton_Click);
             // 
             // createdQuestions_ListView
             // 
+            resources.ApplyResources(this.createdQuestions_ListView, "createdQuestions_ListView");
             this.createdQuestions_ListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.createdQuestions_ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
@@ -69,12 +67,10 @@
             this.createdQuestions_ListView.FullRowSelect = true;
             this.createdQuestions_ListView.GridLines = true;
             this.createdQuestions_ListView.HideSelection = false;
-            this.createdQuestions_ListView.Location = new System.Drawing.Point(6, 19);
             this.createdQuestions_ListView.MultiSelect = false;
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
-            this.createdQuestions_ListView.Size = new System.Drawing.Size(600, 284);
-            this.createdQuestions_ListView.TabIndex = 1;
             this.createdQuestions_ListView.TileSize = new System.Drawing.Size(170, 60);
+            this.toolTip1.SetToolTip(this.createdQuestions_ListView, resources.GetString("createdQuestions_ListView.ToolTip"));
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
             this.createdQuestions_ListView.View = System.Windows.Forms.View.Details;
             this.createdQuestions_ListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.createdQuestions_ListView_ColumnClick);
@@ -82,137 +78,110 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Order";
-            this.columnHeader2.Width = 75;
+            resources.ApplyResources(this.columnHeader2, "columnHeader2");
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Type";
-            this.columnHeader3.Width = 80;
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Text";
-            this.columnHeader4.Width = 441;
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
             // 
             // deleteQuestionButton
             // 
-            this.deleteQuestionButton.Location = new System.Drawing.Point(525, 309);
+            resources.ApplyResources(this.deleteQuestionButton, "deleteQuestionButton");
             this.deleteQuestionButton.Name = "deleteQuestionButton";
-            this.deleteQuestionButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteQuestionButton.TabIndex = 4;
-            this.deleteQuestionButton.Text = "&Delete";
+            this.toolTip1.SetToolTip(this.deleteQuestionButton, resources.GetString("deleteQuestionButton.ToolTip"));
             this.deleteQuestionButton.UseVisualStyleBackColor = true;
             this.deleteQuestionButton.Click += new System.EventHandler(this.deleteQuestionButton_Click);
             // 
             // editQuestionButton
             // 
-            this.editQuestionButton.Location = new System.Drawing.Point(444, 309);
+            resources.ApplyResources(this.editQuestionButton, "editQuestionButton");
             this.editQuestionButton.Name = "editQuestionButton";
-            this.editQuestionButton.Size = new System.Drawing.Size(75, 23);
-            this.editQuestionButton.TabIndex = 3;
-            this.editQuestionButton.Text = "&Edit";
+            this.toolTip1.SetToolTip(this.editQuestionButton, resources.GetString("editQuestionButton.ToolTip"));
             this.editQuestionButton.UseVisualStyleBackColor = true;
             this.editQuestionButton.Click += new System.EventHandler(this.editQuestionButton_Click);
             // 
             // addQuestionButton
             // 
-            this.addQuestionButton.Location = new System.Drawing.Point(363, 309);
+            resources.ApplyResources(this.addQuestionButton, "addQuestionButton");
             this.addQuestionButton.Name = "addQuestionButton";
-            this.addQuestionButton.Size = new System.Drawing.Size(75, 23);
-            this.addQuestionButton.TabIndex = 2;
-            this.addQuestionButton.Text = "&Add";
+            this.toolTip1.SetToolTip(this.addQuestionButton, resources.GetString("addQuestionButton.ToolTip"));
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
             // closeApplicationButton
             // 
-            this.closeApplicationButton.Location = new System.Drawing.Point(537, 382);
+            resources.ApplyResources(this.closeApplicationButton, "closeApplicationButton");
             this.closeApplicationButton.Name = "closeApplicationButton";
-            this.closeApplicationButton.Size = new System.Drawing.Size(75, 23);
-            this.closeApplicationButton.TabIndex = 9;
-            this.closeApplicationButton.Text = "Close";
+            this.toolTip1.SetToolTip(this.closeApplicationButton, resources.GetString("closeApplicationButton.ToolTip"));
             this.closeApplicationButton.UseVisualStyleBackColor = true;
             this.closeApplicationButton.Click += new System.EventHandler(this.closeApplicationButton_Click);
             // 
             // createdQuestionsGroupBox
             // 
+            resources.ApplyResources(this.createdQuestionsGroupBox, "createdQuestionsGroupBox");
             this.createdQuestionsGroupBox.Controls.Add(this.errorLabel);
             this.createdQuestionsGroupBox.Controls.Add(this.createdQuestions_ListView);
-            this.createdQuestionsGroupBox.Controls.Add(this.refreshListButton);
             this.createdQuestionsGroupBox.Controls.Add(this.addQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
+            this.createdQuestionsGroupBox.Controls.Add(this.refreshListButton);
             this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
-            this.createdQuestionsGroupBox.Location = new System.Drawing.Point(6, 37);
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
-            this.createdQuestionsGroupBox.Size = new System.Drawing.Size(606, 339);
-            this.createdQuestionsGroupBox.TabIndex = 10;
             this.createdQuestionsGroupBox.TabStop = false;
-            this.createdQuestionsGroupBox.Text = "Questions";
+            this.toolTip1.SetToolTip(this.createdQuestionsGroupBox, resources.GetString("createdQuestionsGroupBox.ToolTip"));
             // 
             // errorLabel
             // 
-            this.errorLabel.AutoSize = true;
+            resources.ApplyResources(this.errorLabel, "errorLabel");
             this.errorLabel.BackColor = System.Drawing.Color.Transparent;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(87, 314);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(58, 13);
-            this.errorLabel.TabIndex = 11;
-            this.errorLabel.Text = "Error Label";
-            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.errorLabel, resources.GetString("errorLabel.ToolTip"));
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(600, 24);
-            this.menuStrip1.TabIndex = 12;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.gear;
-            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.settingsButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.settingsButton.ForeColor = System.Drawing.Color.Transparent;
-            this.settingsButton.Location = new System.Drawing.Point(6, 3);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(23, 21);
-            this.settingsButton.TabIndex = 12;
-            this.settingsButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.toolTip1.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip"));
             // 
             // label5
             // 
+            resources.ApplyResources(this.label5, "label5");
             this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label5.Cursor = System.Windows.Forms.Cursors.Default;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label5.Location = new System.Drawing.Point(-5, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(637, 7);
-            this.label5.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
+            // 
+            // settingsButton
+            // 
+            resources.ApplyResources(this.settingsButton, "settingsButton");
+            this.settingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.gear;
+            this.settingsButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.settingsButton.ForeColor = System.Drawing.Color.Transparent;
+            this.settingsButton.Name = "settingsButton";
+            this.toolTip1.SetToolTip(this.settingsButton, resources.GetString("settingsButton.ToolTip"));
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // SurveyQuestionsConfiguratorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(621, 417);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(637, 456);
-            this.MinimumSize = new System.Drawing.Size(637, 456);
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Survey Questions Configurator";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Activated += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Activated);
             this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.createdQuestionsGroupBox.ResumeLayout(false);

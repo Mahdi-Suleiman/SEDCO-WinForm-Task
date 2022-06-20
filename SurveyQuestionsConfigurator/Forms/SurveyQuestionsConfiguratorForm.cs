@@ -4,17 +4,21 @@ using SurveyQuestionsConfigurator.QuestionLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SurveyQuestionsConfigurator.Entities.Generic;
+
 
 namespace SurveyQuestionsConfigurator
 {
@@ -22,6 +26,8 @@ namespace SurveyQuestionsConfigurator
     {
         #region Properties & Attributes
 
+        private readonly ResourceManager localResourceManager;
+        private readonly CultureInfo mDefaultCulture;
         private readonly ListViewColumnSorter mListViewColumnSorter; /// Used for sorting listview columns on click
         private readonly QuestionManager mGeneralQuestionManager;
         #endregion
@@ -31,8 +37,12 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+                Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
+                localResourceManager = new ResourceManager("SurveyQuestionsConfigurator.SurvayQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+
                 InitializeComponent();
-                EnterOfflineMode("Connecting...");
+                EnterOfflineMode(localResourceManager.GetString("connecting"));
 
                 mGeneralQuestionManager = new QuestionManager();
                 mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
@@ -115,7 +125,7 @@ namespace SurveyQuestionsConfigurator
                     ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
                     default:
                         {
-                            string tOfflineMessage = "You're offilne, please try againt later\nOr contact your system adminstrator";
+                            string tOfflineMessage = localResourceManager.GetString("youAreOffilne");
                             if (errorLabel.InvokeRequired)
                             {
                                 errorLabel.Invoke(new Action(() =>
@@ -166,7 +176,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -264,7 +274,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -284,7 +294,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -321,7 +331,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n");
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -338,7 +348,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -354,7 +364,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -373,7 +383,7 @@ namespace SurveyQuestionsConfigurator
                     var selectedItem = createdQuestions_ListView.SelectedItems[0];
 
                     ///Display confirmation dilaog first
-                    var confirmResult = MessageBox.Show("Are you sure to delete this item ??", "Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var confirmResult = MessageBox.Show(localResourceManager.GetString("areYouSureToDeleteThisItem"), localResourceManager.GetString("confirmDelete"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning); ///, MessageBoxDefaultButton.Button1, mDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RtlReading : MessageBoxOptions.DefaultDesktopOnly
                     if (confirmResult == DialogResult.Yes)
                     {
                         int tQuestionId; /// question to be deleted
@@ -393,23 +403,23 @@ namespace SurveyQuestionsConfigurator
                                 break;
 
                             case ErrorCode.ERROR:
-                                MessageBox.Show("Something wrong happened\nPlease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
 
                             default:
-                                MessageBox.Show("Something wrong happened\nPlease try again or contact your system administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(localResourceManager.GetString("contactSystemAdministrator"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select an item first", "No item selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(localResourceManager.GetString("pleaseSelectAnItemFirst"), localResourceManager.GetString("noItemSelected"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -432,7 +442,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -473,12 +483,12 @@ namespace SurveyQuestionsConfigurator
                 }
                 else
                 {
-                    MessageBox.Show("Please select an item first", "No selected item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(localResourceManager.GetString("pleaseSelectAnItemFirst"), localResourceManager.GetString("noItemSelected"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -497,7 +507,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -513,7 +523,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(localResourceManager.GetString("somethingWrongHappened"), localResourceManager.GetString("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }///End event 
