@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dataSourceTextBox.MaxLength" type="System.Int32, mscorlib">
+    <value>128</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="saveButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -130,7 +134,9 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Server Name:</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -149,7 +155,7 @@
   <data name="testConnectionButton.Text" xml:space="preserve">
     <value>Test Connection</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="saveButton.TabIndex" type="System.Int32, mscorlib">
@@ -163,9 +169,6 @@
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1628,6 +1631,9 @@
   <data name="&gt;&gt;testConnectionButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;userIDTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1655,14 +1661,14 @@
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 96</value>
   </data>
+  <data name="initialCatalogTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 20</value>
+  </data>
   <data name="&gt;&gt;testConnectionButton.Name" xml:space="preserve">
     <value>testConnectionButton</value>
   </data>
   <data name="&gt;&gt;initialCatalogTextBox.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
   </data>
   <data name="passwordTextBox.MaxLength" type="System.Int32, mscorlib">
     <value>128</value>
@@ -1679,8 +1685,8 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
   </data>
   <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1690,9 +1696,6 @@
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 93</value>
   </data>
   <data name="&gt;&gt;userIDTextBox.Name" xml:space="preserve">
     <value>userIDTextBox</value>
@@ -1718,9 +1721,6 @@
   <data name="testConnectionButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 2</value>
-  </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
@@ -1745,9 +1745,6 @@
   <data name="initialCatalogTextBox.MaxLength" type="System.Int32, mscorlib">
     <value>128</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="userIDTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -1763,6 +1760,9 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;saveButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -1771,9 +1771,6 @@
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
   </data>
   <data name="dataSourceTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1799,8 +1796,8 @@
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 70</value>
   </data>
-  <data name="testConnectionButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="testConnectionButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>250, 119</value>
@@ -1832,14 +1829,14 @@
   <data name="&gt;&gt;userIDTextBox.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;saveButton.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="testConnectionButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 23</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1853,8 +1850,8 @@
   <data name="passwordTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="dataSourceTextBox.MaxLength" type="System.Int32, mscorlib">
-    <value>128</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 2</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1868,25 +1865,25 @@
   <data name="&gt;&gt;userIDTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="initialCatalogTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 20</value>
+  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;testConnectionButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 93</value>
   </data>
   <data name="&gt;&gt;testConnectionButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;dataSourceTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ar-JO</value>
   </metadata>
 </root>

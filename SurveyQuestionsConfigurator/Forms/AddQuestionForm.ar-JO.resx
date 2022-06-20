@@ -240,20 +240,20 @@
   <data name="smilyQuestionDetailsGroupBox.Text" xml:space="preserve">
     <value>تفاصيل السؤال</value>
   </data>
-  <data name="typeOfQuestionGroupBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="typeOfQuestionGroupBox.Text" xml:space="preserve">
-    <value>نوع السؤال</value>
-  </data>
   <data name="questionTypeComboBox.Items" xml:space="preserve">
-    <value>سؤال ذو وجوه المبتسمة</value>
+    <value>سؤال ذو وجه مبتسم</value>
   </data>
   <data name="questionTypeComboBox.Items1" xml:space="preserve">
     <value>سؤال ذو شريط التمرير</value>
   </data>
   <data name="questionTypeComboBox.Items2" xml:space="preserve">
     <value>سؤال ذو نجوم</value>
+  </data>
+  <data name="typeOfQuestionGroupBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="typeOfQuestionGroupBox.Text" xml:space="preserve">
+    <value>نوع السؤال</value>
   </data>
   <data name="okButton.Text" xml:space="preserve">
     <value>موافق</value>

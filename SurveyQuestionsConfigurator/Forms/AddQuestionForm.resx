@@ -125,6 +125,9 @@
   <data name="smilyQuestionDetailsGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;genericTextBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="questionTextRichTextBox.Text" xml:space="preserve">
     <value />
   </data>
@@ -189,8 +192,8 @@
   <data name="questionOrderNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 39</value>
   </data>
-  <data name="questionTypeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
+  <data name="questionTypeComboBox.Items" xml:space="preserve">
+    <value>Smiley Question</value>
   </data>
   <data name="errorLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -243,8 +246,8 @@
   <data name="typeOfQuestionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 70</value>
   </data>
-  <data name="&gt;&gt;questionTypeComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="genericLabel1.Text" xml:space="preserve">
+    <value>Number Of Smiley Faces (2 -5 ):</value>
   </data>
   <data name="&gt;&gt;smilyQuestionDetailsGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -275,9 +278,6 @@
   </data>
   <data name="genericTextBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 201</value>
-  </data>
-  <data name="questionTypeComboBox.Items" xml:space="preserve">
-    <value>Smiley Question</value>
   </data>
   <data name="&gt;&gt;genericNumericUpDown1.Parent" xml:space="preserve">
     <value>smilyQuestionDetailsGroupBox</value>
@@ -339,9 +339,6 @@
   <data name="questionTypeComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 21</value>
   </data>
-  <data name="questionOrderNumericUpDown.UpDownAlign" type="System.Windows.Forms.LeftRightAlignment, System.Windows.Forms">
-    <value>Left</value>
-  </data>
   <data name="&gt;&gt;pictureBox3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -357,17 +354,11 @@
   <data name="genericLabel3.Text" xml:space="preserve">
     <value>Start Value Caption</value>
   </data>
-  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
-    <value>errorLabel</value>
-  </data>
   <data name="questionOrderNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="questionTextLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;genericNumericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Add a question</value>
@@ -383,9 +374,6 @@
   </data>
   <data name="errorLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
-  </data>
-  <data name="&gt;&gt;genericLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -405,9 +393,6 @@
   <data name="&gt;&gt;questionOrderNumericUpDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;questionTextRichTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="questionTextRichTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
@@ -417,8 +402,14 @@
   <data name="pictureBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 5, 15, 5</value>
   </data>
+  <data name="&gt;&gt;questionTextLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="genericTextBox2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="questionOrderLabel.Text" xml:space="preserve">
+    <value>Order:</value>
   </data>
   <data name="&gt;&gt;genericLabel3.Parent" xml:space="preserve">
     <value>smilyQuestionDetailsGroupBox</value>
@@ -450,11 +441,20 @@
   <data name="&gt;&gt;okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="questionTypeComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
   <data name="genericTextBox1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Both</value>
   </data>
   <data name="genericTextBox1.MaxLength" type="System.Int32, mscorlib">
     <value>99</value>
+  </data>
+  <data name="genericLabel4.Text" xml:space="preserve">
+    <value>End Value Caption</value>
+  </data>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="genericLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -504,8 +504,8 @@
   <data name="questionTypeComboBox.Items2" xml:space="preserve">
     <value>Star Question</value>
   </data>
-  <data name="genericLabel1.Text" xml:space="preserve">
-    <value>Number Of Smiley Faces (2 -5 ):</value>
+  <data name="genericTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="genericLabel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>211, 183</value>
@@ -521,9 +521,6 @@
   </data>
   <data name="&gt;&gt;genericLabel3.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="genericLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 13</value>
   </data>
   <data name="&gt;&gt;genericLabel2.Name" xml:space="preserve">
     <value>genericLabel2</value>
@@ -543,8 +540,8 @@
   <data name="questionTextRichTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="questionOrderLabel.Text" xml:space="preserve">
-    <value>Order:</value>
+  <data name="&gt;&gt;genericLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="questionOrderLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -561,8 +558,8 @@
   <data name="questionTextRichTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>340, 77</value>
   </data>
-  <data name="genericTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+  <data name="genericLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 13</value>
   </data>
   <data name="genericLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 13</value>
@@ -575,6 +572,9 @@
   </data>
   <data name="genericLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 183</value>
+  </data>
+  <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 39</value>
   </data>
   <data name="questionOrderLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -594,11 +594,11 @@
   <data name="questionTextLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
   </data>
-  <data name="genericLabel4.Text" xml:space="preserve">
-    <value>End Value Caption</value>
+  <data name="&gt;&gt;questionTypeComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="okButton.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="questionOrderNumericUpDown.UpDownAlign" type="System.Windows.Forms.LeftRightAlignment, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="&gt;&gt;genericLabel1.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -609,11 +609,11 @@
   <data name="pictureBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 39</value>
+  <data name="&gt;&gt;questionTextRichTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;questionTextLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
+    <value>errorLabel</value>
   </data>
   <data name="typeOfQuestionGroupBox.Text" xml:space="preserve">
     <value>Type Of Question</value>
@@ -627,8 +627,8 @@
   <data name="&gt;&gt;questionOrderNumericUpDown.Parent" xml:space="preserve">
     <value>smilyQuestionDetailsGroupBox</value>
   </data>
-  <data name="&gt;&gt;genericTextBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;genericNumericUpDown2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="genericTextBox2.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Both</value>

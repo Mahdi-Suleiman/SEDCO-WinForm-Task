@@ -41,7 +41,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -59,15 +59,11 @@ namespace SurveyQuestionsConfigurator
             {
                 mBuilder = mSettingsManager.GetConnectionString();
 
-                //dataSourceTextBox.Text = mBuilder.DataSource;
-                //initialCatalogTextBox.Text = mBuilder.InitialCatalog;
-                //userIDTextBox.Text = mBuilder.UserID;
-                //passwordTextBox.Text = mBuilder.Password;
                 FillFormWithConnectionStringBuilderData();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -75,7 +71,6 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Close the form
         /// </summary>
-        /// <param name="sender"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
             try
@@ -84,7 +79,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -94,33 +89,28 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 mBuilder.Clear();
-
-                //mBuilder.DataSource = dataSourceTextBox.Text.ToString();
-                //mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
-                //mBuilder.UserID = userIDTextBox.Text.ToString();
-                //mBuilder.Password = passwordTextBox.Text.ToString();
                 FillConnectionStringBuilderFields();
 
                 if (CheckConnectionStringInputFields(mBuilder) == ErrorCode.SUCCESS)
                 {
                     if (mSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS)
                     {
-                        MessageBox.Show("Test connection succeeded.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ShowMessage.Box("Test connection succeeded.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Test connection failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessage.Box("Test connection failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("None of the input fields above can be empty\nNor be more than 128 character max", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessage.Box("None of the input fields above can be empty\nNor be more than 128 character max", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -129,10 +119,6 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                //mBuilder.DataSource = dataSourceTextBox.Text.ToString();
-                //mBuilder.InitialCatalog = initialCatalogTextBox.Text.ToString();
-                //mBuilder.UserID = userIDTextBox.Text.ToString();
-                //mBuilder.Password = passwordTextBox.Text.ToString();
                 FillConnectionStringBuilderFields();
 
                 ErrorCode isSaved = mSettingsManager.SaveConnectionString(mBuilder);
@@ -142,12 +128,12 @@ namespace SurveyQuestionsConfigurator
                 }
                 else
                 {
-                    MessageBox.Show("Couldn't save settings, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessage.Box("Couldn't save settings\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
             }
         }
@@ -171,7 +157,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong happened, please try again\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }

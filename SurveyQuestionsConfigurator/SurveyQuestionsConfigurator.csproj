@@ -69,6 +69,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddQuestionFormStrings.ar-JO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddQuestionFormStrings.ar-JO.resx</DependentUpon>
+    </Compile>
     <Compile Include="AddQuestionFormStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +90,18 @@
     </Compile>
     <Compile Include="Forms\ConnectionSettingsForm.Designer.cs">
       <DependentUpon>ConnectionSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LangaugeSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LangaugeSettingsForm.Designer.cs">
+      <DependentUpon>LangaugeSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMessage.cs" />
+    <Compile Include="SurvayQuestionFormStrings.ar-JO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SurvayQuestionFormStrings.ar-JO.resx</DependentUpon>
     </Compile>
     <Compile Include="SurveyQuestionsConfiguratorDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -105,7 +122,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SurvayQuestionFormStrings.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddQuestionFormStrings.ar-JO.resx" />
+    <EmbeddedResource Include="AddQuestionFormStrings.ar-JO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddQuestionFormStrings.ar-JO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddQuestionFormStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AddQuestionFormStrings.Designer.cs</LastGenOutput>
@@ -139,7 +159,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SurvayQuestionFormStrings.ar-JO.resx" />
+    <EmbeddedResource Include="SurvayQuestionFormStrings.ar-JO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SurvayQuestionFormStrings.ar-JO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SurvayQuestionFormStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SurvayQuestionFormStrings.Designer.cs</LastGenOutput>
@@ -192,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gear.png" />
+    <None Include="Resources\language.png" />
     <Content Include="Resources\sedco_logo.ico" />
   </ItemGroup>
   <ItemGroup>

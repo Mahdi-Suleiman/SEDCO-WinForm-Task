@@ -11,7 +11,13 @@ namespace SurveyQuestionsConfigurator
 {
     public class ShowMessage
     {
-        public DialogResult Box(ResourceManager pLocalResourceManager, CultureInfo pDefaultCulture, string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon)
+        ///<summary>
+        /// Custom methods to show message box dialog
+        /// </summary>
+        /// <returns>
+        /// DialogResult
+        /// </returns>
+        public static DialogResult Box(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon, ResourceManager pLocalResourceManager = null, CultureInfo pDefaultCulture = null)
         {
             return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, pDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);
         }

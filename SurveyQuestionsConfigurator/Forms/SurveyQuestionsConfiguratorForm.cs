@@ -193,7 +193,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -278,18 +278,6 @@ namespace SurveyQuestionsConfigurator
             }
         } ///End Function.
 
-        ///<summary>
-        /// Custom methods to show message box dialog
-        /// </summary>
-        /// <returns>
-        /// DialogResult
-        /// </returns>
-        private DialogResult ShowMessageBox(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon)
-        {
-            return MessageBox.Show(mLocalResourceManager.GetString(pText), mLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, mDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);
-        }
-
-
         #endregion
 
         #region Event Handlers
@@ -303,7 +291,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -323,7 +311,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -360,7 +348,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -377,7 +365,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -393,7 +381,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -414,7 +402,7 @@ namespace SurveyQuestionsConfigurator
                     ///Display confirmation dilaog first
 
                     ///
-                    var confirmResult = ShowMessageBox($"{ResourceStrings.areYouSureToDeleteThisItem}", $"{ResourceStrings.confirmDelete}", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var confirmResult = ShowMessage.Box($"{ResourceStrings.areYouSureToDeleteThisItem}", $"{ResourceStrings.confirmDelete}", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, mLocalResourceManager, mDefaultCulture);
                     if (confirmResult == DialogResult.Yes)
                     {
                         int tQuestionId; /// question to be deleted
@@ -434,23 +422,23 @@ namespace SurveyQuestionsConfigurator
                                 break;
 
                             case ErrorCode.ERROR:
-                                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                                 break;
 
                             default:
-                                ShowMessageBox($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                ShowMessage.Box($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                                 break;
                         }
                     }
                 }
                 else
                 {
-                    ShowMessageBox($"{ResourceStrings.pleaseSelectAnItemFirst}", $"{ResourceStrings.noItemSelected}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ShowMessage.Box($"{ResourceStrings.pleaseSelectAnItemFirst}", $"{ResourceStrings.noItemSelected}", MessageBoxButtons.OK, MessageBoxIcon.Warning, mLocalResourceManager, mDefaultCulture);
                 }
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -473,7 +461,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -514,12 +502,12 @@ namespace SurveyQuestionsConfigurator
                 }
                 else
                 {
-                    ShowMessageBox($"{ResourceStrings.pleaseSelectAnItemFirst}", $"{ResourceStrings.noItemSelected}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ShowMessage.Box($"{ResourceStrings.pleaseSelectAnItemFirst}", $"{ResourceStrings.noItemSelected}", MessageBoxButtons.OK, MessageBoxIcon.Warning, mLocalResourceManager, mDefaultCulture);
                 }
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
@@ -538,7 +526,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -554,7 +542,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessageBox($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }///End event 
