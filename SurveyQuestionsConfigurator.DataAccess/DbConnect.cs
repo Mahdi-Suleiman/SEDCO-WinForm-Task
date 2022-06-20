@@ -78,29 +78,30 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// ID if found
         /// 0 if no row is found
         /// </returns>
-        private ErrorCode GetIDFromOrder(SqlConnection pSqlConnection, int pOrder, ref int pQuestionID)
+        private ErrorCode CheckIfUpdatingSameQuestion(SqlConnection pSqlConnection, int pOrder, int pQuestionID)
         {
             try
             {
                 using (SqlCommand cmd = pSqlConnection.CreateCommand())
                 {
-                    cmd.CommandText = "dbo.GetIDFromOrder";
+                    cmd.CommandText = "dbo.CheckIfUpdatingSameQuestion";
                     cmd.CommandType = CommandType.StoredProcedure;
                     SqlParameter[] parameters = new SqlParameter[] {
                                 new SqlParameter($"{QuestionColumn.ReturnValue}", SqlDbType.Int),
                                 new SqlParameter($"{QuestionColumn.Order}", pOrder),
+                                new SqlParameter($"{QuestionColumn.ID}", pQuestionID),
                             };
-                    parameters[0].Direction = ParameterDirection.ReturnValue;
+                    parameters[0].Direction = ParameterDirection.ReturnValue; /// retured value from function
                     cmd.Parameters.AddRange(parameters);
 
                     cmd.ExecuteNonQuery();
 
-                    pQuestionID = (int)parameters[0].Value;
+                    return (ErrorCode)parameters[0].Value;
 
-                    if (pQuestionID == -1)
-                        return ErrorCode.ERROR;
+                    //if (pQuestionID == -1)
+                    //    return ErrorCode.ERROR;
 
-                    return ErrorCode.SUCCESS;
+                    //return ErrorCode.SUCCESS;
                 }
             }
             catch (Exception ex)
@@ -442,8 +443,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode tOrderStatusResult = ErrorCode.ERROR;
-                ErrorCode tIsIDTaken = ErrorCode.ERROR;
-                int tReturnedID = -1;
+                ErrorCode tIsEditingSameQuestion = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -456,11 +456,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         tOrderStatusResult = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
                         /// get question ID form it's unique order
-                        tIsIDTaken = GetIDFromOrder(sqlConnection, pSmileyQuestion.Order, ref tReturnedID);
+                        tIsEditingSameQuestion = CheckIfUpdatingSameQuestion(sqlConnection, pSmileyQuestion.Order, pSmileyQuestion.ID);
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsIDTaken == ErrorCode.SUCCESS)
+                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsEditingSameQuestion == ErrorCode.ERROR)
                             return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -515,8 +515,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode tOrderStatusResult = ErrorCode.ERROR;
-                ErrorCode tIsIDTaken = ErrorCode.ERROR;
-                int tReturnedID = -1;
+                ErrorCode tIsEditingSameQuestion = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -529,11 +528,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         tOrderStatusResult = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
                         /// get question ID form it's unique order
-                        tIsIDTaken = GetIDFromOrder(sqlConnection, pSliderQuestion.Order, ref tReturnedID);
+                        tIsEditingSameQuestion = CheckIfUpdatingSameQuestion(sqlConnection, pSliderQuestion.Order, pSliderQuestion.ID);
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsIDTaken == ErrorCode.SUCCESS)
+                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsEditingSameQuestion == ErrorCode.ERROR)
                             return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -590,8 +589,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 ErrorCode tOrderStatusResult = ErrorCode.ERROR;
-                ErrorCode tIsIDTaken = ErrorCode.ERROR;
-                int tReturnedID = -1;
+                ErrorCode tIsUpdatingSameQuestion = ErrorCode.ERROR;
 
                 using (TransactionScope transactionScope = new TransactionScope())
                 {
@@ -604,11 +602,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         tOrderStatusResult = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
 
                         /// get question ID form it's unique order
-                        tIsIDTaken = GetIDFromOrder(sqlConnection, pStarQuestion.Order, ref tReturnedID);
+                        tIsUpdatingSameQuestion = CheckIfUpdatingSameQuestion(sqlConnection, pStarQuestion.Order, pStarQuestion.ID);
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsIDTaken == ErrorCode.SUCCESS)
+                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsUpdatingSameQuestion == ErrorCode.ERROR)
                             return ErrorCode.SQL_VIOLATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
