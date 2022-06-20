@@ -168,8 +168,10 @@
             this.languageSettingsButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.languageSettingsButton.ForeColor = System.Drawing.Color.Transparent;
             this.languageSettingsButton.Name = "languageSettingsButton";
-            this.langaugeSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip"));
+            this.connectionSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip"));
+            this.langaugeSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip1"));
             this.languageSettingsButton.UseVisualStyleBackColor = true;
+            this.languageSettingsButton.Click += new System.EventHandler(this.languageSettingsButton_Click);
             // 
             // SurveyQuestionsConfiguratorForm
             // 

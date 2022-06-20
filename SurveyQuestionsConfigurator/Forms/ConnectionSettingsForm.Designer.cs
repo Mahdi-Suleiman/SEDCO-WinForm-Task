@@ -99,16 +99,16 @@
             // 
             // testConnectionButton
             // 
-            resources.ApplyResources(this.testConnectionButton, "testConnectionButton");
             this.testConnectionButton.AutoEllipsis = true;
+            resources.ApplyResources(this.testConnectionButton, "testConnectionButton");
             this.testConnectionButton.Name = "testConnectionButton";
             this.testConnectionButton.UseVisualStyleBackColor = true;
             this.testConnectionButton.Click += new System.EventHandler(this.testConnectionButton_Click);
             // 
             // label5
             // 
-            resources.ApplyResources(this.label5, "label5");
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
             // ConnectionSettingsForm

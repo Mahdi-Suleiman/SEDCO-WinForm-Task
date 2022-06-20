@@ -22,9 +22,21 @@ namespace SurveyQuestionsConfigurator
     {
         #region Properties
 
+        private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
         private SqlConnectionStringBuilder mBuilder;
         private readonly SettingsManager mSettingsManager;
+
+        private enum ResourceStrings
+        {
+            somethingWrongHappenedError,
+            couldNotSaveSettingsError,
+            testConnectionSucceeded,
+            testConnectionFailedError,
+            emptyInputFieldsError,
+            error,
+            success
+        }
         #endregion
 
         #region Constructor
@@ -32,6 +44,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.ConnectinSettingsFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
 
@@ -41,7 +54,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -63,7 +76,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -79,7 +92,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -95,22 +108,22 @@ namespace SurveyQuestionsConfigurator
                 {
                     if (mSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS)
                     {
-                        ShowMessage.Box("Test connection succeeded.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ShowMessage.Box($"{ResourceStrings.testConnectionSucceeded}", $"{ResourceStrings.success}", MessageBoxButtons.OK, MessageBoxIcon.Information, mLocalResourceManager, mDefaultCulture);
                     }
                     else
                     {
-                        ShowMessage.Box("Test connection failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessage.Box($"{ResourceStrings.testConnectionFailedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                     }
                 }
                 else
                 {
-                    ShowMessage.Box("None of the input fields above can be empty\nNor be more than 128 character max", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessage.Box($"{ResourceStrings.emptyInputFieldsError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 }
 
             }
             catch (Exception ex)
             {
-                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -128,12 +141,12 @@ namespace SurveyQuestionsConfigurator
                 }
                 else
                 {
-                    ShowMessage.Box("Couldn't save settings\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowMessage.Box($"{ResourceStrings.couldNotSaveSettingsError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 }
             }
             catch (Exception ex)
             {
-                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
             }
         }
@@ -157,7 +170,7 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessage.Box("Something wrong happened\nplease try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
                 return ErrorCode.ERROR;
             }

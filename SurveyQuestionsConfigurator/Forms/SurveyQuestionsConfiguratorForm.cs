@@ -548,5 +548,18 @@ namespace SurveyQuestionsConfigurator
         }///End event 
         #endregion
 
+        private void languageSettingsButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LangaugeSettingsForm langaugeSettingsForm = new LangaugeSettingsForm();
+                langaugeSettingsForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
+                Logger.LogError(ex);
+            }
+        }
     }
 }

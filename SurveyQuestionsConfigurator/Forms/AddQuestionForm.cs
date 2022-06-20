@@ -64,8 +64,8 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
-                Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
                 mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.AddQuestionFormStrings", typeof(SurveyQuestionsConfiguratorForm).Assembly);
+                Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
 
                 InitializeComponent();
                 mGeneralQuestionManager = new QuestionManager();

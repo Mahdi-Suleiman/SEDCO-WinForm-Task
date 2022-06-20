@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyQuestionsConfigurator.CommonHelpers;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -19,7 +20,15 @@ namespace SurveyQuestionsConfigurator
         /// </returns>
         public static DialogResult Box(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon, ResourceManager pLocalResourceManager = null, CultureInfo pDefaultCulture = null)
         {
-            return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, pDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);
+            try
+            {
+                return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, pDefaultCulture.ToString() == "ar-JO" ? MessageBoxOptions.RightAlign : MessageBoxOptions.DefaultDesktopOnly);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
         }
     }
 }

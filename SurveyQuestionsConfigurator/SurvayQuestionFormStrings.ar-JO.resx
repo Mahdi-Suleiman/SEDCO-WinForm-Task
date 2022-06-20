@@ -134,7 +134,7 @@
     <value />
   </data>
   <data name="error" xml:space="preserve">
-    <value>خطأ</value>
+    <value>حدث خطأ</value>
   </data>
   <data name="noItemSelected" xml:space="preserve">
     <value>لم يتم تحديد اي سؤال</value>
