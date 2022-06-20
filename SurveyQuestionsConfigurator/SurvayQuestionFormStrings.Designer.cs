@@ -134,12 +134,39 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slider.
+        /// </summary>
+        internal static string SLIDER {
+            get {
+                return ResourceManager.GetString("SLIDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smiley.
+        /// </summary>
+        internal static string SMILEY {
+            get {
+                return ResourceManager.GetString("SMILEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Something wrong happened
         ///please try again.
         /// </summary>
         internal static string somethingWrongHappenedError {
             get {
                 return ResourceManager.GetString("somethingWrongHappenedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Star.
+        /// </summary>
+        internal static string STAR {
+            get {
+                return ResourceManager.GetString("STAR", resourceCulture);
             }
         }
         

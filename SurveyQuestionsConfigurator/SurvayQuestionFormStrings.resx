@@ -142,9 +142,18 @@ Please try again or contact your system administrator</value>
   <data name="pleaseSelectAnItemFirst" xml:space="preserve">
     <value>Please select an item first</value>
   </data>
+  <data name="SLIDER" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="SMILEY" xml:space="preserve">
+    <value>Smiley</value>
+  </data>
   <data name="somethingWrongHappenedError" xml:space="preserve">
     <value>Something wrong happened
 please try again</value>
+  </data>
+  <data name="STAR" xml:space="preserve">
+    <value>Star</value>
   </data>
   <data name="youAreOffilneError" xml:space="preserve">
     <value>You're offilne, please try againt later

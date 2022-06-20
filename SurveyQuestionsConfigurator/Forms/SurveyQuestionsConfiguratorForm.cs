@@ -45,7 +45,10 @@ namespace SurveyQuestionsConfigurator
             noItemSelected,
             pleaseSelectAnItemFirst,
             youAreOffilneError,
-            somethingWrongHappenedError
+            somethingWrongHappenedError,
+            SMILEY,
+            SLIDER,
+            STAR
         }
         #endregion
 
@@ -173,17 +176,23 @@ namespace SurveyQuestionsConfigurator
 
                 foreach (Question q in pQuestionsList)
                 {
+                    string tQuestionType = mLocalResourceManager.GetString($"{(QuestionType)q.Type}");
+
                     /// Add id as a tag to Order column -> use it while it's hidden
-                    tListviewitem = new ListViewItem($"{q.Order}");
-                    tListviewitem.Tag = q.ID;
-                    tListviewitem.SubItems.Add($"{(QuestionType)q.Type}");
-                    tListviewitem.SubItems[0].Tag = q.Type;
+                    tListviewitem = new ListViewItem($"{q.Order}")
+                    {
+                        Tag = q.ID /// SubItems[0].Tag
+                    };
+                    tListviewitem.SubItems.Add($"{tQuestionType}");
+                    /// Save question type in Type's column tag => Decouple what is shown in UI from actual data
+                    tListviewitem.SubItems[1].Tag = q.Type;
                     tListviewitem.SubItems.Add($"{q.Text}");
+
 
                     /// Prevent Cross-thread operation exception
                     if (this.createdQuestions_ListView.InvokeRequired)
                     {
-                        Action safeWrite = delegate { BuildListView(); };
+                        Action safeWrite = delegate { BuildListView(); }; /// new delegate with the original calling function
                         this.createdQuestions_ListView.Invoke(safeWrite);
                     }
                     else
@@ -480,21 +489,21 @@ namespace SurveyQuestionsConfigurator
                 {
                     int tQuestionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].Tag);
                     Question tQuestion = null;
-                    if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text == QuestionType.SMILEY.ToString())
+                    if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.SMILEY.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.SMILEY);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
                         tAddQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text.ToString() == QuestionType.SLIDER.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.SLIDER.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.SLIDER);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
                         tAddQuestionForm.ShowDialog();
                     }
-                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Text.ToString() == QuestionType.STAR.ToString())
+                    else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.STAR.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.STAR);
 
