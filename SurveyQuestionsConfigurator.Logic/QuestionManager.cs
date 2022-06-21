@@ -13,11 +13,18 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class QuestionManager
     {
-        SmileyQuestionRepository mSmileyQuestionRepository = new SmileyQuestionRepository();
-        SliderQuestionRepository mSliderQuestionRepository = new SliderQuestionRepository();
-        StarQuestionRepository mStarQuestionRepository = new StarQuestionRepository();
-        GenericRepository mRepository = new GenericRepository();
+        private SmileyQuestionRepository mSmileyQuestionRepository = new SmileyQuestionRepository();
+        private SliderQuestionRepository mSliderQuestionRepository = new SliderQuestionRepository();
+        private StarQuestionRepository mStarQuestionRepository = new StarQuestionRepository();
+        private GenericRepository mRepository = new GenericRepository();
 
+        public QuestionManager()
+        {
+            mSmileyQuestionRepository = new SmileyQuestionRepository();
+            mSliderQuestionRepository = new SliderQuestionRepository();
+            mStarQuestionRepository = new StarQuestionRepository();
+            mRepository = new GenericRepository();
+        }
         #region Add Question Functions
         /// <summary>
         /// Check values and pass it to repository layer
