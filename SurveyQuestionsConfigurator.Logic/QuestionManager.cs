@@ -460,7 +460,8 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(pQuestion.Text) && pQuestion.Text.Length < 4000) //if Question text is not null or empty 
+                if (!String.IsNullOrWhiteSpace(pQuestion.Text)
+                    && pQuestion.Text.Length < 4000) //if Question text is not null or empty 
                     return ErrorCode.SUCCESS;
 
                 return ErrorCode.ERROR;

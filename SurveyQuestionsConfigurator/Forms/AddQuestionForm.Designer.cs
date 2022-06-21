@@ -58,14 +58,13 @@
             // 
             // pictureBox3
             // 
-            resources.ApplyResources(this.pictureBox3, "pictureBox3");
             this.pictureBox3.Image = global::SurveyQuestionsConfigurator.Properties.Resources.questionMark;
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.TabStop = false;
             // 
             // smilyQuestionDetailsGroupBox
             // 
-            resources.ApplyResources(this.smilyQuestionDetailsGroupBox, "smilyQuestionDetailsGroupBox");
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.errorLabel);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionTextRichTextBox);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.questionOrderLabel);
@@ -79,6 +78,7 @@
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericTextBox1);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericNumericUpDown2);
             this.smilyQuestionDetailsGroupBox.Controls.Add(this.genericLabel2);
+            resources.ApplyResources(this.smilyQuestionDetailsGroupBox, "smilyQuestionDetailsGroupBox");
             this.smilyQuestionDetailsGroupBox.Name = "smilyQuestionDetailsGroupBox";
             this.smilyQuestionDetailsGroupBox.TabStop = false;
             // 
@@ -186,20 +186,20 @@
             // 
             // typeOfQuestionGroupBox
             // 
-            resources.ApplyResources(this.typeOfQuestionGroupBox, "typeOfQuestionGroupBox");
             this.typeOfQuestionGroupBox.Controls.Add(this.questionTypeComboBox);
+            resources.ApplyResources(this.typeOfQuestionGroupBox, "typeOfQuestionGroupBox");
             this.typeOfQuestionGroupBox.Name = "typeOfQuestionGroupBox";
             this.typeOfQuestionGroupBox.TabStop = false;
             // 
             // questionTypeComboBox
             // 
-            resources.ApplyResources(this.questionTypeComboBox, "questionTypeComboBox");
             this.questionTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.questionTypeComboBox.FormattingEnabled = true;
             this.questionTypeComboBox.Items.AddRange(new object[] {
             resources.GetString("questionTypeComboBox.Items"),
             resources.GetString("questionTypeComboBox.Items1"),
             resources.GetString("questionTypeComboBox.Items2")});
+            resources.ApplyResources(this.questionTypeComboBox, "questionTypeComboBox");
             this.questionTypeComboBox.Name = "questionTypeComboBox";
             this.questionTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.questionTypeComboBox_SelectedIndexChanged);
             // 
@@ -212,8 +212,8 @@
             // 
             // cancelButton
             // 
-            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
