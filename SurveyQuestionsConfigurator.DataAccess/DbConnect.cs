@@ -22,8 +22,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
             try
             {
                 mSqlConnectionSettings = ConfigurationManager.ConnectionStrings[0];
-                SqlDependency.Start(mSqlConnectionSettings.ConnectionString);
-
             }
             catch (Exception ex)
             {

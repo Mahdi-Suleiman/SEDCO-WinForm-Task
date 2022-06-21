@@ -29,7 +29,7 @@ namespace SurveyQuestionsConfigurator
         private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
         private readonly ListViewColumnSorter mListViewColumnSorter; /// Used for sorting listview columns on click
-        private readonly QuestionManager mGeneralQuestionManager;
+        private readonly QuestionManager mQuestionManager;
 
         /// <summary>
         /// All translatable message box messages in the "AddQuestionFormStrings" resource file
@@ -66,8 +66,9 @@ namespace SurveyQuestionsConfigurator
 
                 EnterOfflineMode(mLocalResourceManager.GetString($"{ResourceStrings.connecting}"));
 
-                mGeneralQuestionManager = new QuestionManager();
-                mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign itto the ListView control.
+                mQuestionManager = new QuestionManager();
+
+                mListViewColumnSorter = new ListViewColumnSorter(); /// Create an instance of a ListView column sorter and assign it to the ListView control.
                 this.createdQuestions_ListView.ListViewItemSorter = mListViewColumnSorter;
             }
             catch (Exception ex)
@@ -88,11 +89,16 @@ namespace SurveyQuestionsConfigurator
             /// Remove each row
             try
             {
-                /// Prevent Cross-thread operation exception
+                /// Perform thread safe call to prevent Cross-thread operation exception
                 if (createdQuestions_ListView.InvokeRequired)
                 {
-                    Action safeWrite = delegate { ClearListView(); };
-                    createdQuestions_ListView.Invoke(safeWrite);
+                    createdQuestions_ListView.Invoke(new Action(() =>
+                    {
+                        foreach (ListViewItem item in createdQuestions_ListView.Items)
+                        {
+                            item.Remove();
+                        }
+                    }));
                 }
                 else
                 {
@@ -109,6 +115,7 @@ namespace SurveyQuestionsConfigurator
         }
 
         /// <summary>
+        /// This method gets called from QuestionManager(BLL)
         /// Refill list view with data when needed (on Add, Edit, Refresh, ...etc)
         /// </summary>
         /// <param name="stateInfo">
@@ -119,22 +126,22 @@ namespace SurveyQuestionsConfigurator
             /// Connect to quesion table and fill the list view
             try
             {
-                ErrorCode result = ErrorCode.ERROR;
+                ErrorCode tResult = ErrorCode.ERROR;
 
                 List<Question> tQuestionsList = (List<Question>)stateInfo;
                 if (tQuestionsList != null)
                 {
                     /// Show data from current list
-                    result = ErrorCode.SUCCESS;
+                    tResult = ErrorCode.SUCCESS;
                 }
                 else if (stateInfo == null)
                 {
                     /// Show data from DB
                     tQuestionsList = new List<Question>();
-                    result = mGeneralQuestionManager.GetAllQuestions(ref tQuestionsList);
+                    tResult = mQuestionManager.GetAllQuestions(ref tQuestionsList);
                 }
 
-                switch (result)
+                switch (tResult)
                 {
                     ///If connectin to DB is SUCCESS -> Enable buttons and list view
                     case ErrorCode.SUCCESS:
@@ -147,7 +154,7 @@ namespace SurveyQuestionsConfigurator
 
                             ClearListView();
 
-                            /// Prevent Cross-thread operation exception
+                            /// Perform thread safe call to prevent Cross-thread operation exception
                             if (this.createdQuestions_ListView.InvokeRequired)
                             {
                                 this.createdQuestions_ListView.Invoke(new Action(() =>
@@ -165,14 +172,7 @@ namespace SurveyQuestionsConfigurator
                     ///If connectin to DB is NOT SUCCESS -> Disable buttons and list view
                     default:
                         {
-                            string tOfflineMessage = mLocalResourceManager.GetString("youAreOffilne");
-                            if (errorLabel.InvokeRequired)
-                            {
-                                errorLabel.Invoke(new Action(() =>
-                                {
-                                    errorLabel.Top = 309; /// Lift label up so text wont hide under group box control
-                                }));
-                            }
+                            string tOfflineMessage = mLocalResourceManager.GetString($"{ResourceStrings.youAreOffilneError}");
                             EnterOfflineMode(tOfflineMessage);
                             break;
                         }
@@ -193,21 +193,51 @@ namespace SurveyQuestionsConfigurator
             {
                 ListViewItem tListviewitem;/// Used for creating listview items.
 
-                foreach (Question q in pQuestionsList)
+                /// Perform thread safe call to prevent Cross-thread operation exception
+                if (this.createdQuestions_ListView.InvokeRequired)
                 {
-                    string tQuestionType = mLocalResourceManager.GetString($"{(QuestionType)q.Type}");
-
-                    /// Add id as a tag to Order column -> use it while it's hidden
-                    tListviewitem = new ListViewItem($"{q.Order}")
+                    this.createdQuestions_ListView.Invoke(new Action(() =>
                     {
-                        Tag = q.ID /// SubItems[0].Tag
-                    };
-                    tListviewitem.SubItems.Add($"{tQuestionType}");
 
-                    tListviewitem.SubItems[1].Tag = q.Type; /// Save question type in Type's column tag => Decouple what is shown in UI from actual data
-                    tListviewitem.SubItems.Add($"{q.Text}");
+                        foreach (Question q in pQuestionsList)
+                        {
+                            string tQuestionType = mLocalResourceManager.GetString($"{(QuestionType)q.Type}");
 
-                    this.createdQuestions_ListView.Items.Add(tListviewitem); /// add whole row
+                            /// Add id as a tag to Order column -> use it while it's hidden
+                            tListviewitem = new ListViewItem($"{q.Order}")
+                            {
+                                Tag = q.ID /// SubItems[0].Tag
+                            };
+                            tListviewitem.SubItems.Add($"{tQuestionType}");
+
+                            tListviewitem.SubItems[1].Tag = q.Type; /// Save question type in Type's column tag => Decouple what is shown in UI from actual data
+                            tListviewitem.SubItems.Add($"{q.Text}");
+
+                            this.createdQuestions_ListView.Items.Add(tListviewitem); /// add whole row
+                        }
+                        this.createdQuestions_ListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent); /// Used for auto sizing the column to fit content
+                    }));
+                }
+                else
+                {
+                    foreach (Question q in pQuestionsList)
+                    {
+                        string tQuestionType = mLocalResourceManager.GetString($"{(QuestionType)q.Type}");
+
+                        /// Add id as a tag to Order column -> use it while it's hidden
+                        tListviewitem = new ListViewItem($"{q.Order}")
+                        {
+                            Tag = q.ID /// SubItems[0].Tag
+                        };
+                        tListviewitem.SubItems.Add($"{tQuestionType}");
+
+                        tListviewitem.SubItems[1].Tag = q.Type; /// Save question type in Type's column tag => Decouple what is shown in UI from actual data
+                        tListviewitem.SubItems.Add($"{q.Text}");
+
+                        this.createdQuestions_ListView.Items.Add(tListviewitem); /// add whole row
+                    }
+                    this.createdQuestions_ListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent); /// Used for auto sizing the column to fit content
+
                 }
 
             }
@@ -228,6 +258,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                /// Perform thread safe call to prevent Cross-thread operation exception
                 if (this.InvokeRequired)
                 {
                     this.Invoke(new Action(() =>
@@ -253,6 +284,23 @@ namespace SurveyQuestionsConfigurator
                     ClearListView();
                     createdQuestions_ListView.Enabled = false;
                 }
+
+                /// Move error label 5 pixels to fit all message in a neat way
+                if (pOfflineMeesage == mLocalResourceManager.GetString($"{ResourceStrings.youAreOffilneError}"))
+                {
+                    if (errorLabel.InvokeRequired)
+                    {
+                        errorLabel.Invoke(new Action(() =>
+                        {
+                            errorLabel.Top = 309;
+                        }
+                        ));
+                    }
+                    else
+                    {
+                        errorLabel.Top = 309;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -268,6 +316,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                /// Perform thread safe call to prevent Cross-thread operation exception
                 if (this.InvokeRequired)
                 {
                     this.Invoke(new Action(() =>
@@ -306,16 +355,16 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 QuestionManager.refreshDataEvent += BuildListView; /// Add BuildListView() refernce to event
-                mGeneralQuestionManager.RefreshListInstantly(); /// Get show data from DB at load
-                mGeneralQuestionManager.WatchForChanges(); /// Subscribe to data changes event
+                //mQuestionManager.InstantlyRefreshList(); /// Get show data from DB at load
+                mQuestionManager.WatchForChanges(); /// Subscribe to data changes event
 
                 //Thread th = new Thread(() =>
                 //{
-                //    mGeneralQuestionManager.WatchForChanges();
+                //    mQuestionManager.WatchForChanges();
                 //});
                 //th.Start();
-                //mGeneralQuestionManager.WatchForChanges();
-                //ThreadPool.QueueUserWorkItem(mGeneralQuestionManager.WatchForChanges);
+                //mQuestionManager.WatchForChanges();
+                //ThreadPool.QueueUserWorkItem(mQuestionManager.WatchForChanges);
                 /// Build List View on load
                 //BuildListView();
                 //ThreadPool.QueueUserWorkItem(BuildListView);
@@ -395,7 +444,7 @@ namespace SurveyQuestionsConfigurator
                 DialogResult tResult = addQuestionForm.ShowDialog(this);
                 if (tResult == DialogResult.OK)
                 {
-                    mGeneralQuestionManager.RefreshListInstantly();
+                    mQuestionManager.InstantlyRefreshList();
                 }
             }
             catch (Exception ex)
@@ -445,14 +494,14 @@ namespace SurveyQuestionsConfigurator
 
                         /// Get ID from hidden ID column
                         tQuestionId = Convert.ToInt32(selectedItem.Tag);
-                        result = mGeneralQuestionManager.DeleteQuestionByID(tQuestionId);
+                        result = mQuestionManager.DeleteQuestionByID(tQuestionId);
 
                         /// unselect item -> avoid errors
                         createdQuestions_ListView.SelectedIndices.Clear();
                         switch (result)
                         {
                             case ErrorCode.SUCCESS:
-                                mGeneralQuestionManager.RefreshListInstantly();
+                                mQuestionManager.InstantlyRefreshList();
                                 break;
 
                             case ErrorCode.EMPTY:
@@ -486,7 +535,7 @@ namespace SurveyQuestionsConfigurator
             {
                 /// Rebuild List View when refresh button is pressed
                 //BuildListView();
-                ThreadPool.QueueUserWorkItem(BuildListView);
+                mQuestionManager.InstantlyRefreshList();
                 //Thread t = new Thread(BuildListView)
                 //{
                 //    IsBackground = true
@@ -537,7 +586,7 @@ namespace SurveyQuestionsConfigurator
 
                     if (tFormDialogResult == DialogResult.OK)
                     {
-                        ThreadPool.QueueUserWorkItem(BuildListView);
+                        mQuestionManager.InstantlyRefreshList();
                     }
                 }
                 else
@@ -562,7 +611,11 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 ConnectionSettingsForm connectionSettingsForm = new ConnectionSettingsForm();
-                connectionSettingsForm.ShowDialog();
+                DialogResult tResult = connectionSettingsForm.ShowDialog();
+                if (tResult == DialogResult.OK)
+                {
+                    mQuestionManager.InstantlyRefreshList();
+                }
             }
             catch (Exception ex)
             {

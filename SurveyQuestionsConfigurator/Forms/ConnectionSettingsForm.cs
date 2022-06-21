@@ -142,6 +142,7 @@ namespace SurveyQuestionsConfigurator
                 if (isSaved == ErrorCode.SUCCESS)
                 {
                     this.Close();
+                    this.DialogResult = DialogResult.OK;
                 }
                 else
                 {

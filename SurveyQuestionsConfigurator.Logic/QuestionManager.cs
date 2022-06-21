@@ -65,18 +65,31 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             {
                 int AutoRefreshTimer = GetAutoRefreshTimerFromConfig();
                 List<Question> tList = new List<Question>();
-
+                ErrorCode tResult = ErrorCode.ERROR;
                 ThreadPool.QueueUserWorkItem(delegate
                 {
                     while (true)
                     {
                         tList.Clear();
-                        mRepository.GetAll(ref tList);
-
-                        if (mChachedQuestions.SequenceEqual(tList) == false)
+                        tResult = mRepository.GetAll(ref tList);
+                        if (tResult == ErrorCode.SUCCESS)
                         {
-                            ResetChachedQuestionsList(tList);
-                            refreshDataEvent?.Invoke(tList);
+                            if (tList.Count != 0)
+                            {
+                                if (mChachedQuestions.SequenceEqual(tList) == false)
+                                {
+                                    ResetChachedQuestionsList(tList);
+                                    refreshDataEvent?.Invoke(tList);
+                                }
+                            }
+                            else
+                            {
+                                refreshDataEvent?.Invoke(null); /// Notify UI of empty DB
+                            }
+                        }
+                        else
+                        {
+                            refreshDataEvent?.Invoke(null); /// Notify UI of offline DB
                         }
                         Thread.Sleep(AutoRefreshTimer);
                     }
@@ -89,7 +102,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         }
 
-        public void RefreshListInstantly()
+        public void InstantlyRefreshList()
         {
             try
             {
