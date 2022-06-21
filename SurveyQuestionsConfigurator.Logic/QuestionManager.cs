@@ -19,9 +19,19 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         private SliderQuestionRepository mSliderQuestionRepository;
         private StarQuestionRepository mStarQuestionRepository;
         private GenericRepository mRepository;
-        private List<Question> mChachedQuestions;
+        private static List<Question> mChachedQuestions;
 
         #endregion
+
+        private static void ResetChachedQuestionsList(List<Question> pQuestionList)
+        {
+            lock (mChachedQuestions)
+            {
+                mChachedQuestions.Clear();
+                mChachedQuestions.AddRange(pQuestionList);
+            }
+        }
+
 
         #region Constructor
         public QuestionManager()
@@ -58,6 +68,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
                         if (mChachedQuestions.SequenceEqual(tList) == false)
                         {
+                            ResetChachedQuestionsList(tList);
                             refreshData?.Invoke(tList);
                         }
                         Thread.Sleep(5000);
@@ -360,8 +371,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             try
             {
                 var returnValue = mRepository.GetAll(ref questionsList);
-                mChachedQuestions.Clear();
-                mChachedQuestions.AddRange(questionsList);
+                ResetChachedQuestionsList(questionsList);
                 return returnValue;
             }
             catch (Exception ex)

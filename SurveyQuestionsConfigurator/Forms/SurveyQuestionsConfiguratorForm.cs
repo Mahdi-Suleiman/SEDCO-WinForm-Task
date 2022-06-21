@@ -118,13 +118,21 @@ namespace SurveyQuestionsConfigurator
             /// Connect to quesion table and fill the list view
             try
             {
-                //if (stateInfo == null)
-                //List<Question> tQuestionsList = new List<Question>();
-                List<Question> tQuestionsList = (stateInfo == null) ? new List<Question>() : (List<Question>)stateInfo;
-                ///Size text column header to fit the text.
-                //this.createdQuestions_ListView.Columns[2].Width = -2;
+                ErrorCode result = ErrorCode.ERROR;
 
-                ErrorCode result = mGeneralQuestionManager.GetAllQuestions(ref tQuestionsList);
+                List<Question> tQuestionsList = (List<Question>)stateInfo;
+                if (tQuestionsList != null)
+                {
+                    /// Show data from current list
+                    result = ErrorCode.SUCCESS;
+                }
+                else if (stateInfo == null)
+                {
+                    /// Show data from DB
+                    tQuestionsList = new List<Question>();
+                    result = mGeneralQuestionManager.GetAllQuestions(ref tQuestionsList);
+                }
+
                 switch (result)
                 {
                     ///If connectin to DB is SUCCESS -> Enable buttons and list view
@@ -141,8 +149,10 @@ namespace SurveyQuestionsConfigurator
                             /// Prevent Cross-thread operation exception
                             if (this.createdQuestions_ListView.InvokeRequired)
                             {
-                                Action safeWrite = delegate { BuildListView(null); }; /// new delegate with the original calling function
-                                this.createdQuestions_ListView.Invoke(safeWrite);
+                                this.createdQuestions_ListView.Invoke(new Action(() =>
+                               {
+                                   FillListView(tQuestionsList);
+                               }));
                             }
                             else
                             {
