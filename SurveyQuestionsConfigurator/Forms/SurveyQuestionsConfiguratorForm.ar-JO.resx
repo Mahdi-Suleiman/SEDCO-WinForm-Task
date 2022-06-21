@@ -162,6 +162,12 @@
   <data name="settingsButton.ToolTip" xml:space="preserve">
     <value>إعدادات الاتصال</value>
   </data>
+  <data name="languageSettingsButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="languageSettingsButton.ToolTip1" xml:space="preserve">
+    <value>إعدادات اللغة</value>
+  </data>
   <data name="closeApplicationButton.Text" xml:space="preserve">
     <value>اغلاق</value>
   </data>
@@ -185,9 +191,6 @@
   </data>
   <data name="errorLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
-  </data>
-  <data name="button1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1639,7 +1642,7 @@
 </value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+    <value>NoControl</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>

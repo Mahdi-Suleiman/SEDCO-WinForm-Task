@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static SurveyQuestionsConfigurator.Entities.Generic;
 
@@ -13,18 +14,78 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class QuestionManager
     {
-        private SmileyQuestionRepository mSmileyQuestionRepository = new SmileyQuestionRepository();
-        private SliderQuestionRepository mSliderQuestionRepository = new SliderQuestionRepository();
-        private StarQuestionRepository mStarQuestionRepository = new StarQuestionRepository();
-        private GenericRepository mRepository = new GenericRepository();
+        #region Properties & Attributes
+        private SmileyQuestionRepository mSmileyQuestionRepository;
+        private SliderQuestionRepository mSliderQuestionRepository;
+        private StarQuestionRepository mStarQuestionRepository;
+        private GenericRepository mRepository;
+        private List<Question> mChachedQuestions;
 
+        #endregion
+
+        #region Constructor
         public QuestionManager()
         {
-            mSmileyQuestionRepository = new SmileyQuestionRepository();
-            mSliderQuestionRepository = new SliderQuestionRepository();
-            mStarQuestionRepository = new StarQuestionRepository();
-            mRepository = new GenericRepository();
+            try
+            {
+                mSmileyQuestionRepository = new SmileyQuestionRepository();
+                mSliderQuestionRepository = new SliderQuestionRepository();
+                mStarQuestionRepository = new StarQuestionRepository();
+                mRepository = new GenericRepository();
+                mChachedQuestions = new List<Question>();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
         }
+
+        #endregion
+
+        #region Delegates And Events
+        public delegate void DataChanged(object sender);
+        public static event DataChanged refreshData;
+        public void WatchForChanges()
+        {
+            try
+            {
+                ThreadPool.QueueUserWorkItem(delegate
+                {
+                    while (true)
+                    {
+                        List<Question> tList = new List<Question>();
+                        mRepository.GetAll(ref tList);
+
+                        if (mChachedQuestions.SequenceEqual(tList) == false)
+                        {
+                            refreshData?.Invoke(tList);
+                        }
+                        Thread.Sleep(5000);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        public void RefreshListInstantly()
+        {
+            try
+            {
+                refreshData.Invoke(null);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
+        }
+        #endregion
+
+
         #region Add Question Functions
         /// <summary>
         /// Check values and pass it to repository layer
@@ -298,7 +359,10 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                return mRepository.GetAll(ref questionsList);
+                var returnValue = mRepository.GetAll(ref questionsList);
+                mChachedQuestions.Clear();
+                mChachedQuestions.AddRange(questionsList);
+                return returnValue;
             }
             catch (Exception ex)
             {

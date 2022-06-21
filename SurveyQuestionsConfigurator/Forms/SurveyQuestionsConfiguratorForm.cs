@@ -113,13 +113,14 @@ namespace SurveyQuestionsConfigurator
         /// <param name="stateInfo">
         /// Essential for allowing threads to call this function
         /// </param>
-        public void BuildListView(Object stateInfo = null)
+        public void BuildListView(Object stateInfo)
         {
             /// Connect to quesion table and fill the list view
             try
             {
-                List<Question> tQuestionsList = new List<Question>();
-
+                //if (stateInfo == null)
+                //List<Question> tQuestionsList = new List<Question>();
+                List<Question> tQuestionsList = (stateInfo == null) ? new List<Question>() : (List<Question>)stateInfo;
                 ///Size text column header to fit the text.
                 //this.createdQuestions_ListView.Columns[2].Width = -2;
 
@@ -135,11 +136,18 @@ namespace SurveyQuestionsConfigurator
                                 EnterOnlineMode();
                             }
 
-                            /// Remove each row
                             ClearListView();
 
-                            ///Fill the list view
-                            FillListView(tQuestionsList);
+                            /// Prevent Cross-thread operation exception
+                            if (this.createdQuestions_ListView.InvokeRequired)
+                            {
+                                Action safeWrite = delegate { BuildListView(null); }; /// new delegate with the original calling function
+                                this.createdQuestions_ListView.Invoke(safeWrite);
+                            }
+                            else
+                            {
+                                FillListView(tQuestionsList);
+                            }
                             break;
                         }
 
@@ -184,21 +192,11 @@ namespace SurveyQuestionsConfigurator
                         Tag = q.ID /// SubItems[0].Tag
                     };
                     tListviewitem.SubItems.Add($"{tQuestionType}");
-                    /// Save question type in Type's column tag => Decouple what is shown in UI from actual data
-                    tListviewitem.SubItems[1].Tag = q.Type;
+
+                    tListviewitem.SubItems[1].Tag = q.Type; /// Save question type in Type's column tag => Decouple what is shown in UI from actual data
                     tListviewitem.SubItems.Add($"{q.Text}");
 
-
-                    /// Prevent Cross-thread operation exception
-                    if (this.createdQuestions_ListView.InvokeRequired)
-                    {
-                        Action safeWrite = delegate { BuildListView(); }; /// new delegate with the original calling function
-                        this.createdQuestions_ListView.Invoke(safeWrite);
-                    }
-                    else
-                    {
-                        this.createdQuestions_ListView.Items.Add(tListviewitem);
-                    }
+                    this.createdQuestions_ListView.Items.Add(tListviewitem); /// add whole row
                 }
 
             }
@@ -296,6 +294,16 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                QuestionManager.refreshData += BuildListView;
+                mGeneralQuestionManager.WatchForChanges();
+
+                //Thread th = new Thread(() =>
+                //{
+                //    mGeneralQuestionManager.WatchForChanges();
+                //});
+                //th.Start();
+                //mGeneralQuestionManager.WatchForChanges();
+                //ThreadPool.QueueUserWorkItem(mGeneralQuestionManager.WatchForChanges);
                 /// Build List View on load
                 //BuildListView();
                 //ThreadPool.QueueUserWorkItem(BuildListView);
@@ -318,7 +326,7 @@ namespace SurveyQuestionsConfigurator
                 //Thread thr = new Thread(new ThreadStart(BuildListView));
                 //thr.Start();
                 //BuildListView();
-                ThreadPool.QueueUserWorkItem(BuildListView);
+                //ThreadPool.QueueUserWorkItem(BuildListView);
             }
             catch (Exception ex)
             {
@@ -372,7 +380,11 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 AddQuestionForm addQuestionForm = new AddQuestionForm();
-                addQuestionForm.ShowDialog(this);
+                DialogResult tResult = addQuestionForm.ShowDialog(this);
+                if (tResult == DialogResult.OK)
+                {
+                    mGeneralQuestionManager.RefreshListInstantly();
+                }
             }
             catch (Exception ex)
             {
@@ -428,8 +440,8 @@ namespace SurveyQuestionsConfigurator
                         switch (result)
                         {
                             case ErrorCode.SUCCESS:
-                                //BuildListView();
-                                ThreadPool.QueueUserWorkItem(BuildListView);
+                                mGeneralQuestionManager.RefreshListInstantly();
+                                //ThreadPool.QueueUserWorkItem(BuildListView);
                                 break;
 
                             case ErrorCode.ERROR:
@@ -485,7 +497,8 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 AddQuestionForm tAddQuestionForm = null; /// Accept Qustion object
-                if (createdQuestions_ListView.SelectedIndices.Count > 0) //If at least one question is selected
+                DialogResult tFormDialogResult = DialogResult.None; /// Used to instantly refresh list if a question was added or edited successfuly
+                if (createdQuestions_ListView.SelectedIndices.Count > 0) /// If at least one question is selected
                 {
                     int tQuestionId = Convert.ToInt32(createdQuestions_ListView.SelectedItems[0].Tag);
                     Question tQuestion = null;
@@ -494,21 +507,26 @@ namespace SurveyQuestionsConfigurator
                         tQuestion = new Question(tQuestionId, QuestionType.SMILEY);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-                        tAddQuestionForm.ShowDialog();
+                        tFormDialogResult = tAddQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.SLIDER.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.SLIDER);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-                        tAddQuestionForm.ShowDialog();
+                        tFormDialogResult = tAddQuestionForm.ShowDialog();
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.STAR.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.STAR);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-                        tAddQuestionForm.ShowDialog();
+                        tFormDialogResult = tAddQuestionForm.ShowDialog();
+                    }
+
+                    if (tFormDialogResult == DialogResult.OK)
+                    {
+                        ThreadPool.QueueUserWorkItem(BuildListView);
                     }
                 }
                 else

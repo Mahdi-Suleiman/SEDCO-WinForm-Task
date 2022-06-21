@@ -59,5 +59,32 @@ namespace SurveyQuestionsConfigurator.Entities
             this(pQuestion.ID, pQuestion.Order, pQuestion.Text, pQuestion.Type)
         { }
 
+
+        public override bool Equals(object pObject)
+        {
+            if (pObject == null ||
+                this.GetType() != pObject.GetType()
+                )
+            {
+                return false;
+            }
+
+            Question q = (Question)pObject;
+            if (
+                q.ID == this.ID &&
+                q.Order == this.Order &&
+                q.Text == this.Text
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

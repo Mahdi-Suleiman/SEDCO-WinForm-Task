@@ -12,17 +12,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class LanguageSettingsManager
     {
-
-        //public LanguageSettingsManager()
-        //{
-        //    try
-        //    {
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.LogError(ex); /// write error to log file
-        //    }
-        //}
         public ErrorCode LoadLangaugeSettings(ref string pReturnedLangaugeString)
         {
             try

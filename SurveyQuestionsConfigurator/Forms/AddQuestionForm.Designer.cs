@@ -208,7 +208,7 @@
             resources.ApplyResources(this.okButton, "okButton");
             this.okButton.Name = "okButton";
             this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.addQuestionButton_Click);
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 

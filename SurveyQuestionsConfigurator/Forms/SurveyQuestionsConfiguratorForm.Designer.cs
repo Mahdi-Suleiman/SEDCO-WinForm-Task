@@ -40,12 +40,12 @@
             this.addQuestionButton = new System.Windows.Forms.Button();
             this.connectionSettingsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.settingsButton = new System.Windows.Forms.Button();
+            this.languageSettingsButton = new System.Windows.Forms.Button();
             this.closeApplicationButton = new System.Windows.Forms.Button();
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
             this.errorLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.label5 = new System.Windows.Forms.Label();
-            this.languageSettingsButton = new System.Windows.Forms.Button();
             this.langaugeSettingsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.createdQuestionsGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +120,18 @@
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
+            // languageSettingsButton
+            // 
+            this.languageSettingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.language;
+            resources.ApplyResources(this.languageSettingsButton, "languageSettingsButton");
+            this.languageSettingsButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.languageSettingsButton.ForeColor = System.Drawing.Color.Transparent;
+            this.languageSettingsButton.Name = "languageSettingsButton";
+            this.connectionSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip"));
+            this.langaugeSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip1"));
+            this.languageSettingsButton.UseVisualStyleBackColor = true;
+            this.languageSettingsButton.Click += new System.EventHandler(this.languageSettingsButton_Click);
+            // 
             // closeApplicationButton
             // 
             resources.ApplyResources(this.closeApplicationButton, "closeApplicationButton");
@@ -161,18 +173,6 @@
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
-            // languageSettingsButton
-            // 
-            this.languageSettingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.language;
-            resources.ApplyResources(this.languageSettingsButton, "languageSettingsButton");
-            this.languageSettingsButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.languageSettingsButton.ForeColor = System.Drawing.Color.Transparent;
-            this.languageSettingsButton.Name = "languageSettingsButton";
-            this.connectionSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.languageSettingsButton, resources.GetString("languageSettingsButton.ToolTip1"));
-            this.languageSettingsButton.UseVisualStyleBackColor = true;
-            this.languageSettingsButton.Click += new System.EventHandler(this.languageSettingsButton_Click);
-            // 
             // SurveyQuestionsConfiguratorForm
             // 
             resources.ApplyResources(this, "$this");
@@ -186,7 +186,6 @@
             this.MaximizeBox = false;
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Activated += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Activated);
             this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.createdQuestionsGroupBox.PerformLayout();

@@ -96,10 +96,10 @@
     <Compile Include="Forms\ConnectionSettingsForm.Designer.cs">
       <DependentUpon>ConnectionSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LangaugeSettingsForm.cs">
+    <Compile Include="Forms\LangaugeSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LangaugeSettingsForm.Designer.cs">
+    <Compile Include="Forms\LangaugeSettingsForm.Designer.cs">
       <DependentUpon>LangaugeSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LanguageSettingsFormStrings.Designer.cs">
@@ -164,10 +164,10 @@
     <EmbeddedResource Include="Forms\SurveyQuestionsConfiguratorForm.resx">
       <DependentUpon>SurveyQuestionsConfiguratorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LangaugeSettingsForm.ar-JO.resx">
+    <EmbeddedResource Include="Forms\LangaugeSettingsForm.ar-JO.resx">
       <DependentUpon>LangaugeSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LangaugeSettingsForm.resx">
+    <EmbeddedResource Include="Forms\LangaugeSettingsForm.resx">
       <DependentUpon>LangaugeSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LanguageSettingsFormStrings.ar-JO.resx" />
