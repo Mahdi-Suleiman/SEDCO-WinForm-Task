@@ -24,13 +24,14 @@ namespace SurveyQuestionsConfigurator
 
         private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
-        private readonly LanguageSettingsManager mLanguageSettingsManager;
 
-        private ComboBoxLanguages mLoadedComboBoxLanguage;
+        private ComboBoxLanguages mLoadedComboBoxLanguage; /// used to check if selected langauge is changed
         private readonly string mConfigEnglishLangauge;
         private readonly string mConfigArabicLangauge;
-        private string mReturnedLangaugeValue;
 
+        private readonly Configuration tConfigFile;
+        private readonly KeyValueConfigurationCollection tSettings;
+        private readonly string mDefaultCultureString;
         /// <summary>
         /// All translatable message box messages in the "LanguageSettingsFormStrings" resource file
         /// </summary>
@@ -59,13 +60,16 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.LanguageSettingsFormStrings", typeof(LangaugeSettingsForm).Assembly);
+                mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+
                 mLoadedComboBoxLanguage = ComboBoxLanguages.NoLanguage;
                 mConfigEnglishLangauge = "en-US";
                 mConfigArabicLangauge = "ar-JO";
 
-                mLanguageSettingsManager = new LanguageSettingsManager();
-                mLocalResourceManager = new ResourceManager("SurveyQuestionsConfigurator.LanguageSettingsFormStrings", typeof(LangaugeSettingsForm).Assembly);
-                mDefaultCulture = new CultureInfo(ConfigurationManager.AppSettings["DefaultCulture"]);
+                tConfigFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                tSettings = tConfigFile.AppSettings.Settings;
+                mDefaultCultureString = "DefaultCulture";
 
                 Thread.CurrentThread.CurrentUICulture = mDefaultCulture;
 
@@ -134,7 +138,7 @@ namespace SurveyQuestionsConfigurator
                     /// Saving english langauge
                     if (tCurrentSelectedIndex == ComboBoxLanguages.English)
                     {
-                        ErrorCode tResult = mLanguageSettingsManager.SaveLangaugeSettings(mConfigEnglishLangauge);
+                        ErrorCode tResult = SaveLangaugeSettings(mConfigEnglishLangauge);
                         if (tResult == ErrorCode.SUCCESS)
                         {
                             Application.Restart();
@@ -147,7 +151,7 @@ namespace SurveyQuestionsConfigurator
                     /// Saving arabic langauge
                     else if (tCurrentSelectedIndex == ComboBoxLanguages.Arabic)
                     {
-                        ErrorCode tResult = mLanguageSettingsManager.SaveLangaugeSettings(mConfigArabicLangauge);
+                        ErrorCode tResult = SaveLangaugeSettings(mConfigArabicLangauge);
                         if (tResult == ErrorCode.SUCCESS)
                         {
                             Application.Restart();
@@ -177,25 +181,60 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                ErrorCode result = mLanguageSettingsManager.LoadLangaugeSettings(ref mReturnedLangaugeValue);
-                if (result == ErrorCode.SUCCESS)
+                string tReturnedLangaugeValue = GetSavedLangaugeSettings();
+
+
+
+                if (tReturnedLangaugeValue == mConfigEnglishLangauge)
                 {
-                    if (mReturnedLangaugeValue == mConfigEnglishLangauge)
-                    {
-                        languageComboBox.SelectedIndex = 0;
-                        mLoadedComboBoxLanguage = (ComboBoxLanguages)languageComboBox.SelectedIndex;
-                    }
-                    else if (mReturnedLangaugeValue == mConfigArabicLangauge)
-                    {
-                        languageComboBox.SelectedIndex = 1;
-                        mLoadedComboBoxLanguage = (ComboBoxLanguages)languageComboBox.SelectedIndex;
-                    }
+                    languageComboBox.SelectedIndex = (int)ComboBoxLanguages.English;
+                    mLoadedComboBoxLanguage = (ComboBoxLanguages)languageComboBox.SelectedIndex;
+                }
+                else if (tReturnedLangaugeValue == mConfigArabicLangauge)
+                {
+                    languageComboBox.SelectedIndex = (int)ComboBoxLanguages.Arabic;
+                    mLoadedComboBoxLanguage = (ComboBoxLanguages)languageComboBox.SelectedIndex;
+                }
+                else
+                {
+                    languageComboBox.SelectedIndex = (int)ComboBoxLanguages.NoLanguage;
                 }
             }
             catch (Exception ex)
             {
                 ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex);
+            }
+        }
+
+        private string GetSavedLangaugeSettings()
+        {
+            try
+            {
+                return tSettings[mDefaultCultureString].Value;
+            }
+            catch (Exception ex)
+            {
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
+                Logger.LogError(ex);
+                return String.Empty;
+            }
+        }
+
+        private ErrorCode SaveLangaugeSettings(string pLangaugeToSave)
+        {
+            try
+            {
+                tSettings[mDefaultCultureString].Value = pLangaugeToSave;
+                tConfigFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(tConfigFile.AppSettings.SectionInformation.Name);
+
+                return ErrorCode.SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex); /// write error to log file
+                return ErrorCode.ERROR;
             }
         }
 

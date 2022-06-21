@@ -3,6 +3,7 @@ using SurveyQuestionsConfigurator.Entities;
 using SurveyQuestionsConfigurator.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -53,12 +54,17 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #endregion
 
         #region Delegates And Events
+
         public delegate void DataChanged(object sender);
         public static event DataChanged refreshData;
+
+
         public void WatchForChanges()
         {
             try
             {
+                int AutoRefreshTimer = GetAutoRefreshTimerFromConfig();
+
                 ThreadPool.QueueUserWorkItem(delegate
                 {
                     while (true)
@@ -71,7 +77,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                             ResetChachedQuestionsList(tList);
                             refreshData?.Invoke(tList);
                         }
-                        Thread.Sleep(5000);
+                        Thread.Sleep(AutoRefreshTimer);
                     }
                 });
             }
@@ -92,6 +98,30 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             {
                 Logger.LogError(ex);
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Get auto refresh timer from config file
+        /// </summary>
+        /// <returns>
+        /// int AutoRefreshTimer
+        /// </returns>
+        private int GetAutoRefreshTimerFromConfig()
+        {
+            try
+            {
+                string tSectionName = "AutoRefreshTimer";
+                var tConfigFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var tSettings = tConfigFile.AppSettings.Settings;
+                string tValue = tSettings[tSectionName].Value;
+                return Int32.Parse(tValue);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                int tDefaultTimer = 30000;
+                return tDefaultTimer;
             }
         }
         #endregion
