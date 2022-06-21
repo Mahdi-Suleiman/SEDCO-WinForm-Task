@@ -18,6 +18,7 @@ GO
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CheckIfOrderExist]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
 BEGIN
+SET NOEXEC OFF
 CREATE FUNCTION [dbo].[CheckIfOrderExist] (@ORDER INT)
 RETURNS INT
 AS
@@ -31,8 +32,13 @@ BEGIN
 		RETURN @SUCCESS
 
 	RETURN @SQL_VIOLATION
-END;
 END
+GO
+SET NOEXEC ON
+GO
+END
+
+
 GO
 /****** Object:  UserDefinedFunction [dbo].[GetIDFromOrder]    Script Date: 15/06/2022 20:28:01 ******/
 SET ANSI_NULLS ON

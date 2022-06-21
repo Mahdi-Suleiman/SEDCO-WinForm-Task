@@ -672,14 +672,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         };
                         cmd.Parameters.AddRange(parameters);
 
-                        return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR;
+                        return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.EMPTY;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.ERROR;
+                return Generic.ErrorCode.SQL_VIOLATION;
             }
 
         } /// Function end

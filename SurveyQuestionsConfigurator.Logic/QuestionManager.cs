@@ -56,7 +56,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         #region Delegates And Events
 
         public delegate void DataChanged(object sender);
-        public static event DataChanged refreshData;
+        public static event DataChanged refreshDataEvent;
 
 
         public void WatchForChanges()
@@ -64,18 +64,19 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             try
             {
                 int AutoRefreshTimer = GetAutoRefreshTimerFromConfig();
+                List<Question> tList = new List<Question>();
 
                 ThreadPool.QueueUserWorkItem(delegate
                 {
                     while (true)
                     {
-                        List<Question> tList = new List<Question>();
+                        tList.Clear();
                         mRepository.GetAll(ref tList);
 
                         if (mChachedQuestions.SequenceEqual(tList) == false)
                         {
                             ResetChachedQuestionsList(tList);
-                            refreshData?.Invoke(tList);
+                            refreshDataEvent?.Invoke(tList);
                         }
                         Thread.Sleep(AutoRefreshTimer);
                     }
@@ -92,7 +93,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                refreshData.Invoke(null);
+                refreshDataEvent.Invoke(null);
             }
             catch (Exception ex)
             {
@@ -427,7 +428,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
-                Question question = new Question(pQuestionId);
                 if (pQuestionId > 0)
                 {
                     return mRepository.Delete(pQuestionId);

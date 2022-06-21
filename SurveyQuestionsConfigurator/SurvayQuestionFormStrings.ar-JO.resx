@@ -142,6 +142,10 @@
   <data name="pleaseSelectAnItemFirst" xml:space="preserve">
     <value>الرجاء اختيار سؤال اولًا</value>
   </data>
+  <data name="questionDoesNotExist" xml:space="preserve">
+    <value>السؤال غير موجود أو تم حذفه بالفعل
+قم بالتحديث وحاول مرة أخرى</value>
+  </data>
   <data name="SLIDER" xml:space="preserve">
     <value>شريط</value>
   </data>

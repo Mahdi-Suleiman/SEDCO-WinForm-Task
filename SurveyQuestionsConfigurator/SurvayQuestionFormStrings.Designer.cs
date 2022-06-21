@@ -134,6 +134,16 @@ namespace SurveyQuestionsConfigurator {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Question does not exist or it has already been deleted
+        ///Refresh and try again.
+        /// </summary>
+        internal static string questionDoesNotExist {
+            get {
+                return ResourceManager.GetString("questionDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Slider.
         /// </summary>
         internal static string SLIDER {

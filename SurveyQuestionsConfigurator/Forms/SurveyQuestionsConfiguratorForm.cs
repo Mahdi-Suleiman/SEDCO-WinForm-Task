@@ -46,6 +46,7 @@ namespace SurveyQuestionsConfigurator
             pleaseSelectAnItemFirst,
             youAreOffilneError,
             somethingWrongHappenedError,
+            questionDoesNotExist,
             SMILEY,
             SLIDER,
             STAR
@@ -304,8 +305,9 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                QuestionManager.refreshData += BuildListView;
-                mGeneralQuestionManager.WatchForChanges();
+                QuestionManager.refreshDataEvent += BuildListView; /// Add BuildListView() refernce to event
+                mGeneralQuestionManager.RefreshListInstantly(); /// Get show data from DB at load
+                mGeneralQuestionManager.WatchForChanges(); /// Subscribe to data changes event
 
                 //Thread th = new Thread(() =>
                 //{
@@ -451,11 +453,10 @@ namespace SurveyQuestionsConfigurator
                         {
                             case ErrorCode.SUCCESS:
                                 mGeneralQuestionManager.RefreshListInstantly();
-                                //ThreadPool.QueueUserWorkItem(BuildListView);
                                 break;
 
-                            case ErrorCode.ERROR:
-                                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
+                            case ErrorCode.EMPTY:
+                                ShowMessage.Box($"{ResourceStrings.questionDoesNotExist}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                                 break;
 
                             default:
