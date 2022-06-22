@@ -17,6 +17,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
     {
         ///get tSqlConnection string information from App.config
         private ConnectionStringSettings mSqlConnectionSettings;
+
+        #region Constructor
         public DbConnect()
         {
             try
@@ -29,6 +31,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             }
         }
 
+        #endregion
 
         #region Common Methods
 
