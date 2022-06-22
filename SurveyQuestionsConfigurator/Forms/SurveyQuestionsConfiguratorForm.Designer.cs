@@ -54,14 +54,11 @@
             // 
             resources.ApplyResources(this.refreshListButton, "refreshListButton");
             this.refreshListButton.Name = "refreshListButton";
-            this.connectionSettingsToolTip.SetToolTip(this.refreshListButton, resources.GetString("refreshListButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.refreshListButton, resources.GetString("refreshListButton.ToolTip1"));
             this.refreshListButton.UseVisualStyleBackColor = true;
             this.refreshListButton.Click += new System.EventHandler(this.refreshDataButton_Click);
             // 
             // createdQuestions_ListView
             // 
-            resources.ApplyResources(this.createdQuestions_ListView, "createdQuestions_ListView");
             this.createdQuestions_ListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.createdQuestions_ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
@@ -70,11 +67,10 @@
             this.createdQuestions_ListView.FullRowSelect = true;
             this.createdQuestions_ListView.GridLines = true;
             this.createdQuestions_ListView.HideSelection = false;
+            resources.ApplyResources(this.createdQuestions_ListView, "createdQuestions_ListView");
             this.createdQuestions_ListView.MultiSelect = false;
             this.createdQuestions_ListView.Name = "createdQuestions_ListView";
             this.createdQuestions_ListView.TileSize = new System.Drawing.Size(170, 60);
-            this.connectionSettingsToolTip.SetToolTip(this.createdQuestions_ListView, resources.GetString("createdQuestions_ListView.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.createdQuestions_ListView, resources.GetString("createdQuestions_ListView.ToolTip1"));
             this.createdQuestions_ListView.UseCompatibleStateImageBehavior = false;
             this.createdQuestions_ListView.View = System.Windows.Forms.View.Details;
             this.createdQuestions_ListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.createdQuestions_ListView_ColumnClick);
@@ -96,8 +92,6 @@
             // 
             resources.ApplyResources(this.deleteQuestionButton, "deleteQuestionButton");
             this.deleteQuestionButton.Name = "deleteQuestionButton";
-            this.connectionSettingsToolTip.SetToolTip(this.deleteQuestionButton, resources.GetString("deleteQuestionButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.deleteQuestionButton, resources.GetString("deleteQuestionButton.ToolTip1"));
             this.deleteQuestionButton.UseVisualStyleBackColor = true;
             this.deleteQuestionButton.Click += new System.EventHandler(this.deleteQuestionButton_Click);
             // 
@@ -105,8 +99,6 @@
             // 
             resources.ApplyResources(this.editQuestionButton, "editQuestionButton");
             this.editQuestionButton.Name = "editQuestionButton";
-            this.connectionSettingsToolTip.SetToolTip(this.editQuestionButton, resources.GetString("editQuestionButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.editQuestionButton, resources.GetString("editQuestionButton.ToolTip1"));
             this.editQuestionButton.UseVisualStyleBackColor = true;
             this.editQuestionButton.Click += new System.EventHandler(this.editQuestionButton_Click);
             // 
@@ -114,27 +106,24 @@
             // 
             resources.ApplyResources(this.addQuestionButton, "addQuestionButton");
             this.addQuestionButton.Name = "addQuestionButton";
-            this.connectionSettingsToolTip.SetToolTip(this.addQuestionButton, resources.GetString("addQuestionButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.addQuestionButton, resources.GetString("addQuestionButton.ToolTip1"));
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
             // settingsButton
             // 
-            resources.ApplyResources(this.settingsButton, "settingsButton");
             this.settingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.gear;
+            resources.ApplyResources(this.settingsButton, "settingsButton");
             this.settingsButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.settingsButton.ForeColor = System.Drawing.Color.Transparent;
             this.settingsButton.Name = "settingsButton";
             this.connectionSettingsToolTip.SetToolTip(this.settingsButton, resources.GetString("settingsButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.settingsButton, resources.GetString("settingsButton.ToolTip1"));
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // languageSettingsButton
             // 
-            resources.ApplyResources(this.languageSettingsButton, "languageSettingsButton");
             this.languageSettingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.language;
+            resources.ApplyResources(this.languageSettingsButton, "languageSettingsButton");
             this.languageSettingsButton.Cursor = System.Windows.Forms.Cursors.Default;
             this.languageSettingsButton.ForeColor = System.Drawing.Color.Transparent;
             this.languageSettingsButton.Name = "languageSettingsButton";
@@ -147,14 +136,11 @@
             // 
             resources.ApplyResources(this.closeApplicationButton, "closeApplicationButton");
             this.closeApplicationButton.Name = "closeApplicationButton";
-            this.connectionSettingsToolTip.SetToolTip(this.closeApplicationButton, resources.GetString("closeApplicationButton.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.closeApplicationButton, resources.GetString("closeApplicationButton.ToolTip1"));
             this.closeApplicationButton.UseVisualStyleBackColor = true;
             this.closeApplicationButton.Click += new System.EventHandler(this.closeApplicationButton_Click);
             // 
             // createdQuestionsGroupBox
             // 
-            resources.ApplyResources(this.createdQuestionsGroupBox, "createdQuestionsGroupBox");
             this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.errorLabel);
             this.createdQuestionsGroupBox.Controls.Add(this.createdQuestions_ListView);
@@ -162,10 +148,9 @@
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.refreshListButton);
             this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
+            resources.ApplyResources(this.createdQuestionsGroupBox, "createdQuestionsGroupBox");
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
             this.createdQuestionsGroupBox.TabStop = false;
-            this.connectionSettingsToolTip.SetToolTip(this.createdQuestionsGroupBox, resources.GetString("createdQuestionsGroupBox.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.createdQuestionsGroupBox, resources.GetString("createdQuestionsGroupBox.ToolTip1"));
             // 
             // errorLabel
             // 
@@ -173,26 +158,20 @@
             this.errorLabel.BackColor = System.Drawing.Color.Transparent;
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLabel.Name = "errorLabel";
-            this.connectionSettingsToolTip.SetToolTip(this.errorLabel, resources.GetString("errorLabel.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.errorLabel, resources.GetString("errorLabel.ToolTip1"));
             // 
             // menuStrip1
             // 
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            this.langaugeSettingsToolTip.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip"));
-            this.connectionSettingsToolTip.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip1"));
             // 
             // label5
             // 
-            resources.ApplyResources(this.label5, "label5");
             this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label5.Cursor = System.Windows.Forms.Cursors.Default;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.connectionSettingsToolTip.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this.label5, resources.GetString("label5.ToolTip1"));
             // 
             // SurveyQuestionsConfiguratorForm
             // 
@@ -207,8 +186,6 @@
             this.MaximizeBox = false;
             this.Name = "SurveyQuestionsConfiguratorForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.connectionSettingsToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
-            this.langaugeSettingsToolTip.SetToolTip(this, resources.GetString("$this.ToolTip1"));
             this.Load += new System.EventHandler(this.SurveyQuestionsConfiguratorForm_Load);
             this.createdQuestionsGroupBox.ResumeLayout(false);
             this.createdQuestionsGroupBox.PerformLayout();

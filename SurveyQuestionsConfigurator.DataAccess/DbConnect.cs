@@ -39,7 +39,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <param name="pOrder"></param>
         /// <returns>
         /// ErrorCode.SUCCESS
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         private ErrorCode CheckIfOrderExist(SqlConnection pSqlConnection, int pOrder)
         {
@@ -221,7 +221,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode InsertSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
@@ -242,8 +242,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         tOrderStatusResult = CheckIfOrderExist(sqlConnection, pSmileyQuestion.Order);
 
                         /// return if order already exist
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION)
-                            return ErrorCode.SQL_VIOLATION;
+                        if (tOrderStatusResult == ErrorCode.VALIDATION)
+                            return ErrorCode.VALIDATION;
 
                         /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -288,7 +288,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode InsertSliderQuestion(SliderQuestion pSliderQuestion)
         {
@@ -309,8 +309,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         tOrderStatusResult = CheckIfOrderExist(sqlConnection, pSliderQuestion.Order);
 
                         /// return if order already exist
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION)
-                            return ErrorCode.SQL_VIOLATION;
+                        if (tOrderStatusResult == ErrorCode.VALIDATION)
+                            return ErrorCode.VALIDATION;
 
                         /// if order is not in use -> insert a question with the same order 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
@@ -359,7 +359,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode InsertStarQuestion(StarQuestion pStarQuestion)
         {
@@ -379,8 +379,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         tOrderStatusResult = CheckIfOrderExist(sqlConnection, pStarQuestion.Order);
 
                         /// return if order already exist
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION)
-                            return ErrorCode.SQL_VIOLATION;
+                        if (tOrderStatusResult == ErrorCode.VALIDATION)
+                            return ErrorCode.VALIDATION;
 
 
                         /// if order is not in use -> insert a question with the same order 
@@ -433,7 +433,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode UpdateSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
@@ -458,8 +458,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsEditingSameQuestion == ErrorCode.ERROR)
-                            return ErrorCode.SQL_VIOLATION;
+                        if (tOrderStatusResult == ErrorCode.VALIDATION && tIsEditingSameQuestion == ErrorCode.ERROR)
+                            return ErrorCode.VALIDATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
@@ -506,7 +506,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode UpdateSliderQuestion(SliderQuestion pSliderQuestion)
         {
@@ -530,8 +530,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsEditingSameQuestion == ErrorCode.ERROR)
-                            return ErrorCode.SQL_VIOLATION;
+                        if (tOrderStatusResult == ErrorCode.VALIDATION && tIsEditingSameQuestion == ErrorCode.ERROR)
+                            return ErrorCode.VALIDATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
@@ -580,7 +580,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode UpdateStarQuestion(StarQuestion pStarQuestion)
         {
@@ -604,8 +604,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
 
                         /// return if order already exist && the order is taken by another questionID
                         /// if ediitng the same question -> order is already taken BUT the same question is being edited which is OKAY
-                        if (tOrderStatusResult == ErrorCode.SQL_VIOLATION && tIsUpdatingSameQuestion == ErrorCode.ERROR)
-                            return ErrorCode.SQL_VIOLATION;
+                        if (tOrderStatusResult == ErrorCode.VALIDATION && tIsUpdatingSameQuestion == ErrorCode.ERROR)
+                            return ErrorCode.VALIDATION;
 
                         using (SqlCommand cmd = sqlConnection.CreateCommand())
                         {
@@ -670,14 +670,14 @@ namespace SurveyQuestionsConfigurator.DataAccess
                         };
                         cmd.Parameters.AddRange(parameters);
 
-                        return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.EMPTY;
+                        return cmd.ExecuteNonQuery() > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.VALIDATION;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
+                return Generic.ErrorCode.ERROR;
             }
 
         } /// Function end
@@ -797,14 +797,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             pSmileyQuestion = new SmileyQuestion(tID, tOrder, tText, tType, tNumberOfSmileyFaces);
                         }
 
-                        return pSmileyQuestion.NumberOfSmileyFaces >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+                        return pSmileyQuestion.NumberOfSmileyFaces > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.VALIDATION; /// RETURN INT32
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
@@ -869,14 +864,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                                 tStartValue, tEndValue, tStartValueCaption, tEndValueCaption);
                         }
 
-                        return pSliderQuestion.StartValue >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+                        return pSliderQuestion.StartValue > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.VALIDATION; /// RETURN INT32
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {
@@ -937,14 +927,9 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             pStarQuestion = new StarQuestion(tID, tOrder, tText, tType, tNumberOfStars);
                         }
 
-                        return pStarQuestion.NumberOfStars >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+                        return pStarQuestion.NumberOfStars > 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.VALIDATION; /// RETURN INT32
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {

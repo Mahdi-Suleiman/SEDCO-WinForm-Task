@@ -12,7 +12,7 @@ namespace SurveyQuestionsConfigurator.Entities
         {
             ERROR = -1,
             SUCCESS = 1,
-            SQL_VIOLATION = 2,
+            VALIDATION = 2,
             EMPTY = 3
         }
 
@@ -35,7 +35,6 @@ namespace SurveyQuestionsConfigurator.Entities
             StartValueCaption,
             EndValueCaption,
             ReturnValue
-
         }
     }
 }

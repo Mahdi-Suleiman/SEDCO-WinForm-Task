@@ -190,23 +190,20 @@ namespace SurveyQuestionsConfigurator
                         questionTextRichTextBox.Text = tSmileyQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(tSmileyQuestion.NumberOfSmileyFaces);
                         break;
-                    case ErrorCode.EMPTY:
+
+                    case ErrorCode.VALIDATION:
                         ShowMessage.Box($"{ResourceStrings.questionWasNotFoundOrDeletedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                         this.Close();
                         break;
-                    case ErrorCode.SQL_VIOLATION:
+
+                    default:
                         ShowMessage.Box($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                        this.Close();
-                        break;
-                    case ErrorCode.ERROR:
-                        ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                         this.Close();
                         break;
                 }
             }
             catch (Exception ex)
             {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex); //write error to log file
             }
         } /// End function
@@ -235,15 +232,11 @@ namespace SurveyQuestionsConfigurator
                         genericTextBox1.Text = tSliderQuestion.StartValueCaption.ToString();
                         genericTextBox2.Text = tSliderQuestion.EndValueCaption.ToString();
                         break;
-                    case ErrorCode.EMPTY:
-                        ShowMessage.Box($"{ResourceStrings.questionWasNotFoundOrDeletedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                        this.Close();
-                        break;
-                    case ErrorCode.SQL_VIOLATION:
+                    case ErrorCode.VALIDATION:
                         ShowMessage.Box($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                         this.Close();
                         break;
-                    case ErrorCode.ERROR:
+                    default:
                         ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                         this.Close();
                         break;
@@ -251,7 +244,6 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex); //write error to log file
             }
         } /// End function
@@ -277,15 +269,11 @@ namespace SurveyQuestionsConfigurator
                         questionTextRichTextBox.Text = tStarQuestion.Text.ToString();
                         genericNumericUpDown1.Value = Convert.ToDecimal(tStarQuestion.NumberOfStars);
                         break;
-                    case ErrorCode.EMPTY:
-                        ShowMessage.Box($"{ResourceStrings.questionWasNotFoundOrDeletedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                        this.Close();
-                        break;
-                    case ErrorCode.SQL_VIOLATION:
+                    case ErrorCode.VALIDATION:
                         ShowMessage.Box($"{ResourceStrings.contactSystemAdministratorError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                         this.Close();
                         break;
-                    case ErrorCode.ERROR:
+                    default:
                         ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                         this.Close();
                         break;
@@ -293,7 +281,6 @@ namespace SurveyQuestionsConfigurator
             }
             catch (Exception ex)
             {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 Logger.LogError(ex); //write error to log file
             }
         }/// End function
@@ -449,10 +436,10 @@ namespace SurveyQuestionsConfigurator
                         case ErrorCode.SUCCESS:
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
-                        case ErrorCode.SQL_VIOLATION:
+                        case ErrorCode.VALIDATION:
                             errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
-                        case ErrorCode.ERROR:
+                        default:
                             errorLabel.Text = "";
                             ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                             break;
@@ -503,10 +490,10 @@ namespace SurveyQuestionsConfigurator
                         case ErrorCode.SUCCESS:
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
-                        case ErrorCode.SQL_VIOLATION:
+                        case ErrorCode.VALIDATION:
                             errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
-                        case ErrorCode.ERROR:
+                        default:
                             errorLabel.Text = "";
                             ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                             break;
@@ -556,10 +543,10 @@ namespace SurveyQuestionsConfigurator
                         case ErrorCode.SUCCESS:
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
-                        case ErrorCode.SQL_VIOLATION:
+                        case ErrorCode.VALIDATION:
                             errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
-                        case ErrorCode.ERROR:
+                        default:
                             errorLabel.Text = "";
                             ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                             break;
@@ -610,10 +597,10 @@ namespace SurveyQuestionsConfigurator
                         case ErrorCode.SUCCESS:
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
-                        case ErrorCode.SQL_VIOLATION:
+                        case ErrorCode.VALIDATION:
                             errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
-                        case ErrorCode.ERROR:
+                        default:
                             errorLabel.Text = "";
                             ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                             break;
@@ -665,10 +652,10 @@ namespace SurveyQuestionsConfigurator
                         case ErrorCode.SUCCESS:
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
-                        case ErrorCode.SQL_VIOLATION:
+                        case ErrorCode.VALIDATION:
                             errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
-                        case ErrorCode.ERROR:
+                        default:
                             errorLabel.Text = "";
                             ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                             break;
@@ -717,10 +704,10 @@ namespace SurveyQuestionsConfigurator
                         case ErrorCode.SUCCESS:
                             errorLabel.Text = "";
                             return ErrorCode.SUCCESS;
-                        case ErrorCode.SQL_VIOLATION:
+                        case ErrorCode.VALIDATION:
                             errorLabel.Text = mLocalResourceManager.GetString($"{ResourceStrings.questionOrderAlreadyInUseError}");
                             break;
-                        case ErrorCode.ERROR:
+                        default:
                             errorLabel.Text = "";
                             ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                             break;

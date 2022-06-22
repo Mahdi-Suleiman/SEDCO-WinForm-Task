@@ -334,19 +334,7 @@ namespace SurveyQuestionsConfigurator
             try
             {
                 QuestionManager.refreshDataEvent += BuildListView; /// Add BuildListView() refernce to event
-                //mQuestionManager.InstantlyRefreshList(); /// Get show data from DB at load
                 mQuestionManager.WatchForChanges(); /// Subscribe to data changes event
-
-                //Thread th = new Thread(() =>
-                //{
-                //    mQuestionManager.WatchForChanges();
-                //});
-                //th.Start();
-                //mQuestionManager.WatchForChanges();
-                //ThreadPool.QueueUserWorkItem(mQuestionManager.WatchForChanges);
-                /// Build List View on load
-                //BuildListView();
-                //ThreadPool.QueueUserWorkItem(BuildListView);
             }
             catch (Exception ex)
             {
@@ -483,7 +471,7 @@ namespace SurveyQuestionsConfigurator
                                 mQuestionManager.InstantlyRefreshList();
                                 break;
 
-                            case ErrorCode.EMPTY:
+                            case ErrorCode.VALIDATION:
                                 ShowMessage.Box($"{ResourceStrings.questionDoesNotExist}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                                 break;
 
@@ -512,14 +500,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                /// Rebuild List View when refresh button is pressed
-                //BuildListView();
                 mQuestionManager.InstantlyRefreshList();
-                //Thread t = new Thread(BuildListView)
-                //{
-                //    IsBackground = true
-                //};
-                //t.Start();
             }
             catch (Exception ex)
             {
@@ -546,20 +527,26 @@ namespace SurveyQuestionsConfigurator
                         tQuestion = new Question(tQuestionId, QuestionType.SMILEY);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-                        tFormDialogResult = tAddQuestionForm.ShowDialog();
+
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.SLIDER.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.SLIDER);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-                        tFormDialogResult = tAddQuestionForm.ShowDialog();
+
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.STAR.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.STAR);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
+
+                    }
+
+                    /// prevent exception if form was closed due to some error
+                    if (!tAddQuestionForm.IsDisposed)
+                    {
                         tFormDialogResult = tAddQuestionForm.ShowDialog();
                     }
 
@@ -618,8 +605,10 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }///End event 
-        #endregion
 
+        /// <summary>
+        /// Show language settings form
+        /// </summary>
         private void languageSettingsButton_Click(object sender, EventArgs e)
         {
             try
@@ -633,5 +622,7 @@ namespace SurveyQuestionsConfigurator
                 Logger.LogError(ex);
             }
         }
+
+        #endregion
     }
 }

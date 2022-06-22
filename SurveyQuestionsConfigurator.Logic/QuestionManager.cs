@@ -177,7 +177,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode InsertSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
@@ -205,7 +205,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode InsertSliderQuestion(SliderQuestion pSliderQuestion)
         {
@@ -233,7 +233,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode InsertStarQuestion(StarQuestion pStarQuestion)
         {
@@ -265,7 +265,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode UpdateSmileyQuestion(SmileyQuestion pSmileyQuestion)
         {
@@ -293,7 +293,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode UpdateSliderQuestion(SliderQuestion pSliderQuestion)
         {
@@ -321,7 +321,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode UpdateStarQuestion(StarQuestion pStarQuestion)
         {
@@ -353,7 +353,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion pSmileyQuestion)
         {
@@ -381,7 +381,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode GetSliderQuestionByID(ref SliderQuestion pSliderQuestion)
         {
@@ -409,7 +409,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode GetStarQuestionByID(ref StarQuestion pStarQuestion)
         {
@@ -437,7 +437,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode GetAllQuestions(ref List<Question> questionsList)
         {
@@ -464,7 +464,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
-        /// ErrorCode.SQL_VIOLATION
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode DeleteQuestionByID(int pQuestionId)
         {
