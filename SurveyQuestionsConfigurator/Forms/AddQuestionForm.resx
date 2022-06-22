@@ -534,6 +534,24 @@
   <data name="&gt;&gt;smilyQuestionDetailsGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="questionTypeComboBox.Items" xml:space="preserve">
+    <value>Smiley Question</value>
+  </data>
+  <data name="questionTypeComboBox.Items1" xml:space="preserve">
+    <value>Slider Question</value>
+  </data>
+  <data name="questionTypeComboBox.Items2" xml:space="preserve">
+    <value>Star Question</value>
+  </data>
+  <data name="questionTypeComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="questionTypeComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 21</value>
+  </data>
+  <data name="questionTypeComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;questionTypeComboBox.Name" xml:space="preserve">
     <value>questionTypeComboBox</value>
   </data>
@@ -569,36 +587,6 @@
   </data>
   <data name="&gt;&gt;typeOfQuestionGroupBox.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="questionTypeComboBox.Items" xml:space="preserve">
-    <value>Smiley Question</value>
-  </data>
-  <data name="questionTypeComboBox.Items1" xml:space="preserve">
-    <value>Slider Question</value>
-  </data>
-  <data name="questionTypeComboBox.Items2" xml:space="preserve">
-    <value>Star Question</value>
-  </data>
-  <data name="questionTypeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="questionTypeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 21</value>
-  </data>
-  <data name="questionTypeComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;questionTypeComboBox.Name" xml:space="preserve">
-    <value>questionTypeComboBox</value>
-  </data>
-  <data name="&gt;&gt;questionTypeComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;questionTypeComboBox.Parent" xml:space="preserve">
-    <value>typeOfQuestionGroupBox</value>
-  </data>
-  <data name="&gt;&gt;questionTypeComboBox.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>218, 403</value>
@@ -665,6 +653,9 @@
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>399, 471</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Add a question</value>
