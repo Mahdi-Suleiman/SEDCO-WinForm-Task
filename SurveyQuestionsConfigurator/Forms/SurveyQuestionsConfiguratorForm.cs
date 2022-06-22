@@ -121,11 +121,13 @@ namespace SurveyQuestionsConfigurator
         /// <param name="stateInfo">
         /// Essential for allowing threads to call this function
         /// </param>
-        public void BuildListView(Object stateInfo)
+        public void BuildListView(ErrorCode pErrorCode, List<Question> pQuestionList)
         {
             /// Connect to quesion table and fill the list view
             try
             {
+
+
                 ErrorCode tResult = ErrorCode.ERROR;
 
                 List<Question> tQuestionsList = (List<Question>)stateInfo;
@@ -152,7 +154,6 @@ namespace SurveyQuestionsConfigurator
                                 EnterOnlineMode();
                             }
 
-                            ClearListView();
 
                             /// Perform thread safe call to prevent Cross-thread operation exception
                             if (this.createdQuestions_ListView.InvokeRequired)
@@ -191,6 +192,8 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
+                ClearListView();
+
                 ListViewItem tListviewitem;/// Used for creating listview items.
 
                 /// Perform thread safe call to prevent Cross-thread operation exception

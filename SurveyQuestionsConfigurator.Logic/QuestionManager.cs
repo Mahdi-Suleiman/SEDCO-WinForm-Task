@@ -21,18 +21,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         private StarQuestionRepository mStarQuestionRepository;
         private GenericRepository mRepository;
         private static List<Question> mChachedQuestions;
+        private static bool mKeepWatchingFlag;
 
         #endregion
-
-        private static void ResetChachedQuestionsList(List<Question> pQuestionList)
-        {
-            lock (mChachedQuestions)
-            {
-                mChachedQuestions.Clear();
-                mChachedQuestions.AddRange(pQuestionList);
-            }
-        }
-
 
         #region Constructor
         public QuestionManager()
@@ -44,6 +35,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 mStarQuestionRepository = new StarQuestionRepository();
                 mRepository = new GenericRepository();
                 mChachedQuestions = new List<Question>();
+                mKeepWatchingFlag = true;
             }
             catch (Exception ex)
             {
@@ -55,7 +47,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
         #region Delegates And Events
 
-        public delegate void DataChanged(object sender);
+        public delegate void DataChanged(ErrorCode pErroCode, List<Question> pQuestionList);
         public static event DataChanged refreshDataEvent;
 
 
@@ -68,7 +60,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 ErrorCode tResult = ErrorCode.ERROR;
                 ThreadPool.QueueUserWorkItem(delegate
                 {
-                    while (true)
+                    while (mKeepWatchingFlag)
                     {
                         tList.Clear();
                         tResult = mRepository.GetAll(ref tList);
@@ -79,17 +71,17 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                                 if (mChachedQuestions.SequenceEqual(tList) == false)
                                 {
                                     ResetChachedQuestionsList(tList);
-                                    refreshDataEvent?.Invoke(tList);
+                                    refreshDataEvent?.Invoke(ErrorCode.SUCCESS, tList);
                                 }
                             }
-                            else
+                            else if (tResult == ErrorCode.EMPTY)
                             {
-                                refreshDataEvent?.Invoke(null); /// Notify UI of empty DB
+                                refreshDataEvent?.Invoke(ErrorCode.EMPTY, tList); /// Notify UI of empty DB
                             }
                         }
                         else
                         {
-                            refreshDataEvent?.Invoke(null); /// Notify UI of offline DB
+                            refreshDataEvent?.Invoke(ErrorCode.ERROR, tList); /// Notify UI of offline DB
                         }
                         Thread.Sleep(AutoRefreshTimer);
                     }
@@ -106,7 +98,26 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         {
             try
             {
+                List<Question> tList = new List<Question>();
+                ErrorCode tResult = ErrorCode.ERROR;
+
+                tList.Clear();
+                tResult = mRepository.GetAll(ref tList);
+
                 refreshDataEvent.Invoke(null);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
+        }
+
+        public void StopWatching()
+        {
+            try
+            {
+                mKeepWatchingFlag = false;
             }
             catch (Exception ex)
             {
@@ -138,6 +149,23 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return tDefaultTimer;
             }
         }
+
+        private static void ResetChachedQuestionsList(List<Question> pQuestionList)
+        {
+            try
+            {
+                lock (mChachedQuestions)
+                {
+                    mChachedQuestions.Clear();
+                    mChachedQuestions.AddRange(pQuestionList);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+            }
+        }
+
         #endregion
 
 
@@ -459,7 +487,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 
         #endregion
 
-
         #region Validation Functions
 
         /// <summary>
@@ -561,5 +588,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         } /// Function end
 
         #endregion
+
     }
 }
