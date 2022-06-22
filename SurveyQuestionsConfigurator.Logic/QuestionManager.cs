@@ -72,12 +72,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                         if (tResult != ErrorCode.ERROR)
                         {
                             ResetChachedQuestionsList(tList);
-                            refreshDataEvent?.Invoke(tResult, tList);
                         }
-                        else
-                        {
-                            refreshDataEvent?.Invoke(ErrorCode.ERROR, tList); /// Notify UI of offline DB
-                        }
+                        refreshDataEvent?.Invoke(tResult, tList);
+
                         Thread.Sleep(AutoRefreshTimer);
                     }
                 }));

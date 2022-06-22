@@ -127,22 +127,6 @@ namespace SurveyQuestionsConfigurator
             try
             {
 
-
-                //ErrorCode tResult = ErrorCode.ERROR;
-
-                //List<Question> tQuestionsList = (List<Question>)stateInfo;
-                //if (tQuestionsList != null)
-                //{
-                //    /// Show data from current list
-                //    tResult = ErrorCode.SUCCESS;
-                //}
-                //else if (stateInfo == null)
-                //{
-                //    /// Show data from DB
-                //    tQuestionsList = new List<Question>();
-                //    tResult = mQuestionManager.GetAllQuestions(ref tQuestionsList);
-                //}
-
                 switch (pErrorCode)
                 {
                     ///If connectin to DB is SUCCESS -> Enable buttons and list view
