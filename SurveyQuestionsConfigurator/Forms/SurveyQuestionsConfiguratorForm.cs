@@ -215,7 +215,6 @@ namespace SurveyQuestionsConfigurator
 
                             this.createdQuestions_ListView.Items.Add(tListviewitem); /// add whole row
                         }
-                        this.createdQuestions_ListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent); /// Used for auto sizing the column to fit content
                     }));
                 }
                 else
@@ -236,10 +235,7 @@ namespace SurveyQuestionsConfigurator
 
                         this.createdQuestions_ListView.Items.Add(tListviewitem); /// add whole row
                     }
-                    this.createdQuestions_ListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent); /// Used for auto sizing the column to fit content
-
                 }
-
             }
             catch (Exception ex)
             {
