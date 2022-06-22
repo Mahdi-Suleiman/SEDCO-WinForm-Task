@@ -131,7 +131,7 @@
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;errorLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;settingsButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -152,9 +152,6 @@
   <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="refreshListButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
   <data name="label5.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -171,7 +168,7 @@
     <value>600, 284</value>
   </data>
   <data name="&gt;&gt;editQuestionButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Order</value>
@@ -197,9 +194,6 @@
   </data>
   <data name="closeApplicationButton.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="errorLabel.Text" xml:space="preserve">
-    <value>Error Label</value>
   </data>
   <data name="&gt;&gt;languageSettingsButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -240,8 +234,8 @@
   <data name="&gt;&gt;settingsButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="errorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="refreshListButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="deleteQuestionButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>525, 309</value>
@@ -261,14 +255,11 @@
   <data name="&gt;&gt;connectionSettingsToolTip.Name" xml:space="preserve">
     <value>connectionSettingsToolTip</value>
   </data>
-  <data name="&gt;&gt;deleteQuestionButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="addQuestionButton.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="errorLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="closeApplicationButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -279,8 +270,11 @@
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
+    <value>errorLabel</value>
+  </data>
   <data name="&gt;&gt;createdQuestions_ListView.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="languageSettingsButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -309,8 +303,8 @@
   <data name="&gt;&gt;closeApplicationButton.Name" xml:space="preserve">
     <value>closeApplicationButton</value>
   </data>
-  <data name="&gt;&gt;addQuestionButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;deleteQuestionButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;createdQuestions_ListView.Name" xml:space="preserve">
     <value>createdQuestions_ListView</value>
@@ -339,8 +333,8 @@
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>637, 456</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="errorLabel.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="createdQuestionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>606, 339</value>
@@ -376,6 +370,9 @@
     <value>564, 3</value>
   </data>
   <data name="closeApplicationButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="errorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="editQuestionButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -1839,9 +1836,6 @@
         AAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <data name="$this.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="createdQuestionsGroupBox.Text" xml:space="preserve">
     <value>Questions</value>
   </data>
@@ -1855,7 +1849,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;addQuestionButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="refreshListButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 309</value>
@@ -1878,8 +1872,8 @@
   <data name="settingsButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="editQuestionButton.Text" xml:space="preserve">
-    <value>&amp;Edit</value>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;settingsButton.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1893,8 +1887,8 @@
   <data name="closeApplicationButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>537, 382</value>
   </data>
-  <data name="addQuestionButton.ToolTip" xml:space="preserve">
-    <value />
+  <data name="errorLabel.Text" xml:space="preserve">
+    <value>Error Label</value>
   </data>
   <data name="&gt;&gt;languageSettingsButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1917,6 +1911,9 @@
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>637, 7</value>
   </data>
+  <data name="editQuestionButton.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
   <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
@@ -1928,6 +1925,9 @@
   </data>
   <data name="&gt;&gt;refreshListButton.Name" xml:space="preserve">
     <value>refreshListButton</value>
+  </data>
+  <data name="addQuestionButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="deleteQuestionButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1953,20 +1953,20 @@
   <data name="&gt;&gt;addQuestionButton.Parent" xml:space="preserve">
     <value>createdQuestionsGroupBox</value>
   </data>
+  <data name="&gt;&gt;addQuestionButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="editQuestionButton.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="createdQuestions_ListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
+  <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 314</value>
+  </data>
   <data name="deleteQuestionButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="createdQuestionsGroupBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="columnHeader3.Text" xml:space="preserve">
     <value>Type</value>
@@ -2001,14 +2001,14 @@
   <data name="editQuestionButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 314</value>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
-  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
-    <value>errorLabel</value>
+  <data name="createdQuestionsGroupBox.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;refreshListButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="refreshListButton.ToolTip1" xml:space="preserve">
     <value />
@@ -2016,8 +2016,8 @@
   <data name="menuStrip1.Text" xml:space="preserve">
     <value>menuStrip1</value>
   </data>
-  <data name="addQuestionButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="$this.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>441</value>
@@ -2040,6 +2040,9 @@
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-JO</value>
+  </metadata>
   <metadata name="langaugeSettingsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>183, 16</value>
   </metadata>

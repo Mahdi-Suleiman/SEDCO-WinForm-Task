@@ -155,12 +155,12 @@
             // createdQuestionsGroupBox
             // 
             resources.ApplyResources(this.createdQuestionsGroupBox, "createdQuestionsGroupBox");
+            this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.errorLabel);
             this.createdQuestionsGroupBox.Controls.Add(this.createdQuestions_ListView);
             this.createdQuestionsGroupBox.Controls.Add(this.addQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.editQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.refreshListButton);
-            this.createdQuestionsGroupBox.Controls.Add(this.deleteQuestionButton);
             this.createdQuestionsGroupBox.Controls.Add(this.menuStrip1);
             this.createdQuestionsGroupBox.Name = "createdQuestionsGroupBox";
             this.createdQuestionsGroupBox.TabStop = false;

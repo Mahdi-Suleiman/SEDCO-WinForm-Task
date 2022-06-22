@@ -145,7 +145,7 @@
     <value>477</value>
   </data>
   <data name="deleteQuestionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 309</value>
+    <value>6, 309</value>
   </data>
   <data name="deleteQuestionButton.Text" xml:space="preserve">
     <value>حذف</value>
@@ -157,7 +157,7 @@
     <value>تعديل</value>
   </data>
   <data name="addQuestionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 309</value>
+    <value>168, 309</value>
   </data>
   <data name="addQuestionButton.Text" xml:space="preserve">
     <value>اضافة</value>
@@ -174,12 +174,6 @@
   <data name="closeApplicationButton.Text" xml:space="preserve">
     <value>اغلاق</value>
   </data>
-  <data name="createdQuestionsGroupBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="createdQuestionsGroupBox.Text" xml:space="preserve">
-    <value>الاسئلة</value>
-  </data>
   <data name="errorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -194,6 +188,12 @@
   </data>
   <data name="errorLabel.Text" xml:space="preserve">
     <value>وسم الخطأ</value>
+  </data>
+  <data name="createdQuestionsGroupBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="createdQuestionsGroupBox.Text" xml:space="preserve">
+    <value>الاسئلة</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
