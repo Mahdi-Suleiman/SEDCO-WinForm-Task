@@ -192,5 +192,33 @@ What is accomplished today:
 -Use "Lock" when writing on log file
 
 What is remaining to be done:
+-Documentation
+********************************************************
+Date : 16/06/2022
+What is accomplished today:
+-Study observer pattern
+What is remaining to be done:
+-Study observer pattern
+********************************************************
+Date : 17/06/2022
+What is accomplished today:
+-Study observer pattern
 
+What is remaining to be done:
+-Study observer pattern
+********************************************************
+Date : 18/06/2022
+What is accomplished today:
+-Arabic Form Langauge and layout
+-Change language configurator
+
+What is remaining to be done:
+-Study observer pattern
+********************************************************
+Date : 19/06/2022
+What is accomplished today:
+-Apply Auto refresh feature
+-override Question Equals function (Comparer)
+
+What is remaining to be done:
 -Documentation
