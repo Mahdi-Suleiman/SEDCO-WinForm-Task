@@ -128,44 +128,40 @@ namespace SurveyQuestionsConfigurator
             {
 
 
-                ErrorCode tResult = ErrorCode.ERROR;
+                //ErrorCode tResult = ErrorCode.ERROR;
 
-                List<Question> tQuestionsList = (List<Question>)stateInfo;
-                if (tQuestionsList != null)
-                {
-                    /// Show data from current list
-                    tResult = ErrorCode.SUCCESS;
-                }
-                else if (stateInfo == null)
-                {
-                    /// Show data from DB
-                    tQuestionsList = new List<Question>();
-                    tResult = mQuestionManager.GetAllQuestions(ref tQuestionsList);
-                }
+                //List<Question> tQuestionsList = (List<Question>)stateInfo;
+                //if (tQuestionsList != null)
+                //{
+                //    /// Show data from current list
+                //    tResult = ErrorCode.SUCCESS;
+                //}
+                //else if (stateInfo == null)
+                //{
+                //    /// Show data from DB
+                //    tQuestionsList = new List<Question>();
+                //    tResult = mQuestionManager.GetAllQuestions(ref tQuestionsList);
+                //}
 
-                switch (tResult)
+                switch (pErrorCode)
                 {
                     ///If connectin to DB is SUCCESS -> Enable buttons and list view
                     case ErrorCode.SUCCESS:
+                    case ErrorCode.EMPTY:
                         {
-                            /// Prevent EnterOnlineMode() everytime unless DB connection is down
-                            if (addQuestionButton.Enabled == false)
-                            {
-                                EnterOnlineMode();
-                            }
-
+                            EnterOnlineMode();
 
                             /// Perform thread safe call to prevent Cross-thread operation exception
                             if (this.createdQuestions_ListView.InvokeRequired)
                             {
                                 this.createdQuestions_ListView.Invoke(new Action(() =>
                                {
-                                   FillListView(tQuestionsList);
+                                   FillListView(pQuestionList);
                                }));
                             }
                             else
                             {
-                                FillListView(tQuestionsList);
+                                FillListView(pQuestionList);
                             }
                             break;
                         }

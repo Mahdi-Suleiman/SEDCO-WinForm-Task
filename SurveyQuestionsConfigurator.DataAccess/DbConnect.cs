@@ -727,14 +727,19 @@ namespace SurveyQuestionsConfigurator.DataAccess
                             Question q = new Question(tID, tOrder, tText, tType);
                             pQuestionsList.Add(q);
                         }
-                        return pQuestionsList.Count >= 0 ? Generic.ErrorCode.SUCCESS : Generic.ErrorCode.ERROR; /// RETURN INT32
+
+                        if (pQuestionsList.Count == 0)
+                        {
+                            return ErrorCode.EMPTY;
+                        }
+                        else if (pQuestionsList.Count > 0)
+                        {
+                            return ErrorCode.SUCCESS;
+                        }
+
+                        return ErrorCode.ERROR;
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                Logger.LogError(ex); /// write error to log file
-                return Generic.ErrorCode.SQL_VIOLATION;
             }
             catch (Exception ex)
             {

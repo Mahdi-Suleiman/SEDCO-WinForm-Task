@@ -50,34 +50,29 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         public delegate void DataChanged(ErrorCode pErroCode, List<Question> pQuestionList);
         public static event DataChanged refreshDataEvent;
 
-
+        /// <summary>
+        /// Subscribe to a thread that continuously watch for DB changes every 30 seconds
+        /// </summary>
         public void WatchForChanges()
         {
             try
             {
-                int AutoRefreshTimer = GetAutoRefreshTimerFromConfig();
+                int AutoRefreshTimer = GetAutoRefreshTimerFromConfigFile();
+
                 List<Question> tList = new List<Question>();
                 ErrorCode tResult = ErrorCode.ERROR;
-                ThreadPool.QueueUserWorkItem(delegate
+
+                Thread tAutoRefreshThread = new Thread(new ThreadStart(delegate
                 {
                     while (mKeepWatchingFlag)
                     {
                         tList.Clear();
                         tResult = mRepository.GetAll(ref tList);
-                        if (tResult == ErrorCode.SUCCESS)
+
+                        if (tResult != ErrorCode.ERROR)
                         {
-                            if (tList.Count != 0)
-                            {
-                                if (mChachedQuestions.SequenceEqual(tList) == false)
-                                {
-                                    ResetChachedQuestionsList(tList);
-                                    refreshDataEvent?.Invoke(ErrorCode.SUCCESS, tList);
-                                }
-                            }
-                            else if (tResult == ErrorCode.EMPTY)
-                            {
-                                refreshDataEvent?.Invoke(ErrorCode.EMPTY, tList); /// Notify UI of empty DB
-                            }
+                            ResetChachedQuestionsList(tList);
+                            refreshDataEvent?.Invoke(tResult, tList);
                         }
                         else
                         {
@@ -85,7 +80,10 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                         }
                         Thread.Sleep(AutoRefreshTimer);
                     }
-                });
+                }));
+
+                tAutoRefreshThread.IsBackground = true;
+                tAutoRefreshThread.Start();
             }
             catch (Exception ex)
             {
@@ -94,6 +92,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         }
 
+        /// <summary>
+        /// Refresh list at anytime without any delay
+        /// </summary>
         public void InstantlyRefreshList()
         {
             try
@@ -104,7 +105,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 tList.Clear();
                 tResult = mRepository.GetAll(ref tList);
 
-                refreshDataEvent.Invoke(null);
+                refreshDataEvent.Invoke(tResult, tList);
             }
             catch (Exception ex)
             {
@@ -113,6 +114,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         }
 
+        /// <summary>
+        /// Breaks the infinite loop of "tAutoRefreshThread" 
+        /// </summary>
         public void StopWatching()
         {
             try
@@ -132,7 +136,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         /// <returns>
         /// int AutoRefreshTimer
         /// </returns>
-        private int GetAutoRefreshTimerFromConfig()
+        private int GetAutoRefreshTimerFromConfigFile()
         {
             try
             {
