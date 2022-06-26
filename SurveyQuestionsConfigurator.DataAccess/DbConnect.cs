@@ -15,8 +15,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
 {
     public class DbConnect
     {
-        ///get tSqlConnection string information from App.config
-        private ConnectionStringSettings mSqlConnectionSettings;
+        #region Properties & Attributes
+
+        private ConnectionStringSettings mSqlConnectionSettings; /// get connection string information from App.config, "connectionStrings" section
+
+        #endregion
 
         #region Constructor
         public DbConnect()
@@ -36,7 +39,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         #region Common Methods
 
         /// <summary>
-        /// Return SUCCESS if order is not already in use
+        /// Execute and SQL function and Return SUCCESS if order is not already in use
         /// </summary>
         /// <param name="pSqlConnection"></param>
         /// <param name="pOrder"></param>
@@ -76,8 +79,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <param name="pSqlConnection"></param>
         /// <param name="pOrder"></param>
         /// <returns>
-        /// ID if found
-        /// 0 if no row is found
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
         /// </returns>
         private ErrorCode CheckIfUpdatingSameQuestion(SqlConnection pSqlConnection, int pOrder, int pQuestionID)
         {
@@ -98,11 +101,6 @@ namespace SurveyQuestionsConfigurator.DataAccess
                     cmd.ExecuteNonQuery();
 
                     return (ErrorCode)parameters[0].Value;
-
-                    //if (pQuestionID == -1)
-                    //    return ErrorCode.ERROR;
-
-                    //return ErrorCode.SUCCESS;
                 }
             }
             catch (Exception ex)
@@ -160,9 +158,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
                 tConfig.ConnectionStrings.ConnectionStrings[0].ProviderName = tProviderName;
                 tConfig.Save(ConfigurationSaveMode.Minimal);
 
-                //mSqlConnectionSettings = tConfig.ConnectionStrings.ConnectionStrings[0];
                 ConfigurationManager.RefreshSection(tSectionName);
-                UpdateConnectionSettings();
+                UpdateGlobalConnectionSettings();
                 return ErrorCode.SUCCESS;
             }
             catch (Exception ex)
@@ -176,8 +173,8 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// Get used connection string from config file
         /// </summary>
         /// <returns>
-        /// ErrorCode.SUCCESS
-        /// ErrorCode.ERROR
+        /// SqlConnectionStringBuilder
+        /// null
         /// </returns>
         public SqlConnectionStringBuilder GetConnectionString()
         {
@@ -197,7 +194,11 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <summary>
         /// Sets mSqlConnectionSettings to newest data
         /// </summary>
-        private ErrorCode UpdateConnectionSettings()
+        /// <returns>
+        /// ErrorCode.SUCCESS
+        /// ErrorCode.ERROR
+        /// </returns>
+        private ErrorCode UpdateGlobalConnectionSettings()
         {
             try
             {
@@ -655,6 +656,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// <returns>
         /// ErrorCode.SUCCESS
         /// ErrorCode.ERROR
+        /// ErrorCode.VALIDATION
         /// </returns>
         public ErrorCode DeleteQuestionByID(int pQuestionId)
         {
@@ -696,6 +698,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
+        /// ErrorCode.EMPTY
         /// ErrorCode.ERROR
         /// </returns>
         public ErrorCode GetAllQuestions(ref List<Question> pQuestionsList)
@@ -704,7 +707,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
             {
                 using (SqlConnection sqlConnection = new SqlConnection())
                 {
-                    UpdateConnectionSettings();
+                    UpdateGlobalConnectionSettings();
                     sqlConnection.ConnectionString = mSqlConnectionSettings.ConnectionString;
                     sqlConnection.Open();
 
@@ -758,6 +761,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
+        /// ErrorCode.VALIDATION
         /// ErrorCode.ERROR
         /// </returns>
         public ErrorCode GetSmileyQuestionByID(ref SmileyQuestion pSmileyQuestion)
@@ -818,6 +822,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
+        /// ErrorCode.VALIDATION
         /// ErrorCode.ERROR
         /// </returns>
         public ErrorCode GetSliderQuestionByID(ref SliderQuestion pSliderQuestion)
@@ -885,6 +890,7 @@ namespace SurveyQuestionsConfigurator.DataAccess
         /// </summary>
         /// <returns>
         /// ErrorCode.SUCCESS
+        /// ErrorCode.VALIDATION
         /// ErrorCode.ERROR
         /// </returns>
         public ErrorCode GetStarQuestionByID(ref StarQuestion pStarQuestion)

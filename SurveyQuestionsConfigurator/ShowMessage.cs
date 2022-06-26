@@ -18,15 +18,18 @@ namespace SurveyQuestionsConfigurator
         /// <returns>
         /// DialogResult
         /// </returns>
-        public static DialogResult Box(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon, ResourceManager pLocalResourceManager = null, CultureInfo pDefaultCulture = null)
+        public static DialogResult Box(string pText, string pCaption, MessageBoxButtons pButton, MessageBoxIcon pIcon,
+            ResourceManager pLocalResourceManager = null, CultureInfo pDefaultCulture = null)
         {
             try
             {
                 if (pDefaultCulture.ToString() == "ar-JO")
                 {
-                    return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign);
+                    return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption),
+                        pButton, pIcon, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign); /// Handle RTL Message Box 
                 }
-                return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption), pButton, pIcon);
+                return MessageBox.Show(pLocalResourceManager.GetString(pText), pLocalResourceManager.GetString(pCaption),
+                    pButton, pIcon); /// Handle LTR Mssage box
             }
             catch (Exception ex)
             {

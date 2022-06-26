@@ -12,6 +12,12 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class SliderQuestionRepository : GenericRepository
     {
+        /// <summary>
+        /// Add the passed question object to the database through Data Access Layer
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode Add(SliderQuestion pSliderQuestion)
         {
             try
@@ -25,6 +31,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
+        /// <summary>
+        /// Get a question based on its passed object's ID then overwrite it's fields
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode Get(ref SliderQuestion pSliderQuestion)
         {
             try
@@ -38,6 +50,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
+        /// <summary>
+        /// Update a question and set new values from the passed object's fields
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode Update(SliderQuestion pSliderQuestion)
         {
             try

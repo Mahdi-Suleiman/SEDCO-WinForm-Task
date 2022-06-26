@@ -12,6 +12,12 @@ namespace SurveyQuestionsConfigurator.Repositories
 {
     public class SmileyQuestionRepository : GenericRepository
     {
+        /// <summary>
+        /// Add the passed question object
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode Add(SmileyQuestion pSmileyQuestion)
         {
             try
@@ -25,6 +31,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
+        /// <summary>
+        /// Get a question based on it's passed object's ID then overwrite it's fields
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode Get(ref SmileyQuestion pSmileyQuestion)
         {
             try
@@ -38,6 +50,12 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
+        /// <summary>
+        /// Update a question and set new values from the passed object's fields
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode Update(SmileyQuestion pSmileyQuestion)
         {
             try

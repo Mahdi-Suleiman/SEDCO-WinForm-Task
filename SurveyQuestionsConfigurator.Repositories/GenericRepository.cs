@@ -15,8 +15,11 @@ namespace SurveyQuestionsConfigurator.Repositories
     public class GenericRepository
     {
 
-        protected DbConnect mDbConnect = new DbConnect();
+        protected DbConnect mDbConnect = new DbConnect(); /// Instance of Data Access Layer
 
+        ///<summary>
+        /// Delete a question by it's passed ID
+        ///</summary>
         public ErrorCode Delete(int pID)
         {
             try
@@ -30,6 +33,9 @@ namespace SurveyQuestionsConfigurator.Repositories
             }
         }
 
+        ///<summary>
+        /// Get all question from Questions table and save them into passed by reference list
+        ///</summary>
         public ErrorCode GetAll(ref List<Question> pQuestionsList)
         {
             try

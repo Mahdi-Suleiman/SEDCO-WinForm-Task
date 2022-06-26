@@ -10,17 +10,16 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
 {
     public class Logger
     {
-        private static string mExeFolder = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        private static object mBalanceLock = new object();
-        private static object mBalanceLock2 = null;
-        public Logger()
-        {
-        }
+        private static string mExeFolder = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location); ///Gets the directory name of the current exe
+        private static object mBalanceLock = new object(); /// used to lock writing on file
+        private static object mBalanceLock2 = null; /// used to lock writing on file for the backup function
+
         public static void LogError(Exception pEx)
         {
             try
             {
-                /// lock file writing to prevent exception System.IO.IOException : The process cannot access the file 'LogFile.txt' because it is being used by another process
+                /// lock file writing to prevent exception System.IO.IOException : 
+                /// The process cannot access the file 'LogFile.txt' because it is being used by another process
                 lock (mBalanceLock)
                 {
                     using (StreamWriter sw = new StreamWriter($"{mExeFolder}/logs/LogFile.txt", append: true))
@@ -43,7 +42,7 @@ namespace SurveyQuestionsConfigurator.CommonHelpers
             }
         }
 
-        //Log error in case main "LogError" faced an exception
+        /// Log error in case main "LogError" faced an exception
         public static void BackUpLogger(Exception pEx)
         {
             try

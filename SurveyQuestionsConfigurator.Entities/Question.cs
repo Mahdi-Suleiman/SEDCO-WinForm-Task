@@ -59,7 +59,14 @@ namespace SurveyQuestionsConfigurator.Entities
             this(pQuestion.ID, pQuestion.Order, pQuestion.Text, pQuestion.Type)
         { }
 
-
+        /// <summary>
+        /// Compare 2 objects of the same type
+        /// </summary>
+        /// <param name="pObject"></param>
+        /// <returns>
+        /// True
+        /// False
+        /// </returns>
         public override bool Equals(object pObject)
         {
             try
@@ -89,9 +96,11 @@ namespace SurveyQuestionsConfigurator.Entities
                 Logger.LogError(ex);
                 return false;
             }
-
         }
 
+        /// <summary>
+        /// Must be overridden along with Equals
+        /// </summary>
         public override int GetHashCode()
         {
             return base.GetHashCode();
