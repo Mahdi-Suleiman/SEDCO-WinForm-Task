@@ -39,7 +39,7 @@
             this.editQuestionButton = new System.Windows.Forms.Button();
             this.addQuestionButton = new System.Windows.Forms.Button();
             this.connectionSettingsToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.settingsButton = new System.Windows.Forms.Button();
+            this.connectionSettingsButton = new System.Windows.Forms.Button();
             this.languageSettingsButton = new System.Windows.Forms.Button();
             this.closeApplicationButton = new System.Windows.Forms.Button();
             this.createdQuestionsGroupBox = new System.Windows.Forms.GroupBox();
@@ -109,16 +109,16 @@
             this.addQuestionButton.UseVisualStyleBackColor = true;
             this.addQuestionButton.Click += new System.EventHandler(this.addQuestionButton_Click);
             // 
-            // settingsButton
+            // connectionSettingsButton
             // 
-            this.settingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.gear;
-            resources.ApplyResources(this.settingsButton, "settingsButton");
-            this.settingsButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.settingsButton.ForeColor = System.Drawing.Color.Transparent;
-            this.settingsButton.Name = "settingsButton";
-            this.connectionSettingsToolTip.SetToolTip(this.settingsButton, resources.GetString("settingsButton.ToolTip"));
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.connectionSettingsButton.BackgroundImage = global::SurveyQuestionsConfigurator.Properties.Resources.gear;
+            resources.ApplyResources(this.connectionSettingsButton, "connectionSettingsButton");
+            this.connectionSettingsButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.connectionSettingsButton.ForeColor = System.Drawing.Color.Transparent;
+            this.connectionSettingsButton.Name = "connectionSettingsButton";
+            this.connectionSettingsToolTip.SetToolTip(this.connectionSettingsButton, resources.GetString("connectionSettingsButton.ToolTip"));
+            this.connectionSettingsButton.UseVisualStyleBackColor = true;
+            this.connectionSettingsButton.Click += new System.EventHandler(this.connectionSettingsButton_Click);
             // 
             // languageSettingsButton
             // 
@@ -180,7 +180,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.languageSettingsButton);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.settingsButton);
+            this.Controls.Add(this.connectionSettingsButton);
             this.Controls.Add(this.createdQuestionsGroupBox);
             this.Controls.Add(this.closeApplicationButton);
             this.MaximizeBox = false;
@@ -207,7 +207,7 @@
         private System.Windows.Forms.GroupBox createdQuestionsGroupBox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.Button connectionSettingsButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button languageSettingsButton;
         private System.Windows.Forms.ToolTip langaugeSettingsToolTip;

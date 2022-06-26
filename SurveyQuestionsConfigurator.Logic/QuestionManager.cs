@@ -16,12 +16,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
     public class QuestionManager
     {
         #region Properties & Attributes
+
         private SmileyQuestionRepository mSmileyQuestionRepository;
         private SliderQuestionRepository mSliderQuestionRepository;
         private StarQuestionRepository mStarQuestionRepository;
         private GenericRepository mRepository;
-        private static List<Question> mChachedQuestions;
-        private static bool mKeepWatchingFlag;
+        private static List<Question> mChachedQuestions; /// use to check if databsae data changed
+        private static bool mKeepWatchingFlag; /// flag used in the thread that keep watching if data has changed
 
         #endregion
 
@@ -35,7 +36,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 mStarQuestionRepository = new StarQuestionRepository();
                 mRepository = new GenericRepository();
                 mChachedQuestions = new List<Question>();
-                mKeepWatchingFlag = true;
+                mKeepWatchingFlag = true; /// keep checking for changes 
             }
             catch (Exception ex)
             {
@@ -69,11 +70,14 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                         tList.Clear();
                         tResult = mRepository.GetAll(ref tList);
 
-                        if (tResult != ErrorCode.ERROR)
+                        if (mChachedQuestions.SequenceEqual(tList) == false) /// if there is a difference
                         {
-                            ResetChachedQuestionsList(tList);
+                            if (tResult != ErrorCode.ERROR)
+                            {
+                                ResetChachedQuestionsList(tList);
+                            }
+                            refreshDataEvent?.Invoke(tResult, tList);
                         }
-                        refreshDataEvent?.Invoke(tResult, tList);
 
                         Thread.Sleep(AutoRefreshTimer);
                     }
@@ -151,6 +155,9 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         }
 
+        /// <summary>
+        /// reset cached list with new passed list
+        /// </summary>
         private static void ResetChachedQuestionsList(List<Question> pQuestionList)
         {
             try
@@ -168,7 +175,6 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
         }
 
         #endregion
-
 
         #region Add Question Functions
         /// <summary>

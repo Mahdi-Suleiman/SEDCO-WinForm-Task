@@ -118,7 +118,8 @@ namespace SurveyQuestionsConfigurator
         /// This method gets called from QuestionManager(BLL)
         /// Refill list view with data when needed (on Add, Edit, Refresh, ...etc)
         /// </summary>
-        /// <param name="stateInfo">
+        /// <param name="pErrorCode">
+        /// <param name="pQuestionList">
         /// Essential for allowing threads to call this function
         /// </param>
         public void BuildListView(ErrorCode pErrorCode, List<Question> pQuestionList)
@@ -129,10 +130,10 @@ namespace SurveyQuestionsConfigurator
 
                 switch (pErrorCode)
                 {
-                    ///If connectin to DB is SUCCESS -> Enable buttons and list view
                     case ErrorCode.SUCCESS:
                     case ErrorCode.EMPTY:
                         {
+                            /// If connectin to DB is SUCCESS -> Enable buttons and list view
                             EnterOnlineMode();
 
                             /// Perform thread safe call to prevent Cross-thread operation exception
@@ -174,7 +175,7 @@ namespace SurveyQuestionsConfigurator
             {
                 ClearListView();
 
-                ListViewItem tListviewitem;/// Used for creating listview items.
+                ListViewItem tListviewitem;/// Used for creating listview items (rows).
 
                 /// Perform thread safe call to prevent Cross-thread operation exception
                 if (this.createdQuestions_ListView.InvokeRequired)
@@ -189,7 +190,7 @@ namespace SurveyQuestionsConfigurator
                             /// Add id as a tag to Order column -> use it while it's hidden
                             tListviewitem = new ListViewItem($"{q.Order}")
                             {
-                                Tag = q.ID /// SubItems[0].Tag
+                                Tag = q.ID /// == SubItems[0].Tag = q.ID;
                             };
                             tListviewitem.SubItems.Add($"{tQuestionType}");
 
@@ -231,7 +232,7 @@ namespace SurveyQuestionsConfigurator
         /// Set the form into offline mode where user can't do any action that can interact with DB except changing the connection settings
         /// </summary>
         /// <param name="pOfflineMeesage">
-        /// Pass message to be displayed to error label
+        /// Passed message to be displayed to error label
         /// </param>
         private void EnterOfflineMode(string pOfflineMeesage)
         {
@@ -344,26 +345,6 @@ namespace SurveyQuestionsConfigurator
         }///End event 
 
         /// <summary>
-        /// Refresh when add question form is closed
-        /// Or when this form is activated
-        /// </summary>
-        private void SurveyQuestionsConfiguratorForm_Activated(object sender, EventArgs e)
-        {
-            try
-            {
-                //Thread thr = new Thread(new ThreadStart(BuildListView));
-                //thr.Start();
-                //BuildListView();
-                //ThreadPool.QueueUserWorkItem(BuildListView);
-            }
-            catch (Exception ex)
-            {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                Logger.LogError(ex);
-            }
-        }///End event 
-
-        /// <summary>
         /// Sort list for each column
         /// </summary>
         private void createdQuestions_ListView_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -422,22 +403,6 @@ namespace SurveyQuestionsConfigurator
         }///End event 
 
         /// <summary>
-        /// Handle exit click
-        /// </summary>
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                Logger.LogError(ex);
-            }
-        }///End event 
-
-        /// <summary>
         /// Handle delete question click
         /// </summary>
         private void deleteQuestionButton_Click(object sender, EventArgs e)
@@ -451,8 +416,6 @@ namespace SurveyQuestionsConfigurator
                     var selectedItem = createdQuestions_ListView.SelectedItems[0];
 
                     ///Display confirmation dilaog first
-
-                    ///
                     var confirmResult = ShowMessage.Box($"{ResourceStrings.areYouSureToDeleteThisItem}", $"{ResourceStrings.confirmDelete}", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, mLocalResourceManager, mDefaultCulture);
                     if (confirmResult == DialogResult.Yes)
                     {
@@ -527,21 +490,18 @@ namespace SurveyQuestionsConfigurator
                         tQuestion = new Question(tQuestionId, QuestionType.SMILEY);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.SLIDER.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.SLIDER);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-
                     }
                     else if (createdQuestions_ListView.SelectedItems[0].SubItems[1].Tag.ToString() == QuestionType.STAR.ToString())
                     {
                         tQuestion = new Question(tQuestionId, QuestionType.STAR);
 
                         tAddQuestionForm = new AddQuestionForm(tQuestion);
-
                     }
 
                     /// prevent exception if form was closed due to some error
@@ -572,7 +532,7 @@ namespace SurveyQuestionsConfigurator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void settingsButton_Click(object sender, EventArgs e)
+        private void connectionSettingsButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -624,5 +584,6 @@ namespace SurveyQuestionsConfigurator
         }
 
         #endregion
+
     }
 }

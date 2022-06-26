@@ -147,24 +147,6 @@
   <data name="&gt;&gt;refreshListButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Order</value>
-  </data>
-  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
-    <value>487</value>
-  </data>
   <data name="createdQuestions_ListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
@@ -185,6 +167,24 @@
   </data>
   <data name="&gt;&gt;createdQuestions_ListView.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
+    <value>487</value>
   </data>
   <data name="deleteQuestionButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -270,42 +270,45 @@
   <metadata name="connectionSettingsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>175, 49</value>
   </metadata>
-  <data name="settingsButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+  <data name="connectionSettingsButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="settingsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="connectionSettingsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="settingsButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="connectionSettingsButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>589, 3</value>
   </data>
-  <data name="settingsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="connectionSettingsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="settingsButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="connectionSettingsButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 21</value>
   </data>
-  <data name="settingsButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="connectionSettingsButton.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="settingsButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+  <data name="connectionSettingsButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="settingsButton.ToolTip" xml:space="preserve">
+  <data name="connectionSettingsButton.ToolTip" xml:space="preserve">
     <value>Connectin Settings</value>
   </data>
-  <data name="&gt;&gt;settingsButton.Name" xml:space="preserve">
-    <value>settingsButton</value>
+  <data name="&gt;&gt;connectionSettingsButton.Name" xml:space="preserve">
+    <value>connectionSettingsButton</value>
   </data>
-  <data name="&gt;&gt;settingsButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;connectionSettingsButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;connectionSettingsButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;settingsButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;connectionSettingsButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <metadata name="langaugeSettingsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>183, 16</value>
+  </metadata>
   <data name="languageSettingsButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -330,9 +333,6 @@
   <data name="languageSettingsButton.ToolTip" xml:space="preserve">
     <value>Language Settings</value>
   </data>
-  <metadata name="langaugeSettingsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>183, 16</value>
-  </metadata>
   <data name="languageSettingsButton.ToolTip1" xml:space="preserve">
     <value>Language Settings</value>
   </data>
@@ -374,6 +374,57 @@
   </data>
   <data name="&gt;&gt;closeApplicationButton.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>2, 10</value>
+  </metadata>
+  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
+    <value>errorLabel</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.Parent" xml:space="preserve">
+    <value>createdQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;errorLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>createdQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="createdQuestionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 37</value>
+  </data>
+  <data name="createdQuestionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>606, 339</value>
+  </data>
+  <data name="createdQuestionsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="createdQuestionsGroupBox.Text" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="&gt;&gt;createdQuestionsGroupBox.Name" xml:space="preserve">
+    <value>createdQuestionsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;createdQuestionsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;createdQuestionsGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;createdQuestionsGroupBox.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="errorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -432,30 +483,6 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="createdQuestionsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 37</value>
-  </data>
-  <data name="createdQuestionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 339</value>
-  </data>
-  <data name="createdQuestionsGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="createdQuestionsGroupBox.Text" xml:space="preserve">
-    <value>Questions</value>
-  </data>
-  <data name="&gt;&gt;createdQuestionsGroupBox.Name" xml:space="preserve">
-    <value>createdQuestionsGroupBox</value>
-  </data>
-  <data name="&gt;&gt;createdQuestionsGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;createdQuestionsGroupBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;createdQuestionsGroupBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -480,6 +507,9 @@
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="langaugeSettingsToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>183, 16</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

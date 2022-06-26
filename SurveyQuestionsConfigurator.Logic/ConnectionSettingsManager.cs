@@ -13,7 +13,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
 {
     public class ConnectionSettingsManager
     {
-        DbConnect mDbConnect;
+        #region Properties & Attributes
+
+        DbConnect mDbConnect; /// Data Access Layer
+
+        #endregion
+
+        #region Constructor
 
         public ConnectionSettingsManager()
         {
@@ -27,6 +33,16 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             }
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Get connection string from Data Access Layer
+        /// </summary>
+        /// <returns>
+        /// SqlConnectionStringBuilder
+        /// </returns>
         public SqlConnectionStringBuilder GetConnectionString()
         {
             try
@@ -39,6 +55,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return null;
             }
         }
+
+        /// <summary>
+        /// Check connectivity of the passed SqlConnectionStringBuilder connection string and return the corresponding ErrorCode
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode CheckConnectivity(SqlConnectionStringBuilder pBuilder)
         {
             try
@@ -51,6 +74,13 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return ErrorCode.ERROR;
             }
         }
+
+        /// <summary>
+        /// Save passed SqlConnectionStringBuilder connection string
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode SaveConnectionString(SqlConnectionStringBuilder pBuilder)
         {
             try
@@ -63,6 +93,17 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return ErrorCode.ERROR;
             }
         }
+
+        #endregion
+
+        #region Validation Methods
+
+        /// <summary>
+        /// Check connection string validation
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         public ErrorCode CheckConnectionStringInputFields(SqlConnectionStringBuilder pBuilder)
         {
             try
@@ -80,5 +121,7 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                 return ErrorCode.ERROR;
             }
         }
+
+        #endregion
     }
 }

@@ -31,7 +31,9 @@ namespace SurveyQuestionsConfigurator
 
         private readonly Configuration tConfigFile;
         private readonly KeyValueConfigurationCollection tSettings;
+
         private readonly string mDefaultCultureString;
+
         /// <summary>
         /// All translatable message box messages in the "LanguageSettingsFormStrings" resource file
         /// </summary>
@@ -181,8 +183,7 @@ namespace SurveyQuestionsConfigurator
         {
             try
             {
-                string tReturnedLangaugeValue = GetSavedLangaugeSettings();
-
+                string tReturnedLangaugeValue = tSettings[mDefaultCultureString].Value;
 
 
                 if (tReturnedLangaugeValue == mConfigEnglishLangauge)
@@ -207,20 +208,12 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
-        private string GetSavedLangaugeSettings()
-        {
-            try
-            {
-                return tSettings[mDefaultCultureString].Value;
-            }
-            catch (Exception ex)
-            {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                Logger.LogError(ex);
-                return String.Empty;
-            }
-        }
-
+        /// <summary>
+        /// Saves new settings to config file
+        /// </summary>
+        /// <returns>
+        /// ErrorCode
+        /// </returns>
         private ErrorCode SaveLangaugeSettings(string pLangaugeToSave)
         {
             try

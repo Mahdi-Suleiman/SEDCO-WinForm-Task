@@ -24,7 +24,7 @@ namespace SurveyQuestionsConfigurator
 
         private readonly ResourceManager mLocalResourceManager;
         private readonly CultureInfo mDefaultCulture;
-        private SqlConnectionStringBuilder mBuilder;
+        private SqlConnectionStringBuilder mBuilder; /// passed to ConnectionSettingsManager (Busniess Logic Layer)
         private readonly ConnectionSettingsManager mConnectionSettingsManager;
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace SurveyQuestionsConfigurator
         #region Event Handlers
 
         /// <summary>
-        /// Get current connecion string details and fill the form with it
+        /// Get current connecion string details from config file, save it to the generic mBuilder and fill the form with it
         /// </summary>
         private void ConnectionSettingsForm_Load(object sender, EventArgs e)
         {
@@ -101,6 +101,9 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Tests the connection of the inputs 
+        /// </summary>
         private void testConnectionButton_Click(object sender, EventArgs e)
         {
             try
@@ -108,9 +111,9 @@ namespace SurveyQuestionsConfigurator
                 mBuilder.Clear();
                 FillConnectionStringBuilderFields();
 
-                if (CheckConnectionStringInputFields(mBuilder) == ErrorCode.SUCCESS)
+                if (CheckConnectionStringInputFields(mBuilder) == ErrorCode.SUCCESS) /// if the connection string fields are valid
                 {
-                    if (mConnectionSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS)
+                    if (mConnectionSettingsManager.CheckConnectivity(mBuilder) == ErrorCode.SUCCESS) /// check actual connectivity
                     {
                         ShowMessage.Box($"{ResourceStrings.testConnectionSucceeded}", $"{ResourceStrings.success}", MessageBoxButtons.OK, MessageBoxIcon.Information, mLocalResourceManager, mDefaultCulture);
                     }
@@ -132,6 +135,9 @@ namespace SurveyQuestionsConfigurator
             }
         }
 
+        /// <summary>
+        /// Saves the current inputs to the config file under "connectionStrings" section 
+        /// </summary>
         private void saveButton_Click(object sender, EventArgs e)
         {
             try

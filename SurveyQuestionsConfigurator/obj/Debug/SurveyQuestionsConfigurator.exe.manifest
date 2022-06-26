@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SurveyQuestionsConfigurator.exe" size="892880">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SurveyQuestionsConfigurator.exe" size="892368">
       <assemblyIdentity name="SurveyQuestionsConfigurator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TF4xGfML3PH0+khSm2vOPTzEwjB2vt2c6UewGzFVtrg=</dsig:DigestValue>
+        <dsig:DigestValue>iUIAi5tixdTQsnYySDBHvryYT00k4yEOWkcgucPbrrQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SurveyQuestionsConfigurator.Logic.dll" size="11264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SurveyQuestionsConfigurator.Logic.dll" size="11776">
       <assemblyIdentity name="SurveyQuestionsConfigurator.Logic" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nN+dAi9vRE4CS3UBPjjxkW9zSYpaHctDRaVatYMooRY=</dsig:DigestValue>
+        <dsig:DigestValue>DOftGMWtwZgImFMw76PUfHAJaMW0X2ixDvqVf0kElZw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,7 +122,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>shre1DY+pvI0agbdslxW7GQ3N+vD0ZP8Gu8R3aArUUc=</dsig:DigestValue>
+        <dsig:DigestValue>e1RZ12ym69lxKPcMGT90YRRXKGTyh1PK2mUl1Nn4kjk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

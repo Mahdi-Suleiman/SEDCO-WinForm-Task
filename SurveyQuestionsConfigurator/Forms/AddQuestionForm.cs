@@ -103,17 +103,17 @@ namespace SurveyQuestionsConfigurator
                 if (pQuestion.Type == QuestionType.SMILEY)
                 {
                     cSelectedQuestionType = QuestionType.SMILEY; // 0 
-                    InitializeEditingSmileyQuestion(pQuestion);
+                    LoadSmileyQuestion(pQuestion);
                 }
                 else if (pQuestion.Type == QuestionType.SLIDER)
                 {
                     cSelectedQuestionType = QuestionType.SLIDER; // 1
-                    InitializeEditingSliderQuestion(pQuestion);
+                    LoadSliderQuestion(pQuestion);
                 }
                 else if (pQuestion.Type == QuestionType.STAR)
                 {
                     cSelectedQuestionType = QuestionType.STAR; // 2
-                    InitializeEditingStarQuestion(pQuestion);
+                    LoadStarQuestion(pQuestion);
                 }
             }
             catch (Exception ex)
@@ -158,14 +158,75 @@ namespace SurveyQuestionsConfigurator
             }
         } /// End event
 
-        /// <summary>
-        /// Handle OK button click
-        /// Based on what type of form is loaded (Add or Edit)
+        ///<summary>
+        /// Handle saving settings based on what the form is doing (Adding or Editing) 
         /// </summary>
-        private void addQuestionButton_Click(object sender, EventArgs e)
+        private void okButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                /// Close form if operation was successful
+                ErrorCode tOperationState = ErrorCode.ERROR;
+                if (cStateForm == FormStateType.ADD)
+                {
+                    try
+                    {
+                        if (questionTypeComboBox.SelectedIndex == 0)
+                        {
+                            tOperationState = InsertSmileyQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 1)
+                        {
+                            tOperationState = InsertSliderQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 2)
+                        {
+                            tOperationState = InsertStarQuestion();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogError(ex);
+                        throw;
+                    }
+                }
+                else if (cStateForm == FormStateType.EDIT)
+                {
+                    try
+                    {
+                        if (questionTypeComboBox.SelectedIndex == 0)
+                        {
+                            tOperationState = UpdateSmileyQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 1)
+                        {
+                            tOperationState = UpdateSliderQuestion();
+                        }
+                        else if (questionTypeComboBox.SelectedIndex == 2)
+                        {
+                            tOperationState = UpdateStarQuestion();
+                        }
 
-        } /// End event
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogError(ex);
+                        throw;
+                    }
+                }
+
+                if (tOperationState == ErrorCode.SUCCESS)
+                {
+                    this.Close();
+                    this.DialogResult = DialogResult.OK;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
+                Logger.LogError(ex);
+            }
+        }
 
         #endregion
 
@@ -174,7 +235,7 @@ namespace SurveyQuestionsConfigurator
         /// <summary>
         /// Initialize editing smiley question on combobox index change event
         /// </summary>
-        private void InitializeEditingSmileyQuestion(Question pQuestion)
+        private void LoadSmileyQuestion(Question pQuestion)
         {
             /// Get selected question from DB and fill input fields with its data
             try
@@ -205,17 +266,16 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
+                throw;
             }
         } /// End function
 
         /// <summary>
         /// Initialize editing slider question on combobox index change event
         /// </summary>
-        private void InitializeEditingSliderQuestion(Question pQuestion)
+        private void LoadSliderQuestion(Question pQuestion)
         {
-            ///
             /// Get selected question from DB and fill input fields  with its data
-            ///
             try
             {
                 mGenericQuestion = pQuestion;
@@ -245,17 +305,16 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
+                throw;
             }
         } /// End function
 
         /// <summary>
         /// Initialize editing star question on combobox change
         /// </summary>
-        private void InitializeEditingStarQuestion(Question pQuestion)
+        private void LoadStarQuestion(Question pQuestion)
         {
-            ///
-            /// Select wanted question from DB and fill input fields  with its data
-            ///
+            /// Select wanted question from DB and fill input fields with its data
             try
             {
                 mGenericQuestion = pQuestion;
@@ -282,12 +341,13 @@ namespace SurveyQuestionsConfigurator
             catch (Exception ex)
             {
                 Logger.LogError(ex); //write error to log file
+                throw;
             }
         }/// End function
         #endregion
 
-
         #region ComboBox Selected Index Change Methods
+
         /// <summary>
         /// Handle combo box selected index changed
         /// </summary>
@@ -297,15 +357,15 @@ namespace SurveyQuestionsConfigurator
             {
                 if (questionTypeComboBox.SelectedIndex == 0)
                 {
-                    LoadSmileyQuestionSettings();
+                    InitializeEditingSmileyQuestion();
                 }
                 else if (questionTypeComboBox.SelectedIndex == 1)
                 {
-                    LoadSliderQuestionSettings();
+                    InitializeEditingSliderQuestion();
                 }
                 else if (questionTypeComboBox.SelectedIndex == 2)
                 {
-                    LoadStarQuestionSettings();
+                    InitializeEditingStarQuestion();
                 }
             }
             catch (Exception ex)
@@ -318,7 +378,7 @@ namespace SurveyQuestionsConfigurator
          ///<summary>
          /// Initialize smiley question based on combo box changed value
          ///</summary>
-        private void LoadSmileyQuestionSettings()
+        private void InitializeEditingSmileyQuestion()
         {
             try
             {
@@ -346,7 +406,7 @@ namespace SurveyQuestionsConfigurator
         ///<summary>
         /// Initialize slider question based on combo box changed value
         ///</summary>
-        private void LoadSliderQuestionSettings()
+        private void InitializeEditingSliderQuestion()
         {
             try
             {
@@ -379,7 +439,7 @@ namespace SurveyQuestionsConfigurator
         ///<summary>
         /// Initialize star question based on combo box changed value
         ///</summary>
-        private void LoadStarQuestionSettings()
+        private void InitializeEditingStarQuestion()
         {
             try
             {
@@ -409,7 +469,7 @@ namespace SurveyQuestionsConfigurator
         #region Add Question Methods
         /// <summary>
         /// Handle adding a question
-        /// Create a question object and pass to (Busineess Logic Layer)
+        /// Create a question object and pass it to (Busineess Logic Layer)
         /// </summary>
         private ErrorCode InsertSmileyQuestion()
         {
@@ -423,6 +483,7 @@ namespace SurveyQuestionsConfigurator
                 tQuestionOrder = Convert.ToInt32(questionOrderNumericUpDown.Value);
                 tQuestionText = questionTextRichTextBox.Text;
                 tNumberOfSmilyFaces = Convert.ToInt32(genericNumericUpDown1.Value);
+
                 /// Pass -1 as ID because ID is not needed here & there is no constructor that do not accept ID
                 SmileyQuestion tSmileyQuestion = new SmileyQuestion(-1, tQuestionOrder, tQuestionText, QuestionType.SMILEY, tNumberOfSmilyFaces);
 
@@ -449,6 +510,7 @@ namespace SurveyQuestionsConfigurator
                 {
                     ShowMessage.Box($"{ResourceStrings.genericQuestionError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
                 }
+
                 return ErrorCode.ERROR;
             }
             catch (Exception ex)
@@ -781,72 +843,5 @@ namespace SurveyQuestionsConfigurator
             }
         }/// Function end
         #endregion
-
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                /// Close form if operation was successful
-                ErrorCode OperationSuccess = ErrorCode.ERROR;
-                if (cStateForm == FormStateType.ADD)
-                {
-                    try
-                    {
-                        if (questionTypeComboBox.SelectedIndex == 0)
-                        {
-                            OperationSuccess = InsertSmileyQuestion();
-                        }
-                        else if (questionTypeComboBox.SelectedIndex == 1)
-                        {
-                            OperationSuccess = InsertSliderQuestion();
-                        }
-                        else if (questionTypeComboBox.SelectedIndex == 2)
-                        {
-                            OperationSuccess = InsertStarQuestion();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                        Logger.LogError(ex);
-                    }
-                }
-                else if (cStateForm == FormStateType.EDIT)
-                {
-                    try
-                    {
-                        if (questionTypeComboBox.SelectedIndex == 0)
-                        {
-                            OperationSuccess = UpdateSmileyQuestion();
-                        }
-                        else if (questionTypeComboBox.SelectedIndex == 1)
-                        {
-                            OperationSuccess = UpdateSliderQuestion();
-                        }
-                        else if (questionTypeComboBox.SelectedIndex == 2)
-                        {
-                            OperationSuccess = UpdateStarQuestion();
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                        Logger.LogError(ex);
-                    }
-                }
-
-                if (OperationSuccess == ErrorCode.SUCCESS)
-                {
-                    this.Close();
-                    this.DialogResult = DialogResult.OK;
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowMessage.Box($"{ResourceStrings.somethingWrongHappenedError}", $"{ResourceStrings.error}", MessageBoxButtons.OK, MessageBoxIcon.Error, mLocalResourceManager, mDefaultCulture);
-                Logger.LogError(ex);
-            }
-        }
     }
 }
