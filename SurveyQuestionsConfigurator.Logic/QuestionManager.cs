@@ -59,9 +59,11 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
             try
             {
                 int AutoRefreshTimer = GetAutoRefreshTimerFromConfigFile();
+                bool firstTimeCheck = true;
 
                 List<Question> tList = new List<Question>();
                 ErrorCode tResult = ErrorCode.ERROR;
+
 
                 Thread tAutoRefreshThread = new Thread(new ThreadStart(delegate
                 {
@@ -70,12 +72,19 @@ namespace SurveyQuestionsConfigurator.QuestionLogic
                         tList.Clear();
                         tResult = mRepository.GetAll(ref tList);
 
-                        if (mChachedQuestions.SequenceEqual(tList) == false) /// if there is a difference
+                        if (mChachedQuestions.SequenceEqual(tList) == false &&
+                        !firstTimeCheck) /// if there is a difference
                         {
                             if (tResult != ErrorCode.ERROR)
                             {
                                 ResetChachedQuestionsList(tList);
                             }
+                            refreshDataEvent?.Invoke(tResult, tList);
+                        }
+
+                        if (firstTimeCheck) /// refresh data when DB is empty and both lists are empty and equal
+                        {
+                            firstTimeCheck = false;
                             refreshDataEvent?.Invoke(tResult, tList);
                         }
 
